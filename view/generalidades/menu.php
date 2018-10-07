@@ -3,35 +3,35 @@
                 <ul class="nav metismenu" id="side-menu">
                     <img alt="logo" src="../assets/img/aut3.png" width="100%" height="100%" />
                     <li>
-                        <a href="/SISAUTO1/view/NuevaVenta.php"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
+                        <a href="/SISAUTO1/view/NuevaVenta.php" style="font-size:15px;"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>
+                        <a href="" style="font-size:15px;"><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="">Compras</a></li>
-                            <li><a href="">Ventas</a></li>
+                            <li><a href="" style="font-size:15px;">Compras</a></li>
+                            <li><a href="" style="font-size:15px;">Ventas</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-folder"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
+                        <a href="" style="font-size:15px;"><i class="fa fa-folder"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="Cliente.php"><span class="fa fa-user"> Cliente</span></a></li>
-                            <li><a href="Proveedor.php"><span class="fa fa-group"> Proveedor</span></a></li>
-                            <li><a href=""><span class="fa fa-tags"> Producto</span></a></li>
+                            <li><a href="Cliente.php" style="font-size:15px;"><span class="fa fa-user"> Cliente</span></a></li>
+                            <li><a href="Proveedor.php" style="font-size:15px;"><span class="fa fa-group"> Proveedor</span></a></li>
+                            <li><a href=""><span class="fa fa-tags" style="font-size:15px;"> Producto</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-area-chart"></i> <span class="nav-label">Inventario</span> <span class="fa arrow"></span></a>
+                        <a href="" style="font-size:15px;"><i class="fa fa-area-chart"></i> <span class="nav-label">Inventario</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href=""><span class="fa fa-book"> Inventario Principal</span></a></li>
+                            <li><a href="" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
+                        <a href="" style="font-size:15px;"><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href=""><span class="fa fa-group">  Control Usuarios</span></a></li>
-                            <li><a href=""><span class="fa fa-history"> Bitacora</span></a></li>
-                            <li><a href=""><span class="fa fa-database"> Administrar Backup</span></a></li>
+                            <li><a href="" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
+                            <li><a href="" style="font-size:15px;"><span class="fa fa-history"> Bitacora</span></a></li>
+                            <li><a href="" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
                         </ul>
                     </li>
                 </ul>

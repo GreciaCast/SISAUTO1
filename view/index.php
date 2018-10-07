@@ -34,7 +34,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 <div class="ibox-content">
                                     <div class="row" align="" >
                                         <div class="col-12">
-                                            <h1 class="card-body " align="center">SISTEMA INFORMÁTICO DE CONTROL DE COMPRAS-VENTAS <br> PARA EL NEGOCIO AUTOS REPUESTOS VAQUERANO</h1>
+                                            <h1 class="card-body " align="center"><b>SISTEMA INFORMÁTICO DE CONTROL DE COMPRAS-VENTAS</b><br><b> PARA EL NEGOCIO AUTOS REPUESTOS VAQUERANO</b></h1>
                                             <br><br>
                                             <p style="text-align: center; "> <img src="../assets/img/sisa.jpg" alt="aut" width="600"></p>
                                         </div>
