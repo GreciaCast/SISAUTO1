@@ -121,6 +121,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 						<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
 					</div>
 				</div>
+          <?php include("generalidades/cierre.php"); ?>
 			</div>
 		
 		<!-- MODAL VER PROVEEDOR -->
@@ -195,16 +196,94 @@ if (isset($_SESSION['usuarioActivo'])) {
                 </div>
             </div>
         </div>
-         <!-- PONERLO DENTRO DEL MODAL DE EDITAR PROVEEDOR -->
 
-            <form method="POST" id="cambioProv">
-            <input type="hidden" name="id" id="idProv"  />
-            <input type="hidden" name="bandera" id="banderaProv" />
-            <input type="hidden" name="valor" id="valorProv" />
-        </form>
             </div>
-            <?php include("generalidades/cierre.php"); ?>
-					<script src="../assets/Validaciones/mostrarProveedor.js"></script> 
+
+            <!-- MODAL EDITAR PROVEEDOR -->
+
+            <div class="modal fade" id="modalEditarProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
+                  </div>
+                  <div class="modal-body">
+                   <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
+                    <h2 align="center"><b>Datos Generales</b></h2>
+                    <hr width="75%" style="background-color:#007bff;"/>
+                      <input type="hidden" value="EditarPro" name="bandera"/>
+                      <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
+                    <div class="form-group ">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="text" id="nombreProEditar" name="Nombre_Emp"  aria-required="true" value="">
+                      </div>
+                    </div>
+                    <br><br><br><br>
+                    <div class="form-group">
+                      <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Correo:</label>
+                      <div  class="col-sm-7">
+                        <input class="form-control" type="email" id="correoProEditar" name="Correo_Emp" onkeyup="validarCorreoProvEditar(this)"><a id='correoProvEditar'></a>
+                      </div>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
+                      <div class="col-sm-3">
+                        <input class="form-control" type="text" id="telefonoProEditar" name="Telefono_Emp" data-mask="9999-9999" value="" >
+                      </div>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                      <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Dirección:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="text" name="Direccion_Emp" id="direccionProEditar" >
+                      </div>
+                    </div>
+                    <br><br>
+                    <h2 align="center"><b>Datos del Responsable</b></h2>
+                    <hr width="75%" style="background-color:#007bff;"/>
+                    <div class="form-group">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="text" id="nombreResEditar" name="Nombre_Res" >
+                      </div>
+                    </div>
+                    <br><br><br><br>
+                    <div class="form-group">
+                      <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label> 
+                      <div class="col-sm-3">
+                        <input class="form-control" type="text" id="telefonoResEditar" name="Telefono_Res" data-mask="9999-9999">
+                      </div>
+                    </div>
+                      <br><br><br>
+                      <div class="form-group">
+                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                        <div class="col-sm-7">
+                         <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
+                         </textarea>
+                       </div>
+                     </div>
+                  </form>
+                 </div>
+                 <br><br>
+                 <div class="modal-footer">
+                  <input type="hidden" id="anterior" value=""  />
+                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validareditarProveedor()">Aceptar</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                </div>
+              </div>
+            </div>
+            <form method="POST" id="cambioProv">
+              <input type="hidden" name="id" id="idProv"  />
+              <input type="hidden" name="bandera" id="banderaProv" />
+              <input type="hidden" name="valor" id="valorProv" />
+            </form>
+          </div>
+
+            <!-- _______________________________________________________________________________________ -->
+					         <script src="../assets/Validaciones/mostrarProveedor.js"></script> 
                     <script src="../assets/Validaciones/validarProveedor.js"></script>
                     <script src="../assets/Validaciones/validarCorreo.js"></script>
                     <script src="../assets/Validaciones/validarNombreCompletoUsuario.js"></script>

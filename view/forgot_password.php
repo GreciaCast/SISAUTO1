@@ -35,13 +35,13 @@
                     <br>
                     <div class="text-center">
                        <p>
-                           Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña.
+                           Ingrese su dirección de correo electrónico y le enviaremos su nueva contraseña.
                        </p>
                     </div>
                     <div class="row">
 
                         <div class="col-lg-12">
-                            <form class="m-t" role="form" method="post" action="../Controlador/correo.php">
+                            <form class="m-t" role="form" method="post" action="../Controlador/correo.php" autocomplete="off">
                                 <div class="form-group">
                                     <input type="email" class="form-control" id="exampleInputEmail1" type="text" name="correo" aria-describedby="emailHelp" placeholder="Correo Electrónico" required="">
                                 </div>
