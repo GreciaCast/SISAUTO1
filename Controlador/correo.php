@@ -23,12 +23,12 @@ if ($row= mysqli_fetch_assoc($var)){
     	    header("location: /phpSISAUTO/view/login.php");
         } catch (Exception $e) {
         	$_SESSION['error']="Lo sentimos el correo no pudo ser enviado";
-    	    header("location: /phpSISAUTO/view/login.php");
+    	    header("location: /SISAUTO1/view/login.php");
         }
 	 
     }else{
     	$_SESSION['error']="Lo sentimos el correo ingresado no existe";
-    	header("location: /phpSISAUTO/view/forgot-password.php");
+    	header("location: /SISAUTO1/view/forgot-password.php");
     }
 
  ?>

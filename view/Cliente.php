@@ -50,13 +50,13 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</button>
 				</a>
 				<?php  if ($tipo == 1) { ?>
-				<a class="pull-right" href="/phpSISAUTO1/view/Cliente.php?tipo=0">
+				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=0">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes inactivos  <i class="fa fa-bars"></i>
 					</button>
 				</a>
 				<?php  }else{ ?>
-				<a class="pull-right" href="/phpSISAUTO1/view/Cliente.php?tipo=1">
+				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=1">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes activos <i class="fa fa-bars"></i>
 					</button>
@@ -210,7 +210,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 $('#banderaProv').val('cambio');
                 $('#valorProv').val('0');
                 var dominio = window.location.host;
-                 $('#cambioProv').attr('action','http://'+dominio+'/phpSISAUTO1/Controlador/proveedorC.php');
+                 $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
                  $('#cambioProv').submit();
                  }else{
 
@@ -235,7 +235,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 $('#banderaProv').val('cambio');
                 $('#valorProv').val('1');
                 var dominio = window.location.host;
-                 $('#cambioProv').attr('action','http://'+dominio+'/phpSISAUTO1/Controlador/proveedorC.php');
+                 $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
                  $('#cambioProv').submit();
                  }else{
 
@@ -253,7 +253,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/phpSISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
 </head>
 <body>
 </body>

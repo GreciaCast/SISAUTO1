@@ -19,7 +19,7 @@ if($bandera=="guardar"){
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] = "Registro guardado exitosamente";
-    header("location: /phpSISAUTO1/view/Proveedor.php?");
+    header("location: /SISAUTO1/view/Proveedor.php?");
 
 }
 
@@ -38,7 +38,7 @@ if($bandera=="EditarPro"){
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] ="Registro editado exitosamente";
-    header("location: /phpSISAUTO1/view/Proveedor.php");
+    header("location: /SISAUTO1/view/Proveedor.php");
 
 }
 
@@ -54,7 +54,7 @@ if ($bandera=="cambio") {
 		$aux = 1;
 		$_SESSION['mensaje'] ="Proveedor dado de baja exitosamente";
 	}
-    header("location: /phpSISAUTO1/view/Proveedor.php?tipo=".$aux."");
+    header("location: /SISAUTO1/view/Proveedor.php?tipo=".$aux."");
 }
 
 if ($bandera=="cnombre") {

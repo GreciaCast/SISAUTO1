@@ -1,5 +1,5 @@
 <?php 
 session_start();
 unset($_SESSION['usuarioActivo']);
-header("location: /phpSISAUTO1/view/login.php");
+header("location: /SISAUTO1/view/login.php");
  ?>

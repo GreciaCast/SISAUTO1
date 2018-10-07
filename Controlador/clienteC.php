@@ -17,7 +17,7 @@ if($bandera=="GuardarCli"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
    
     $_SESSION['mensaje'] ="Registro guardado exitosamente";
-    header("location: /phpSISAUTO1/view/Cliente.php");
+    header("location: /SISAUTO1/view/Cliente.php");
 
 }
 
@@ -36,7 +36,7 @@ if($bandera=="EditarCli"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     
     $_SESSION['mensaje'] ="Registro editado exitosamente";
-    header("location: /phpSISAUTO1/view/Cliente.php");
+    header("location: /SISAUTO1/view/Cliente.php");
 
 }
 if ($bandera=="cambio") {
@@ -51,7 +51,7 @@ if ($bandera=="cambio") {
 		$aux = 1;
 		$_SESSION['mensaje'] ="Cliente dado de baja exitosamente";
 	}
-    header("location: /phpSISAUTO1/view/Cliente.php?tipo=".$aux."");
+    header("location: /SISAUTO1/view/Cliente.php?tipo=".$aux."");
  }
 if ($bandera=="nombreC") {
 	$sql="SELECT * from cliente where nombre_Cli like '".$_POST["nombre"]."'";

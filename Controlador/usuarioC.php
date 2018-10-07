@@ -16,7 +16,7 @@
 		$sql = "INSERT INTO usuario (usuario_Usu,contrasena_Usu,nombre_Usu,correo_Usu,direccion_Usu,telefono_Usu,dui_Usu,tipo_Usu,estado_Usu) VALUES ('$nombreusuU',MD5('$contrasenaU'),'$nombreU','$correoU','$direccionU','$telefonoU','$duiU',1,1)";
 	    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 	    $mensaje = "¡Registro guardado exitosamente!";
-	    header("location: /phpSISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
+	    header("location: /SISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
 	}
 
 	if($bandera == "EditarUsu"){
@@ -34,7 +34,7 @@
 		}
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		    $mensaje = "Registro editado exitosamente";
-		    header("location: /phpSISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
+		    header("location: /SISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
 	}
 
 	if($bandera == "EditarUsuContrasena"){
@@ -49,7 +49,7 @@
 		}
 	    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 	    $mensaje = "Registro editado exitosamente";
-	    header("location: /phpSISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
+	    header("location: /SISAUTO1/view/Usuarios.php?mensaje=".$mensaje);
 	}
 
 	if ($bandera == "ucorreo"){
@@ -86,7 +86,7 @@
 			$aux = 1;
 			$mensaje = "Usuario dado de baja exitosamente";
 		}
-	    header("location: /phpSISAUTO1/view/Usuarios.php?tipo=".$aux."&mensaje=".$mensaje);
+	    header("location: /SISAUTO1/view/Usuarios.php?tipo=".$aux."&mensaje=".$mensaje);
 	}
 
 ?>

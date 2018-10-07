@@ -48,7 +48,7 @@ function validarCorreoU(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -84,7 +84,7 @@ function validarDUIU(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -112,7 +112,7 @@ function validarNombreUsu(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -204,7 +204,7 @@ function validareditarDUIU(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data != 0 && data != 1) {
@@ -234,7 +234,7 @@ function validareditarCorreoU(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0 || data == 1) {
@@ -275,7 +275,7 @@ function validareditarContrasenaActualU(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {

@@ -12,14 +12,14 @@ session_start();
     	if ($row['contrasena_Usu']== $contrasena) {
     		$_SESSION['usuarioActivo']=$row;
             $_SESSION['mensaje']="Usted a iniciado sesión";
-    		header("location: /phpSISAUTO1/view/index.php");
+    		header("location: /SISAUTO1/view/index.php");
     	}else{
         $_SESSION['error']="Usuario y Contraseña Incorrectos";
-      	header("location: /phpSISAUTO1/view/login.php");
+      	header("location: /SISAUTO1/view/login.php");
     	}
     }else{
     	$_SESSION['error']="Usuario y Contraseña Incorrectos";
-    	header("location: /phpSISAUTO1/view/login.php");
+    	header("location: /SISAUTO1/view/login.php");
     }
 
 

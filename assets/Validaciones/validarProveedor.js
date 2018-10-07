@@ -24,7 +24,7 @@
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -54,7 +54,7 @@
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -88,7 +88,7 @@
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -146,7 +146,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -213,7 +213,7 @@ function validarproveedorEditar(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -248,7 +248,7 @@ function validarproveedorEditar(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/proveedorC.php",
+            url:"/SISAUTO1/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -305,7 +305,7 @@ function validarproveedorEditar(){
 
             return $.ajax({
                 data: param,
-                url:"/phpSISAUTO/Controlador/proveedorC.php",
+                url:"/SISAUTO1/Controlador/proveedorC.php",
                 method: "post",
                 success: function(data){
                     if (data==0) {

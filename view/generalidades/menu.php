@@ -3,7 +3,7 @@
                 <ul class="nav metismenu" id="side-menu">
                     <img alt="logo" src="../assets/img/aut3.png" width="100%" height="100%" />
                     <li>
-                        <a href="/phpSISAUTO1/view/NuevaVenta.php"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
+                        <a href="/SISAUTO1/view/NuevaVenta.php"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
                     </li>
                     <li>
                         <a href=""><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>

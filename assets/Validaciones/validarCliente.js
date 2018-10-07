@@ -21,7 +21,7 @@
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO1/Controlador/clienteC.php",
+            url:"/SISAUTO1/Controlador/clienteC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -64,7 +64,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO1/Controlador/clienteC.php",
+            url:"/SISAUTO1/Controlador/clienteC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -97,7 +97,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO1/Controlador/clienteC.php",
+            url:"/SISAUTO1/Controlador/clienteC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -129,7 +129,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO1/Controlador/clienteC.php",
+            url:"/SISAUTO1/Controlador/clienteC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -204,7 +204,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO1/Controlador/clienteC.php",
+            url:"/SISAUTO1/Controlador/clienteC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
