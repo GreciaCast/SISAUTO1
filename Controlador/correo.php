@@ -20,7 +20,7 @@ if ($row= mysqli_fetch_assoc($var)){
         	mail($_POST['correo'],"Recuperación de contraseña","Su nueva contraseña es : ".$cad,"SISAUTO");
         	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
         	$_SESSION['mensaje']="La contraseña fue enviada al correo";
-    	    header("location: /phpSISAUTO/view/login.php");
+    	    header("location: /SISAUTO1/view/login.php");
         } catch (Exception $e) {
         	$_SESSION['error']="Lo sentimos el correo no pudo ser enviado";
     	    header("location: /SISAUTO1/view/login.php");
@@ -28,7 +28,7 @@ if ($row= mysqli_fetch_assoc($var)){
 	 
     }else{
     	$_SESSION['error']="Lo sentimos el correo ingresado no existe";
-    	header("location: /SISAUTO1/view/forgot-password.php");
+    	header("location: /SISAUTO1/view/forgot_password.php");
     }
 
  ?>

@@ -14,6 +14,8 @@
     <link href="../assets/css/animate.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
 
+    <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
+
     <style>
         body {
             background-image: url("../assets/img/auto.jpg");
@@ -39,9 +41,9 @@
                     <div class="row">
 
                         <div class="col-lg-12">
-                            <form class="m-t" role="form" action="index.html">
+                            <form class="m-t" role="form" method="post" action="../Controlador/correo.php">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Correo Electrónico" required="">
+                                    <input type="email" class="form-control" id="exampleInputEmail1" type="text" name="correo" aria-describedby="emailHelp" placeholder="Correo Electrónico" required="">
                                 </div>
 
                                 <button type="submit" class="btn btn-success block full-width m-b">Restablecer la contraseña</button>
@@ -56,7 +58,19 @@
         </div>
         <!-- <hr/> -->
     </div>
+        <script src="../assets/pNotify/pnotify.custom.min.js"></script>
+
+        <script src="../assets/Validaciones/Mensajes.js"></script>
 
 </body>
 
 </html>
+
+<?php
+if (isset($_SESSION['error'])) {
+     echo ("<script type='text/javascript'>
+notaError('".$_SESSION['error']."');
+</script>");
+ unset($_SESSION['error']);
+ }
+?>
