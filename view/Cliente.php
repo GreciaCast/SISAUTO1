@@ -192,7 +192,83 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
             </div>
 
-         <script type="text/javascript">
+            <!-- MODAL EDITAR CLIENTE -->
+
+            <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Editar Cliente</h3>
+                  </div>
+                  <div class="modal-body">
+                   <form action="../Controlador/clienteC.php" method="POST" id="editarCli" align="center" autocomplete="off">
+                    <h2 align="center"><b>Datos Generales</b></h2>
+                    <hr width="75%" style="background-color:#007bff;"/>
+                      <input type="hidden" value="EditarCli" name="bandera"/>
+                      <input type="hidden" value="" name="idcliente" id="idcliente"/>
+                    <div class="form-group ">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="text" id="nombreCliEditar" name="nombreCli" aria-required="true" value="">
+                      </div>
+                    </div>
+                    <br><br><br><br>
+                    <div class="form-group ">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Dirección:</label>
+                      <div class="col-sm-7">
+                        <input class="form-control" type="text" id="direccionCliEditar"  name="direccionCli" aria-required="true" value="">
+                      </div>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
+                      <div class="col-sm-3">
+                        <input class="form-control" type="text" id="telefonoCliEditar" name="telefonoCli" data-mask="9999-9999" value="" >
+                      </div>
+                    </div>
+                    <br><br><br>
+                     <div class="form-group">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">NRC:</label>
+                      <div class="col-sm-3">
+                        <input class="form-control" type="text" name="nrcCli" id="nrcCliEditar" data-mask="9999-9999" readonly="readonly"aria-required="true"  value="" >
+                      </div>
+                    </div>
+                        <br><br><br>
+                        <div class="form-group">
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">NIT:</label>
+                      <div class="col-sm-3">
+                        <input class="form-control" type="text" name="nitCli" id="nitCliEditar" data-mask="9999-9999" readonly="readonly"aria-required="true" value="" >
+                      </div>
+                    </div>
+                      <br><br><br>
+                      <div class="form-group">
+                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                        <div class="col-sm-7">
+                         <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
+                         </textarea>
+                       </div>
+                     </div>
+                  </form>
+                 </div>
+                 <br><br>
+                 <div class="modal-footer">
+                  <input type="hidden" id="anterior" value=""  />
+                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validareditarCliente()">Aceptar</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                </div>
+              </div>
+            </div>
+
+ <!--********************************************************************************************************************** -->
+             <form method="POST" id="cambioCli">
+               <input type="hidden" name="id" id="idCli"  />
+               <input type="hidden" name="bandera" id="banderaCli" />
+               <input type="hidden" name="valor" id="valorCli" />
+             </form>
+          </div>
+            <!-- DAR DE BAJA -->
+        <script type="text/javascript">
             function baja(id){
                 swal({
                     title: '¿Está seguro en dar de baja?',
@@ -206,18 +282,18 @@ if (isset($_SESSION['usuarioActivo'])) {
 
               }).then((result) => {
                 if(result.value){
-                $('#idProv').val(id);
-                $('#banderaProv').val('cambio');
-                $('#valorProv').val('0');
+                $('#idCli').val(id);
+                $('#banderaCli').val('cambio');
+                $('#valorCli').val('0');
                 var dominio = window.location.host;
-                 $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
-                 $('#cambioProv').submit();
+                 $('#cambioCli').attr('action','http://'+dominio+'/SISAUTO1/Controlador/clienteC.php');
+                 $('#cambioCli').submit();
                  }else{
 
                 }
             })
             }
-
+     //DAR DE ALTA 
             function alta(id){
                 swal({
                     title: '¿Está seguro en dar de alta?',
@@ -231,18 +307,19 @@ if (isset($_SESSION['usuarioActivo'])) {
 
               }).then((result) => {
                 if(result.value){
-                $('#idProv').val(id);
-                $('#banderaProv').val('cambio');
-                $('#valorProv').val('1');
+                $('#idCli').val(id);
+                $('#banderaCli').val('cambio');
+                $('#valorCli').val('1');
                 var dominio = window.location.host;
-                 $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
-                 $('#cambioProv').submit();
+                 $('#cambioCli').attr('action','http://'+dominio+'/SISAUTO1/Controlador/clienteC.php');
+                 $('#cambioCli').submit();
                  }else{
 
                  }
             })
             }
         </script>
+
 		</body>
 		</html>
 
