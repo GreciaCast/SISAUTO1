@@ -192,7 +192,7 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
             </div>
 
-            <!-- MODAL EDITAR CLIENTE -->
+    <!-- MODAL EDITAR CLIENTE -->
 
             <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog modal-lg" role="document">

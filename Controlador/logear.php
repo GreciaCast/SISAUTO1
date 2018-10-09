@@ -11,7 +11,7 @@ session_start();
     if ($row= mysqli_fetch_assoc($var)){
     	if ($row['contrasena_Usu']== $contrasena) {
     		$_SESSION['usuarioActivo']=$row;
-            $_SESSION['mensaje']="Usted a iniciado sesión";
+            $_SESSION['mensaje']="Usted a iniciado sesión - BIENVENIDO";
     		header("location: /SISAUTO1/view/index.php");
     	}else{
         $_SESSION['error']="Usuario y Contraseña Incorrectos";

@@ -10,6 +10,8 @@
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <link href="../assets/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+        <link href="../assets/package/dist/sweetalert2.css" rel="stylesheet">
+
     <!-- Toastr style -->
     <link href="../assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
@@ -19,4 +21,6 @@
     <link href="../assets/css/animate.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
+        <script src="../assets/package/dist/sweetalert2.js"></script>
+
 </head>
