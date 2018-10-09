@@ -42,24 +42,28 @@ if (isset($_SESSION['usuarioActivo'])) {
 						Reporte
 						<span class="fa fa-file-pdf-o"></span>
 					</button>
+          &nbsp;
 				</a>
 				<a class="pull-right" href="AgregarCli.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
 						Agregar nuevo 
 						<span class="fa fa-plus"></span>
 					</button>
+          &nbsp;
 				</a>
 				<?php  if ($tipo == 1) { ?>
 				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=0">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes inactivos  <i class="fa fa-bars"></i>
 					</button>
+          &nbsp;
 				</a>
 				<?php  }else{ ?>
 				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=1">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes activos <i class="fa fa-bars"></i>
 					</button>
+          &nbsp;
 				</a>
 			</div>
 				<?php } ?>
@@ -80,7 +84,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                    <th style="width:85px">Teléfono</th>
                                    <th style="width:85px">NCR</th>
                                    <th style="width:85px">NIT</th>
-                                   <th align="center" style="width:2px">Acción</th>
+                                   <th align="center" style="width:2px">Acciones</th>
                                 </tr>
 														</thead>
 														<tbody>

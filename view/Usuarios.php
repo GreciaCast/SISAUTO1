@@ -13,31 +13,31 @@ and open the template in the editor.
 <?php include("generalidades/apertura.php"); ?>
 <body>
     <div id="wrapper">
-    <?php include("generalidades/menu.php"); ?>
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2></h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="index.php" style="font-size:15px;color:blue;">Inicio</a>
-                </li>
-                <li>
-                    <a style="font-size:15px;">Usuarios</a>
-                </li>
-            </ol>
+        <?php include("generalidades/menu.php"); ?>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2></h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.php" style="font-size:15px;color:blue;">Inicio</a>
+                    </li>
+                    <li>
+                        <a style="font-size:15px;">Usuarios</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+            </div>
         </div>
-        <div class="col-lg-2">
-        </div>
-    </div>
-    <?php if (!isset($_GET['tipo'])) {
-        $tipo = 1;
-    }else{
-        $tipo = $_GET['tipo'];
-    }?>
-    <?php
-    $sql = "SELECT * from usuario where estado_Usu = '$tipo' order by nombre_Usu ASC";
-    $usuarios= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-    ?>
+        <?php if (!isset($_GET['tipo'])) {
+            $tipo = 1;
+        }else{
+            $tipo = $_GET['tipo'];
+        }?>
+        <?php
+        $sql = "SELECT * from usuario where estado_Usu = '$tipo' order by nombre_Usu ASC";
+        $usuarios= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+        ?>
     <div class="row">
         <div class="col-12">
             <div class="row" style="padding:20px">
@@ -85,11 +85,11 @@ and open the template in the editor.
                                                     <table class="table table-striped table-bordered display" id="example">
                                                         <thead>
                                                             <tr>
-                                                            <th style="width:175px">Nombre</th>
-                                                            <th style="width:85px">Correo</th>
-                                                            <th style="width:85px">Teléfono</th>
-                                                            <th align="center" style="width:2px">Acciones</th>
-                                                        </tr>
+                                                                <th style="width:175px">Nombre</th>
+                                                                <th style="width:85px">Correo</th>
+                                                                <th style="width:85px">Teléfono</th>
+                                                                <th align="center" style="width:2px">Acciones</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php While($usuario = mysqli_fetch_assoc($usuarios)){?>
@@ -101,12 +101,9 @@ and open the template in the editor.
                                                                         <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerUsuario" href="" onclick="mostrarUsu('<?php echo $usuario['nombre_Usu']?>','<?php echo $usuario['telefono_Usu']?>','<?php echo $usuario['correo_Usu']?>','<?php echo $usuario['direccion_Usu']?>','<?php echo $usuario['dui_Usu']?>','<?php echo $usuario['usuario_Usu']?>','<?php echo $usuario['tipo_Usu']?>');">
                                                                         </button>
                                                                         <?php  if ($tipo == 1) { ?>
-                                                                            <button title="Editar" type="button" class="btn btn-primary fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarUsuario" onclick="editarUsu('<?php echo $usuario['nombre_Usu']?>','<?php echo $usuario['telefono_Usu']?>','<?php echo $usuario['correo_Usu']?>','<?php echo $usuario['direccion_Usu']?>','<?php echo $usuario['dui_Usu']?>','<?php echo $usuario['usuario_Usu']?>','<?php echo $usuario['tipo_Usu']?>','<?php echo $usuario['idUsuario']?>');"></button>
+                                                                            <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarUsuario" onclick="editarUsu('<?php echo $usuario['nombre_Usu']?>','<?php echo $usuario['telefono_Usu']?>','<?php echo $usuario['correo_Usu']?>','<?php echo $usuario['direccion_Usu']?>','<?php echo $usuario['dui_Usu']?>','<?php echo $usuario['usuario_Usu']?>','<?php echo $usuario['tipo_Usu']?>','<?php echo $usuario['idUsuario']?>');"></button>
                                                                             <?php if($usuario['tipo_Usu'] == 0){ ?>
                                                                             <?php }else{ ?>
-                                                                                <!--
-                                                                                    <button title="Contrasena" type="button" class="btn btn-primary fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarUsuarioContrasena" onclick="editarUsuContrasena('<?php echo $usuario['usuario_Usu']?>','<?php echo $usuario['tipo_Usu']?>','<?php echo $usuario['idUsuario']?>');"></button>
-                                                                                -->
                                                                                 <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="bajaUsu(<?php echo $usuario['idUsuario'] ?>)"></button>
                                                                             <?php }?>
                                                                         <?php  }else{ ?>
