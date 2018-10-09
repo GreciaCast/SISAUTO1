@@ -30,6 +30,9 @@ function editarUsu(nombre,telefono,correo,direccion,dui,usuario,tipo,idusuario){
 }
 
 function editarUsuContrasena(usuario,tipo,idusuario){
+
+	console.log(usuario);
+	console.log(tipo);
 	$("#nombreusuUsuContrasenaEditar").val(usuario);
 	if(tipo == '1'){
 		var aux = 'Empleado';
