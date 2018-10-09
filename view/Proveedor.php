@@ -138,7 +138,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
                 </div>
                 <div class="modal-body">
-                        <h2 align="center"><b>Datos Generales</b></h2>
+                        <h3 align="center"><b>Datos Generales</b></h3>
                         <hr width="75%" style="background-color:#007bff;"/>
                         <div class="form-group ">
                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
@@ -168,7 +168,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                             </div>
                         </div>
                         <br><br>
-                        <h2 align="center"><b>Datos del Responsable</b></h2>
+                        <h3 align="center"><b>Datos del Responsable</b></h3>
                         <hr width="75%" style="background-color:#007bff;"/>
                         <div class="form-group">
                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
@@ -214,7 +214,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   </div>
                   <div class="modal-body">
                    <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
-                    <h2 align="center"><b>Datos Generales</b></h2>
+                    <h3 align="center"><b>Datos Generales</b></h3>
                     <hr width="75%" style="background-color:#007bff;"/>
                       <input type="hidden" value="EditarPro" name="bandera"/>
                       <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
@@ -246,7 +246,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                       </div>
                     </div>
                     <br><br>
-                    <h2 align="center"><b>Datos del Responsable</b></h2>
+                    <h3 align="center"><b>Datos del Responsable</b></h3>
                     <hr width="75%" style="background-color:#007bff;"/>
                     <div class="form-group">
                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
