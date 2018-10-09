@@ -107,7 +107,7 @@ and open the template in the editor.
                                                                                 <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="bajaUsu(<?php echo $usuario['idUsuario'] ?>)"></button>
                                                                             <?php }?>
                                                                         <?php  }else{ ?>
-                                                                            <button title="Dar de alta" type="button" class="btn btn-success fa fa-arrow-circle-up" onclick="altaUsu(<?php echo $usuario['idUsuario'] ?>)"></button>
+                                                                            <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="altaUsu(<?php echo $usuario['idUsuario'] ?>)"></button>
                                                                         <?php } ?>
                                                                     </th>
                                                                 </tr>
