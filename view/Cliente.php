@@ -95,7 +95,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                 <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCliente" href="" onclick="mostrarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
                                                <?php  if ($tipo == 1) {
                                                 ?>
-                                                <button title="Editar" type="button" class="btn btn-primary fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCliente" onclick="editarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['idCliente']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
+                                                <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCliente" onclick="editarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['idCliente']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
                                                  <?php  }else{ }?>
                                                 <?php  if ($tipo == 1) {
                                                 ?>
@@ -245,7 +245,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <div class="form-group">
                         <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
                         <div class="col-sm-7">
-                         <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
+                         <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre del cliente " id="descripcionCliEditar" >
                          </textarea>
                        </div>
                      </div>
