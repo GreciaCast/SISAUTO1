@@ -162,7 +162,7 @@ and open the template in the editor.
                         </div>
                         <label align="right" for="nombre" class="col-sm-12 col-md-3 col-form-label" style="font-size:15px;">Correo:</label>
                         <div class="col-sm-12 col-md-3">
-                            <input class="form-control" type="email" id="email" name="Correo_Usu" style="width:400px;height:40px" value="" onkeyup="validarCorreoEditar(this)"><a id='mensajitoCorreo'></a>
+                            <input class="form-control" type="email" id="correoUsuEditar" name="Correo_Usu" style="width:400px;height:40px" value="" onkeyup="validarCorreoEditar(this)"><a id='mensajitoCorreo'></a>
                         </div>
                     </div>
                     <div class="form-group row">
