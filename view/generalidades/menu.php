@@ -17,7 +17,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="Cliente.php" style="font-size:15px;"><span class="fa fa-user"> Cliente</span></a></li>
                     <li><a href="Proveedor.php" style="font-size:15px;"><span class="fa fa-group"> Proveedor</span></a></li>
-                    <li><a href=""><span class="fa fa-tags" style="font-size:15px;"> Producto</span></a></li>
+                    <li><a href="Producto.php"><span class="fa fa-tags" style="font-size:15px;"> Producto</span></a></li>
                 </ul>
             </li>
             <li>
@@ -37,7 +37,7 @@
             </li>
             <?php } ?>
         </ul>
-        
+
     </div>
 </nav>
 <!-- Logout Modal-->
@@ -49,7 +49,7 @@
             </div>
             <div class="modal-body">
                 <p>Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</p>
-            </div>  
+            </div>
             <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <a class="btn btn-success" href="../Controlador/cerrar.php">Cerrar sesión</a>
@@ -138,7 +138,7 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 &nbsp;&nbsp;
                 <li>
                     <a  data-toggle="modal" data-target="#exampleModal">
