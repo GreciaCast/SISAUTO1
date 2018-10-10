@@ -22,7 +22,6 @@ if (isset($_SESSION['usuarioActivo'])) {
 				</ol>
 			</div>
 			<div class="col-lg-2">
-
 			</div>
 		</div>
 		<?php if (!isset($_GET['tipo'])) { 
