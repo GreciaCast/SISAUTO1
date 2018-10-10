@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
+  if ($_SESSION['usuarioActivo']['tipo_Usu']=='0') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -104,6 +105,21 @@ if (isset($_SESSION['usuarioActivo'])) {
 </body>
 </html>
 
+<?php
+}else{
+    ?>
+    <!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/index.php">
+</head>
+<body>
+</body>
+</html>
+    <?php
+}
+?>
 <?php
 }else{
     ?>

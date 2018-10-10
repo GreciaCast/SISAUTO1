@@ -45,6 +45,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</button>
           &nbsp;
 				</a>
+        <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
 				<a class="pull-right" href="AgregarPro.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
 						Agregar nuevo 
@@ -66,6 +67,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</button>
           &nbsp;
 				</a>
+        <?php } ?>
 			</div>
 				<?php } ?>
 				<div class="row">
@@ -83,8 +85,11 @@ if (isset($_SESSION['usuarioActivo'])) {
 																<th style="width:150px">Empresa</th>
 																<th style="width:80px">Teléfono</th>
 																<th style="width:175px">Responsable</th>
-																<th align="center" style="width:2px">Acciones</th>
-
+                                <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+																  <th align="center" style="width:2px">Acciones</th>
+                                <?php  }else{ ?>
+                                  <th align="center" style="width:2px">Acción</th>
+                                <?php } ?>
 															</tr>
 														</thead>
 														<tbody>
@@ -97,8 +102,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 
 																<th align="center">
 																	<button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProveedor" href="" onclick="mostrarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
-																	<?php  if ($tipo == 1) {
-																		?>
+                                  <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+																	<?php  if ($tipo == 1) {?>
 																		<button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProveedor" onclick="editarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['idProveedor']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
 																		<?php  }else{ }?>
 																		<?php  if ($tipo == 1) {
@@ -107,6 +112,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 																			<?php  }else{ ?>
 																			<button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
 																			<?php } ?>
+                                      <?php } ?>
 																		</th>
 																	</tr>
 																	<?php } ?>

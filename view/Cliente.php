@@ -65,8 +65,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</button>
           &nbsp;
 				</a>
+        <?php } ?>
 			</div>
-				<?php } ?>
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="wrapper wrapper-content">
@@ -84,7 +84,11 @@ if (isset($_SESSION['usuarioActivo'])) {
                                    <th style="width:85px">Teléfono</th>
                                    <th style="width:85px">NCR</th>
                                    <th style="width:85px">NIT</th>
-                                   <th align="center" style="width:2px">Acciones</th>
+                                   <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+                                     <th align="center" style="width:2px">Acciones</th>
+                                   <?php  }else{ ?>
+                                     <th align="center" style="width:2px">Acción</th>
+                                   <?php } ?>
                                 </tr>
 														</thead>
 														<tbody>
@@ -97,16 +101,19 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                                        
                                             <th align="center">
                                                 <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCliente" href="" onclick="mostrarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
+                                               <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                                                <?php  if ($tipo == 1) {
                                                 ?>
                                                 <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCliente" onclick="editarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['idCliente']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
                                                  <?php  }else{ }?>
-                                                <?php  if ($tipo == 1) {
-                                                ?>
+                                                <?php  if($tipo == 1) { ?>
                                                 <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $cliente['idCliente'] ?>)"></button>
                                                 <?php  }else{ ?>
                                                 <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $cliente['idCliente'] ?>)"></button>
                                                 <?php } ?>
+                                                <?php  }else{ if($tipo == 0){?>
+                                                  <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $cliente['idCliente'] ?>)"></button>
+                                                <?php } }?>
                                             </th>
                                         </tr>
                                         <?php } ?>
@@ -137,7 +144,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#007bff;color:black;">
 
-                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i>Ver Cliente</h3>
+                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Cliente</h3>
                 </div>
                 <div class="modal-body">
                  <h2 align="center"><b>Datos Generales</b></h2>
