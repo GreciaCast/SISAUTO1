@@ -176,6 +176,7 @@ return true;
     }
 
 function validarproveedorEditar(){
+    var retornar;
     nombreE = $("#nombreProEditar").val();
     descripcionE = $("#descripcionProvEditar").val();
     anteriorE = $("#anterior").val();
@@ -184,15 +185,37 @@ function validarproveedorEditar(){
         notaError("¡El nombre de la empresa es obligatorio!");
         return 1;
     }else if (nombreE == anteriorE) {
-        return 0;
+        retornar= 0;
     }else if(descripcionE.length > 14){
-        return 0;
+        retornar= 0;
     }else if(descripcionE.length !=0 && descripcionE.length <= 14){
         notaError("Descripción muy corta");
         return 1;
     }else{
         notaError("Justifique en la descripción porque modificó el nombre de la empresa");
         return 1;
+    }
+    if(retornar==0){
+        var param={
+            nombre: $('#nombreProEditar').val(),
+            bandera: "cnombreEditar",
+            idP: $('#idproveedor').val()
+        };
+
+        return $.ajax({
+            data: param,
+            url:"/SISAUTO1/Controlador/proveedorC.php",
+            method: "post",
+            success: function(data){
+                if (data==0) {
+                    return true;
+                }else{
+                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   return false;
+                }
+            }
+        });
+
     }
 }
 

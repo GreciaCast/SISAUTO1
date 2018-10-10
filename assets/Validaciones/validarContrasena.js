@@ -16,11 +16,11 @@ function validarContrasena(obj,e,valor){
     }
   }
   
-  var tamanio = $('#contrasenaUsu').val().length+1;
+  var tamanio = $('#contrasenaUsu').val().length + 1;
   if( tamanio < 6){
-    $('#mensajito1').text("Debe contener al menos 6 caracteres");
+    $('#mensajitoo').text("Debe contener al menos 6 caracteres");
   }else{
-    $('#mensajito1').text("");
+    $('#mensajitoo').text("");
   }
   return aux;
 }
@@ -29,10 +29,13 @@ function validarContrasena2(obj,e,valor){
  
   var confirmar = $('#contrasenaUsu').val();
   var contrasena = $('#contrasenaUsu2').val();
+
+  console.log(confirmar);
+  console.log(contrasena);
   if( confirmar == contrasena){
-    $('#mensajito').text("La contraseña coinciden");
+    $('#mensajitooo').text("La contraseña coincide");
   }else{
-    $('#mensajito').text("La contraseña no coinciden");
+    $('#mensajitooo').text("La contraseña no coincide");
   }
 }
 
@@ -67,9 +70,9 @@ function validareditarContrasena2(obj,e,valor){
   var confirmar = $('#contrasenaUsuEditar').val();
   var contrasena = $('#contrasenaUsu2Editar').val();
   if( confirmar == contrasena){
-    $('#mensajito').text("La contraseña coinciden");
+    $('#mensajito').text("La contraseña coincide");
   }else{
-    $('#mensajito').text("La contraseña no coinciden");
+    $('#mensajito').text("La contraseña no coincide");
   }
 }
 

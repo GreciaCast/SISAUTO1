@@ -17,10 +17,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <a href="index.php" style="font-size:15px;color:blue;">Inicio</a>
                     </li>
                     <li>
-                        <a href="Cliente.php" style="font-size:15px;color:blue;">Cliente</a>
+                        <a href="Cliente.php" style="font-size:15px;color:blue;">Clientes</a>
                     </li>
                     <li>
-                        <a style="font-size:15px;">Registrar Cliente</a>
+                        <a style="font-size:15px;">Registrar cliente</a>
                     </li>
                 </ol>
             </div>

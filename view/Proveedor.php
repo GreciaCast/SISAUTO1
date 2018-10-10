@@ -43,25 +43,31 @@ if (isset($_SESSION['usuarioActivo'])) {
 						Reporte
 						<span class="fa fa-file-pdf-o"></span>
 					</button>
+          &nbsp;
 				</a>
+        <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
 				<a class="pull-right" href="AgregarPro.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
 						Agregar nuevo 
 						<span class="fa fa-plus"></span>
 					</button>
+          &nbsp;
 				</a>
 				<?php  if ($tipo == 1) { ?>
 				<a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=0">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver proveedores inactivos  <i class="fa fa-bars"></i>
 					</button>
+          &nbsp;
 				</a>
 				<?php  }else{ ?>
 				<a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=1">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver proveedores activos <i class="fa fa-bars"></i>
 					</button>
+          &nbsp;
 				</a>
+        <?php } ?>
 			</div>
 				<?php } ?>
 				<div class="row">
@@ -79,8 +85,11 @@ if (isset($_SESSION['usuarioActivo'])) {
 																<th style="width:150px">Empresa</th>
 																<th style="width:80px">Teléfono</th>
 																<th style="width:175px">Responsable</th>
-																<th align="center" style="width:2px">Acción</th>
-
+                                <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+																  <th align="center" style="width:2px">Acciones</th>
+                                <?php  }else{ ?>
+                                  <th align="center" style="width:2px">Acción</th>
+                                <?php } ?>
 															</tr>
 														</thead>
 														<tbody>
@@ -93,8 +102,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 
 																<th align="center">
 																	<button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProveedor" href="" onclick="mostrarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
-																	<?php  if ($tipo == 1) {
-																		?>
+                                  <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+																	<?php  if ($tipo == 1) {?>
 																		<button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProveedor" onclick="editarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['idProveedor']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
 																		<?php  }else{ }?>
 																		<?php  if ($tipo == 1) {
@@ -103,6 +112,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 																			<?php  }else{ ?>
 																			<button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
 																			<?php } ?>
+                                      <?php } ?>
 																		</th>
 																	</tr>
 																	<?php } ?>
@@ -134,7 +144,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
                 </div>
                 <div class="modal-body">
-                        <h2 align="center"><b>Datos Generales</b></h2>
+                        <h3 align="center"><b>Datos Generales</b></h3>
                         <hr width="75%" style="background-color:#007bff;"/>
                         <div class="form-group ">
                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
@@ -164,7 +174,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                             </div>
                         </div>
                         <br><br>
-                        <h2 align="center"><b>Datos del Responsable</b></h2>
+                        <h3 align="center"><b>Datos del Responsable</b></h3>
                         <hr width="75%" style="background-color:#007bff;"/>
                         <div class="form-group">
                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
@@ -210,7 +220,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   </div>
                   <div class="modal-body">
                    <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
-                    <h2 align="center"><b>Datos Generales</b></h2>
+                    <h3 align="center"><b>Datos Generales</b></h3>
                     <hr width="75%" style="background-color:#007bff;"/>
                       <input type="hidden" value="EditarPro" name="bandera"/>
                       <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
@@ -242,7 +252,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                       </div>
                     </div>
                     <br><br>
-                    <h2 align="center"><b>Datos del Responsable</b></h2>
+                    <h3 align="center"><b>Datos del Responsable</b></h3>
                     <hr width="75%" style="background-color:#007bff;"/>
                     <div class="form-group">
                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>

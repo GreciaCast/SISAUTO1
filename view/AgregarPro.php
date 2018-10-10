@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
+  if ($_SESSION['usuarioActivo']['tipo_Usu']=='0') {
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +36,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                             <div class="ibox float-e-margins">
                                 <div class="ibox-content">
                                     <form class="form-horizontal" action="../Controlador/proveedorC.php" method="POST" id="guardarPro" align="center" autocomplete="off">
-                                        <h2><b>Datos Generales</b></h2>
+                                        <h3><b>Datos Generales</b></h3>
                                         <input type="hidden" value="guardar" name="bandera">
                                         <div class="form-group">
                                             
@@ -68,7 +69,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             </div>
                                         </div><br>
                                         <hr size="50" style="background-color: #78bab9"/><br>
-                                        <h2 align="center"><b>Datos del Responsable</b></h2><br>
+                                        <h3 align="center"><b>Datos del Responsable</b></h3><br>
                                         <div class="form-group ">
                                             <label for="responsable" class="col-sm-3 control-label">Nombre del Responsable:</label>
                                             <div class="col-sm-7">
@@ -104,6 +105,21 @@ if (isset($_SESSION['usuarioActivo'])) {
 </body>
 </html>
 
+<?php
+}else{
+    ?>
+    <!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/index.php">
+</head>
+<body>
+</body>
+</html>
+    <?php
+}
+?>
 <?php
 }else{
     ?>
