@@ -58,7 +58,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group">
                                             <label for="empresa" class="col-sm-3 control-label">Codigo:</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="codigoPro" value="<?php echo $ceros . ($contador + 1) ?>" id="codigoP">
+                                                <input class="form-control" type="text" name="codigoPro" value="<?php echo $ceros . ($contador + 1) ?>" id="codigoP" disabled="true">
                                             </div>
                                         </div>
                                         <br>
