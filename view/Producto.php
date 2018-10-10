@@ -83,10 +83,10 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                   <table class="table table-striped table-bordered display" id="example">
                     <thead>
                       <tr>
-                        <th style="width:80px">Codigo</th>
-                        <th style="width:150px">Nombre</th>
-                        <th style="width:175px">Categoria</th>
-                        <th style="width:175px">Marca</th>
+                        <th style="width:30px">Codigo</th>
+                        <th style="width:120px">Nombre</th>
+                        <th style="width:130px">Categoria</th>
+                        <th style="width:100px">Marca</th>
                         <th align="center" style="width:2px">Acciones</th>
 
                       </tr>
