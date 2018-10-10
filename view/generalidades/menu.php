@@ -26,6 +26,7 @@
                     <li><a href="" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>
                 </ul>
             </li>
+            <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -34,6 +35,7 @@
                     <li><a href="" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
                 </ul>
             </li>
+            <?php } ?>
         </ul>
         
     </div>

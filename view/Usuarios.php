@@ -162,7 +162,7 @@ and open the template in the editor.
                         </div>
                         <label align="right" for="nombre" class="col-sm-12 col-md-3 col-form-label" style="font-size:15px;">Correo:</label>
                         <div class="col-sm-12 col-md-3">
-                            <input class="form-control" type="email" id="email" name="Correo_Usu" style="width:400px;height:40px" value="" onkeyup="validarCorreoEditar(this)"><a id='mensajitoCorreo'></a>
+                            <input class="form-control" type="email" id="correoUsuEditar" name="Correo_Usu" style="width:400px;height:40px" value="" onkeyup="validarCorreoEditar(this)"><a id='mensajitoCorreo'></a>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -206,6 +206,13 @@ and open the template in the editor.
             </div>
         </div>
     </div>
+
+        <form method="POST" id="cambioUsu">
+          <input type="hidden" name="id" id="idUsu"  />
+          <input type="hidden" name="bandera" id="banderaUsu" />
+          <input type="hidden" name="valor" id="valorUsu" />
+        </form>
+
     </div>
 
     <script src="../assets/Validaciones/validarUsuario.js"></script>
@@ -236,12 +243,12 @@ and open the template in the editor.
                 cancelButtonText: 'No',
             }).then((result) => {
                 if(result.value){
-                    $('#id').val(id);
-                    $('#bandera').val('cambio');
-                    $('#valor').val('0');
+                    $('#idUsu').val(id);
+                    $('#banderaUsu').val('cambio');
+                    $('#valorUsu').val('0');
                     var dominio = window.location.host;
-                    $('#cambio').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
-                    $('#cambio').submit();
+                    $('#cambioUsu').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
+                    $('#cambioUsu').submit();
                 }else{
 
                 }
@@ -262,12 +269,12 @@ and open the template in the editor.
 
           }).then((result) => {
             if(result.value){
-            $('#id').val(id);
-            $('#bandera').val('cambio');
-            $('#valor').val('1');
+            $('#idUsu').val(id);
+            $('#banderaUsu').val('cambio');
+            $('#valorUsu').val('1');
             var dominio = window.location.host;
-             $('#cambio').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
-             $('#cambio').submit();
+             $('#cambioUsu').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
+             $('#cambioUsu').submit();
              }else{
 
                 }

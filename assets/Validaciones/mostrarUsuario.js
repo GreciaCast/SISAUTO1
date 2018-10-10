@@ -16,7 +16,7 @@ function mostrarUsu(nombre,telefono,correo,direccion,dui,usuario,tipo){
 function editarUsu(nombre,telefono,correo,direccion,dui,usuario,tipo,idusuario){
 	$("#nombreUsuEditar").val(nombre);
 	$("#telefonoUsuEditar").val(telefono);
-	$("#email").val(correo);
+	$("#correoUsuEditar").val(correo);
 	$("#direccionUsuEditar").val(direccion);
 	$("#duiUsuEditar").val(dui);
 	$("#nombreusuUsuEditar").val(usuario);

@@ -48,7 +48,7 @@ function validarCorreoU(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -84,7 +84,7 @@ function validarDUIU(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -112,7 +112,7 @@ function validarNombreUsu(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -157,7 +157,7 @@ async function validareditarUsuario(){
     var correoU = await validareditarCorreoU();
     var direccionU = await validareditarDireccionU(); 
     var duiU = await validareditarDUIU();
-    if (nombreU && telefonoU && direccionU && duiU && (correoU == 1 || correoU == 0)){
+    if (nombreU && telefonoU && direccionU && duiU && (correoU == 0)){
         $('#editarUsu').submit();
     }; 
 }
@@ -204,7 +204,7 @@ function validareditarDUIU(){
         };
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data != 0 && data != 1) {
@@ -220,24 +220,25 @@ function validareditarDUIU(){
 
 function validareditarCorreoU(){
     var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if ($('#email').val().trim() == "") {
+    if ($('#correoUsuEditar').val().trim() == "") {
         notaError("¡El correo es obligatorio!");
         return false;
-    }else if(!regex.test($('#email').val())){
+    }else if(!regex.test($('#correoUsuEditar').val())){
         notaError("¡El correo es incorrecto!");
         return false;
     }else{
         var param = {
-            correo: $('#email').val(),
-            bandera: "ucorreo"
+            correo: $('#correoUsuEditar').val(),
+            bandera: "ucorreoEditar",
+            idU: $('#idusuario').val()
         };
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
-                if (data == 0 || data == 1) {
+                if (data == 0) {
                     return true;
                 }else{
                     console.log(data);
@@ -277,7 +278,7 @@ function validareditarContrasenaActualU(){
 
         return $.ajax({
             data: param,
-            url:"/phpSISAUTO/Controlador/usuarioC.php",
+            url:"/SISAUTO1/Controlador/usuarioC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {

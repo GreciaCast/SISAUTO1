@@ -21,6 +21,6 @@
     <link href="../assets/css/animate.css" rel="stylesheet">
     <link href="../assets/css/style.css" rel="stylesheet">
     <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
-        <script src="../assets/package/dist/sweetalert2.js"></script>
+    <script src="../assets/package/dist/sweetalert2.js"></script>
 
 </head>

@@ -156,25 +156,68 @@ return true;
     }
 
     function validarclienteEditar(){
-    nombre = $("#nombreCliEditar").val();
-    descripcionE = $("#descripcionCliEditar").val();
-    anteriorE = $("#anterior").val();
+    var retornar;
+    nombreC = $("#nombreCliEditar").val();
+    descripcionC = $("#descripcionCliEditar").val();
+    anteriorC = $("#anterior").val();
 
     if ($('#nombreCliEditar').val().trim()=="") {
         notaError("¡El nombre del cliente es obligatorio!");
         return 1;
-    }else if (nombre == anteriorE) {
-        return 0;
-    }else if(descripcionE.length > 14){
-        return 0;
-    }else if(descripcionE.length !=0 && descripcionE.length <= 14){
+    }else if (nombreC == anteriorC) {
+        retornar= 0;
+    }else if(descripcionC.length > 14){
+        retornar= 0;
+    }else if(descripcionC.length !=0 && descripcionC.length <= 14){
         notaError("Descripción muy corta");
         return 1;
     }else{
         notaError("Justifique en la descripción porque modificó el nombre del cliente");
         return 1;
     }
-        }
+    if(retornar==0){
+        var param={
+            nombre: $('#nombreCliEditar').val(),
+            bandera: "cnombreEditar",
+            idC: $('#idcliente').val()
+        };
+
+        return $.ajax({
+            data: param,
+            url:"/SISAUTO1/Controlador/clienteC.php",
+            method: "post",
+            success: function(data){
+                if (data==0) {
+                    return true;
+                }else{
+                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   return false;
+                }
+            }
+        });
+
+    }
+}
+    //function validarclienteEditar(){
+    //nombre = $("#nombreCliEditar").val();
+    //descripcionE = $("#descripcionCliEditar").val();
+    //anteriorE = $("#anterior").val();
+
+    //if ($('#nombreCliEditar').val().trim()=="") {
+      //  notaError("¡El nombre del cliente es obligatorio!");
+        //return 1;
+    //}else if (nombre == anteriorE) {
+      //  return 0;
+    //}else if(descripcionE.length > 14){
+      //  return 0;
+    //}else if(descripcionE.length !=0 && descripcionE.length <= 14){
+      //  notaError("Descripción muy corta");
+        //return 1;
+    //}else{
+      //  notaError("Justifique en la descripción porque modificó el nombre del cliente");
+        //return 1;
+    //}
+      //  }
 
     function validarDireccionEditar(){
 
@@ -199,7 +242,7 @@ return true;
         var param = {
             telefono: $('#telefonoCliEditar').val(),
             bandera: "telefonoCEditar",
-            idP: $('#idcliente').val()
+            idC: $('#idcliente').val()
         };
 
         return $.ajax({

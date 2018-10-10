@@ -77,8 +77,15 @@ if ($bandera=="nrcC") {
     echo mysqli_num_rows($cliente);
 }
 
+// ---------------------------------------------------------------------------------------
+
+if ($bandera=="cnombreEditar") {
+	$sql="SELECT * from cliente where nombre_Cli like '".$_POST["nombre"]."' AND idCliente<>'".$_POST["idC"]."'";
+	$cliente = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+    echo mysqli_num_rows($cliente);
+}
 if ($bandera=="telefonoCEditar") {
-	$sql="SELECT * from cliente where telefono_Cli like '".$_POST["telefono"]."' AND idCliente<>'".$_POST["idP"]."' ";
+	$sql="SELECT * from cliente where telefono_Cli like '".$_POST["telefono"]."' AND idCliente<>'".$_POST["idC"]."' ";
 	$cliente = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
     echo mysqli_num_rows($cliente);
 }

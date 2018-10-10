@@ -58,6 +58,12 @@ if ($bandera == "ucorreo"){
     echo mysqli_num_rows($usuario);
 }
 
+if ($bandera=="ucorreoEditar") {
+	$sql="SELECT * from usuario where correo_Usu = BINARY '".$_POST["correo"]."' AND idUsuario<>'".$_POST["idU"]."'";
+	$usuario = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+    echo mysqli_num_rows($usuario);
+}
+
 if ($bandera == "udui"){
 	$sql = "SELECT * from usuario where dui_Usu = BINARY '".$_POST["dui"]."'";
 	$usuario = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
