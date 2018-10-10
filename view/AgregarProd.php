@@ -113,8 +113,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <br>
                                         <div class="form-group ">
                                             <label for="tel2" class="col-sm-3 control-label">Descripción</label>
-                                            <div class="col-sm-12 col-md-2">
-                                                <textarea type="tel" class="form-control" name="descripcion"  placeholder="Escriba aqui..." id="descripcionPr"></textarea>
+                                            <div class="col-sm-15 col-md-7">
+                                                <textarea type="text" class="form-control" name="descripcion"  placeholder="Escriba aqui..." id="descripcionPr"></textarea>
                                             </div>
                                         </div>
                                         <br>
@@ -134,6 +134,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             </div>
                     <?php include("generalidades/cierre.php"); ?>
                     <script src="../assets/Validaciones/validarProducto.js"></script>
+                    <script src="../assets/Validaciones/mostrarProducto.js"></script>
                     <script type="text/javascript">
                                 function veruniversal() {
                                     if ($('#categoriaPr').find('option:selected').text() == "UNIVERSALES") {

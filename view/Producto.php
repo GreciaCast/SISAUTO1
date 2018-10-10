@@ -100,10 +100,12 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                         <td><?php echo $producto['marca_Prod'] ?></td>
 
                         <th align="center">
-                          <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>');"></button>
+                          <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>',
+                            '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>');"></button>
                           <?php  if ($tipo == 1) {
                             ?>
-                            <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProducto" onclick="editarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>');"></button>
+                            <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProducto" onclick="editarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>',
+                               '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>');"></button>
                             <?php  }else{ }?>
                             <?php  if ($tipo == 1) {
                               ?>
@@ -226,14 +228,14 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                      </div>
                      <br><br><br>
                      <div class="form-group">
-                       <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
+                       <label align="right" for="nombrePro" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
                        <div  class="col-sm-7">
                          <input class="form-control" type="text" id="nombrePE" name="nombrePro">
                        </div>
                      </div>
                      <br><br><br>
                      <div class="form-group">
-                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
+                       <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
                        <div class="col-sm-3">
                          <select name="categorias" class="form-control" id="catePE" onchange="veruniversal();">
                                                 <option value="">[Selecionar Categoria]</option>
@@ -254,28 +256,28 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                      </div>
                      <br><br><br>
                      <div class="form-group">
-                       <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
+                       <label align="right" for="marca" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
                        <div class="col-sm-7">
                          <input class="form-control" type="text" name="marca" id="marcaPE" >
                        </div>
                      </div>
                      <br><br><br>
                      <div class="form-group">
-                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehiculo:</label>
+                       <label align="right" for="modelo" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehiculo:</label>
                        <div class="col-sm-7">
                          <input class="form-control" type="text" id="modeloPE" name="modelo" >
                        </div>
                      </div>
                      <br><br><br><br>
                      <div class="form-group">
-                       <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehiculo:</label>
+                       <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehiculo:</label>
                        <div class="col-sm-3">
                          <input class="form-control" type="number" id="anioPE" name="anio" >
                        </div>
                      </div>
                        <br><br><br>
                        <div class="form-group">
-                         <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
+                         <label align="right" for="descripcion" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                          <div class="col-sm-7">
                           <textarea class="form-control" type="text" name="descripcion" id="descripcionPE"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " >
                           </textarea>

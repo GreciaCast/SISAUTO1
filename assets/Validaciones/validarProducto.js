@@ -116,7 +116,7 @@ async function validarProductoEditar() {
     var descripcion = await validarDescripcionPE();
 
     if (nombre && categoria && marca && modelo && anio && descripcion) {
-        //$('#editarProd').submit();
+      $('#editarProd').submit();
     }
 }
 
