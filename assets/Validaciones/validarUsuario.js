@@ -220,16 +220,17 @@ function validareditarDUIU(){
 
 function validareditarCorreoU(){
     var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if ($('#email').val().trim() == "") {
+    if ($('#correoUsuEditar').val().trim() == "") {
         notaError("¡El correo es obligatorio!");
         return false;
-    }else if(!regex.test($('#email').val())){
+    }else if(!regex.test($('#correoUsuEditar').val())){
         notaError("¡El correo es incorrecto!");
         return false;
     }else{
         var param = {
-            correo: $('#email').val(),
-            bandera: "ucorreoEditar"
+            correo: $('#correoUsuEditar').val(),
+            bandera: "ucorreoEditar",
+            idU: $('#idusuario').val()
         };
 
         return $.ajax({
