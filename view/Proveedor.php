@@ -130,8 +130,9 @@ if (isset($_SESSION['usuarioActivo'])) {
 						</div>
 						<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
 					</div>
-				</div>
           <?php include("generalidades/cierre.php"); ?>
+				</div>
+          
 			</div>
 		
 		<!-- MODAL VER PROVEEDOR -->
