@@ -48,7 +48,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
       </button>
       &nbsp;
     </a>
-    <a class="pull-right" href="AgregarPro.php">
+    <a class="pull-right" href="AgregarProd.php">
       <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
         Agregar nuevo
         <span class="fa fa-plus"></span>

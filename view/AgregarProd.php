@@ -29,6 +29,22 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
         <div class="row">
             <div class="col-lg-12">
+              <?php
+              $sql = "SELECT * from producto order by idProducto ASC";
+                      $producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+               $contador = mysqli_num_rows($producto);
+               if ($contador > -1 && $contador < 9) {
+                   $ceros = "0000";
+               } else if ($contador >= 9 && $contador < 100) {
+                   $ceros = "000";
+               } else if ($contador >= 99 && $contador < 1000) {
+                   $ceros = "00";
+               } else if ($contador >= 999 && $contador < 10000) {
+                   $ceros = "0";
+               } else {
+                   $ceros = "";
+               }
+               ?>
                 <div class="wrapper wrapper-content">
                     <div class="row">
                         <div class="col-lg-12">
@@ -42,21 +58,21 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group">
                                             <label for="empresa" class="col-sm-3 control-label">Codigo:</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="codigoPro" value="<?php echo $ceros . ($contador + 1) ?>" id="codigoP"/>
+                                                <input class="form-control" type="text" name="codigoPro" value="<?php echo $ceros . ($contador + 1) ?>" id="codigoP">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
                                             <label for="empresa" class="col-sm-3 control-label">Nombre:</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" placeholder="Nombre del Producto" type="text" id="nombrePr" name="nombrePro"/>
+                                                <input class="form-control" placeholder="Nombre del Producto" type="text" id="nombrePr" name="nombrePro">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
                                             <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
                                             <div  class="col-sm-2">
-                                              <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();"/>
+                                              <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();">
                                         <option value="">[Selecionar Categoria]</option>
                                         <option value="1">AMORTIGUADORES</option>
                                         <option value="2">BUJÍAS</option>
@@ -77,21 +93,21 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group ">
                                             <label for="direccion" class="col-sm-3 control-label">Marca:</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="marca" id="marcaPr" placeholder="Marca del Producto"/>
+                                                <input class="form-control" type="text" name="marca" id="marcaPr" placeholder="Marca del Producto">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
                                             <label for="responsable" class="col-sm-3 control-label">Modelo:</label>
                                             <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="modelo" id="modeloPr" placeholder="Modelo de Auto"/>
+                                                <input class="form-control" type="text" name="modelo" id="modeloPr" placeholder="Modelo de Auto">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
                                             <label for="tel2" class="col-sm-3 control-label">Año </label>
                                             <div class="col-sm-2">
-                                                <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año"/>
+                                                <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año">
                                             </div>
                                         </div>
                                         <br>
@@ -134,22 +150,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 }
             </script>
 
-            <?php
-            $sql = "SELECT * from producto order by idProducto ASC";
-                    $producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-             $contador = mysqli_num_rows($producto);
-             if ($contador > -1 && $contador < 9) {
-                 $ceros = "0000";
-             } else if ($contador >= 9 && $contador < 100) {
-                 $ceros = "000";
-             } else if ($contador >= 99 && $contador < 1000) {
-                 $ceros = "00";
-             } else if ($contador >= 999 && $contador < 10000) {
-                 $ceros = "0";
-             } else {
-                 $ceros = "";
-             }
-             ?>
+
         </div>
     </div>
 </body>
