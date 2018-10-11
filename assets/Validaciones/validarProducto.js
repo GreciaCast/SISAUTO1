@@ -13,6 +13,7 @@ async function validarProducto() {
 
     if (nombre && categoria && marca && modelo && anio && descripcion) {
         var comp=await existe();
+      //  var compi=await existes();
         if(comp==0){
            $('#guardarProd').submit();
         }
@@ -116,7 +117,7 @@ async function validarProductoEditar() {
     var descripcion = await validarDescripcionPE();
 
     if (nombre && categoria && marca && modelo && anio && descripcion) {
-      $('#editarProd').submit();
+        $('#editarProd').submit();
     }
 }
 
@@ -159,6 +160,9 @@ function validarAnioPE() {
 
      if ($('#anioPE').val().trim()=="") {
         notaError("El año es obligatorio!");
+        return false;
+    }else if ($('#anioPE').val().trim().length!=4) {
+        notaError("El año debe contener 4 dígitos!");
         return false;
     }
     return true;
