@@ -78,7 +78,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
         <div class="col-lg-12">
           <div class="ibox float-e-margins">
             <div class="ibox-content">
-              <form class="form-horizontal" action="../Controlador/productoC.php" method="POST" id="guardarPro" autocomplete="off">
+              <form class="form-horizontal" action="../Controlador/productoC.php" method="POST" id="guardarProd" autocomplete="off">
                 <div class="table-responsive">
                   <table class="table table-striped table-bordered display" id="example">
                     <thead>
