@@ -83,12 +83,15 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                   <table class="table table-striped table-bordered display" id="example">
                     <thead>
                       <tr>
-                        <th style="width:30px">Codigo</th>
+                        <th style="width:30px">Código</th>
                         <th style="width:120px">Nombre</th>
-                        <th style="width:130px">Categoria</th>
+                        <th style="width:130px">Categoría</th>
                         <th style="width:100px">Marca</th>
+                        <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                         <th align="center" style="width:2px">Acciones</th>
-
+                      <?php  }else{ ?>
+                        <th align="center" style="width:2px">Acción</th>
+                      <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -102,6 +105,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                         <th align="center">
                           <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>',
                             '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>');"></button>
+                            <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                           <?php  if ($tipo == 1) {
                             ?>
                             <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProducto" onclick="editarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>',
@@ -112,6 +116,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                               <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $producto['idProducto'] ?>)"></button>
                               <?php  }else{ ?>
                               <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $producto['idProducto'] ?>)" ></button>
+                              <?php } ?>
                               <?php } ?>
                             </th>
                           </tr>
