@@ -17,7 +17,7 @@ if (isset($_SESSION['usuarioActivo'])) {
         <a href="index.php" style="font-size:15px;color:blue;">Inicio</a>
       </li>
       <li>
-        <a style="font-size:15px;">Bitacora</a>
+        <a style="font-size:15px;">Bitácora</a>
       </li>
     </ol>
   </div>
