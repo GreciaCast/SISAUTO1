@@ -31,7 +31,7 @@
                 <a href="" style="font-size:15px;"><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
-                    <li><a href="" style="font-size:15px;"><span class="fa fa-history"> Bitacora</span></a></li>
+                    <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
                     <li><a href="" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
                 </ul>
             </li>
