@@ -8,7 +8,7 @@
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="" style="font-size:15px;">Compras</a></li>
+                    <li><a href="Compras.php" style="font-size:15px;">Compras</a></li>
                     <li><a href="" style="font-size:15px;">Ventas</a></li>
                 </ul>
             </li>
