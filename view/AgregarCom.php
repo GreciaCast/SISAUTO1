@@ -307,7 +307,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
                     <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
                     <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-                    <script src="js/plugins/fullcalendar/moment.min.js"></script>
+                    <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
         </div>
     </div>
 </body>
