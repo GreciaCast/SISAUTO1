@@ -79,7 +79,7 @@ and open the template in the editor.
                                                                     <th align="center">
                                                                         <button title="Ver" type="button" class="btn btn-info fa fa-eye">
                                                                         </button>
-                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra">
+                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarPro('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>')">
                                                                         </button>
                                                                     </th>
                                                                 </tr>
@@ -108,21 +108,22 @@ and open the template in the editor.
                                  <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
                                     <h3><b>Datos generales</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
-                                    <input type="hidden" value="GuardarCom" name="bandera"></input>
+                                    <input type="hidden" value="EditarCom" name="bandera"/>
+                                    <input type="hidden" value="" name="idcompra" id="idcompra"/>
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Fecha: </label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" id="num" placeholder="" style="width:150px;height:40px">
+                                            <input class="form-control" type="number" id="fechaComEditar" placeholder="" style="width:150px;height:40px">
                                         </div>
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Numero de factura: </label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" id="num" placeholder="" style="width:150px;height:40px">
+                                            <input class="form-control" type="number" id="nummeroFacComEditar" placeholder="" style="width:150px;height:40px">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:600px;height:40px" class="form-control"> 
+                                            <select style="width:600px;height:40px" class="form-control" id="proveedorComEditar"> 
                                                 <option value="">[Selecionar Categoria]</option>
                                                 <option value="">Suspensión</option>
                                                 <option value="">Dirección</option>
@@ -135,17 +136,18 @@ and open the template in the editor.
                                     <div class="form-group row">
                                         <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Cantidad:</label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" placeholder="Cantidad" style="width:150px;height:40px">
+                                            <input class="form-control" type="number" id="cantidadComEditar" placeholder="Cantidad" style="width:150px;height:40px">
                                         </div>
                                         <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Precio Unitario:</label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" placeholder="$" style="width:150px;height:40px">
+                                            <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="preciouniComEditar"></div>
+                                            <!-- <input class="form-control" type="number" placeholder="$" style="width:150px;height:40px"> -->
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:400px;height:40px" class="form-control"> 
+                                            <select style="width:400px;height:40px" class="form-control" id="categoriaComEditar"> 
                                                 <option value="">[Selecionar Categoria]</option>
                                                 <option value="">Suspensión</option>
                                                 <option value="">Dirección</option>
@@ -155,7 +157,7 @@ and open the template in the editor.
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
                                         <div class="col-sm-12 col-md-8">
-                                            <select  class="form-control"> 
+                                            <select  class="form-control" id="productoComEditar"> 
                                                 <option value="">[Selecionar Proveedor]</option>
                                                 <option value=""></option>
                                                 <option value=""></option>
@@ -204,8 +206,9 @@ and open the template in the editor.
                                         </div>
                                         <div class="form-group row">
                                             <label align="right" for="nrc" class="col-sm-12 col-md-8 col-form-label">Total de compra:</label>
-                                            <div class="col-sm-12 col-md-2">
-                                                <input class="form-control" type="text" placeholder="$" style="width:150px;height:40px">
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComEditar"></div>
+                                                <!-- <input class="form-control" type="text" placeholder="$" style="width:150px;height:40px"> -->
                                             </div>
                                         </div>
                                     </form>
@@ -213,7 +216,7 @@ and open the template in the editor.
                                 <br><br>
                                 <div class="modal-footer">
                                   <input type="hidden" id="anterior" value=""  />
-                                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validareditarProveedor()">Aceptar</button>
+                                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;">Aceptar</button>
                                   <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
                               </div>
                           </div>
