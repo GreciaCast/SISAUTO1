@@ -75,7 +75,37 @@ and open the template in the editor.
                                                                     <tr>
                                                                         <td><?php echo $compra['fecha_Com'] ?></td>
                                                                         <td><?php echo $compra['numFac_Com'] ?></td>
-                                                                        <td><?php echo $compra['id_Proveedor'] ?></td>
+                                                                        <td>
+
+<?php 
+$aux = $compra['id_Proveedor'];
+$sql1 = "SELECT nombre_Prov FROM proveedor where idProveedor = '$aux'";
+$proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+$proveedor = mysqli_fetch_array($proveedor);
+echo $proveedor['nombre_Prov'];
+
+/*
+$localtime = localtime();
+$localtime_assoc = localtime(time(), true);
+//print_r($localtime);
+//print_r($localtime_assoc);
+echo $localtime_assoc['tm_mday']; 
+echo "/";
+echo $localtime_assoc['tm_mon']; 
+echo "/";
+echo $localtime_assoc['tm_year']; 
+echo " Hora ";
+echo $localtime_assoc['tm_hour']; 
+echo ":";
+echo $localtime_assoc['tm_min']; 
+echo ":";
+echo $localtime_assoc['tm_sec']; 
+*/
+
+
+ //echo $proveedor;
+?>
+                                                                        </td>
                                                                         <th align="center">
                                                                             <button title="Ver" type="button" class="btn btn-info fa fa-eye">
                                                                             </button>

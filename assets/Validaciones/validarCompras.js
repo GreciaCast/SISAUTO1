@@ -1,0 +1,32 @@
+function filtrarCategoria(id){
+	$('#productoFiltrado').empty();
+	$('#productoFiltrado').append('<option value="">[Selecionar categoria]</option>');
+	$.get('/SISAUTO1/Controlador/comprasC.php?bandera=1&id='+id,function(data){
+		console.log(data);
+			$('#productoFiltrado').append(data);
+	});
+
+
+}
+
+function agregar(){
+	var cantidad = $('#cantidad').val();
+	var precio = $('#precio').val();
+	var obtenerC = $("#categoriaPro").find('option:selected');
+	var obtenerP = $("#productoFiltrado").find('option:selected');
+	var categoriaId = obtenerC.val();
+	var categoriaText = obtenerC.text();
+	var productoId = obtenerP.val();
+	var productoText = obtenerP.text();
+	var subtotal = parseFloat(cantidad) * parseFloat(precio);
+	var html = '<tr id="f'+productoId+'"><td>'+cantidad+'</td>';
+	html=html+'<td>'+productoText+'</td>';
+	html=html+'<td>'+precio+'</td>';
+	html=html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>'
+	html=html+'<td><button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar("'+productoId+'");"></button></td></tr>';
+	$('#tablaProductos').append(html);
+
+}
+function eliminar(id){
+	alert();
+}
