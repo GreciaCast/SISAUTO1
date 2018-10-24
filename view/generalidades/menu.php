@@ -1,14 +1,14 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
-            <img alt="logo" src="../assets/img/aut3.png" width="100%" height="100%" />
+            <img alt="logo" src="../assets/img/aut5.png" width="100%" height="100%" />
             <li>
                 <a href="/SISAUTO1/view/NuevaVenta.php" style="font-size:15px;"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
             </li>
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="" style="font-size:15px;">Compras</a></li>
+                    <li><a href="Compras.php" style="font-size:15px;">Compras</a></li>
                     <li><a href="" style="font-size:15px;">Ventas</a></li>
                 </ul>
             </li>

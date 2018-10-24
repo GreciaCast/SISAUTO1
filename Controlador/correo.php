@@ -11,7 +11,7 @@ $var= mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_co
 if ($row= mysqli_fetch_assoc($var)){
 	$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
         $cad = "";
-        for($i=0;$i<12;$i++)
+        for($i=0;$i<8;$i++)
         {
             $cad .= substr($str,rand(0,62),1);
         }

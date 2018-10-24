@@ -222,10 +222,11 @@ function validareditarCorreoU(){
     var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     if ($('#correoUsuEditar').val().trim() == "") {
         notaError("¡El correo es obligatorio!");
-        return false;
+        return true;
     }else if(!regex.test($('#correoUsuEditar').val())){
         notaError("¡El correo es incorrecto!");
-        return false;
+        console.log();
+        return true;
     }else{
         var param = {
             correo: $('#correoUsuEditar').val(),
