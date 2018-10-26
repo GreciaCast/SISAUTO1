@@ -109,7 +109,7 @@ echo $localtime_assoc['tm_sec'];
                                                                         <th align="center">
                                                                         <button title="Ver" type="button" class="btn btn-info fa fa-eye">
                                                                         </button>
-                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarPro('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>')">
+                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>')">
                                                                         </button>
                                                                     </th>
                                                                     </tr>
@@ -128,6 +128,10 @@ echo $localtime_assoc['tm_sec'];
 
                     <!-- MODAL EDITAR COMPRA -->
                     <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                     <?php 
+                     $sql="SELECT * from proveedor  order by nombre_Prov ASC";
+                     $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                     ?>
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header" style="background-color:#007bff;color:black;">
@@ -135,28 +139,58 @@ echo $localtime_assoc['tm_sec'];
                                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Compra</h3>
                                 </div>
                                 <div class="modal-body">
-                                 <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
+                                 <form action="../Controlador/comprasC.php" method="POST" id="editarPro" align="center" autocomplete="off">
                                     <h3><b>Datos generales</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
                                     <input type="hidden" value="EditarCom" name="bandera"/>
                                     <input type="hidden" value="" name="idcompra" id="idcompra"/>
-                                    <div class="form-group row">
-                                        <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Fecha: </label>
-                                        <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" id="fechaComEditar" placeholder="" style="width:150px;height:40px">
-                                        </div>
+                                    <div class="form-group row" id="data_2">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Numero de factura: </label>
                                         <div class="col-sm-12 col-md-3">
                                             <input class="form-control" type="number" id="nummeroFacComEditar" placeholder="" style="width:150px;height:40px">
                                         </div>
+                                        <?php
+                                        
+                                            date_default_timezone_set('america/el_salvador');
+                                            $hora1 = date("A");
+                                            $hoy = getdate();
+                                            $hora = date("g");
+                                            //print_r($hoy);
+                                            // echo " Fecha ";
+                                            // echo ($hoy['mday']);
+                                            // echo "/";
+                                            // echo $hoy['mon'];
+                                            // echo "/";
+                                            // echo $hoy['year'];
+                                            // echo "       Hora ";
+                                            // echo $hora;
+                                            // echo ":";
+                                            // echo $hoy['minutes'];
+                                            // echo ":";
+                                            // echo $hoy['seconds'];
+                                            // echo $hora1;
+                                            
+                                        ?>
+                                        <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Fecha: </label>
+                                        <div class="col-sm-12 col-md-3 input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input class="form-control" type="number" id="fecha" value="01/01/2018" style="width:150px;height:40px">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        
                                     </div>
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:600px;height:40px" class="form-control" id="proveedorComEditar"> 
-                                                <option value="">[Selecionar Categoria]</option>
-                                                <option value="">Suspensión</option>
-                                                <option value="">Dirección</option>
+                                            <select style="width:600px;height:40px" class="form-control" name="proveedorComE" id="proveedorComEditar"> 
+                                                <option value="">[Selecionar Proveedor]</option>
+                                                <?php
+
+                                                While($proveedor=mysqli_fetch_array($proveedores)){
+                                                     echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -188,7 +222,7 @@ echo $localtime_assoc['tm_sec'];
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
                                         <div class="col-sm-12 col-md-8">
                                             <select  class="form-control" id="productoComEditar"> 
-                                                <option value="">[Selecionar Proveedor]</option>
+                                                <option value="">[Selecionar Producto]</option>
                                                 <option value=""></option>
                                                 <option value=""></option>
                                                 <option value=""></option>
@@ -252,6 +286,8 @@ echo $localtime_assoc['tm_sec'];
                           </div>
                       </div>
                   </div>
+
+                  <script src="../assets/Validaciones/mostrarCompra.js"></script> 
               </div>
           </div>
           <?php include("generalidades/cierre.php"); ?>
@@ -262,6 +298,308 @@ echo $localtime_assoc['tm_sec'];
         $('#example').DataTable();
     } );
 </script>
+
+<script>
+        $(document).ready(function(){
+
+            var $image = $(".image-crop > img")
+            $($image).cropper({
+                aspectRatio: 1.618,
+                preview: ".img-preview",
+                done: function(data) {
+                    // Output the result data for cropping image.
+                }
+            });
+
+            var $inputImage = $("#inputImage");
+            if (window.FileReader) {
+                $inputImage.change(function() {
+                    var fileReader = new FileReader(),
+                            files = this.files,
+                            file;
+
+                    if (!files.length) {
+                        return;
+                    }
+
+                    file = files[0];
+
+                    if (/^image\/\w+$/.test(file.type)) {
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function () {
+                            $inputImage.val("");
+                            $image.cropper("reset", true).cropper("replace", this.result);
+                        };
+                    } else {
+                        showMessage("Please choose an image file.");
+                    }
+                });
+            } else {
+                $inputImage.addClass("hide");
+            }
+
+            $("#download").click(function() {
+                window.open($image.cropper("getDataURL"));
+            });
+
+            $("#zoomIn").click(function() {
+                $image.cropper("zoom", 0.1);
+            });
+
+            $("#zoomOut").click(function() {
+                $image.cropper("zoom", -0.1);
+            });
+
+            $("#rotateLeft").click(function() {
+                $image.cropper("rotate", 45);
+            });
+
+            $("#rotateRight").click(function() {
+                $image.cropper("rotate", -45);
+            });
+
+            $("#setDrag").click(function() {
+                $image.cropper("setDragMode", "crop");
+            });
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+
+            $('#data_2 .input-group.date').datepicker({
+                startView: 1,
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                format: "dd/mm/yyyy"
+            });
+
+            $('#data_3 .input-group.date').datepicker({
+                startView: 2,
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+
+            $('#data_4 .input-group.date').datepicker({
+                minViewMode: 1,
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            $('#data_5 .input-daterange').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true
+            });
+
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
+
+            var elem_2 = document.querySelector('.js-switch_2');
+            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+
+            var elem_3 = document.querySelector('.js-switch_3');
+            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green'
+            });
+
+            $('.demo1').colorpicker();
+
+            var divStyle = $('.back-change')[0].style;
+            $('#demo_apidemo').colorpicker({
+                color: divStyle.backgroundColor
+            }).on('changeColor', function(ev) {
+                        divStyle.backgroundColor = ev.color.toHex();
+                    });
+
+            $('.clockpicker').clockpicker();
+
+            $('input[name="daterange"]').daterangepicker();
+
+            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+            $('#reportrange').daterangepicker({
+                format: 'MM/DD/YYYY',
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: { days: 60 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Hoy': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'right',
+                drops: 'down',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
+            $(".select2_demo_1").select2();
+            $(".select2_demo_2").select2();
+            $(".select2_demo_3").select2({
+                placeholder: "Select a state",
+                allowClear: true
+            });
+
+
+            $(".touchspin1").TouchSpin({
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+
+            $(".touchspin2").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: '%',
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+
+            $(".touchspin3").TouchSpin({
+                verticalbuttons: true,
+                buttondown_class: 'btn btn-white',
+                buttonup_class: 'btn btn-white'
+            });
+
+
+        });
+        var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+                '.chosen-select-width'     : {width:"95%"}
+                }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+        $("#ionrange_1").ionRangeSlider({
+            min: 0,
+            max: 5000,
+            type: 'double',
+            prefix: "$",
+            maxPostfix: "+",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_2").ionRangeSlider({
+            min: 0,
+            max: 10,
+            type: 'single',
+            step: 0.1,
+            postfix: " carats",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_3").ionRangeSlider({
+            min: -50,
+            max: 50,
+            from: 0,
+            postfix: "°",
+            prettify: false,
+            hasGrid: true
+        });
+
+        $("#ionrange_4").ionRangeSlider({
+            values: [
+                "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"
+            ],
+            type: 'single',
+            hasGrid: true
+        });
+
+        $("#ionrange_5").ionRangeSlider({
+            min: 10000,
+            max: 100000,
+            step: 100,
+            postfix: " km",
+            from: 55000,
+            hideMinMax: true,
+            hideFromTo: false
+        });
+
+        $(".dial").knob();
+
+        $("#basic_slider").noUiSlider({
+            start: 40,
+            behaviour: 'tap',
+            connect: 'upper',
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#range_slider").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#drag-fixed").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag-fixed',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+
+    </script>
+
 
 </body>
 </html>
