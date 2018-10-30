@@ -129,7 +129,7 @@ echo $localtime_assoc['tm_sec'];
                     <!-- MODAL EDITAR COMPRA -->
                     <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                      <?php 
-                     $sql="SELECT * from proveedor  order by nombre_Prov ASC";
+                     $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
                      $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
                      ?>
                         <div class="modal-dialog modal-lg" role="document">
@@ -183,7 +183,7 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:600px;height:40px" class="form-control" name="proveedorComE" id="proveedorComEditar"> 
+                                            <select style="width:350px;height:40px" class="form-control" name="proveedorComE" id="proveedorComEditar"> 
                                                 <option value="">[Selecionar Proveedor]</option>
                                                 <?php
 
@@ -212,9 +212,19 @@ echo $localtime_assoc['tm_sec'];
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
                                         <div class="col-sm-12 col-md-10">
                                             <select style="width:400px;height:40px" class="form-control" id="categoriaComEditar"> 
-                                                <option value="">[Selecionar Categoria]</option>
-                                                <option value="">Suspensión</option>
-                                                <option value="">Dirección</option>
+                                                <option value="">[Selecionar categoria]</option>
+                                                <option value="1">AMORTIGUADORES</option>
+                                                <option value="2">BUJÍAS</option>
+                                                <option value="3">COMBUSTIBLE</option>
+                                                <option value="4">ELÉCTRICO</option>
+                                                <option value="5">ENFRIAMIENTO</option>
+                                                <option value="6">FILTROS</option>
+                                                <option value="7">FRENOS</option>
+                                                <option value="8">MOTOR</option>
+                                                <option value="8">SENSORES</option>
+                                                <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                                                <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                                                <option value="12">UNIVERSALES</option>
                                             </select>
                                         </div>
                                     </div>
@@ -259,8 +269,9 @@ echo $localtime_assoc['tm_sec'];
                                                             <td>...</td>
                                                             <td>...</td>
                                                             <td>...</td>
-                                                            <td><button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o"></button>
-                                                                <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash"></button></td>
+                                                            <td>
+                                                                <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash"></button>
+                                                            </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
