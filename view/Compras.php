@@ -65,7 +65,7 @@ and open the template in the editor.
                                                             <thead>
                                                                 <tr>
                                                                     <th style="width:50px">Fecha/Hora</th>
-                                                                    <th style="width:50px">Num Factura</th>
+                                                                    <th style="width:50px">N° de factura</th>
                                                                     <th style="width:150px">Proveedor</th>
                                                                     <th align="center" style="width:2px">Acciones</th>
                                                                 </tr>
