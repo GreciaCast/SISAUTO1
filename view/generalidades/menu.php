@@ -23,7 +23,9 @@
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-area-chart"></i> <span class="nav-label">Inventario</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>
+                    <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>
+                    <li><a href="" style="font-size:15px;"><span class="fa fa-book"> Kardex</span></a></li>
+                
                 </ul>
             </li>
             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
@@ -148,13 +150,6 @@
             </ul>
         </nav>
     </div>
-
-
-
-
-
-
-
 
 
 <!-- MODAL VER USUARIOS -->

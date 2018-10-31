@@ -8,6 +8,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <body>
 	<div id="wrapper">
 		<?php include("generalidades/menu.php"); ?>
+    <?php include("funciones.php"); ?>
 		<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
 		<div class="row wrapper border-bottom white-bg page-heading">
 			<div class="col-lg-10">
@@ -101,15 +102,23 @@ if (isset($_SESSION['usuarioActivo'])) {
 																<td><?php echo $proveedore['nombreResp_Prov'] ?></td>
 
 																<th align="center">
+                                <!-- ____________________________________________________ -->
+                                  <?php
+                                    $cuenta = contarProducto($proveedore['idProveedor'] );
+                                  ?>
+                                <!-- ____________________________________________________ -->
 																	<button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProveedor" href="" onclick="mostrarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
                                   <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
 																	<?php  if ($tipo == 1) {?>
 																		<button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProveedor" onclick="editarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['idProveedor']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
 																		<?php  }else{ }?>
 																		<?php  if ($tipo == 1) {
+                                        if($cuenta == 0){
 																			?>
 																			<button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
-																			<?php  }else{ ?>
+																			<?php
+                                        }else{}
+                                        }else{ ?>
 																			<button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
 																			<?php } ?>
                                       <?php } ?>
