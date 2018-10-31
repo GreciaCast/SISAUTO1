@@ -109,7 +109,7 @@ echo $localtime_assoc['tm_sec'];
                                                                         <th align="center">
                                                                         <button title="Ver" type="button" class="btn btn-info fa fa-eye">
                                                                         </button>
-                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>')">
+                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
                                                                         </button>
                                                                     </th>
                                                                     </tr>
@@ -174,7 +174,7 @@ echo $localtime_assoc['tm_sec'];
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Fecha: </label>
                                         <div class="col-sm-12 col-md-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input class="form-control" type="number" id="fecha" value="01/01/2018" style="width:150px;height:40px">
+                                            <input class="form-control" type="text" id="fecha" value="01/01/2018" style="width:150px;height:40px">
                                         </div>
                                     </div>
                                     <div>
@@ -240,7 +240,7 @@ echo $localtime_assoc['tm_sec'];
                                             </select>
                                         </div>
                                         <div class="col-sm-12 col-md-1">
-                                            <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" style="width:39px;height:39px"></button>
+                                            <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" style="width:39px;height:39px" data-toggle="modal" data-target="#modalVerAddProducto"></button>
                                         </div>
                                     </div>
                                     <hr width="75%" /><br>
@@ -260,10 +260,10 @@ echo $localtime_assoc['tm_sec'];
                                                             <th style="width:200px">Producto</th>
                                                             <th style="width:30px">Precio unitario</th>
                                                             <th style="width:30px">Subtotal</th>
-                                                            <td style="width:50px">Acciones</td>
+                                                            <th style="width:50px">Acciones</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody id="productos">
                                                         <tr>
                                                             <td>...</td>
                                                             <td>...</td>
@@ -282,7 +282,7 @@ echo $localtime_assoc['tm_sec'];
                                         <div class="form-group row">
                                             <label align="right" for="nrc" class="col-sm-12 col-md-8 col-form-label">Total de compra:</label>
                                             <div class="col-sm-12 col-md-3">
-                                                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComEditar"></div>
+                                                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComEditar" readonly="readonly"></div>
                                                 <!-- <input class="form-control" type="text" placeholder="$" style="width:150px;height:40px"> -->
                                             </div>
                                         </div>
@@ -298,7 +298,81 @@ echo $localtime_assoc['tm_sec'];
                       </div>
                   </div>
 
+                  <div class="modal fade" id="modalVerAddProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                   <div class="modal-dialog modal-lg" role="document">
+                       <div class="modal-content">
+                           <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                               <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
+                           </div>
+                           <div class="modal-body">
+                               <hr width="75%" style="background-color:#007bff;"/>
+                               <div class="form-group ">
+                                   <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Codigo: </label>
+                                   <div class="col-sm-7">
+                                       <input class="form-control" type="text" id="codigoP" name="codigoP" readonly="readonly" aria-required="true" value="">
+                                   </div>
+                               </div>
+                               <br><br><br><br>
+                               <div class="form-group">
+                                   <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
+                                   <div  class="col-sm-7">
+                                       <input class="form-control" type="text" id="nombreP" name="nombreP" disabled="true">
+                                   </div>
+                               </div>
+                               <br><br><br>
+                               <div class="form-group">
+                                   <label align="right" for="cateP" class="col-sm-4 control-label" style="font-size:15px;">Categoria:</label>
+                                   <div class="col-sm-3">
+                                       <input class="form-control" type="text" id="cateP" name="cateP" value="" disabled="true">
+                                   </div>
+                               </div>
+                               <br><br><br>
+                               <div class="form-group">
+                                   <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
+                                   <div class="col-sm-7">
+                                       <input class="form-control" type="text" type="text" name="marcaP"  id="marcaP" disabled="true">
+                                   </div>
+                               </div>
+                               <br><br><br>
+                               <div class="form-group">
+                                   <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehiculo:</label>
+                                   <div class="col-sm-7">
+                                       <input class="form-control" type="text" id="modeloP" name="modeloP" disabled="true">
+                                   </div>
+                               </div>
+                               <br><br><br>
+                               <div class="form-group">
+                                   <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehiculo:</label>
+                                   <div class="col-sm-3">
+                                       <input class="form-control" type="text" id="anioP" name="anioP" disabled="true">
+                                   </div>
+                               </div>
+                               <div id="ocultar">
+                                   <br><br><br>
+                                   <div class="form-group">
+                                       <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
+                                       <div class="col-sm-7">
+                                        <textarea class="form-control" type="text" name="descripcion" id="descripcionP"  placeholder="Escriba aqui..."  disabled="true">
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="modal-footer">
+                           <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                       </div>
+                   </div>
+               </div>
+
+           </div>
+
                   <script src="../assets/Validaciones/mostrarCompra.js"></script> 
+                  <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
+                  <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
+                  <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+                  <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
               </div>
           </div>
           <?php include("generalidades/cierre.php"); ?>
