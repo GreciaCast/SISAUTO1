@@ -35,10 +35,8 @@ if(isset($_POST["bandera"])){
 
 		}
 		
-
-
- $_SESSION['mensaje'] = "Registro guardado exitosamente";
- header("location: /SISAUTO1/view/Compras.php?");
+		$_SESSION['mensaje'] = "Registro guardado exitosamente";
+		header("location: /SISAUTO1/view/Compras.php?");
 	}
 
 }
