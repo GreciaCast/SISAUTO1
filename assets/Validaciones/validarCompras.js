@@ -1,6 +1,6 @@
 function filtrarCategoria(id){
 	$('#productoFiltrado').empty();
-	$('#productoFiltrado').append('<option value="">[Selecionar categoria]</option>');
+	$('#productoFiltrado').append('<option value="">[Selecionar producto]</option>');
 	$.get('/SISAUTO1/Controlador/comprasC.php?bandera=1&id='+id,function(data){
 		console.log(data);
 			$('#productoFiltrado').append(data);

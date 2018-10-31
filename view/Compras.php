@@ -64,7 +64,7 @@ and open the template in the editor.
                                                         <table class="table table-striped table-bordered display" id="example">
                                                             <thead>
                                                                 <tr>
-                                                                    <th style="width:50px">Fecha/Hora</th>
+                                                                    <th style="width:30px">Fecha</th>
                                                                     <th style="width:50px">N° de factura</th>
                                                                     <th style="width:150px">Proveedor</th>
                                                                     <th align="center" style="width:2px">Acciones</th>
@@ -73,7 +73,10 @@ and open the template in the editor.
                                                             <tbody>
                                                                 <?php While($compra = mysqli_fetch_assoc($compras)){?>
                                                                     <tr>
-                                                                        <td><?php echo $compra['fecha_Com'] ?></td>
+                                                                        <td>
+<?php $fechaCom = explode("-",$compra['fecha_Com']);
+        $fechaCom = $fechaCom[2].'/'.$fechaCom[1].'/'.$fechaCom[0];
+echo $fechaCom ?></td>
                                                                         <td><?php echo $compra['numFac_Com'] ?></td>
                                                                         <td>
 

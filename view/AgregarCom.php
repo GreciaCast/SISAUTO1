@@ -46,19 +46,19 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             $hoy = getdate();
                                             $hora = date("g");
                                             //print_r($hoy);
-                                            echo " Fecha ";
-                                            echo ($hoy['mday']);
-                                            echo "/";
-                                            echo $hoy['mon'];
-                                            echo "/";
-                                            echo $hoy['year'];
-                                            echo "       Hora ";
-                                            echo $hora;
-                                            echo ":";
-                                            echo $hoy['minutes'];
-                                            echo ":";
-                                            echo $hoy['seconds'];
-                                            echo $hora1;
+                                            // echo " Fecha ";
+                                            // echo ($hoy['mday']);
+                                            // echo "/";
+                                            // echo $hoy['mon'];
+                                            // echo "/";
+                                            // echo $hoy['year'];
+                                            // echo "       Hora ";
+                                            // echo $hora;
+                                            // echo ":";
+                                            // echo $hoy['minutes'];
+                                            // echo ":";
+                                            // echo $hoy['seconds'];
+                                            // echo $hora1;
                                             
                                         ?>
                                         <label for="empresa" class="col-sm-3 control-label">Fecha: </label>
@@ -74,10 +74,20 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <?php 
+                                            $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
+                                            $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                                        ?>
                                         <label for="empresa" class="col-sm-3 control-label">Proveedor:</label>
                                         <div class="col-sm-3 input-group">
                                             <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="form-control"> 
                                                 <option value="">[Selecionar proveedor]</option>
+                                                <?php
+
+                                                While($proveedor=mysqli_fetch_array($proveedores)){
+                                                     echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                                                }
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
@@ -85,21 +95,21 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <h3><b>Datos del producto</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
                                     <div class="form-group row">
-                                        <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Cantidad:</label>
-                                        <div class="col-sm-12 col-md-3">
+                                        <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
+                                        <div class="col-sm-12 col-md-1">
                                             <input id="cantidad" name="cantidadProd" class="form-control" type="number" placeholder="Cantidad" style="width:150px;height:40px">
                                         </div>
-                                        <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Precio Unitario:</label>
-                                        <div class="col-sm-12 col-md-5 input-group date">
+                                        <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
+                                        <div class="col-sm-12 col-md-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                             <input id="precio" name="precioProd" class="form-control" type="number" style="width:150px;height:40px">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="tele1" class="col-sm-3 control-label">Categoria:</label>
+                                        <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
                                         <div class="col-sm-2">
-                                          <select id="categoriaPro" name="categorias" style="width:600px;height:40px" class="form-control"  onchange="filtrarCategoria(this.value);">
-                                            <option value="">[Selecionar categoria]</option>
+                                          <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control"  onchange="filtrarCategoria(this.value);">
+                                            <option value="">[Selecionar categoría]</option>
                                             <option value="1">AMORTIGUADORES</option>
                                             <option value="2">BUJÍAS</option>
                                             <option value="3">COMBUSTIBLE</option>
@@ -116,9 +126,9 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
-                                        <div class="col-sm-12 col-md-8">
-                                            <select id="productoFiltrado" name="productos" style="width:700px;height:40px" class="form-control"> 
+                                        <label for="empresa" class="col-sm-3 control-label">Producto:</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select id="productoFiltrado" name="productos" style="width:600px;height:40px" class="form-control"> 
                                                 <option value="">[Selecionar producto]</option>
                                                 <option value=""></option>
                                             </select>
@@ -150,13 +160,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         </tr>
                                                     </thead>
                                                     <tbody id = "tablaProductos">
-                                                        <tr>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td></td>
-                                                            <td><button title="Eliminar" type="button" class="btn btn-danger fa fa-trash"></button></td>
-                                                        </tr>
+                            
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -164,7 +168,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="card-footer small text-muted"></div>
                                     </div>
                                     <div class="form-group row">
-                                        <label align="right" for="nrc" class="col-sm-12 col-md-8 col-form-label">Total de compra:</label>
+                                        <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de compra:</label>
                                         <div class="col-sm-12 col-md-2 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="total" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
                                             <!--
