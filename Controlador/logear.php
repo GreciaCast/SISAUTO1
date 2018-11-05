@@ -10,13 +10,6 @@ session_start();
     $var= mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     if ($row= mysqli_fetch_assoc($var)){
     	if ($row['contrasena_Usu']== $contrasena) {
-        //////////CAPTURA DATOS PARA BITACORA
-        $conexion = conectarMysql();
-        $sql = "INSERT INTO bitacora (idUsuario,sesionInicio,actividad) VALUES ('1','2018-01-01 00:25:15','prueba')";
-        mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
-        //$_SESSION['mensaje'] = "Registro guardado exitosamente";
-        header("location: /SISAUTO1/view/login.php?");
-        ///////////////////////////////////////////////
     		$_SESSION['usuarioActivo']=$row;
             $_SESSION['mensaje']="Usted a iniciado sesión - BIENVENIDO";
     		header("location: /SISAUTO1/view/index.php");
