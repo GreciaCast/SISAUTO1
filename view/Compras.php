@@ -77,8 +77,8 @@ and open the template in the editor.
 <?php $fechaCom = explode("-",$compra['fecha_Com']);
         $fechaCom = $fechaCom[2].'/'.$fechaCom[1].'/'.$fechaCom[0];
 echo $fechaCom ?></td>
-                                                                        <td><?php echo $compra['numFac_Com'] ?></td>
-                                                                        <td>
+ <td><?php echo $compra['numFac_Com'] ?></td>
+<td>
 
 <?php 
 $aux = $compra['id_Proveedor'];
@@ -110,7 +110,7 @@ echo $localtime_assoc['tm_sec'];
 ?>
                                                                         </td>
                                                                         <th align="center">
-                                                                        <button title="Ver" type="button" class="btn btn-info fa fa-eye">
+                                                                        <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra" onclick="VerCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
                                                                         </button>
                                                                         <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
                                                                         </button>
@@ -130,6 +130,87 @@ echo $localtime_assoc['tm_sec'];
                             </div>
                         </div>
                     </div>
+     <!-- MODAL VER COMPRA -->
+<div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver Compra</h3>
+                </div>
+                <div class="modal-body">
+                 <h3 align="center"><b>Datos Generales</b></h3>
+                        <hr width="75%" style="background-color:#007bff;"/>
+                        <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Fecha:</label>
+                            <div class="col-sm-3 input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input class="form-control" type="text" id="fecha" value="01/01/2018" readonly="readonly" aria-required="true" >
+                             </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="nummeroFacComVer" name="" readonly="readonly" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <br><br>
+                         <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Proveedor:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" name="proveedorComE" id="proveedorComVer" readonly="readonly" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <br><br>
+                        
+                <div class="modal-footer">
+                 </div>
+                       <div class="card mb-3">
+                                        <div class="card-header" align="center">
+                                            <h3><b>Detalle de compra</b></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:10px">Cantidad</th>
+                                                            <th style="width:200px">Producto</th>
+                                                            <th style="width:30px">Precio unitario</th>
+                                                            <th style="width:30px">Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="productos">
+                                                        <tr>
+                                                            <td>...</td>
+                                                            <td>...</td>
+                                                            <td>...</td>
+                                                            <td>...</td>
+                                                        
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer small text-muted"></div>
+                                        </div>
+                                        <br><br><br>
+                         <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Total Compra:</label>
+                            <div class="col-sm-5">
+                            <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComVer" readonly="readonly"></div>
+                               </div>
+                        </div>
+                     <br><br>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                </div>  
+                </div>
+                     </div>
+                 </div>
+
+
 
                     <!-- MODAL EDITAR COMPRA -->
                     <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

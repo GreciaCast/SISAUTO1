@@ -24,10 +24,12 @@ if (isset($_SESSION['usuarioActivo'])) {
       <div class="col-lg-2">
       </div>
     </div>
+
     <div class="row">
       <div class="col-12">
       <div class="row" style="padding:20px">
         <br>
+        
         <a class="pull-right" href="">
           <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
             Reporte
@@ -45,12 +47,12 @@ if (isset($_SESSION['usuarioActivo'])) {
             Ver ventas 
             <span class="fa fa-eye"></span>
           </button>
+
           &nbsp;
         </a>
-               
-        
-        
-      </div>
+           
+        </div>
+
         <div class="row">
           <div class="col-lg-12">
             <div class="wrapper wrapper-content">
@@ -60,8 +62,31 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <div class="ibox-content">
                       <form class="form-horizontal" action=" " method="POST"  autocomplete="off">
                         <div class="table-responsive">
+
                           <table class="table table-striped table-bordered display" id="example">
+
                             <thead>
+                    <div class="col-sm-3 input-group">
+                       <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
+                       <div class="col-sm-3">
+                         <select name="categorias" style="width:600px;height:40px" class="form-control" id="" onchange="veruniversal();">
+                                  <option value="">[Selecionar Categoria]</option>
+                                  <option value="1">AMORTIGUADORES</option>
+                                  <option value="2">BUJÍAS</option>
+                                  <option value="3">COMBUSTIBLE</option>
+                                  <option value="4">ELÉCTRICO</option>
+                                  <option value="5">ENFRIAMIENTO</option>
+                                  <option value="6">FILTROS</option>
+                                  <option value="7">FRENOS</option>
+                                  <option value="8">MOTOR</option>
+                                  <option value="8">SENSORES</option>
+                                  <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                                  <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                                  <option value="12">UNIVERSALES</option>
+                          </select>              
+                       </div>   
+                       <br><br><br>                                               
+                         &nbsp;
                                <tr>
                                    <th style="width:90px" >Código Producto</th>
                                    <th style="width:125px" >Nombre</th>
@@ -72,7 +97,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                              
+                      
+                             
                                 </tbody>
                               </table>
                             </div>
