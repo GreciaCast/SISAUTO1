@@ -9,6 +9,25 @@ function filtrarCategoria(id){
 
 }
 
+function mostrarAddProduc(){
+    var cate = ["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    console.log(100000);
+    var obtenerP = $("#productoFiltrado").find('option:selected');
+    var productoId = obtenerP.val();
+	var productoText = obtenerP.text();
+   // $("#codigoAddP").val(codigoP);
+    $("#nombreAddP").val(productoText);
+   // $("#cateAddP").val(cate[parseInt(cateP)-1]);
+   // $("#marcaAddP").val(marcaP);
+   // $("#modeloAddP").val(modeloP);
+   // if(anioP!='0'){
+   //    $("#anioAddP").val(anioP);
+   // }else{
+   //    $("#anioAddP").val("");
+   // }
+   // $("#descripcionAddP").val(descripcionP);
+}
+
 function agregar(){
 	var cantidad = $('#cantidad').val();
 	var precio = $('#precio').val();

@@ -114,6 +114,8 @@ echo $localtime_assoc['tm_sec'];
                                                                         </button>
                                                                         <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
                                                                         </button>
+                                                                        <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash-o">
+                                                                        </button>
                                                                     </th>
                                                                     </tr>
                                                                 <?php } ?>
