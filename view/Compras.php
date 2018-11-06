@@ -297,7 +297,7 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:400px;height:40px" class="form-control" id="categoriaComEditar"> 
+                                            <select style="width:400px;height:40px" class="form-control" id="categoriaPro" name="categorias" onchange="filtrarCategoria(this.value);"> 
                                                 <option value="">[Selecionar categoria]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>
@@ -317,11 +317,8 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
                                         <div class="col-sm-12 col-md-8">
-                                            <select  class="form-control" id="productoComEditar"> 
+                                            <select  class="form-control" id="productoFiltrado" name="productos"> 
                                                 <option value="">[Selecionar Producto]</option>
-                                                <option value=""></option>
-                                                <option value=""></option>
-                                                <option value=""></option>
                                                 <option value=""></option>
                                             </select>
                                         </div>
@@ -331,7 +328,7 @@ echo $localtime_assoc['tm_sec'];
                                     </div>
                                     <hr width="75%" /><br>
                                     <div class="form-group" align="center">
-                                        <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px"></button>
+                                        <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" ></button>
                                     </div>
                                     <div class="card mb-3">
                                         <div class="card-header">
@@ -346,7 +343,7 @@ echo $localtime_assoc['tm_sec'];
                                                             <th style="width:200px">Producto</th>
                                                             <th style="width:30px">Precio unitario</th>
                                                             <th style="width:30px">Subtotal</th>
-                                                            <th style="width:50px">Acciones</th>
+                                                            <th style="width:50px">Acción</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="productos">
@@ -455,6 +452,7 @@ echo $localtime_assoc['tm_sec'];
            </div>
 
                   <script src="../assets/Validaciones/mostrarCompra.js"></script> 
+                  <script src="../assets/Validaciones/validarCompras.js"></script>
                   <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
                   <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
                   <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>

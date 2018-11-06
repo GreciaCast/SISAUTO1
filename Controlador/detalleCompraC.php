@@ -20,6 +20,7 @@ if(isset($_GET["bandera"])){
 		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].'</td>';
 		$cadena=$cadena.'<td>'.$detalle['precio_DCom'].'</td>';
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';
+		$cadena=$cadena.'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash"></button>';
 		$cadena.="</tr>";
 	}
 	
