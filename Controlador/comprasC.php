@@ -6,7 +6,12 @@ $conexion = conectarMysql();
 
 
 if(isset($_POST["bandera"])){
-
+	//////////CAPTURA DATOS PARA BITACORA
+	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nueva compra')";
+	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	header("location: /SISAUTO1/view/Cliente.php?");
+	///////////////////////////////////////////////
 	$bandera = $_POST["bandera"];
 	if($bandera == "GuardarCom"){
 		
@@ -33,6 +38,61 @@ if(isset($_POST["bandera"])){
 		}
 		$_SESSION['mensaje'] = "Registro guardado exitosamente";
 		header("location: /SISAUTO1/view/Compras.php?");
+	}
+
+	if($bandera == "EditarCom"){
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito una compra')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		header("location: /SISAUTO1/view/Cliente.php?");
+		///////////////////////////////////////////////
+		$fechaCom = $_POST["fecha_Com"];
+		$fechaCom = explode("/",$fechaCom);
+		$fechaCom = $fechaCom[2].'-'.$fechaCom[1].'-'.$fechaCom[0];
+		$numFacCom = $_POST["numFac_Com"];
+		$totalCom = $_POST["total"];
+		$idProvCom = $_POST["id_Proveedor"];
+		$cantidadProdCom = $_POST["cantidad_DCom"];
+		$precioProdCom = $_POST["precio_DCom"];
+		$idProdCom = $_POST["id_Producto"];
+		$idcompra = $_POST["idcompra"];
+
+		$sql = "UPDATE compra set fecha_Com='$fechaCom',numFac_Com='$numFacCom',total_Com='$totalCom',id_Proveedor='$idProvCom' where idCompra = '$idcompra'";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+		$sql1 = "DELETE from detallecompra where id_Compra = '$idcompra'";
+		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+		foreach ($cantidadProdCom as $key => $producto) {
+			$sql1 = "INSERT INTO detallecompra (cantidad_DCom,precio_DCom,id_Compra,id_Producto) VALUES ('$cantidadProdCom[$key]','$precioProdCom[$key]','$idcompra','$idProdCom[$key]')";
+			mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+		}
+		$_SESSION['mensaje'] = "Registro editado exitosamente";
+		header("location: /SISAUTO1/view/Compras.php?");
+
+
+	}
+	if ($bandera == "eliminar") {
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Elimino una compra')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		header("location: /SISAUTO1/view/Cliente.php?");
+		///////////////////////////////////////////////
+		$idCom=$_POST["id"];
+		$sql1 = "DELETE from detallecompra where id_Compra = '$idCom'";
+		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+		$sql1 = "DELETE from compra where idCompra = '$idCom'";
+		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+
+		$_SESSION['mensaje'] = "Compra eliminada exitosamente";
+		header("location: /SISAUTO1/view/Compras.php?");
+
+
 	}
 
 }

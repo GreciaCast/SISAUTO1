@@ -146,3 +146,7 @@ else {
   // }
   return aux;
 }
+
+function validarCompraE(){
+	$('#editarCompra').submit();
+}
