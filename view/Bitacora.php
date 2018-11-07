@@ -28,7 +28,7 @@ if (isset($_SESSION['usuarioActivo']))
   </div>
 
   <?php if (!isset($_GET['tipo'])) {
-    $tipo=1;
+    $tipo=0;
   }else{
     $tipo = $_GET['tipo'];
   }?>
@@ -47,7 +47,7 @@ if (isset($_SESSION['usuarioActivo']))
         </button>
         &nbsp;
       </a>
-      <?php  if ($tipo == 1) { ?>
+      <?php  if ($tipo == 0) { ?>
       <?php  }else{ ?>
     </div>
       <?php } ?>
