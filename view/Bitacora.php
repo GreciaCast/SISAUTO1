@@ -76,7 +76,7 @@ if (isset($_SESSION['usuarioActivo']))
                         ?>
 
                         <tr>
-                          <td><?php echo date('d-m-Y H:i:s',strtotime($bitacora['sesionInicio'])) ?></td>
+                          <td><?php echo date('d-m-Y H:i:s A',strtotime($bitacora['sesionInicio'])) ?></td>
                           <td><?php echo $bitacora['usuario_Usu'] ?></td>
                           <td><?php echo $bitacora['actividad'] ?></td>
                         </tr>
