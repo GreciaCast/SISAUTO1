@@ -10,7 +10,6 @@ session_start();
     $var= mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     if ($row= mysqli_fetch_assoc($var)){
     	if ($row['contrasena_Usu']== $contrasena) {
-<<<<<<< HEAD
         //////////CAPTURA DATOS PARA BITACORA
         $usuario=$row['usuario_Usu'];
         $conexion = conectarMysql();
@@ -19,8 +18,6 @@ session_start();
         //$_SESSION['mensaje'] = "Registro guardado exitosamente";
         header("location: /SISAUTO1/view/login.php?");
         ///////////////////////////////////////////////
-=======
->>>>>>> 4253d3054cf052a19b7e652681f136c5fd89d627
     		$_SESSION['usuarioActivo']=$row;
             $_SESSION['mensaje']="Usted a iniciado sesión - BIENVENIDO";
     		header("location: /SISAUTO1/view/index.php");
