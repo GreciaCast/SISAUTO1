@@ -64,3 +64,8 @@ function validarCompra(){
 
 	$('#guardarCom').submit();
 }
+
+function validarCompraE(){
+
+	$('#editarCompra').submit();
+}
