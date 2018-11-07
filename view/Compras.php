@@ -77,8 +77,8 @@ and open the template in the editor.
 <?php $fechaCom = explode("-",$compra['fecha_Com']);
         $fechaCom = $fechaCom[2].'/'.$fechaCom[1].'/'.$fechaCom[0];
 echo $fechaCom ?></td>
-                                                                        <td><?php echo $compra['numFac_Com'] ?></td>
-                                                                        <td>
+ <td><?php echo $compra['numFac_Com'] ?></td>
+<td>
 
 <?php 
 $aux = $compra['id_Proveedor'];
@@ -110,9 +110,11 @@ echo $localtime_assoc['tm_sec'];
 ?>
                                                                         </td>
                                                                         <th align="center">
-                                                                        <button title="Ver" type="button" class="btn btn-info fa fa-eye">
+                                                                        <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra" onclick="VerCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
                                                                         </button>
                                                                         <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
+                                                                        </button>
+                                                                        <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash-o" onclick="eliminarC(<?php echo $compra['idCompra'] ?>)">
                                                                         </button>
                                                                     </th>
                                                                     </tr>
@@ -128,6 +130,81 @@ echo $localtime_assoc['tm_sec'];
                             </div>
                         </div>
                     </div>
+     <!-- MODAL VER COMPRA -->
+<div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver Compra</h3>
+                </div>
+                <div class="modal-body">
+                 <h3 align="center"><b>Datos Generales</b></h3>
+                        <hr width="75%" style="background-color:#007bff;"/>
+                        <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Fecha:</label>
+                            <div class="col-sm-3 input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <input class="form-control" type="text" id="fechaVer" value="01/01/2018" readonly="readonly" aria-required="true" >
+                             </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" type="text" id="nummeroFacComVer" name="" readonly="readonly" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <br><br>
+                         <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Proveedor:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" name="proveedorComE" id="proveedorComVer" readonly="readonly" aria-required="true" value="">
+                            </div>
+                        </div>
+                        <br><br>
+                        
+                <div class="modal-footer">
+                 </div>
+                       <div class="card mb-3">
+                                        <div class="card-header" align="center">
+                                            <h3><b>Detalle de compra</b></h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:10px">Cantidad</th>
+                                                            <th style="width:200px">Producto</th>
+                                                            <th style="width:30px">Precio unitario</th>
+                                                            <th style="width:30px">Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="productosVer">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer small text-muted"></div>
+                                        </div>
+                                        <br><br><br>
+                         <div class="form-group ">
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Total Compra:</label>
+                            <div class="col-sm-5">
+                            <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComVer" readonly="readonly"></div>
+                               </div>
+                        </div>
+                     <br><br>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                </div>  
+                </div>
+                     </div>
+                 </div>
+
+
 
                     <!-- MODAL EDITAR COMPRA -->
                     <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -142,7 +219,7 @@ echo $localtime_assoc['tm_sec'];
                                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Compra</h3>
                                 </div>
                                 <div class="modal-body">
-                                 <form action="../Controlador/comprasC.php" method="POST" id="editarPro" align="center" autocomplete="off">
+                                 <form action="../Controlador/comprasC.php" method="POST" id="editarCompra" align="center" autocomplete="off">
                                     <h3><b>Datos generales</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
                                     <input type="hidden" value="EditarCom" name="bandera"/>
@@ -150,7 +227,7 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row" id="data_2">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Numero de factura: </label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" id="nummeroFacComEditar" placeholder="" style="width:150px;height:40px">
+                                            <input class="form-control" type="number" id="nummeroFacComEditar" name="numFac_Com" placeholder="" style="width:150px;height:40px">
                                         </div>
                                         <?php
                                         
@@ -158,26 +235,12 @@ echo $localtime_assoc['tm_sec'];
                                             $hora1 = date("A");
                                             $hoy = getdate();
                                             $hora = date("g");
-                                            //print_r($hoy);
-                                            // echo " Fecha ";
-                                            // echo ($hoy['mday']);
-                                            // echo "/";
-                                            // echo $hoy['mon'];
-                                            // echo "/";
-                                            // echo $hoy['year'];
-                                            // echo "       Hora ";
-                                            // echo $hora;
-                                            // echo ":";
-                                            // echo $hoy['minutes'];
-                                            // echo ":";
-                                            // echo $hoy['seconds'];
-                                            // echo $hora1;
                                             
                                         ?>
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Fecha: </label>
                                         <div class="col-sm-12 col-md-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input class="form-control" type="text" id="fecha" value="01/01/2018" style="width:150px;height:40px">
+                                            <input class="form-control" type="text" id="fecha" name="fecha_Com" value="01/01/2018" style="width:150px;height:40px">
                                         </div>
                                     </div>
                                     <div>
@@ -186,7 +249,7 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:350px;height:40px" class="form-control" name="proveedorComE" id="proveedorComEditar"> 
+                                            <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComEditar"> 
                                                 <option value="">[Selecionar Proveedor]</option>
                                                 <?php
 
@@ -203,18 +266,18 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Cantidad:</label>
                                         <div class="col-sm-12 col-md-3">
-                                            <input class="form-control" type="number" id="cantidadComEditar" placeholder="Cantidad" style="width:150px;height:40px">
+                                            <input class="form-control" type="number" id="cantidad" name="cantidadProd" placeholder="Cantidad" style="width:150px;height:40px">
                                         </div>
                                         <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Precio Unitario:</label>
                                         <div class="col-sm-12 col-md-3">
-                                            <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="preciouniComEditar"></div>
+                                            <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" name="precioProd" id="precio"></div>
                                             <!-- <input class="form-control" type="number" placeholder="$" style="width:150px;height:40px"> -->
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
                                         <div class="col-sm-12 col-md-10">
-                                            <select style="width:400px;height:40px" class="form-control" id="categoriaComEditar"> 
+                                            <select style="width:400px;height:40px" class="form-control" id="categoriaPro" name="categorias" onchange="filtrarCategoria(this.value);"> 
                                                 <option value="">[Selecionar categoria]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>
@@ -234,21 +297,18 @@ echo $localtime_assoc['tm_sec'];
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
                                         <div class="col-sm-12 col-md-8">
-                                            <select  class="form-control" id="productoComEditar"> 
+                                            <select  class="form-control" id="productoFiltrado" name="productos"> 
                                                 <option value="">[Selecionar Producto]</option>
-                                                <option value=""></option>
-                                                <option value=""></option>
-                                                <option value=""></option>
                                                 <option value=""></option>
                                             </select>
                                         </div>
-                                        <div class="col-sm-12 col-md-1">
+                                        <!-- <div class="col-sm-12 col-md-1">
                                             <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" style="width:39px;height:39px" data-toggle="modal" data-target="#modalVerAddProducto"></button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <hr width="75%" /><br>
                                     <div class="form-group" align="center">
-                                        <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px"></button>
+                                        <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregar();" ></button>
                                     </div>
                                     <div class="card mb-3">
                                         <div class="card-header">
@@ -263,20 +323,12 @@ echo $localtime_assoc['tm_sec'];
                                                             <th style="width:200px">Producto</th>
                                                             <th style="width:30px">Precio unitario</th>
                                                             <th style="width:30px">Subtotal</th>
-                                                            <th style="width:50px">Acciones</th>
+                                                            <th style="width:50px">Acción</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="productos">
-                                                        <tr>
-                                                            <td>...</td>
-                                                            <td>...</td>
-                                                            <td>...</td>
-                                                            <td>...</td>
-                                                            <td>
-                                                                <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash"></button>
-                                                            </td>
-                                                            </tr>
-                                                        </tbody>
+                                                    <tbody id="tablaProductos">
+                                                        
+                                                    </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -285,7 +337,7 @@ echo $localtime_assoc['tm_sec'];
                                         <div class="form-group row">
                                             <label align="right" for="nrc" class="col-sm-12 col-md-8 col-form-label">Total de compra:</label>
                                             <div class="col-sm-12 col-md-3">
-                                                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalComEditar" readonly="readonly"></div>
+                                                <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="total" name="total" readonly="readonly"></div>
                                                 <!-- <input class="form-control" type="text" placeholder="$" style="width:150px;height:40px"> -->
                                             </div>
                                         </div>
@@ -294,7 +346,7 @@ echo $localtime_assoc['tm_sec'];
                                 <br><br>
                                 <div class="modal-footer">
                                   <input type="hidden" id="anterior" value=""  />
-                                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;">Aceptar</button>
+                                  <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validarCompraE();">Aceptar</button>
                                   <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
                               </div>
                           </div>
@@ -372,6 +424,7 @@ echo $localtime_assoc['tm_sec'];
            </div>
 
                   <script src="../assets/Validaciones/mostrarCompra.js"></script> 
+                  <script src="../assets/Validaciones/validarCompras.js"></script>
                   <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
                   <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
                   <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
@@ -690,7 +743,37 @@ echo $localtime_assoc['tm_sec'];
 
 
 </body>
+<form method="POST" id="eliminarCom">
+    <input type="hidden" name="id" id="idCom"  />
+    <input type="hidden" name="bandera" id="banderaCom" />
+</form>
 </html>
+  <!-- ELIMINAR COMPRA -->
+        <script type="text/javascript">
+            function eliminarC(id){
+                swal({
+                    title: '¿Está seguro de eliminar?',
+                  // text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Si',
+                  cancelButtonText: 'No',
+
+              }).then((result) => {
+                if(result.value){
+                $('#idCom').val(id);
+                $('#banderaCom').val('eliminar');
+                var dominio = window.location.host;
+                 $('#eliminarCom').attr('action','http://'+dominio+'/SISAUTO1/Controlador/comprasC.php');
+                 $('#eliminarCom').submit();
+                 }else{
+
+                }
+            })
+            }
+            </script>
 <?php
 }else{
     ?>
