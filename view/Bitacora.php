@@ -63,15 +63,20 @@ if (isset($_SESSION['usuarioActivo']))
                     <table class="table table-striped table-bordered display" id="example">
                       <thead>
                         <tr>
-                          <th style="width:30px">Inicio Sesion</th>
+                          <th style="width:30px">Fecha y Hora</th>
                           <th style="width:40px">Usuario</th>
                           <th style="width:150px">Actividad</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <?php While ($bitacora = mysqli_fetch_assoc($bitacoras)) { ?>
+                      <?php While ($bitacora = mysqli_fetch_assoc($bitacoras)) {
+                        //date_default_timezone_set('America/Mexico_City');
+                        //$fecha=date("d-m-Y H:i:s");
+
+                        ?>
+
                         <tr>
-                          <td><?php echo $bitacora['sesionInicio'] ?></td>
+                          <td><?php echo date('d-m-Y H:i:s',strtotime($bitacora['sesionInicio'])) ?></td>
                           <td><?php echo $bitacora['usuario_Usu'] ?></td>
                           <td><?php echo $bitacora['actividad'] ?></td>
                         </tr>
