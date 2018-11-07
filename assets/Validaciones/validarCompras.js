@@ -11,21 +11,38 @@ function filtrarCategoria(id){
 
 function mostrarAddProduc(){
     var cate = ["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
-    console.log(100000);
+	var obtenerC = $("#categoriaPro").find('option:selected');
+	var categoriaId = obtenerC.val();
+	var categoriaText = obtenerC.text();
     var obtenerP = $("#productoFiltrado").find('option:selected');
-    var productoId = obtenerP.val();
+    var id = obtenerP.val();
 	var productoText = obtenerP.text();
-   // $("#codigoAddP").val(codigoP);
     $("#nombreAddP").val(productoText);
-   // $("#cateAddP").val(cate[parseInt(cateP)-1]);
-   // $("#marcaAddP").val(marcaP);
-   // $("#modeloAddP").val(modeloP);
-   // if(anioP!='0'){
-   //    $("#anioAddP").val(anioP);
-   // }else{
-   //    $("#anioAddP").val("");
-   // }
-   // $("#descripcionAddP").val(descripcionP);
+    $("#cateAddP").val(cate[parseInt(categoriaId)-1]);
+
+    $.get('/SISAUTO1/Controlador/comprasC.php?codigo=1&id='+id,function(data){
+	 	    $("#codigoAddP").val(data);    
+	 });
+    $.get('/SISAUTO1/Controlador/comprasC.php?marca=1&id='+id,function(data){
+	 	    $("#marcaAddP").val(data);    
+	 });
+
+    $.get('/SISAUTO1/Controlador/comprasC.php?descripcion=1&id='+id,function(data){
+	 	    $("#descripcionAddP").val(data);  
+	 });
+
+    $.get('/SISAUTO1/Controlador/comprasC.php?modelo=1&id='+id,function(data){
+	 	    $("#modeloAddP").val(data);   
+	 });
+
+    $.get('/SISAUTO1/Controlador/comprasC.php?anio=1&id='+id,function(data){
+			if(data!='0'){
+				$("#anioAddP").val(data);
+			}else{
+				$("#anioAddP").val("");
+			}		    
+	 });
+   
 }
 
 function agregar(){

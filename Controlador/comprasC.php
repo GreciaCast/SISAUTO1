@@ -84,9 +84,59 @@ if(isset($_GET["bandera"])){
 	$sql1 = "SELECT * from producto where categoria_Prod = '$id' and tipo_Prod = 1 order by nombre_Prod ASC";
 	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 	While ($producto = mysqli_fetch_assoc($productos)){
-		$cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['nombre_Prod'].'  '.$producto['marca_Prod'].'  "'.$producto['descripcion_Prod'].'" - '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].'</option>';
+		$cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['nombre_Prod'].'  '.$producto['marca_Prod'].' - '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].'</option>';
 	}
 	echo $cadena;
+}
+
+if(isset($_GET["codigo"])){
+	$id = $_GET["id"];
+	$cod='';
+	$sql1 = "SELECT * from producto where idProducto = '$id' ";
+	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$producto = mysqli_fetch_array($productos);
+		$cod = $cod.''.$producto['codigo_Prod'];
+	echo $cod;
+}
+
+if(isset($_GET["marca"])){
+	$id = $_GET["id"];
+	$mar='';
+	$sql1 = "SELECT * from producto where idProducto = '$id' ";
+	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$producto = mysqli_fetch_array($productos);
+		$mar = $mar.''.$producto['marca_Prod'];
+	echo $mar;
+}
+
+if(isset($_GET["descripcion"])){
+	$id = $_GET["id"];
+	$des='';
+	$sql1 = "SELECT * from producto where idProducto = '$id' ";
+	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$producto = mysqli_fetch_array($productos);
+		$des = $des.''.$producto['descripcion_Prod'];
+	echo $des;
+}
+
+if(isset($_GET["modelo"])){
+	$id = $_GET["id"];
+	$mod='';
+	$sql1 = "SELECT * from producto where idProducto = '$id' ";
+	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$producto = mysqli_fetch_array($productos);
+		$mod = $mod.''.$producto['modeloVehiculo_Prod'];
+	echo $mod;
+}
+
+if(isset($_GET["anio"])){
+	$id = $_GET["id"];
+	$ani='';
+	$sql1 = "SELECT * from producto where idProducto = '$id' ";
+	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$producto = mysqli_fetch_array($productos);
+		$ani = $ani.''.$producto['anioVehiculo_Prod'];
+	echo $ani;
 }
 
 ?>
