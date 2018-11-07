@@ -9,9 +9,11 @@ if(isset($_POST["bandera"])){
 
 	$bandera = $_POST["bandera"];
 	if($bandera == "GuardarCom"){
+		
 		$fechaCom = $_POST["fecha_Com"];
 		$fechaCom = explode("/",$fechaCom);
 		$fechaCom = $fechaCom[2].'-'.$fechaCom[1].'-'.$fechaCom[0];
+		
 		$numFacCom = $_POST["numFac_Com"];
 		$totalCom = $_POST["total"];
 		$idProvCom = $_POST["id_Proveedor"];
@@ -35,6 +37,7 @@ if(isset($_POST["bandera"])){
 
 }
 
+//----------------------------  AGREGAR AL COMBOBOX DE LOS PRODUCTOS
 if(isset($_GET["bandera"])){
 	$id = $_GET["id"];
 	$cadena='';
@@ -46,54 +49,65 @@ if(isset($_GET["bandera"])){
 	echo $cadena;
 }
 
-if(isset($_GET["codigo"])){
-	$id = $_GET["id"];
-	$cod='';
-	$sql1 = "SELECT * from producto where idProducto = '$id' ";
-	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-	$producto = mysqli_fetch_array($productos);
-		$cod = $cod.''.$producto['codigo_Prod'];
-	echo $cod;
-}
+//-----------------------------------------------------------   VER PRODUCTO EN LA COMPRA
+	if(isset($_GET["nombre"])){
+		$id = $_GET["id"];
+		$nom = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$nom = $nom.''.$producto['nombre_Prod'];
+		echo $nom;
+	}
 
-if(isset($_GET["marca"])){
-	$id = $_GET["id"];
-	$mar='';
-	$sql1 = "SELECT * from producto where idProducto = '$id' ";
-	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-	$producto = mysqli_fetch_array($productos);
-		$mar = $mar.''.$producto['marca_Prod'];
-	echo $mar;
-}
+	if(isset($_GET["codigo"])){
+		$id = $_GET["id"];
+		$cod = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$cod = $cod.''.$producto['codigo_Prod'];
+		echo $cod;
+	}
 
-if(isset($_GET["descripcion"])){
-	$id = $_GET["id"];
-	$des='';
-	$sql1 = "SELECT * from producto where idProducto = '$id' ";
-	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-	$producto = mysqli_fetch_array($productos);
-		$des = $des.''.$producto['descripcion_Prod'];
-	echo $des;
-}
+	if(isset($_GET["marca"])){
+		$id = $_GET["id"];
+		$mar = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$mar = $mar.''.$producto['marca_Prod'];
+		echo $mar;
+	}
 
-if(isset($_GET["modelo"])){
-	$id = $_GET["id"];
-	$mod='';
-	$sql1 = "SELECT * from producto where idProducto = '$id' ";
-	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-	$producto = mysqli_fetch_array($productos);
-		$mod = $mod.''.$producto['modeloVehiculo_Prod'];
-	echo $mod;
-}
+	if(isset($_GET["descripcion"])){
+		$id = $_GET["id"];
+		$des = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$des = $des.''.$producto['descripcion_Prod'];
+		echo $des;
+	}
 
-if(isset($_GET["anio"])){
-	$id = $_GET["id"];
-	$ani='';
-	$sql1 = "SELECT * from producto where idProducto = '$id' ";
-	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-	$producto = mysqli_fetch_array($productos);
-		$ani = $ani.''.$producto['anioVehiculo_Prod'];
-	echo $ani;
-}
+	if(isset($_GET["modelo"])){
+		$id = $_GET["id"];
+		$mod = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$mod = $mod.''.$producto['modeloVehiculo_Prod'];
+		echo $mod;
+	}
 
+	if(isset($_GET["anio"])){
+		$id = $_GET["id"];
+		$ani = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);
+			$ani = $ani.''.$producto['anioVehiculo_Prod'];
+		echo $ani;
+	}
+//-----------------------------------------------------------------------------------------------------
 ?>
