@@ -116,7 +116,7 @@
   ?>
 </table>
 <form name="frmTesis" method="get" action="" id="frmTesis">
-  <p align="center"><input type="button" name="IM" id="IM" value="IMPRIMIR" onClick="imprimir()"></p>
+  <p align="center"><input class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo" style="font-size:17px;" type="button" name="IM" id="IM" value="IMPRIMIR" onClick="imprimir()"></p>
 </form>
 <p>&nbsp;</p>
 </body>

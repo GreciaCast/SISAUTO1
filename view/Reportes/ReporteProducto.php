@@ -53,7 +53,8 @@
 		}
 </script>
 </head>
-
+<?php $cate = array(1 => "AMORTIGUADORES", 2 => "BUJÍAS", 3 => "COMBUSTIBLE",
+4 => "ELÉCTRICO", 5 => "ENFRIAMIENTO", 6 => "FILTROS", 7 => "FRENOS", 8 => "MOTOR", 9 => "SENSORES", 10 => "SUSPENSIÓN Y DIRECCIÓN", 11 => "TRANSMISIÓN Y EMBRAGUE", 12 => "UNIVERSALES"); ?>
 <body>
 <table width="685" border="0" align="center">
   <tr>
@@ -65,7 +66,7 @@
     <p>Teléfono: 2393-0214.</p></span></td>
   </tr>
   <tr align="center">
-    <td colspan="2"><strong class="titulos">REPORTE DE BITACORA</strong></td>
+    <td colspan="2"><strong class="titulos">REPORTE DE PRODUCTOS</strong></td>
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
@@ -82,9 +83,9 @@
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Categoria</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Marca</td>
   </tr>
     <?php
 	//try {
@@ -95,7 +96,7 @@
 
 	$contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from bitacora ";
+	$sql = "select * from producto ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
 	$consulta=mysqli_query($conexion,$sql);
@@ -108,7 +109,7 @@
   <tr align="left" class="">
     <td bgcolor=""><?php echo $contador;?></td>
     <td bgcolor=""><?php echo $fila[1];?></td>
-    <td bgcolor=""><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
+    <td bgcolor=""><?php echo $cate[$fila['categoria_Prod']];?></td>
     <td bgcolor=""><?php echo $fila[3];?></td>
   </tr>
   <?php $contador++;
