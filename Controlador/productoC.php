@@ -9,7 +9,7 @@ if ($bandera == "guardar") {
 $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
 $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nuevo producto')";
 mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-header("location: /SISAUTO1/view/Cliente.php?");
+header("location: /SISAUTO1/view/Producto.php?");
 ///////////////////////////////////////////////
 
 
@@ -36,7 +36,7 @@ if ($bandera == "EditarProd") {
   $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
   $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito datos de producto')";
   mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-  header("location: /SISAUTO1/view/Cliente.php?");
+  header("location: /SISAUTO1/view/Producto.php?");
   ///////////////////////////////////////////////
 
     $nombrePro = $_POST["nombrePro"];
@@ -63,7 +63,7 @@ if ($bandera=="cambio") {
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
     $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de alta a un producto')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-    header("location: /SISAUTO1/view/Cliente.php?");
+    header("location: /SISAUTO1/view/Producto.php?");
     ///////////////////////////////////////////////
 		$aux = 0;
 		$_SESSION['mensaje'] ="Producto dado de alta exitosamente";
@@ -73,7 +73,7 @@ if ($bandera=="cambio") {
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
     $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un producto')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-    header("location: /SISAUTO1/view/Cliente.php?");
+    header("location: /SISAUTO1/view/Producto.php?");
     ///////////////////////////////////////////////
 		$aux = 1;
 		$_SESSION['mensaje'] ="Producto dado de baja exitosamente";
