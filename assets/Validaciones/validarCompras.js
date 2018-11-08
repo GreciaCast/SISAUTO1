@@ -147,6 +147,56 @@ else {
   return aux;
 }
 
-function validarCompraE(){
-	$('#editarCompra').submit();
+async function validarCompraE(){
+	var numFac= await validarnumFacE();
+	var fecha= await validarfechaE();
+	var proveedor= await validarproveedorE();
+	var total= await validartotalE();
+	if(numFac==true && fecha==true && proveedor==true && total==true){
+		$('#editarCompra').submit();
+	}
 }
+
+   function validarnumFacE(){
+
+    if ($('#nummeroFacComEditar').val().trim()=="") {
+    	notaError("El número de la compra es obligatorio!");
+    	return false;
+    }
+
+    return true;
+
+    }
+
+    function validarfechaE(){
+
+    if ($('#fecha').val().trim()=="") {
+    	notaError("La fecha de la compra es obligatorio!");
+    	return false;
+    }
+
+    return true;
+
+    }
+
+    function validarproveedorE(){
+
+    if ($('#proveedorComEditar').val().trim()=="") {
+    	notaError("El proveedor es obligatorio!");
+    	return false;
+    }
+
+    return true;
+
+    }
+
+    function validartotalE(){
+
+    if ($('#total').val().trim()=="") {
+    	notaError("Ingrese al menos un producto!");
+    	return false;
+    }
+
+    return true;
+
+    }
