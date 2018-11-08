@@ -4,7 +4,7 @@ include("../confi/Conexion.php");
 $conexion = conectarMysql();
 
 $bandera = $_POST["bandera"];
-
+if ($bandera == "guardar") {
 //////////CAPTURA DATOS PARA BITACORA
 $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
 $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nuevo producto')";
@@ -12,7 +12,7 @@ mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mys
 header("location: /SISAUTO1/view/Cliente.php?");
 ///////////////////////////////////////////////
 
-if ($bandera == "guardar") {
+
     $codigo = $_POST["codigoPro"];
     $nombrePro = $_POST["nombrePro"];
     $categoria = $_POST["categorias"];

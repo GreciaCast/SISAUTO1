@@ -24,19 +24,19 @@ if (isset($_SESSION['usuarioActivo'])) {
 			<div class="col-lg-2">
 			</div>
 		</div>
-		<?php if (!isset($_GET['tipo'])) { 
+		<?php if (!isset($_GET['tipo'])) {
 			$tipo=1;
 		}else{
 			$tipo = $_GET['tipo'];
 		}?>
-		 <?php 
+		 <?php
             $sql="SELECT * from cliente where tipo_Cli='$tipo' order by nombre_Cli ASC";
             $clientes= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
 		<div class="row">
 			<div class="col-12">
 			<div class="row" style="padding:20px">
 				<br>
-				<a class="pull-right" href="">
+				<a class="pull-right" href="Reportes/ReporteClienteUnico.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
 						Reporte
 						<span class="fa fa-file-pdf-o"></span>
@@ -45,7 +45,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 				</a>
 				<a class="pull-right" href="AgregarCli.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
-						Agregar nuevo 
+						Agregar nuevo
 						<span class="fa fa-plus"></span>
 					</button>
           &nbsp;
@@ -97,7 +97,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <td><?php echo $cliente['telefono_Cli'] ?></td>
                                             <td><?php echo $cliente['nrc_Cli'] ?></td>
                                             <td><?php echo $cliente['nit_Cli'] ?></td>
-                                                                                       
+
                                             <th align="center">
                                                 <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCliente" href="" onclick="mostrarCli('<?php echo $cliente['nombre_Cli']?>','<?php echo $cliente['direccion_Cli']?>','<?php echo $cliente['telefono_Cli']?>','<?php echo $cliente['nrc_Cli']?>','<?php echo $cliente['nit_Cli']?>','<?php echo $cliente['descripcion_Cli']?>');"></button>
                                                <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
@@ -132,10 +132,10 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</div>
 					<?php include("generalidades/cierre.php"); ?>
               <script src="../assets/Validaciones/mostrarCliente.js"></script>
-              <script src="../assets/Validaciones/validarCliente.js"></script> 
+              <script src="../assets/Validaciones/validarCliente.js"></script>
 				</div>
 			</div>
-		
+
 		<!-- MODAL VER CLIENTE -->
 
          <div class="modal fade" id="modalVerCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -182,17 +182,17 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 <input class="form-control" type="text" id="nit" name="NIT" disabled="true">
                             </div>
                         </div>
-                        
+
                         <div id="ocultar">
                         <br><br><br>
                         <div class="form-group">
-                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                             <div class="col-sm-7">
                                <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui..." id="descripcionCli" disabled="true">
                                </textarea>
                             </div>
                         </div>
-                       </div> 
+                       </div>
                 </div>
                 <br><br>
                 <div class="modal-footer">
@@ -253,7 +253,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     </div>
                       <br><br><br>
                       <div class="form-group">
-                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                         <div class="col-sm-7">
                          <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre del cliente " id="descripcionCliEditar" >
                          </textarea>
@@ -303,7 +303,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 }
             })
             }
-     //DAR DE ALTA 
+     //DAR DE ALTA
             function alta(id){
                 swal({
                     title: '¿Está seguro en dar de alta?',
