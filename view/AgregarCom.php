@@ -64,7 +64,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <label for="empresa" class="col-sm-3 control-label">Fecha: </label>
                                         <div class="col-sm-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input id="fecha" name="fecha_Com" type="text" class="form-control" value="01/01/2018" style="width:150px;height:40px">
+                                            <input id="fecha" name="fecha_Com" type="text" class="form-control" value="01/01/2018" style="width:150px;height:40px"onkeypress="return validarFechaCom(this,event,this.value)">
+                                            <a id='mensajitoFecha'></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
