@@ -38,6 +38,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <h3><b>Datos generales</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
                                     <input type="hidden" value="GuardarCom" name="bandera"></input>
+                                    <div class="form-group row">
+                                        <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
+                                        <div class="col-sm-3 input-group">
+                                            <input  id="numFacCom" name="numFac_Com" class="form-control" type="number" id="num" placeholder="" style="width:150px;height:40px">
+                                        </div>
+                                    </div>
                                     <div class="form-group row" id="data_2">
                                         <?php
                                         
@@ -45,33 +51,14 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             $hora1 = date("A");
                                             $hoy = getdate();
                                             $hora = date("g");
-                                            //print_r($hoy);
-                                            // echo " Fecha ";
-                                            // echo ($hoy['mday']);
-                                            // echo "/";
-                                            // echo $hoy['mon'];
-                                            // echo "/";
-                                            // echo $hoy['year'];
-                                            // echo "       Hora ";
-                                            // echo $hora;
-                                            // echo ":";
-                                            // echo $hoy['minutes'];
-                                            // echo ":";
-                                            // echo $hoy['seconds'];
-                                            // echo $hora1;
-                                            
+                                            $dia = date("d");
+                                             $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
                                         ?>
                                         <label for="empresa" class="col-sm-3 control-label">Fecha: </label>
                                         <div class="col-sm-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                            <input id="fecha" name="fecha_Com" type="text" class="form-control" value="01/01/2018" style="width:150px;height:40px"onkeypress="return validarFechaCom(this,event,this.value)">
+                                            <input id="fecha" name="fecha_Com" type="text" class="form-control" value="<?php echo $fech?>" min="01/01/2000" max="<?php echo $fech?>" style="width:150px;height:40px">
                                             <a id='mensajitoFecha'></a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
-                                        <div class="col-sm-3 input-group">
-                                            <input  id="numFacCom" name="numFac_Com" class="form-control" type="number" id="num" placeholder="" style="width:150px;height:40px">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -100,6 +87,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="col-sm-12 col-md-1">
                                             <input id="cantidad" name="cantidadProd" class="form-control" type="number" placeholder="Cantidad" style="width:150px;height:40px">
                                         </div>
+                                        
                                         <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
                                         <div class="col-sm-12 col-md-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-usd"></i></span>
@@ -137,6 +125,13 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="col-sm-12 col-md-1">
                                             <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerAddProducto" href="" onclick="mostrarAddProduc();" style="width:39px;height:39px">
                                             </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 col-md-3">
+                                        </div>
+                                        <div class="col-sm-12 col-md-5">
+                                            <a id='mensajeee1'></a>
                                         </div>
                                     </div>
                                     <hr width="75%" /><br>

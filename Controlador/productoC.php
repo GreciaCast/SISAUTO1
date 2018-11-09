@@ -5,13 +5,6 @@ $conexion = conectarMysql();
 
 $bandera = $_POST["bandera"];
 
-//////////CAPTURA DATOS PARA BITACORA
-$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nuevo producto')";
-mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-header("location: /SISAUTO1/view/Cliente.php?");
-///////////////////////////////////////////////
-
 if ($bandera == "guardar") {
     $codigo = $_POST["codigoPro"];
     $nombrePro = $_POST["nombrePro"];
@@ -31,14 +24,6 @@ if ($bandera == "guardar") {
 }
 
 if ($bandera == "EditarProd") {
-
-  //////////CAPTURA DATOS PARA BITACORA
-  $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-  $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito datos de producto')";
-  mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-  header("location: /SISAUTO1/view/Cliente.php?");
-  ///////////////////////////////////////////////
-
     $nombrePro = $_POST["nombrePro"];
     $categoria = $_POST["categorias"];
     $marca = $_POST["marca"];
@@ -46,6 +31,8 @@ if ($bandera == "EditarProd") {
     $anio = $_POST["anio"];
     $descripcion = $_POST["descripcion"];
     $idProducto = $_POST["idProducto"];
+
+
 
     $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion' where idProducto = '$idProducto'";
 
@@ -59,22 +46,10 @@ if ($bandera=="cambio") {
 	$sql = "UPDATE producto set tipo_Prod='".$_POST["valor"]."' where idProducto = '".$_POST["id"]."'";
 	$producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 	if ($_POST["valor"]==1) {
-    //////////CAPTURA DATOS PARA BITACORA
-    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de alta a un producto')";
-    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-    header("location: /SISAUTO1/view/Cliente.php?");
-    ///////////////////////////////////////////////
 		$aux = 0;
 		$_SESSION['mensaje'] ="Producto dado de alta exitosamente";
 		// $mensaje = "Proveedor dado de alta exitosamente";
 	}else{
-    //////////CAPTURA DATOS PARA BITACORA
-    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un producto')";
-    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-    header("location: /SISAUTO1/view/Cliente.php?");
-    ///////////////////////////////////////////////
 		$aux = 1;
 		$_SESSION['mensaje'] ="Producto dado de baja exitosamente";
 	}
