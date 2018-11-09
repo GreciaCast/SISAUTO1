@@ -149,11 +149,15 @@ function agregar(){
 	html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
 	html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar('+productoId+','+subtotal+');"></button></td></tr>';
 	
-	 if(cantidad == "" || cantidad == 0 || precio == "" || precio == 0 || $('#categoriaPro').val() == "" || $('#productoFiltrado').val() == ""){
+	 if(cantidad == "" || precio == "" || $('#categoriaPro').val() == "" || $('#productoFiltrado').val() == ""){
 	 	$('#mensajeee1').text("");
 	 	$('#mensajeee1').text("* Debe completar todos los datos del producto");
 
-	 }else{
+	 }else if(cantidad == 0 || precio == 0){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* Debe escribir datos correctos");
+
+     }else{
 	 	$('#mensajeee1').text("");
 
 		$('#tablaProductos').append(html);
