@@ -9,7 +9,7 @@ function editarCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
 	$.get('/SISAUTO1/Controlador/detalleCompraC.php?bandera=1&id='+idcompra,function(data){
 		var r=JSON.parse(data);
 			$('#tablaProductos').append(r[0]);
-			$('#total').val(r[1]);
+			$('#total').val(parseFloat(r[1]).toFixed(2));
 
 	});
 
@@ -18,7 +18,7 @@ function VerCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
 	$("#nummeroFacComVer").val(numeroFac);
 	// $("#proveedorComVer").val(nombreproveedor);
 	$("#fechaVer").val(fecha.split('-').reverse().join('/'));
-	$("#totalComVer").val(totalCompra);
+	$("#totalComVer").val(parseFloat(totalCompra).toFixed(2));
 	$("#proveedorComVer>option[value="+idproveedor+"]").attr("selected",true);
 
 	$('#productosVer').empty();
