@@ -41,7 +41,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <div class="form-group row">
                                         <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
                                         <div class="col-sm-3 input-group">
-                                            <input  id="numFacCom" name="numFac_Com" class="form-control" type="number" id="num" placeholder="" style="width:150px;height:40px">
+                                            <input  id="numFacCom" name="numFac_Com" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
                                         </div>
                                     </div>
                                     <div class="form-group row" id="data_2">
@@ -85,13 +85,13 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <div class="form-group row">
                                         <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
                                         <div class="col-sm-12 col-md-1">
-                                            <input id="cantidad" name="cantidadProd" class="form-control" type="number" placeholder="Cantidad" style="width:150px;height:40px">
+                                            <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
                                         </div>
                                         
                                         <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
                                         <div class="col-sm-12 col-md-3 input-group date">
                                             <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                            <input id="precio" name="precioProd" class="form-control" type="number" style="width:150px;height:40px">
+                                            <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -149,8 +149,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         <tr>
                                                             <th style="width:10px">Cantidad</th>
                                                             <th style="width:200px">Producto</th>
-                                                            <th style="width:30px">Precio unitario</th>
-                                                            <th style="width:30px">Subtotal</th>
+                                                            <th style="width:30px">Precio unitario ($)</th>
+                                                            <th style="width:30px">Subtotal ($)</th>
                                                             <th style="width:50px">Acción</th>
                                                         </tr>
                                                     </thead>
@@ -265,6 +265,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <script src="../assets/Validaciones/mostrarProducto.js"></script>
                     <script src="../assets/Validaciones/validarProducto.js"></script>
                     <script src="../assets/Validaciones/validarCompras.js"></script>
+                    <script src="../assets/Validaciones/validarNumeros.js"></script>
                     <script src="../assets/Validaciones/validarCliente.js"></script>
                     <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
                     <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
