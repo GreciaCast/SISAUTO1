@@ -191,7 +191,7 @@ async function validarCompraE(){
 
    function validarnumFacE(){
 
-    if ($('#nummeroFacComEditar').val().trim()=="") {
+    if ($('#numFacCom').val().trim()=="") {
     	notaError("¡El numero de factura es obligatorio!");
     	return false;
     }
