@@ -78,6 +78,9 @@ if(isset($_POST["bandera"])){
 		//header("location: /SISAUTO1/view/Compras.php?");
 	}
 
+}
+}
+
 	if($bandera == "EditarCom"){
 
 		//////////CAPTURA DATOS PARA BITACORA
@@ -165,7 +168,6 @@ if(isset($_POST["bandera"])){
 
 	}
 
-}
 
 //----------------------------  AGREGAR AL COMBOBOX DE LOS PRODUCTOS
 if(isset($_GET["bandera"])){
