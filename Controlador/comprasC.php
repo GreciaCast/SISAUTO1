@@ -36,13 +36,8 @@ if(isset($_POST["bandera"])){
 		
 			$sql2 = "SELECT * FROM inventario WHERE id_Producto = '$idProdCom[$key]' order by idInventario desc";
 			$resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
-			$resultadoo = mysqli_fetch_array($resultadooS);
-			echo("---Uno");
-			print_r($resultadoo);
-			echo("---Dos");
-			// $resultadoo =  mysqli_fetch_array($resultadoo);//CAPTURA EL ULTIMO REGISTRO
-			 $idD = $resultadoo['idInventario'];
-			//  echo $idD;
+			$resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+			$idD = $resultadoo['idInventario'];
 
 
 			if($idD == ""){

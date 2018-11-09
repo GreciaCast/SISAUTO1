@@ -26,8 +26,9 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
       </div>
       <?php
-      $sql="SELECT * from inventario ";
-      $inventarios= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
+
+      $sql="SELECT * from inventario GROUP BY id_Producto";
+      $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
       
       <div class="row">
         <div class="col-12">
@@ -100,7 +101,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                              </thead>
                              <tbody>
 
-                              <?php While($inventario=mysqli_fetch_assoc($inventarios)){?>
+                              <?php While($inventario = mysqli_fetch_assoc($inventarios)){?>
                               <tr>
                                 <td><?php
                                   $aux1 = $inventario['id_Producto']; 
@@ -120,7 +121,15 @@ if (isset($_SESSION['usuarioActivo'])) {
                                   </td>
 
 
-                                  <td><?php echo $inventario['cantidad_Inv'] ?></td>
+                                  <td><?php 
+
+
+      $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
+      $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+      $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+      $cant = $resultadoo['nuevaExistencia_Inv'];
+
+      echo $cant ?></td>
                                   
                                   <td><?php echo '0' ?></td>
 
