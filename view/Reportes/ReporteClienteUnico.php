@@ -69,9 +69,9 @@
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
-    <td>FECHA IMPRESION:  <?php echo date("d-m-Y"); ?>
+    <td>FECHA IMPRESIÓN:  <?php echo date("d-m-Y"); ?>
     <br>
-    HORA  IMPRESION:   <?php
+    HORA  IMPRESIÓN:   <?php
 		date_default_timezone_set('America/El_Salvador');
 		$date = new DateTime();
 	     echo $date->format('h:i:s A');
@@ -83,8 +83,8 @@
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Direccion</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Telefono</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Dirección</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">NCR</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">NIT</td>
   </tr>

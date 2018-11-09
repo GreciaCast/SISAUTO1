@@ -42,7 +42,7 @@ and open the template in the editor.
         <div class="col-12">
             <div class="row" style="padding:20px">
                 <br>
-                <a class="pull-right" href="">
+                <a class="pull-right" href="Reportes/ReporteUsuario.php">
                     <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
                         Reporte
                         <span class="fa fa-file-pdf-o"></span>
@@ -51,7 +51,7 @@ and open the template in the editor.
                 </a>
                 <a class="pull-right" href="AgregarUsu.php">
                     <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
-                        Agregar nuevo 
+                        Agregar nuevo
                         <span class="fa fa-plus"></span>
                     </button>
                     &nbsp;

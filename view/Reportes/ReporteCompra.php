@@ -82,9 +82,9 @@
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Empresa</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Responsable</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">N° de factura</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Proveedor</td>
   </tr>
     <?php
 	//try {
@@ -95,7 +95,7 @@
 
 	$contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from proveedor ";
+	$sql = "select * from compra ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
 	$consulta=mysqli_query($conexion,$sql);

@@ -28,7 +28,7 @@ if (isset($_SESSION['usuarioActivo']))
   </div>
 
   <?php if (!isset($_GET['tipo'])) {
-    $tipo=1;
+    $tipo=0;
   }else{
     $tipo = $_GET['tipo'];
   }?>
@@ -40,14 +40,14 @@ if (isset($_SESSION['usuarioActivo']))
     <div class="col-12">
     <div class="row" style="padding:20px">
       <br>
-      <a class="pull-right" href="Reportes/ejemplo.php">
+      <a class="pull-right" href="Reportes/bitacora.php">
         <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
           Reporte
           <span class="fa fa-file-pdf-o"></span>
         </button>
         &nbsp;
       </a>
-      <?php  if ($tipo == 1) { ?>
+      <?php  if ($tipo == 0) { ?>
       <?php  }else{ ?>
     </div>
       <?php } ?>

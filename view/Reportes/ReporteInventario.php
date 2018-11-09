@@ -65,7 +65,7 @@
     <p>Teléfono: 2393-0214.</p></span></td>
   </tr>
   <tr align="center">
-    <td colspan="2"><strong class="titulos">REPORTE DE PROVEEDORES</strong></td>
+    <td colspan="2"><strong class="titulos">REPORTE DE INVENTARIO</strong></td>
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
@@ -82,9 +82,11 @@
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Empresa</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Responsable</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Código Producto</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Entradas</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Salidas</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Existencias</td>
   </tr>
     <?php
 	//try {
@@ -95,7 +97,7 @@
 
 	$contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from proveedor ";
+	$sql = "select * from inventario ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
 	$consulta=mysqli_query($conexion,$sql);
@@ -110,6 +112,9 @@
     <td bgcolor=""><?php echo $fila[1];?></td>
     <td bgcolor=""><?php echo $fila[2];?></td>
     <td bgcolor=""><?php echo $fila[3];?></td>
+    <td bgcolor=""><?php echo $fila[4];?></td>
+    <td bgcolor=""><?php echo $fila[5];?></td>
+    <td bgcolor=""><?php echo $fila[6];?></td>
   </tr>
   <?php $contador++;
 }

@@ -6,12 +6,7 @@ $conexion = conectarMysql();
 $bandera = $_POST["bandera"];
 
 if($bandera == "GuardarUsu"){
-	//////////CAPTURA DATOS PARA BITACORA
-	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nueva usuario')";
-	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-	header("location: /SISAUTO1/view/Usuarios.php?");
-	///////////////////////////////////////////////
+
 	$nombreusuU = $_POST["NombreUsu_Usu"];
 	$contrasenaU = $_POST["Contrasena_Usu"];
 	$nombreU = $_POST["Nombre_Usu"];
@@ -23,15 +18,15 @@ if($bandera == "GuardarUsu"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] = "Registro guardado exitosamente";
     header("location: /SISAUTO1/view/Usuarios.php?");
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registró nuevo usuario')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		///////////////////////////////////////////////
 }
 
 if($bandera == "EditarUsu"){
-	//////////CAPTURA DATOS PARA BITACORA
-	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editodatos de un usuario')";
-	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-	header("location: /SISAUTO1/view/Usuarios.php?");
-	///////////////////////////////////////////////
+
     $nombreusuU = $_POST["NombreUsu_Usu"];
 	$nombreU = $_POST["Nombre_Usu"];
 	$correoU = $_POST["Correo_Usu"];
@@ -47,6 +42,11 @@ if($bandera == "EditarUsu"){
 	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 	$_SESSION['mensaje'] ="Registro editado exitosamente";
 	header("location: /SISAUTO1/view/Usuarios.php?");
+	//////////CAPTURA DATOS PARA BITACORA
+	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó datos de un usuario')";
+	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	///////////////////////////////////////////////
 }
 
 if($bandera == "EditarUsuContrasena"){
@@ -62,6 +62,11 @@ if($bandera == "EditarUsuContrasena"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] ="Registro editado exitosamente";
     header("location: /SISAUTO1/view/index.php?");
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó el correo de un usuario')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		///////////////////////////////////////////////
 }
 
 if ($bandera == "ucorreo"){
@@ -98,23 +103,21 @@ if ($bandera == "cambio") {
 	$sql = "UPDATE usuario set estado_Usu = '".$_POST["valor"]."' where idUsuario = '".$_POST["id"]."'";
 	$proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 	if ($_POST["valor"] == 1) {
+		$aux = 0;
+		$_SESSION['mensaje'] ="Usuario dado de alta exitosamente";
 		//////////CAPTURA DATOS PARA BITACORA
 		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
 		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de alta a un usuario')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-		header("location: /SISAUTO1/view/Usuarios.php?");
 		///////////////////////////////////////////////
-		$aux = 0;
-		$_SESSION['mensaje'] ="Usuario dado de alta exitosamente";
 	}else{
+		$aux = 1;
+		$_SESSION['mensaje'] ="Usuario dado de baja exitosamente";
 		//////////CAPTURA DATOS PARA BITACORA
 		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
 		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un usuario')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-		header("location: /SISAUTO1/view/Usuarios.php?");
 		///////////////////////////////////////////////
-		$aux = 1;
-		$_SESSION['mensaje'] ="Usuario dado de baja exitosamente";
 	}
     header("location: /SISAUTO1/view/Usuarios.php?tipo=".$aux."");
 }

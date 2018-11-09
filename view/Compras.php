@@ -36,7 +36,7 @@ and open the template in the editor.
             <div class="col-12">
                 <div class="row" style="padding:20px">
                     <br>
-                    <a class="pull-right">
+                    <a class="pull-right" href="Reportes/ReporteCompra.php">
                         <button class="btn btn-success" data-toggle="modal" data-target="#modalEditarCompra" style="font-size:16px;">
                             Reporte
                             <span class="fa fa-file-pdf-o"></span>
@@ -80,7 +80,7 @@ and open the template in the editor.
                                                                         <td><?php echo $compra['numFac_Com'] ?></td>
                                                                         <td>
 
-                                                                            <?php 
+                                                                            <?php
                                                                             $aux = $compra['id_Proveedor'];
                                                                             $sql1 = "SELECT nombre_Prov FROM proveedor where idProveedor = '$aux'";
                                                                             $proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
@@ -111,9 +111,9 @@ and open the template in the editor.
                         </div>
                         <!-- MODAL VER COMPRA -->
                         <div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <?php 
+                            <?php
                             $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
-                            $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                            $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
                             ?>
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -144,7 +144,7 @@ and open the template in the editor.
                                         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Proveedor:</label>
                                         <div class="col-sm-3">
                                             <!-- <input class="form-control" type="text" name="proveedorComE" id="proveedorComVer" readonly="readonly" aria-required="true" value=""> -->
-                                            <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComVer" disabled="true" > 
+                                            <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComVer" disabled="true" >
 
                                                 <?php
 
@@ -192,7 +192,7 @@ and open the template in the editor.
                                 <br><br>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -201,9 +201,9 @@ and open the template in the editor.
 
                     <!-- MODAL EDITAR COMPRA -->
                     <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                     <?php 
+                     <?php
                      $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
-                     $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                     $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
                      ?>
                      <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -242,7 +242,7 @@ and open the template in the editor.
                                 <div class="form-group row">
                                     <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                     <div class="col-sm-12 col-md-10">
-                                        <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComEditar"> 
+                                        <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComEditar">
                                             <option value="">[Selecionar Proveedor]</option>
                                             <?php
 
@@ -270,7 +270,7 @@ and open the template in the editor.
                             <div class="form-group row">
                                 <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
                                 <div class="col-sm-12 col-md-10">
-                                    <select style="width:400px;height:40px" class="form-control" id="categoriaPro" name="categorias" onchange="filtrarCategoria(this.value);"> 
+                                    <select style="width:400px;height:40px" class="form-control" id="categoriaPro" name="categorias" onchange="filtrarCategoria(this.value);">
                                         <option value="">[Selecionar categoria]</option>
                                         <option value="1">AMORTIGUADORES</option>
                                         <option value="2">BUJÍAS</option>
@@ -290,7 +290,7 @@ and open the template in the editor.
                             <div class="form-group row">
                                 <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Producto:</label>
                                 <div class="col-sm-12 col-md-8">
-                                    <select  class="form-control" id="productoFiltrado" name="productos"> 
+                                    <select  class="form-control" id="productoFiltrado" name="productos">
                                         <option value="">[Selecionar Producto]</option>
                                         <option value=""></option>
                                     </select>
@@ -355,7 +355,7 @@ and open the template in the editor.
 
           </div>
 
-          <script src="../assets/Validaciones/mostrarCompra.js"></script> 
+          <script src="../assets/Validaciones/mostrarCompra.js"></script>
           <script src="../assets/Validaciones/validarCompras.js"></script>
           <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
           <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>

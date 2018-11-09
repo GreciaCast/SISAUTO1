@@ -29,8 +29,8 @@ if (isset($_SESSION['usuarioActivo'])) {
       <div class="col-12">
       <div class="row" style="padding:20px">
         <br>
-        
-        <a class="pull-right" href="">
+
+        <a class="pull-right" href="Reportes/ReporteInventario.php">
           <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
             Reporte
             <span class="fa fa-file-pdf-o"></span>
@@ -38,19 +38,19 @@ if (isset($_SESSION['usuarioActivo'])) {
           &nbsp;
         </a>
         <a class="pull-right" href="">
-          
+
             <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
-            Ver compras 
+            Ver compras
             <span class="fa fa-eye"></span>
           </button>
             <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
-            Ver ventas 
+            Ver ventas
             <span class="fa fa-eye"></span>
           </button>
 
           &nbsp;
         </a>
-           
+
         </div>
 
         <div class="row">
@@ -83,9 +83,9 @@ if (isset($_SESSION['usuarioActivo'])) {
                                   <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
                                   <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
                                   <option value="12">UNIVERSALES</option>
-                          </select>              
-                       </div>   
-                       <br><br><br>                                               
+                          </select>
+                       </div>
+                       <br><br><br>
                          &nbsp;
                                <tr>
                                    <th style="width:90px" >Código Producto</th>
@@ -97,17 +97,17 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                      
-                             
+
+
                                 </tbody>
                               </table>
                             </div>
                           </form>
-                       
+
           <?php include("generalidades/cierre.php"); ?>
         </div>
       </div>
-  
+
     </body>
     </html>
 
