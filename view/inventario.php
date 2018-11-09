@@ -26,8 +26,9 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
       </div>
       <?php
-      $sql="SELECT * from inventario ";
-      $inventarios= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
+
+      $sql="SELECT * from inventario GROUP BY id_Producto";
+      $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
       
       <div class="row">
         <div class="col-12">
@@ -71,7 +72,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 
                               <thead>
                                 <div class="col-sm-3 input-group">
-                                 <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
+                                <!-- <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
                                  <div class="col-sm-3">
                                    <select name="categorias" style="width:600px;height:40px" class="form-control" id="" onchange="veruniversal();">
                                     <option value="">[Selecionar Categoria]</option>
@@ -89,27 +90,32 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <option value="12">UNIVERSALES</option>
                                   </select>              
                                 </div>   
-                                <br><br><br>                                               
+                                <br><br><br>     -->                                          
                                 &nbsp;
                                 <tr>
-                                 <th style="width:40px" >Código Producto</th>
+                                 <th style="width:70px" >Código Producto</th>
                                  <th style="width:125px" >Nombre</th>
                                  <th style="width:35px" >Entradas</th>
                                  <th style="width:35px" >Salidas</th>
+                                 <th style="width:20px" >Existencias</th>
+                                 <th style="width:35px" >Acción</th>
+
+
                                </tr>
                              </thead>
                              <tbody>
 
-                              <?php While($inventario=mysqli_fetch_assoc($inventarios)){?>
+                              <?php While($inventario = mysqli_fetch_assoc($inventarios)){?>
                               <tr>
-                                <td><?php
+                                <td align="center"><?php
                                   $aux1 = $inventario['id_Producto']; 
                                   $sql1 = "SELECT codigo_Prod FROM producto where idProducto = '$aux1'";
                                   $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
                                   $producto = mysqli_fetch_array($producto);
                                   echo $producto['codigo_Prod'];
                                   ?></td>
-                                  <td>
+
+                                  <td >
                                     <?php
                                     $aux = $inventario['id_Producto']; 
                                     $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
@@ -120,13 +126,33 @@ if (isset($_SESSION['usuarioActivo'])) {
                                   </td>
 
 
-                                  <td><?php echo $inventario['cantidad_Inv'] ?></td>
-                                  
-                                  <td><?php echo '0' ?></td>
+                                  <td align="center"><?php 
 
 
+                                    $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
+                                    $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                    $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+                                    $cant = $resultadoo['nuevaExistencia_Inv'];
+                                    echo $cant ?></td>
 
-                                  <?php } ?>
+                                    <td align="center"><?php echo '0' ?></td>
+
+
+                                  <td align="center"><?php 
+
+
+                                    $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
+                                    $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                    $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+                                    $cant = $resultadoo['nuevaExistencia_Inv'];
+                                    echo $cant ?></td>
+
+                                    <th align="center">
+                                     <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
+                                               
+
+                             <?php } ?>
+
 
 
                                 </tbody>

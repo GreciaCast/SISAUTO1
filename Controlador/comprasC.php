@@ -41,9 +41,17 @@ if(isset($_POST["bandera"])){
 			echo ($idProdCom[$key]);
 			echo("----");
 			$sql2 = "SELECT * FROM inventario WHERE id_Producto = '$idProdCom[$key]' order by idInventario desc";
-			$resultadoo = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
-			$resultadoo =  mysqli_fetch_array($resultadoo);//CAPTURA EL ULTIMO REGISTRO
-			$id = $resultadoo['idInventario'];
+
+			$resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+			$resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+			$idD = $resultadoo['idInventario'];
+
+
+			if($idD == ""){
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,0,0.0,'$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$cantidadProdCom[$key]','$precioProdCom[$key]','$idProdCom[$key]')";
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+		
+			}else{
 
 			if($id != ""){
 				$existencias = $resultadoo['nuevaExistencia_Inv'];
