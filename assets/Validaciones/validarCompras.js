@@ -27,22 +27,22 @@ function validarFechaC(){
         notaError("¡La fecha es obligatoria!");
         return false;
     }else if (anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado > mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado == mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado == mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }
     return true;
@@ -50,7 +50,10 @@ function validarFechaC(){
 
 function validarNumeroFacC(){
     if ($('#numFacCom').val().trim() == "") {
-        notaError("¡El numero de factura es obligatorio!");
+        notaError("¡El número de factura es obligatorio!");
+        return false;
+    }else if ($('#numFacCom').val().trim() == 0) {
+        notaError("¡El número de factura es inválido!");
         return false;
     }
     return true;
@@ -69,7 +72,7 @@ function validarDetallesC(){
         notaError("¡Los detalles de la compra son obligatorios!");
         return false;
     }else if (($('#total').val().trim() == "")) {
-        notaError("¡Los detalles de la compra deben ser validos!");
+        notaError("¡Los detalles de la compra deben ser válidos!");
         return false;
     }
     return true;
@@ -150,7 +153,11 @@ function agregar(){
 	 	$('#mensajeee1').text("");
 	 	$('#mensajeee1').text("* Debe completar todos los datos del producto");
 
-	 }else{
+	 }else if(cantidad == 0 || precio == 0){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* Debe escribir datos correctos");
+
+     }else{
 	 	$('#mensajeee1').text("");
 
 		$('#tablaProductos').append(html);
@@ -185,7 +192,7 @@ async function validarCompraE(){
    function validarnumFacE(){
 
     if ($('#nummeroFacComEditar').val().trim()=="") {
-    	notaError("El número de la compra es obligatorio!");
+    	notaError("¡El numero de factura es obligatorio!");
     	return false;
     }
 
@@ -193,21 +200,21 @@ async function validarCompraE(){
 
     }
 
-    function validarfechaE(){
+    // function validarfechaE(){
 
-    if ($('#fecha').val().trim()=="") {
-    	notaError("La fecha de la compra es obligatorio!");
-    	return false;
-    }
+    // if ($('#fecha').val().trim()=="") {
+    // 	notaError("La fecha de la compra es obligatorio!");
+    // 	return false;
+    // }
 
-    return true;
+    // return true;
 
-    }
+    // }
 
     function validarproveedorE(){
 
     if ($('#proveedorComEditar').val().trim()=="") {
-    	notaError("El proveedor es obligatorio!");
+    	notaError("¡El proveedor es obligatorio!");
     	return false;
     }
 
@@ -217,11 +224,53 @@ async function validarCompraE(){
 
     function validartotalE(){
 
-    if ($('#total').val().trim()=="") {
-    	notaError("Ingrese al menos un producto!");
+    if ($('#total').val().trim()=="0.00") {
+    	notaError("¡Los detalles de la compra son obligatorios!");
     	return false;
+    }else if (($('#total').val().trim() == "")) {
+        notaError("¡Los detalles de la compra deben ser validos!");
+        return false;
     }
 
     return true;
 
     }
+
+    function validarfechaE(){
+
+    var f = new Date();
+    //FECHA ACTUAL
+    var diaActual = f.getDate();
+    var mesActual = f.getMonth() + 1;
+    var anioActual = f.getFullYear();
+    //FECHA SELECCIONADA
+    $fechaCom = $('#fecha').val();
+    var fechas = $fechaCom.split('/');
+    var diaSeleccionado = fechas[0];
+    var mesSeleccionado = fechas[1];
+    var anioSeleccionado = fechas[2];       
+
+    if ($('#fecha').val().trim() == "") {
+        notaError("¡La fecha es obligatoria!");
+        return false;
+    }else if (anioSeleccionado > anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }else if (diaSeleccionado > diaActual && mesSeleccionado > mesActual && anioSeleccionado > anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }else if (diaSeleccionado > diaActual && mesSeleccionado == mesActual && anioSeleccionado == anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }else if (diaSeleccionado == diaActual && mesSeleccionado == mesActual && anioSeleccionado > anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }else if (diaSeleccionado == diaActual && mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }else if (mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
+        notaError("¡La fecha debe ser valida!");
+        return false;
+    }
+    return true;
+}
