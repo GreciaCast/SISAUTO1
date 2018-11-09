@@ -220,7 +220,7 @@ and open the template in the editor.
                                 <div class="form-group row" id="data_2">
                                     <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Numero de factura: </label>
                                     <div class="col-sm-12 col-md-3">
-                                        <input class="form-control" type="number" id="nummeroFacComEditar" name="numFac_Com" placeholder="" style="width:150px;height:40px">
+                                        <input class="form-control" type="number" id="numFacCom" name="numFac_Com" placeholder="" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
                                     </div>
                                     <?php
 
@@ -259,11 +259,13 @@ and open the template in the editor.
                              <div class="form-group row">
                                 <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Cantidad:</label>
                                 <div class="col-sm-12 col-md-3">
-                                    <input class="form-control" type="number" id="cantidad" name="cantidadProd" placeholder="Cantidad" style="width:150px;height:40px">
+                                    <input class="form-control" type="text" id="cantidad" name="cantidadProd" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
                                 </div>
                                 <label for="direccion" class="col-sm-12 col-md-2 col-form-label">Precio Unitario:</label>
                                 <div class="col-sm-12 col-md-3">
-                                    <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" name="precioProd" id="precio"></div>
+                                    <div class="input-group m-b">
+                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span> <input type="text" class="form-control" name="precioProd" id="precio" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                                    </div>
                                     <!-- <input class="form-control" type="number" placeholder="$" style="width:150px;height:40px"> -->
                                 </div>
                             </div>
@@ -357,6 +359,7 @@ and open the template in the editor.
 
           <script src="../assets/Validaciones/mostrarCompra.js"></script> 
           <script src="../assets/Validaciones/validarCompras.js"></script>
+          <script src="../assets/Validaciones/validarNumeros.js"></script>
           <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
           <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
           <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>

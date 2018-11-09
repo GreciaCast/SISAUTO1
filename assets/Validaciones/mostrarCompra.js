@@ -1,5 +1,5 @@
 function editarCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
-	$("#nummeroFacComEditar").val(numeroFac);
+	$("#numFacCom").val(numeroFac);
 	$("#fecha").val(fecha.split('-').reverse().join('/'));
 	$("#total").val(totalCompra);
 	$("#idcompra").val(idcompra);
