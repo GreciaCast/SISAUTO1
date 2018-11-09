@@ -83,8 +83,8 @@
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Empresa</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Correo</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Responsable</td>
   </tr>
     <?php
 	//try {

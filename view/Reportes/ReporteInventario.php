@@ -87,6 +87,7 @@
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Entradas</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Salidas</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Existencias</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
   </tr>
     <?php
 	//try {

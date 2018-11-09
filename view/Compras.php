@@ -144,12 +144,8 @@ and open the template in the editor.
                                         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Proveedor:</label>
                                         <div class="col-sm-3">
                                             <!-- <input class="form-control" type="text" name="proveedorComE" id="proveedorComVer" readonly="readonly" aria-required="true" value=""> -->
-<<<<<<< HEAD
-                                            <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComVer" disabled="true" >
 
-=======
                                             <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComVer" disabled="true" > 
->>>>>>> 581cf49f0278f2d21e5d67eb36b681f7033a3de4
                                                 <?php
 
                                                 While($proveedor=mysqli_fetch_array($proveedores)){

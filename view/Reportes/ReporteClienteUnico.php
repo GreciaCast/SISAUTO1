@@ -85,7 +85,7 @@
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Dirección</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">NCR</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">NRC</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">NIT</td>
   </tr>
     <?php
