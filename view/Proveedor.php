@@ -26,20 +26,20 @@ if (isset($_SESSION['usuarioActivo'])) {
 
 			</div>
 		</div>
-		<?php if (!isset($_GET['tipo'])) { 
+		<?php if (!isset($_GET['tipo'])) {
 			$tipo=1;
 		}else{
 			$tipo = $_GET['tipo'];
 		}?>
-		<?php 
+		<?php
 		$sql="SELECT * from proveedor where tipo_Prov='$tipo' order by nombre_Prov ASC";
-		$proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+		$proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 		?>
 		<div class="row">
 			<div class="col-12">
 			<div class="row" style="padding:20px">
 				<br>
-				<a class="pull-right" href="">
+				<a class="pull-right" href="Reportes/ReporteProveedor.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
 						Reporte
 						<span class="fa fa-file-pdf-o"></span>
@@ -49,7 +49,7 @@ if (isset($_SESSION['usuarioActivo'])) {
         <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
 				<a class="pull-right" href="AgregarPro.php">
 					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
-						Agregar nuevo 
+						Agregar nuevo
 						<span class="fa fa-plus"></span>
 					</button>
           &nbsp;
@@ -141,9 +141,9 @@ if (isset($_SESSION['usuarioActivo'])) {
 					</div>
           <?php include("generalidades/cierre.php"); ?>
 				</div>
-          
+
 			</div>
-		
+
 		<!-- MODAL VER PROVEEDOR -->
 
          <div class="modal fade" id="modalVerProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -194,7 +194,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                         </div>
                         <br><br><br><br>
                         <div class="form-group">
-                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label> 
+                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
                             <div class="col-sm-3">
                                 <input class="form-control" type="text" id="telefonoRes" name="DUI_Usu" disabled="true">
                             </div>
@@ -202,13 +202,13 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <div id="ocultar">
                         <br><br><br>
                         <div class="form-group">
-                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                             <div class="col-sm-7">
                                <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui..." id="descripcionProv" disabled="true">
                                </textarea>
                             </div>
                         </div>
-                       </div> 
+                       </div>
                 </div>
                 <br><br>
                 <div class="modal-footer">
@@ -272,14 +272,14 @@ if (isset($_SESSION['usuarioActivo'])) {
                     </div>
                     <br><br><br><br>
                     <div class="form-group">
-                      <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label> 
+                      <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
                       <div class="col-sm-3">
                         <input class="form-control" type="text" id="telefonoResEditar" name="Telefono_Res" data-mask="9999-9999">
                       </div>
                     </div>
                       <br><br><br>
                       <div class="form-group">
-                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label> 
+                        <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                         <div class="col-sm-7">
                          <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
                          </textarea>
@@ -303,7 +303,7 @@ if (isset($_SESSION['usuarioActivo'])) {
           </div>
 
             <!-- _______________________________________________________________________________________ -->
-					         <script src="../assets/Validaciones/mostrarProveedor.js"></script> 
+					         <script src="../assets/Validaciones/mostrarProveedor.js"></script>
                     <script src="../assets/Validaciones/validarProveedor.js"></script>
                     <script src="../assets/Validaciones/validarCorreo.js"></script>
                     <script src="../assets/Validaciones/validarNombreCompletoUsuario.js"></script>

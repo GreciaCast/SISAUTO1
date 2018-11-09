@@ -8,7 +8,13 @@ $conexion = conectarMysql();
 
 if($bandera=="guardar"){
 
-    $nombreE = $_POST["Nombre_Emp"];
+  //////////CAPTURA DATOS PARA BITACORA
+  $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+  $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nuevo proveedor')";
+  mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+  header("location: /SISAUTO1/view/Proveedor.php?");
+  ///////////////////////////////////////////////
+  $nombreE = $_POST["Nombre_Emp"];
 	$correoE = $_POST["Correo_Emp"];
 	$telefonoE = $_POST["Telefono_Emp"];
 	$direccionE = $_POST["Direccion_Emp"];
@@ -25,7 +31,13 @@ if($bandera=="guardar"){
 
 if($bandera=="EditarPro"){
 
-    $nombreE = $_POST["Nombre_Emp"];
+  //////////CAPTURA DATOS PARA BITACORA
+  $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+  $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito datos de un proveedor')";
+  mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+  header("location: /SISAUTO1/view/Proveedor.php?");
+  ///////////////////////////////////////////////
+  $nombreE = $_POST["Nombre_Emp"];
 	$correoE = $_POST["Correo_Emp"];
 	$telefonoE = $_POST["Telefono_Emp"];
 	$direccionE = $_POST["Direccion_Emp"];
@@ -47,10 +59,23 @@ if ($bandera=="cambio") {
 	$sql = "UPDATE proveedor set tipo_Prov='".$_POST["valor"]."' where idProveedor = '".$_POST["id"]."'";
 	$proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 	if ($_POST["valor"]==1) {
+
+    //////////CAPTURA DATOS PARA BITACORA
+    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de alta a un proveedor')";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+    header("location: /SISAUTO1/view/Proveedor.php?");
+    ///////////////////////////////////////////////
 		$aux = 0;
 		$_SESSION['mensaje'] ="Proveedor dado de alta exitosamente";
 		// $mensaje = "Proveedor dado de alta exitosamente";
 	}else{
+    //////////CAPTURA DATOS PARA BITACORA
+    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un proveedor')";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+    header("location: /SISAUTO1/view/Proveedor.php?");
+    ///////////////////////////////////////////////
 		$aux = 1;
 		$_SESSION['mensaje'] ="Proveedor dado de baja exitosamente";
 	}

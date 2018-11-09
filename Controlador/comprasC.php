@@ -8,11 +8,17 @@ $conexion = conectarMysql();
 if(isset($_POST["bandera"])){
 	$bandera = $_POST["bandera"];
 	if($bandera == "GuardarCom"){
-		
+		//////////CAPTURA DATOS PARA BITACORA
+	  $usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+	  $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registro nueva compra')";
+	  mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	  header("location: /SISAUTO1/view/Compras.php?");
+	  ///////////////////////////////////////////////
+
 		$fechaCom = $_POST["fecha_Com"];
 		$fechaCom = explode("/",$fechaCom);
 		$fechaCom = $fechaCom[2].'-'.$fechaCom[1].'-'.$fechaCom[0];
-		
+
 		$numFacCom = $_POST["numFac_Com"];
 		$totalCom = $_POST["total"];
 		$idProvCom = $_POST["id_Proveedor"];
@@ -60,6 +66,13 @@ if(isset($_POST["bandera"])){
 	}
 
 	if($bandera == "EditarCom"){
+
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito una compra')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		header("location: /SISAUTO1/view/Compras.php?");
+		///////////////////////////////////////////////
 		$fechaCom = $_POST["fecha_Com"];
 		$fechaCom = explode("/",$fechaCom);
 		$fechaCom = $fechaCom[2].'-'.$fechaCom[1].'-'.$fechaCom[0];
@@ -88,6 +101,12 @@ if(isset($_POST["bandera"])){
 		
 	}
 	if ($bandera == "eliminar") {
+		//////////CAPTURA DATOS PARA BITACORA
+		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Elimino una compra')";
+		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		header("location: /SISAUTO1/view/Compras.php?");
+		///////////////////////////////////////////////
 		$idCom=$_POST["id"];
 		$sql1 = "DELETE from detallecompra where id_Compra = '$idCom'";
 		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());

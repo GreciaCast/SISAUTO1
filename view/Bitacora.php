@@ -40,7 +40,7 @@ if (isset($_SESSION['usuarioActivo']))
     <div class="col-12">
     <div class="row" style="padding:20px">
       <br>
-      <a class="pull-right" href="">
+      <a class="pull-right" href="Reportes/ejemplo.php">
         <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
           Reporte
           <span class="fa fa-file-pdf-o"></span>
@@ -70,9 +70,7 @@ if (isset($_SESSION['usuarioActivo']))
                       </thead>
                       <tbody>
                       <?php While ($bitacora = mysqli_fetch_assoc($bitacoras)) {
-                        //date_default_timezone_set('America/Mexico_City');
-                        //$fecha=date("d-m-Y H:i:s");
-
+                       date_default_timezone_set('America/El_Salvador');
                         ?>
 
                         <tr>
