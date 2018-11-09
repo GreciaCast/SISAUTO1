@@ -102,7 +102,7 @@ if(isset($_POST["bandera"])){
 			mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 			// ___________________________________________________________________________
-			$sql2 = "DELETE from inventario WHERE  id_Producto = '$idProdCom[$key]'";
+			$sql2 = "DELETE from inventario WHERE  id_Producto = '$idProdCom'";
 			mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 			$sql3 = "SELECT * FROM inventario WHERE idInventario = (SELECT MAX(idInventario) from inventario) and id_Producto = '$idProdCom[$key]'";
@@ -144,7 +144,7 @@ if(isset($_POST["bandera"])){
 		///////////////////////////////////////////////
 		// $idProdCom = $_POST["id_Producto"];
 		$idCom=$_POST["id"];
-		// $sql1 = "DELETE from inventario WHERE  id_Producto = '$idProdCom[$key]'";
+		// $sql1 = "DELETE from inventario WHERE  id_Producto = '$idCom'";
 		// mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		
 		$sql1 = "DELETE from detallecompra where id_Compra = '$idCom'";
