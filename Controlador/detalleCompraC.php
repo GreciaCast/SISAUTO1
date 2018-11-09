@@ -50,7 +50,9 @@ if(isset($_GET["bandera1"])){
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DCom'].'</td>';
 		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].'</td>';
 		$cadena=$cadena.'<td>'.$detalle['precio_DCom'].'</td>';
-		$cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';
+		$subtotal = $detalle['cantidad_DCom']*$detalle['precio_DCom'];
+		$cadena=$cadena.'<td>'.number_format($subtotal,2,'.','').'</td>';
+		// $cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';
 		$cadena.='</tr>';
 	}
 	
