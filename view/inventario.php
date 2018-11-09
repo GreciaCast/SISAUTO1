@@ -72,7 +72,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 
                               <thead>
                                 <div class="col-sm-3 input-group">
-                                 <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
+                                <!-- <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
                                  <div class="col-sm-3">
                                    <select name="categorias" style="width:600px;height:40px" class="form-control" id="" onchange="veruniversal();">
                                     <option value="">[Selecionar Categoria]</option>
@@ -90,7 +90,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <option value="12">UNIVERSALES</option>
                                   </select>              
                                 </div>   
-                                <br><br><br>                                               
+                                <br><br><br>     -->                                          
                                 &nbsp;
                                 <tr>
                                  <th style="width:70px" >Código Producto</th>
