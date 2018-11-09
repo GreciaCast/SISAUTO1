@@ -27,22 +27,22 @@ function validarFechaC(){
         notaError("¡La fecha es obligatoria!");
         return false;
     }else if (anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado > mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado == mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado == mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }
     return true;
@@ -50,7 +50,10 @@ function validarFechaC(){
 
 function validarNumeroFacC(){
     if ($('#numFacCom').val().trim() == "") {
-        notaError("¡El numero de factura es obligatorio!");
+        notaError("¡El número de factura es obligatorio!");
+        return false;
+    }else if ($('#numFacCom').val().trim() == 0) {
+        notaError("¡El número de factura es inválido!");
         return false;
     }
     return true;
@@ -69,7 +72,7 @@ function validarDetallesC(){
         notaError("¡Los detalles de la compra son obligatorios!");
         return false;
     }else if (($('#total').val().trim() == "")) {
-        notaError("¡Los detalles de la compra deben ser validos!");
+        notaError("¡Los detalles de la compra deben ser válidos!");
         return false;
     }
     return true;
@@ -146,7 +149,7 @@ function agregar(){
 	html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
 	html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar('+productoId+','+subtotal+');"></button></td></tr>';
 	
-	 if(cantidad == "" || precio == "" || $('#categoriaPro').val() == "" || $('#productoFiltrado').val() == ""){
+	 if(cantidad == "" || cantidad == 0 || precio == "" || precio == 0 || $('#categoriaPro').val() == "" || $('#productoFiltrado').val() == ""){
 	 	$('#mensajeee1').text("");
 	 	$('#mensajeee1').text("* Debe completar todos los datos del producto");
 
