@@ -72,12 +72,7 @@ and open the template in the editor.
                                                             </thead>
                                                             <tbody>
                                                                 <?php While($compra = mysqli_fetch_assoc($compras)){?>
-                                                                <tr>
-                                                                    <td>
-                                                                        <?php $fechaCom = explode("-",$compra['fecha_Com']);
-                                                                        $fechaCom = $fechaCom[2].'/'.$fechaCom[1].'/'.$fechaCom[0];
-                                                                        echo $fechaCom ?></td>
-                                                                        <td><?php echo $compra['numFac_Com'] ?></td>
+                                                                    <tr>
                                                                         <td>
 <?php $fechaCom = explode("-",$compra['fecha_Com']);
         $fechaCom = $fechaCom[2].'/'.$fechaCom[1].'/'.$fechaCom[0];
@@ -93,29 +88,27 @@ $proveedor = mysqli_fetch_array($proveedor);
 echo $proveedor['nombre_Prov'];
 ?>
                                                                         </td>
-<th align="center">
-    <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra" onclick="VerCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
-    </button>
-    <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
-    </button>
-    <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash-o" onclick="eliminarC(<?php echo $compra['idCompra'] ?>)">
-    </button>
-</th>
-</tr>
-<?php } ?>
-</tbody>
-</table>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
+                                                                        <th align="center">
+                                                                        <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra" onclick="VerCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
+                                                                        </button>
+                                                                        <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarCompra" onclick="editarCom('<?php echo $compra['numFac_Com']?>','<?php echo $compra['fecha_Com']?>','<?php echo $compra['total_Com']?>','<?php echo $compra['idCompra']?>','<?php echo $compra['id_Proveedor']?>')">
+                                                                        </button>
+                                                                        <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash-o" onclick="eliminarC(<?php echo $compra['idCompra'] ?>)">
+                                                                        </button>
+                                                                    </th>
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 <!-- MODAL VER COMPRA -->
 <div class="modal fade" id="modalVerCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <?php 
