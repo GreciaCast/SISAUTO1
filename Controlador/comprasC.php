@@ -94,6 +94,34 @@ if(isset($_POST["bandera"])){
 			$sql1 = "INSERT INTO detallecompra (cantidad_DCom,precio_DCom,id_Compra,id_Producto) VALUES ('$cantidadProdCom[$key]','$precioProdCom[$key]','$idcompra','$idProdCom[$key]')";
 			mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
+			// ___________________________________________________________________________
+			$sql2 = "DELETE from inventario WHERE  id_Producto = '$idProdCom[$key]'";
+			mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+			$sql3 = "SELECT * FROM inventario WHERE idInventario = (SELECT MAX(idInventario) from inventario) and id_Producto = '$idProdCom[$key]'";
+			$resultadoo = mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+			$resultadoo =  mysqli_fetch_array($resultadoo);//CAPTURA EL ULTIMO REGISTRO
+			$id = $resultadoo['idInventario'];
+			echo $id;
+
+			if($id == ""){
+
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,0,0.0,'$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$cantidadProdCom[$key]','$precioProdCom[$key]','$idProdCom[$key]')";
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+			}else{
+
+				$existencias = $resultadoo['nuevaExistencia_Inv'];
+				$precioActual = $resultadoo['nuevoPrecio_Inv'];
+				$nuevaExistencia = $resultadoo['nuevaExistencia_Inv'] + $cantidadProdCom[$key];
+				$nuevoPrecio = ($resultadoo['nuevoPrecio_Inv'] + $precioProdCom[$key])/2;
+
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,'$existencias','$precioActual','$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProdCom[$key]')";
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+			}
+			// ___________________________________________________________________________
+
 		}
 		$_SESSION['mensaje'] = "Registro editado exitosamente";
 		header("location: /SISAUTO1/view/Compras.php?");
@@ -107,14 +135,18 @@ if(isset($_POST["bandera"])){
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		header("location: /SISAUTO1/view/Compras.php?");
 		///////////////////////////////////////////////
+		// $idProdCom = $_POST["id_Producto"];
 		$idCom=$_POST["id"];
+		// $sql1 = "DELETE from inventario WHERE  id_Producto = '$idProdCom[$key]'";
+		// mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+		
 		$sql1 = "DELETE from detallecompra where id_Compra = '$idCom'";
 		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 		$sql1 = "DELETE from compra where idCompra = '$idCom'";
 		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-
+		
 		$_SESSION['mensaje'] = "Compra eliminada exitosamente";
 		header("location: /SISAUTO1/view/Compras.php?");
 
