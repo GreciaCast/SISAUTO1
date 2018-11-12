@@ -179,6 +179,9 @@ function eliminar(id,subtotal){
     $('#f'+id).remove();
 }
 
+
+//-----------------FUNCIONES DE EDITAR------------------------------------------------------
+
 async function validarCompraE(){
     var numFac= await validarnumFacE();
     var fecha= await validarfechaE();
