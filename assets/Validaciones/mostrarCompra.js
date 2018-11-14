@@ -3,14 +3,14 @@ function editarCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
 	$("#fecha").val(fecha.split('-').reverse().join('/'));
 	$("#total").val(totalCompra);
 	$("#idcompra").val(idcompra);
-	$("#proveedorComEditar>option[value="+idproveedor+"]").attr("selected",true);
-
+	$.get('/SISAUTO1/Controlador/comprasC.php?provee=1&id='+idproveedor,function(data){
+            $("#proveedorComEditar").val(data);
+     });
 	$('#tablaProductos').empty();
 	$.get('/SISAUTO1/Controlador/detalleCompraC.php?bandera=1&id='+idcompra,function(data){
 		var r=JSON.parse(data);
 			$('#tablaProductos').append(r[0]);
 			$('#total').val(parseFloat(r[1]).toFixed(2));
-
 	});
 
 }

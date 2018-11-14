@@ -234,4 +234,17 @@ if(isset($_GET["bandera"])){
 		echo $ani;
 	}
 //-----------------------------------------------------------------------------------------------------
+
+//------------------ PROVEEDOR DE MODIFICAR
+	if(isset($_GET["provee"])){
+		$id = $_GET["id"];
+		$pro = '';
+		$sql1 = "SELECT * from proveedor where tipo_Prov = 1 and idProveedor = '$id' ";
+		$proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$prove = mysqli_fetch_array($proveedor);
+			$pro = $pro.''.$prove['nombre_Prov'];
+		echo $pro;
+	}
+
+
 ?>

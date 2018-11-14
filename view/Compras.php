@@ -242,14 +242,7 @@ and open the template in the editor.
                                 <div class="form-group row">
                                     <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                     <div class="col-sm-12 col-md-10">
-                                        <select style="width:350px;height:40px" class="form-control" name="id_Proveedor" id="proveedorComEditar">
-                                            <option value="">[Selecionar Proveedor]</option>
-                                            <?php
-
-                                            While($proveedor=mysqli_fetch_array($proveedores)){
-                                             echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
-                                         }
-                                         ?>
+                                        <input  id="proveedorComEditar" name="id_Proveedor" class="form-control" type="text" id="num" style="width:150px;height:40px">
                                      </select>
                                  </div>
                              </div>
