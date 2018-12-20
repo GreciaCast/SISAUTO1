@@ -234,7 +234,7 @@ and open the template in the editor.
                                 <div class="form-group row">
                                     <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Proveedor:</label>
                                     <div class="col-sm-12 col-md-10">
-                                        <input  id="proveedorComEditar" name="id_Proveedor" class="form-control" type="text" id="num" style="width:150px;height:40px">
+                                        <input  id="proveedorComEditar" name="id_Proveedor" class="form-control" type="text" id="num" style="width:350px;height:40px" readonly="readonly">
                                      </select>
                                  </div>
                              </div>
