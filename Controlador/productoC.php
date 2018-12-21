@@ -60,4 +60,19 @@ if ($bandera=="existe") {
     $proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
     echo mysqli_num_rows($proveedor);
 }
+
+//----------------------------  AGREGAR AL COMBOBOX DE LOS MODELOS
+if(isset($_GET["bandera"])){
+    $id = $_GET["id"];
+    $cadena='';
+    $sql1 = "SELECT * from producto where categoria_Prod = '$id' and tipo_Prod = 1 order by nombre_Prod ASC";
+    $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+    While ($producto = mysqli_fetch_assoc($productos)){
+        if($producto['anioVehiculo_Prod'] != 0){
+            $cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['modeloVehiculo_Prod'].', año: '.$producto['anioVehiculo_Prod'].'</option>';
+        }
+    }
+    echo $cadena;
+}
+
 ?>

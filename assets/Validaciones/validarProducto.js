@@ -197,3 +197,12 @@ function validarStockPE() {
     }
     return true;
 }
+
+function filtrarModelos(id){
+    $('#modeloFiltrado').empty();
+    $('#modeloFiltrado').append('<option value="">[Selecionar modelo y año]</option>');
+    $.get('/SISAUTO1/Controlador/productoC.php?bandera=1&id='+id,function(data){
+        console.log(data);
+            $('#modeloFiltrado').append(data);
+    });
+}

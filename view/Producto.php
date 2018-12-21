@@ -330,83 +330,136 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
            </div>
 
 
+  <!-- MODAL -->
+  <div class="modal inmodal" id="modalReporteProducto" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-check-square-o modal-icon"></i>
+                <h4 class="modal-title">Seleccione</h4>
+                <small>...</small>
+            </div>
+            <div class="modal-body">
 
-           <div class="modal fade" id="modalReporteProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-               <div class="modal-dialog modal-lg" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header" style="background-color:#007bff;color:black;">
+              <div class="i-checks">
+                <label><input type="radio" checked="" value="option1" name="a"> <i></i> Ambos</label>
+              </div>
+              <br>
+              <div class="i-checks">
+                <label><input type="radio" value="option1" name="a"> <i></i> Categoria </label>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-2">
+                  <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
+                    <option value="">[Selecionar categoría]</option>
+                    <option value="1">AMORTIGUADORES</option>
+                    <option value="2">BUJÍAS</option>
+                    <option value="3">COMBUSTIBLE</option>
+                    <option value="4">ELÉCTRICO</option>
+                    <option value="5">ENFRIAMIENTO</option>
+                    <option value="6">FILTROS</option>
+                    <option value="7">FRENOS</option>
+                    <option value="8">MOTOR</option>
+                    <option value="8">SENSORES</option>
+                    <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                    <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                    <option value="12">UNIVERSALES</option>
+                </select>
+                </div>
+              </div>
+              <br>
+              <div class="i-checks">
+                <label><input type="radio" value="option2" name="a"> <i></i> Modelo de vehiculo </label>
+              </div>
+              <div class="col-sm-2 input-group">
+                <select id="modeloFiltrado" name="modelos" style="width:500px;height:40px" class="form-control"> 
+                  <option value="">[Selecionar modelo y año]</option>
+                  <option value=""></option>
+                </select>
+              </div>
 
-                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-tag"></i> Reporte de Productos</h3>
-                   </div>
-                   <div class="modal-body">
-                    <form action="../Controlador/productoC.php" method="POST" id="editarProd" align="center" autocomplete="off">
-                       
-                   </form>
-                  </div>
-               </div>
-             </div>
-             <form method="POST" id="cambioProd">
-                        <input type="hidden" name="id" id="idProd"  />
-                        <input type="hidden" name="bandera" id="banderaProd" />
-                        <input type="hidden" name="valor" id="valorProd" />
-                    </form>
-           </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+              &nbsp;&nbsp;
+              <a class="pull-right" href="Reportes/ReporteProductosCat.php">
+                <button type="button" class="btn btn-success" style="font-size:14px;">
+                  Generar reporte
+                  <span class="fa fa-file-pdf-o"></span>
+                </button>
+                &nbsp;
+              </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------------------------------------------------------------------------------------->
+
+
      <!-- _______________________________________________________________ -->
-     <script src="../assets/Validaciones/validarEntero.js"></script>
-     <script src="../assets/Validaciones/mostrarProducto.js"></script>
-      <script src="../assets/Validaciones/validarProducto.js"></script>
+    <script src="../assets/Validaciones/validarEntero.js"></script>
+    <script src="../assets/Validaciones/mostrarProducto.js"></script>
+    <script src="../assets/Validaciones/validarProducto.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+    <script type="text/javascript">
+         function baja(id) {
+             swal({
+                 title: '¿Está seguro en dar de baja?',
+                 // text: "You won't be able to revert this!",
+                 type: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Si',
+                 cancelButtonText: 'No',
 
-      <script type="text/javascript">
-                 function baja(id) {
-                     swal({
-                         title: '¿Está seguro en dar de baja?',
-                         // text: "You won't be able to revert this!",
-                         type: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#3085d6',
-                         cancelButtonColor: '#d33',
-                         confirmButtonText: 'Si',
-                         cancelButtonText: 'No',
+             }).then((result) => {
+                 if (result.value) {
+                     $('#idProd').val(id);
+                     $('#banderaProd').val('cambio');
+                     $('#valorProd').val('0');
+                     var dominio = window.location.host;
+                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
+                     $('#cambioProd').submit();
+                 } else {
 
-                     }).then((result) => {
-                         if (result.value) {
-                             $('#idProd').val(id);
-                             $('#banderaProd').val('cambio');
-                             $('#valorProd').val('0');
-                             var dominio = window.location.host;
-                             $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
-                             $('#cambioProd').submit();
-                         } else {
-
-                         }
-                     })
                  }
+             })
+         }
 
-                 function alta(id) {
-                     swal({
-                         title: '¿Está seguro en dar de alta?',
-                         // text: "You won't be able to revert this!",
-                         type: 'warning',
-                         showCancelButton: true,
-                         confirmButtonColor: '#3085d6',
-                         cancelButtonColor: '#d33',
-                         confirmButtonText: 'Si',
-                         cancelButtonText: 'No',
+         function alta(id) {
+             swal({
+                 title: '¿Está seguro en dar de alta?',
+                 // text: "You won't be able to revert this!",
+                 type: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#3085d6',
+                 cancelButtonColor: '#d33',
+                 confirmButtonText: 'Si',
+                 cancelButtonText: 'No',
 
-                     }).then((result) => {
-                         if (result.value) {
-                             $('#idProd').val(id);
-                             $('#banderaProd').val('cambio');
-                             $('#valorProd').val('1');
-                             var dominio = window.location.host;
-                             $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
-                             $('#cambioProd').submit();
-                         } else {
+             }).then((result) => {
+                 if (result.value) {
+                     $('#idProd').val(id);
+                     $('#banderaProd').val('cambio');
+                     $('#valorProd').val('1');
+                     var dominio = window.location.host;
+                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
+                     $('#cambioProd').submit();
+                 } else {
 
-                         }
-                     })
                  }
-             </script>
+             })
+         }
+     </script>
 
             <script type="text/javascript">
                 function veruniversal() {
