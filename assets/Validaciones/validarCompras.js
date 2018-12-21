@@ -225,17 +225,6 @@ async function validarCompraE(){
 
     }
 
-    // function validarfechaE(){
-
-    // if ($('#fecha').val().trim()=="") {
-    //  notaError("La fecha de la compra es obligatorio!");
-    //  return false;
-    // }
-
-    // return true;
-
-    // }
-
     function validarproveedorE(){
 
     if ($('#proveedorComEditar').val().trim()=="") {
