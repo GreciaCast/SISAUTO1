@@ -63,108 +63,112 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
                         ?>
                         <label for="empresa" class="col-sm-3 control-label">Tipo de cliente:</label>
-                        <div class="i-checks"><label> <input type="radio" value="option1" name="a"> <i></i> Cliente Jurídico </label></div>
-                        <div class="i-checks">
-                          <label> <input type="radio" checked="" value="option2" name="a"> <i></i> Cliente Natural </label></div>
-                          <div class="col-sm-3 input-group">
-                            <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="form-control"> 
-                              <option value="">[Selecionar cliente]</option>
-                              <?php
+                        <div class="col-sm-3 i-checks">
+                          <label> <input type="radio" value="option1" name="a"> <i></i> Cliente Jurídico </label><label><input type="radio" checked="" value="option2" name="a"> <i></i> Cliente Natural </label>
+                        </div>
+                      </div>
 
-                              While($proveedor=mysqli_fetch_array($proveedores)){
-                               echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
-                             }
-                             ?>
-                           </select>
-                         </div>
-                       </div>
-                       <br><br>
-                       <h3><b>Datos del producto</b></h3>
-                       <hr width="75%" style="background-color:#007bff;"/><br>
-                       <div class="form-group row">
-                        <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
-                        <div class="col-sm-12 col-md-1">
-                          <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
-                        </div>
+                     <div class="form-group row">
+                       <label for="empresa" class="col-sm-3 control-label"></label>
+                       <div class="col-sm-3 input-group">
+                        <select data-placeholder="Choose a Country..." id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                          <option value="">[Selecionar cliente]</option>
+                          <?php
 
-                        <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
-                        <div class="col-sm-12 col-md-3 input-group date">
-                          <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                          <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
-                        <div class="col-sm-2">
-                          <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
-                            <option value="">[Selecionar categoría]</option>
-                            <option value="1">AMORTIGUADORES</option>
-                            <option value="2">BUJÍAS</option>
-                            <option value="3">COMBUSTIBLE</option>
-                            <option value="4">ELÉCTRICO</option>
-                            <option value="5">ENFRIAMIENTO</option>
-                            <option value="6">FILTROS</option>
-                            <option value="7">FRENOS</option>
-                            <option value="8">MOTOR</option>
-                            <option value="8">SENSORES</option>
-                            <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-                            <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-                            <option value="12">UNIVERSALES</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="empresa" class="col-sm-3 control-label">Producto:</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select id="productoFiltrado" name="productos" style="width:600px;height:40px" class="form-control"> 
-                            <option value="">[Selecionar producto]</option>
-                            <option value=""></option>
-                          </select>
-                        </div>
-                        <div class="col-sm-12 col-md-1">
-                          <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerAddProducto" href="" onclick="mostrarAddProduc();" style="width:39px;height:39px">
-                          </button>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="col-sm-12 col-md-3">
-                        </div>
-                        <div class="col-sm-12 col-md-5">
-                          <a id='mensajeee1'></a>
-                        </div>
-                      </div>
-                      <hr width="75%" /><br>
-                      <div class="form-group" align="center">
-                        <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregar();"></button>
-                      </div>
-                      <div class="card mb-3">
-                        <div class="card-header">
-                          <h3><b>Detalles de la venta</b></h3>
-                        </div>
-                        <div class="card-body">
-                          <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                <tr>
-                                  <th style="width:10px">Cantidad</th>
-                                  <th style="width:200px">Producto</th>
-                                  <th style="width:30px">Precio unitario ($)</th>
-                                  <th style="width:30px">Subtotal ($)</th>
-                                  <th style="width:50px">Acción</th>
-                                </tr>
-                              </thead>
-                              <tbody id = "tablaProductos">
+                          While($proveedor=mysqli_fetch_array($proveedores)){
+                           echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                         }
+                         ?>
+                       </select>
+                     </div>
+                   </div>
+                   <br><br>
+                   <h3><b>Datos del producto</b></h3>
+                   <hr width="75%" style="background-color:#007bff;"/><br>
+                   <div class="form-group row">
+                    <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
+                    <div class="col-sm-12 col-md-1">
+                      <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
+                    </div>
 
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                        <div class="card-footer small text-muted"></div>
+                    <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
+                    <div class="col-sm-12 col-md-3 input-group date">
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                      <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
+                    <div class="col-sm-2">
+                      <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
+                        <option value="">[Selecionar categoría]</option>
+                        <option value="1">AMORTIGUADORES</option>
+                        <option value="2">BUJÍAS</option>
+                        <option value="3">COMBUSTIBLE</option>
+                        <option value="4">ELÉCTRICO</option>
+                        <option value="5">ENFRIAMIENTO</option>
+                        <option value="6">FILTROS</option>
+                        <option value="7">FRENOS</option>
+                        <option value="8">MOTOR</option>
+                        <option value="8">SENSORES</option>
+                        <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                        <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                        <option value="12">UNIVERSALES</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="empresa" class="col-sm-3 control-label">Producto:</label>
+                    <div class="col-sm-12 col-md-7">
+                      <select id="productoFiltrado" name="productos" style="width:600px;height:40px" class="form-control"> 
+                        <option value="">[Selecionar producto]</option>
+                        <option value=""></option>
+                      </select>
+                    </div>
+                    <div class="col-sm-12 col-md-1">
+                      <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerAddProducto" href="" onclick="mostrarAddProduc();" style="width:39px;height:39px">
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-12 col-md-3">
+                    </div>
+                    <div class="col-sm-12 col-md-5">
+                      <a id='mensajeee1'></a>
+                    </div>
+                  </div>
+                  <hr width="75%" /><br>
+                  <div class="form-group" align="center">
+                    <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregar();"></button>
+                  </div>
+                  <div class="card mb-3">
+                    <div class="card-header">
+                      <h3><b>Detalles de la venta</b></h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th style="width:10px">Cantidad</th>
+                              <th style="width:200px">Producto</th>
+                              <th style="width:30px">Precio unitario ($)</th>
+                              <th style="width:30px">Subtotal ($)</th>
+                              <th style="width:50px">Acción</th>
+                            </tr>
+                          </thead>
+                          <tbody id = "tablaProductos">
+
+                          </tbody>
+                        </table>
                       </div>
-                      <div class="form-group row">
-                        <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
-                        <div class="col-sm-12 col-md-2 input-group date">
-                          <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="total" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
+                    </div>
+                    <div class="card-footer small text-muted"></div>
+                  </div>
+                  <div class="form-group row">
+                    <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
+                    <div class="col-sm-12 col-md-2 input-group date">
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="total" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
                                             <!--
                                                 El id es para el js y el name para el controlador
                                               -->
