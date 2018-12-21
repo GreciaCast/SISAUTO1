@@ -41,8 +41,8 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
   <div class="col-12">
   <div class="row" style="padding:20px">
     <br>
-    <a class="pull-right" href="">
-      <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
+    <a class="pull-right" >
+      <button class="btn btn-success" data-toggle="modal" data-target="#modalReporteProducto" style="font-size:16px;">
         Reporte
         <span class="fa fa-file-pdf-o"></span>
       </button>
@@ -319,7 +319,30 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                         <input type="hidden" name="valor" id="valorProd" />
                     </form>
            </div>
-     <!-- -------------------------------------------------------- -->
+
+
+
+           <div class="modal fade" id="modalReporteProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+               <div class="modal-dialog modal-lg" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header" style="background-color:#007bff;color:black;">
+
+                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-tag"></i> Reporte de Productos</h3>
+                   </div>
+                   <div class="modal-body">
+                    <form action="../Controlador/productoC.php" method="POST" id="editarProd" align="center" autocomplete="off">
+                       
+                   </form>
+                  </div>
+               </div>
+             </div>
+             <form method="POST" id="cambioProd">
+                        <input type="hidden" name="id" id="idProd"  />
+                        <input type="hidden" name="bandera" id="banderaProd" />
+                        <input type="hidden" name="valor" id="valorProd" />
+                    </form>
+           </div>
+     <!-- _______________________________________________________________ -->
      <script src="../assets/Validaciones/validarEntero.js"></script>
      <script src="../assets/Validaciones/mostrarProducto.js"></script>
       <script src="../assets/Validaciones/validarProducto.js"></script>
