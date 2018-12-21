@@ -95,62 +95,43 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 <tr>
                                  <th style="width:70px" >Código Producto</th>
                                  <th style="width:125px" >Nombre</th>
-                                 <th style="width:35px" >Entradas</th>
-                                 <th style="width:35px" >Salidas</th>
                                  <th style="width:20px" >Existencias</th>
                                  <th style="width:35px" >Acción</th>
-
-
                                </tr>
                              </thead>
                              <tbody>
 
                               <?php While($inventario = mysqli_fetch_assoc($inventarios)){?>
                               <tr>
-                                <td align="center"><?php
+                                <td align="center">
+                                  <?php
                                   $aux1 = $inventario['id_Producto']; 
                                   $sql1 = "SELECT codigo_Prod FROM producto where idProducto = '$aux1'";
                                   $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
                                   $producto = mysqli_fetch_array($producto);
                                   echo $producto['codigo_Prod'];
-                                  ?></td>
-
-                                  <td >
-                                    <?php
-                                    $aux = $inventario['id_Producto']; 
-                                    $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
-                                    $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-                                    $producto = mysqli_fetch_array($producto);
-                                    echo $producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'];
-                                    ?>
-                                  </td>
-
-
-                                  <td align="center"><?php 
-
-
-                                    $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
-                                    $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
-                                    $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
-                                    $cant = $resultadoo['nuevaExistencia_Inv'];
-                                    echo $cant ?></td>
-
-                                    <td align="center"><?php echo '0' ?></td>
-
-
-                                  <td align="center"><?php 
-
-
-                                    $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
-                                    $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
-                                    $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
-                                    $cant = $resultadoo['nuevaExistencia_Inv'];
-                                    echo $cant ?></td>
-
-                                    <th align="center">
-                                     <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
+                                  ?>
+                                </td>
+                                <td>
+                                  <?php
+                                  $aux = $inventario['id_Producto']; 
+                                  $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
+                                  $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+                                  $producto = mysqli_fetch_array($producto);
+                                  echo $producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'];
+                                  ?>
+                                </td>
+                                <td align="center">
+                                  <?php 
+                                  $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
+                                  $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                  $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+                                  $cant = $resultadoo['nuevaExistencia_Inv'];
+                                  echo $cant ?>
+                                </td>
+                                <th align="center">
+                                <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
                                                
-
                              <?php } ?>
 
 

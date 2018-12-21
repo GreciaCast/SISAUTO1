@@ -11,6 +11,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <body>
 <div id="wrapper">
     <?php include("generalidades/menu.php"); ?>
+    <?php include("funciones.php"); ?>
 
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
@@ -103,6 +104,11 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                         <td><?php echo $producto['marca_Prod'] ?></td>
 
                         <th align="center">
+                          <!-- ____________________________________________________ -->
+                            <?php
+                              $cuenta = contarProductoInventario($producto['idProducto'] );
+                            ?>
+                          <!-- ____________________________________________________ -->
                           <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>',
                             '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
                             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
@@ -112,9 +118,12 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                                '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
                             <?php  }else{ }?>
                             <?php  if ($tipo == 1) {
+                              if($cuenta == 0){
                               ?>
                               <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $producto['idProducto'] ?>)"></button>
-                              <?php  }else{ ?>
+                              <?php  
+                              }else{}
+                              }else{ ?>
                               <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $producto['idProducto'] ?>)" ></button>
                               <?php } ?>
                               <?php } ?>
