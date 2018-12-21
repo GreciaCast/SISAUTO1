@@ -10,11 +10,12 @@ async function validarProducto() {
       var anio = 1;
     }
     var descripcion = await validarDescripcionP();
+    var stock = await validarStockP();
 
-    if (nombre && categoria && marca && modelo && anio && descripcion) {
-        var comp=await existe();
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
+        var comp = await existe();
       //  var compi=await existes();
-        if(comp==0){
+        if(comp == 0){
            $('#guardarProd').submit();
         }
     }
@@ -22,7 +23,7 @@ async function validarProducto() {
 
 function validarNombreP() {
     if ($('#nombrePr').val().trim() == "") {
-        notaError("El nombre es obligatorio!");
+        notaError("¡El nombre es obligatorio!");
         return false;
     }
     return true;
@@ -31,7 +32,7 @@ function validarNombreP() {
 function validarCategoriaP() {
 
     if ($('#categoriaPr').val().trim() == "") {
-        notaError("La categoria es obligatorio!");
+        notaError("¡La categoria es obligatoria!");
         return false;
     }
     return true;
@@ -40,7 +41,7 @@ function validarCategoriaP() {
 function validarMarcaP() {
 
     if ($('#marcaPr').val().trim() == "") {
-        notaError("La marca es obligatorio!");
+        notaError("¡La marca es obligatoria!");
         return false;
     }
     return true;
@@ -49,7 +50,7 @@ function validarMarcaP() {
 function validarModeloP() {
 
     if ($('#modeloPr').val().trim() == "") {
-        notaError("El modelo es obligatorio!");
+        notaError("¡El modelo es obligatorio!");
         return false;
     }
     return true;
@@ -58,10 +59,10 @@ function validarModeloP() {
 function validarAnioP() {
 
      if ($('#anioPr').val().trim()=="") {
-        notaError("El año es obligatorio!");
+        notaError("¡El año es obligatorio!");
         return false;
     }else if ($('#anioPr').val().trim().length!=4) {
-        notaError("El año debe contener 4 dígitos!");
+        notaError("¡El año debe contener 4 dígitos!");
         return false;
     }
     return true;
@@ -70,11 +71,21 @@ function validarAnioP() {
 function validarDescripcionP() {
 
     if ($('#descripcionPr').val().trim() == "") {
-        notaError("La descripcion es obligatorio!");
+        notaError("¡La descripcion es obligatoria!");
         return false;
     }
     return true;
 }
+
+function validarStockP() {
+
+    if ($('#stockPr').val().trim()=="") {
+        notaError("¡El stock mínimo, es obligatorio!");
+        return false;
+    }
+    return true;
+}
+
 async function existe(){
     var param = {
             nombre: $('#nombrePr').val(),
@@ -90,10 +101,10 @@ async function existe(){
             url:"/SISAUTO1/Controlador/productoC.php",
             method: "post",
             success: function(data){
-                if (data==0) {
+                if (data == 0) {
                     return true;
                 }else{
-                   notaError("El producto con esas características ya existe!");
+                   notaError("¡El producto ya existe!");
                    return false;
                 }
             }
@@ -115,15 +126,16 @@ async function validarProductoEditar() {
       var anio = 1;
     }
     var descripcion = await validarDescripcionPE();
+    var stock = await validarStockPE();
 
-    if (nombre && categoria && marca && modelo && anio && descripcion) {
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
         $('#editarProd').submit();
     }
 }
 
 function validarNombrePE() {
     if ($('#nombrePE').val().trim() == "") {
-        notaError("El nombre es obligatorio!");
+        notaError("¡El nombre es obligatorio!");
         return false;
     }
     return true;
@@ -132,7 +144,7 @@ function validarNombrePE() {
 function validarCategoriaPE() {
 
     if ($('#catePE').val().trim() == "") {
-        notaError("La categoria es obligatorio!");
+        notaError("¡La categoria es obligatoria!");
         return false;
     }
     return true;
@@ -141,7 +153,7 @@ function validarCategoriaPE() {
 function validarMarcaPE() {
 
     if ($('#marcaPE').val().trim() == "") {
-        notaError("La marca es obligatorio!");
+        notaError("¡La marca es obligatoria!");
         return false;
     }
     return true;
@@ -150,7 +162,7 @@ function validarMarcaPE() {
 function validarModeloPE() {
 
     if ($('#modeloPE').val().trim() == "") {
-        notaError("El modelo es obligatorio!");
+        notaError("¡El modelo es obligatorio!");
         return false;
     }
     return true;
@@ -159,10 +171,10 @@ function validarModeloPE() {
 function validarAnioPE() {
 
      if ($('#anioPE').val().trim()=="") {
-        notaError("El año es obligatorio!");
+        notaError("¡El año es obligatorio!");
         return false;
     }else if ($('#anioPE').val().trim().length!=4) {
-        notaError("El año debe contener 4 dígitos!");
+        notaError("¡El año debe contener 4 dígitos!");
         return false;
     }
     return true;
@@ -171,7 +183,16 @@ function validarAnioPE() {
 function validarDescripcionPE() {
 
     if ($('#descripcionPE').val().trim() == "") {
-        notaError("La descripcion es obligatorio!");
+        notaError("¡La descripcion es obligatoria!");
+        return false;
+    }
+    return true;
+}
+
+function validarStockPE() {
+
+    if ($('#stockPE').val().trim()=="") {
+        notaError("¡El stock mínimo, es obligatorio!");
         return false;
     }
     return true;

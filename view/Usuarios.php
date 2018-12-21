@@ -212,7 +212,6 @@ and open the template in the editor.
           <input type="hidden" name="bandera" id="banderaUsu" />
           <input type="hidden" name="valor" id="valorUsu" />
         </form>
-
     </div>
 
     <script src="../assets/Validaciones/validarUsuario.js"></script>

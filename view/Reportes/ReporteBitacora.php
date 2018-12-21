@@ -65,13 +65,13 @@
     <p>Teléfono: 2393-0214.</p></span></td>
   </tr>
   <tr align="center">
-    <td colspan="2"><strong class="titulos">REPORTE DE USUARIOS</strong></td>
+    <td colspan="2"><strong class="titulos">REPORTE DE BITACORA</strong></td>
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
-    <td>FECHA IMPRESIÓN:  <?php echo date("d/m/Y"); ?>
+    <td>FECHA IMPRESION:  <?php echo date("d-m-Y"); ?>
     <br>
-    HORA  IMPRESIÓN:   <?php
+    HORA  IMPRESION:   <?php
 		date_default_timezone_set('America/El_Salvador');
 		$date = new DateTime();
 	     echo $date->format('h:i:s A');
@@ -82,9 +82,9 @@
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Correo</td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
   </tr>
     <?php
 	//try {
@@ -95,7 +95,7 @@
 
 	$contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from usuario ";
+	$sql = "select * from bitacora ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
 	$consulta=mysqli_query($conexion,$sql);
@@ -107,12 +107,14 @@
 	?>
   <tr align="left" class="">
     <td bgcolor=""><?php echo $contador;?></td>
+    <td bgcolor=""><?php echo $fila[1];?></td>
+    <td bgcolor=""><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
     <td bgcolor=""><?php echo $fila[3];?></td>
-    <td bgcolor=""><?php echo $fila[4];?></td>
-    <td bgcolor=""><?php echo $fila[6];?></td>
   </tr>
   <?php $contador++;
 }
+  // }
+  //}catch(NullException $e){}catch(Exception $e){}
   ?>
 </table>
 <form name="frmTesis" method="get" action="" id="frmTesis">

@@ -107,7 +107,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group ">
                                             <label for="tel2" class="col-sm-3 control-label">Año </label>
                                             <div class="col-sm-2">
-                                                <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año">
+                                                <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año" onkeypress="return validarAnio(this,event,this.value)">
                                             </div>
                                         </div>
                                         <br>
@@ -118,6 +118,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             </div>
                                         </div>
                                         <br>
+                                        <div class="form-group ">
+                                            <label for="tel2" class="col-sm-3 control-label">Stock minimo </label>
+                                            <div class="col-sm-2">
+                                                <input type="tel" class="form-control" type="number" id="stockPr" name="stock" placeholder="Stock" onkeypress="return validarEntero(this,event,this.value)">
+                                            </div>
+                                        </div>
                                         <hr width="75%">
                                         <div class="form-group" align="center">
                                             <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745" onclick="validarProducto();">Aceptar</button>
@@ -132,26 +138,27 @@ if (isset($_SESSION['usuarioActivo'])) {
                     </div>
                 </div>
             </div>
-                    <?php include("generalidades/cierre.php"); ?>
-                    <script src="../assets/Validaciones/validarProducto.js"></script>
-                    <script src="../assets/Validaciones/mostrarProducto.js"></script>
-                    <script type="text/javascript">
-                                function veruniversal() {
-                                    if ($('#categoriaPr').find('option:selected').text() == "UNIVERSALES") {
-                                        $('#universal').val(1);
-//                                        $("#marcaPr").attr("disabled", "disabled");
-                                        $("#modeloPr").attr("disabled", "disabled");
-                                        $("#anioPr").attr("disabled", "disabled");
-                                    } else {
-                                        $('#universal').val(0);
-//                                        $("#marcaPr").removeAttr("disabled");
-                                        $("#modeloPr").removeAttr("disabled");
-                                        $("#anioPr").removeAttr("disabled");
-                                    }
-                                }
-            </script>
+            <?php include("generalidades/cierre.php"); ?>
 
-
+            <script src="../assets/Validaciones/validarEntero.js"></script>
+            <script src="../assets/Validaciones/validarProducto.js"></script>
+            <script src="../assets/Validaciones/mostrarProducto.js"></script>
+            <script type="text/javascript">
+                function veruniversal() {
+                    if ($('#categoriaPr').find('option:selected').text() == "UNIVERSALES") {
+                        $('#universal').val(1);
+    //                                        $("#marcaPr").attr("disabled", "disabled");
+                        $("#modeloPr").attr("disabled", "disabled");
+                        $("#anioPr").attr("disabled", "disabled");
+                    } else {
+                        $('#universal').val(0);
+    //                                        $("#marcaPr").removeAttr("disabled");
+                        $("#modeloPr").removeAttr("disabled");
+                        $("#anioPr").removeAttr("disabled");
+                    }
+                }
+             </script>
+             
         </div>
     </div>
 </body>

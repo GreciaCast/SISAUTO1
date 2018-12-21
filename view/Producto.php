@@ -104,12 +104,12 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
 
                         <th align="center">
                           <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>',
-                            '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>');"></button>
+                            '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
                             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                           <?php  if ($tipo == 1) {
                             ?>
                             <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProducto" onclick="editarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>',
-                               '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>');"></button>
+                               '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
                             <?php  }else{ }?>
                             <?php  if ($tipo == 1) {
                               ?>
@@ -140,67 +140,74 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
      <?php include("generalidades/cierre.php"); ?>
      </div>
 
-     <!-- MODAL VER PROVEEDOR -->
+     <!-- MODAL VER PRODUCTO -->
 
           <div class="modal fade" id="modalVerProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
          <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
                  <div class="modal-header" style="background-color:#007bff;color:black;">
 
-                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
+                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-tag"></i> Producto</h3>
                  </div>
                  <div class="modal-body">
                          <hr width="75%" style="background-color:#007bff;"/>
                          <div class="form-group ">
-                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Codigo: </label>
+                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Código: </label>
                              <div class="col-sm-7">
                                  <input class="form-control" type="text" id="codigoP" name="codigoP" readonly="readonly" aria-required="true" value="">
                              </div>
                          </div>
-                         <br><br><br><br>
+                         <br><br><br>
                          <div class="form-group">
-                             <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
+                             <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Nombre producto:</label>
                              <div  class="col-sm-7">
-                                 <input class="form-control" type="text" id="nombreP" name="nombreP" disabled="true">
+                                 <input class="form-control" type="text" id="nombreP" name="nombreP" readonly="readonly">
                              </div>
                          </div>
-                         <br><br><br>
+                         <br><br>
                          <div class="form-group">
                              <label align="right" for="cateP" class="col-sm-4 control-label" style="font-size:15px;">Categoria:</label>
-                             <div class="col-sm-3">
-                                 <input class="form-control" type="text" id="cateP" name="cateP" value="" disabled="true">
+                             <div class="col-sm-5">
+                                 <input class="form-control" type="text" id="cateP" name="cateP" value="" readonly="readonly">
                              </div>
                          </div>
-                         <br><br><br>
+                         <br><br>
                          <div class="form-group">
-                             <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
+                             <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Marca de producto:</label>
                              <div class="col-sm-7">
-                                 <input class="form-control" type="text" type="text" name="marcaP"  id="marcaP" disabled="true">
+                                 <input class="form-control" type="text" type="text" name="marcaP"  id="marcaP" readonly="readonly">
                              </div>
                          </div>
-                         <br><br><br>
+                         <br><br>
                          <div class="form-group">
-                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehiculo:</label>
+                             <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Modelo de vehículo:</label>
                              <div class="col-sm-7">
-                                 <input class="form-control" type="text" id="modeloP" name="modeloP" disabled="true">
+                                 <input class="form-control" type="text" id="modeloP" name="modeloP" readonly="readonly">
                              </div>
                          </div>
-                         <br><br><br>
+                         <br><br>
                          <div class="form-group">
-                             <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehiculo:</label>
+                             <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Año del vehículo:</label>
                              <div class="col-sm-3">
-                                 <input class="form-control" type="text" id="anioP" name="anioP" disabled="true">
+                                 <input class="form-control" type="text" id="anioP" name="anioP" readonly="readonly">
                              </div>
                          </div>
                          <div id="ocultar">
-                         <br><br><br>
-                         <div class="form-group">
-                             <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
-                             <div class="col-sm-7">
-                                <textarea class="form-control" type="text" name="descripcion" id="descripcionP"  placeholder="Escriba aqui..."  disabled="true">
-                                </textarea>
-                             </div>
-                         </div>
+                           <br><br>
+                           <div class="form-group">
+                               <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
+                               <div class="col-sm-7">
+                                  <textarea class="form-control" type="text" name="descripcion" id="descripcionP"  placeholder="Escriba aqui..." readonly="readonly">
+                                  </textarea>
+                               </div>
+                           </div>
+                        </div>
+                        <br><br><br>
+                        <div class="form-group">
+                          <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
+                          <div class="col-sm-3">
+                            <input class="form-control" type="text" id="stockP" name="stock" readonly="readonly">
+                          </div>
                         </div>
                  </div>
                  <br><br>
@@ -219,68 +226,68 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                  <div class="modal-content">
                    <div class="modal-header" style="background-color:#007bff;color:black;">
 
-                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
+                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-tag"></i> Producto</h3>
                    </div>
                    <div class="modal-body">
                     <form action="../Controlador/productoC.php" method="POST" id="editarProd" align="center" autocomplete="off">
                        <input type="hidden" value="EditarProd" name="bandera"/>
                        <input type="hidden" value="" id="idProducto" name="idProducto"/>
                      <div class="form-group ">
-                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Codigo:</label>
+                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Código:</label>
                        <div class="col-sm-7">
-                         <input class="form-control" type="text" id="codigoPE" name="codigoP"  aria-required="true" value="" disabled="true">
+                         <input class="form-control" type="text" id="codigoPE" name="codigoP"  aria-required="true" value="" readonly="readonly">
                        </div>
                      </div>
                      <br><br><br>
                      <div class="form-group">
-                       <label align="right" for="nombrePro" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
+                       <label align="right" for="nombrePro" class="col-sm-4 control-label" style="font-size:15px;">Nombre producto:</label>
                        <div  class="col-sm-7">
                          <input class="form-control" type="text" id="nombrePE" name="nombrePro">
                        </div>
                      </div>
-                     <br><br><br>
+                     <br><br>
                      <div class="form-group">
-                       <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
-                       <div class="col-sm-3">
+                       <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del producto:</label>
+                       <div class="col-sm-5">
                          <select name="categorias" class="form-control" id="catePE" onchange="veruniversal();">
-                                                <option value="">[Selecionar Categoria]</option>
-                                                <option value="1">AMORTIGUADORES</option>
-                                                <option value="2">BUJÍAS</option>
-                                                <option value="3">COMBUSTIBLE</option>
-                                                <option value="4">ELÉCTRICO</option>
-                                                <option value="5">ENFRIAMIENTO</option>
-                                                <option value="6">FILTROS</option>
-                                                <option value="7">FRENOS</option>
-                                                <option value="8">MOTOR</option>
-                                                <option value="8">SENSORES</option>
-                                                <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-                                                <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-                                                <option value="12">UNIVERSALES</option>
-                                            </select>
+                            <option value="">[Selecionar Categoria]</option>
+                            <option value="1">AMORTIGUADORES</option>
+                            <option value="2">BUJÍAS</option>
+                            <option value="3">COMBUSTIBLE</option>
+                            <option value="4">ELÉCTRICO</option>
+                            <option value="5">ENFRIAMIENTO</option>
+                            <option value="6">FILTROS</option>
+                            <option value="7">FRENOS</option>
+                            <option value="8">MOTOR</option>
+                            <option value="8">SENSORES</option>
+                            <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                            <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                            <option value="12">UNIVERSALES</option>
+                        </select>
                        </div>
                      </div>
-                     <br><br><br>
+                     <br><br>
                      <div class="form-group">
-                       <label align="right" for="marca" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
+                       <label align="right" for="marca" class="col-sm-4 control-label" style="font-size:15px;">Marca de producto:</label>
                        <div class="col-sm-7">
                          <input class="form-control" type="text" name="marca" id="marcaPE" >
                        </div>
                      </div>
-                     <br><br><br>
+                     <br><br>
                      <div class="form-group">
-                       <label align="right" for="modelo" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehiculo:</label>
+                       <label align="right" for="modelo" class="col-sm-4 control-label" style="font-size:15px;">Modelo de vehículo:</label>
                        <div class="col-sm-7">
                          <input class="form-control" type="text" id="modeloPE" name="modelo" >
                        </div>
                      </div>
-                     <br><br><br><br>
+                     <br><br>
                      <div class="form-group">
-                       <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehiculo:</label>
+                       <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Año del vehículo:</label>
                        <div class="col-sm-3">
-                         <input class="form-control" type="number" id="anioPE" name="anio" >
+                         <input class="form-control" type="text" id="anioPE" name="anio" onkeypress="return validarAnio(this,event,this.value)">
                        </div>
                      </div>
-                       <br><br><br>
+                       <br><br>
                        <div class="form-group">
                          <label align="right" for="descripcion" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
                          <div class="col-sm-7">
@@ -288,6 +295,13 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                           </textarea>
                         </div>
                       </div>
+                      <br><br><br>
+                      <div class="form-group">
+                       <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
+                       <div class="col-sm-3">
+                         <input class="form-control" type="text" id="stockPE" name="stock" onkeypress="return validarEntero(this,event,this.value)">
+                       </div>
+                     </div>
                    </form>
                   </div>
                   <br><br>
@@ -305,7 +319,8 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                         <input type="hidden" name="valor" id="valorProd" />
                     </form>
            </div>
-     --------------------------------------------------------
+     <!-- -------------------------------------------------------- -->
+     <script src="../assets/Validaciones/validarEntero.js"></script>
      <script src="../assets/Validaciones/mostrarProducto.js"></script>
       <script src="../assets/Validaciones/validarProducto.js"></script>
 

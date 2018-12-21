@@ -246,5 +246,16 @@ if(isset($_GET["bandera"])){
 		echo $pro;
 	}
 
+//-------------------------------COMPRA DUPLICADA
+	if ($banderaf == "unnumerofac"){
+		$sql = "SELECT * from compra where numFac_Com = BINARY '".$_POST["numerofac"]."'";
+		$compra = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+	    echo mysqli_num_rows($compra);
+	}
 
+	// if ($banderap == "unproveedor"){
+	// 	$sql = "SELECT * from compra where usuario_Usu = BINARY '".$_POST["proveedor"]."'";
+	// 	$proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+	//     echo mysqli_num_rows($proveedor);
+	// }
 ?>

@@ -255,8 +255,6 @@ async function validareditarUsuarioContrasena(){
     var contrasenaactualU = await validareditarContrasenaActualU();
     var contrasenaU = await validareditarContrasenaU();
     var contrasenaU2 = await validareditarContrasenaU2();
-    console.log("GREEEE");
-    console.log(contrasenaactualU);
     if (contrasenaU && contrasenaU2 && (contrasenaactualU >= 1)){
         $('#editarUsuContrasena').submit();
     }; 

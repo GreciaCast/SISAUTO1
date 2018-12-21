@@ -1,4 +1,4 @@
-function mostrarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP){
+function mostrarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,stockP){
     var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
 
     $("#codigoP").val(codigoP);
@@ -12,9 +12,10 @@ function mostrarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP){
        $("#anioP").val("");
     }
     $("#descripcionP").val(descripcionP);
+    $("#stockP").val(stockP);
 }
 
-function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto){
+function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP){
     $("#codigoPE").val(codigoP);
     $("#nombrePE").val(nombreP);
     $("#catePE").val(cateP);
@@ -36,5 +37,6 @@ function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,id
         $("#modeloPE").removeAttr("disabled");
         $("#anioPE").removeAttr("disabled");
     }
+    $("#stockPE").val(stockP);
 
 }

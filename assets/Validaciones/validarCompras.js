@@ -2,8 +2,9 @@ async function validarCompra(){
     var fechaC = await validarFechaC();    
     var numeroFacC = await validarNumeroFacC();
     var proveedorC = await validarProveedorC(); 
-    var detallesC = await validarDetallesC();  
-    if (fechaC && numeroFacC && proveedorC && detallesC){
+    var detallesC = await validarDetallesC();
+    var duplicada = await validarCompraDuplicada();
+    if (fechaC && numeroFacC && proveedorC && detallesC && duplicada){
         $('#guardarCom').submit();
     };
     
@@ -85,8 +86,6 @@ function filtrarCategoria(id){
         console.log(data);
             $('#productoFiltrado').append(data);
     });
-
-
 }
 
 function mostrarAddProduc(){
@@ -125,8 +124,7 @@ function mostrarAddProduc(){
             }else{
                 $("#anioAddP").val("");
             }           
-     });
-   
+     });  
 }
 
 function agregar(){
@@ -169,7 +167,6 @@ function agregar(){
         $('#categoriaPro').val("");
         $('#productoFiltrado').val("");
     }
-
 }
 
 function eliminar(id,subtotal){
@@ -179,7 +176,32 @@ function eliminar(id,subtotal){
     $('#f'+id).remove();
 }
 
-
+function validarCompraDuplicada(){
+    if (!($('#numFacCom').val().trim() == "")) {
+        console.log($('#proves').val());
+        
+        var param = {
+            numerofac: $('#numFacCom').val(),
+            banderaf: "unnumerofac"
+            // ,
+            // proveedor: $('#proves').val(),
+            // banderap: "unproveedor"
+        };
+        return $.ajax({
+            data: param,
+            url:"/SISAUTO1/Controlador/comprasC.php",
+            method: "post",
+            success: function(data){
+                if (data == 0) {
+                    return true;
+                }else{
+                   notaError("¡La compra ya fue registrada!"); 
+                   return false;
+                }
+            }
+        });
+    }
+}
 //-----------------FUNCIONES DE EDITAR------------------------------------------------------
 
 async function validarCompraE(){
