@@ -17,7 +17,6 @@ if(isset($_POST["bandera"])){
 		$totalCom = $_POST["total"];
 		$idProvCom = $_POST["id_Proveedor"];
 		$cantidadProdCom = $_POST["cantidad_DCom"];
-		//print_r($cantidadProdCom);
 		$precioProdCom = $_POST["precio_DCom"];
 		$idProdCom = $_POST["id_Producto"];
 		print_r($idProdCom);
@@ -192,7 +191,11 @@ if(isset($_GET["bandera"])){
 	$sql1 = "SELECT * from producto where categoria_Prod = '$id' and tipo_Prod = 1 order by nombre_Prod ASC";
 	$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 	While ($producto = mysqli_fetch_assoc($productos)){
-		$cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['nombre_Prod'].'  '.$producto['marca_Prod'].' - '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].'</option>';
+		if($producto['anioVehiculo_Prod'] == 0){
+		$cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['nombre_Prod'].'  '.$producto['marca_Prod'].'</option>';
+		}else{
+			$cadena = $cadena.'<option value="'.$producto['idProducto'].'">'.$producto['nombre_Prod'].'  '.$producto['marca_Prod'].' - '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].'</option>';
+		}
 	}
 	echo $cadena;
 }
