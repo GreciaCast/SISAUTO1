@@ -83,18 +83,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <h3><b>Datos del producto</b></h3>
                                     <hr width="75%" style="background-color:#007bff;"/><br>
                                     <div class="form-group row">
-                                        <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
-                                        <div class="col-sm-12 col-md-1">
-                                            <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
-                                        </div>
-                                        
-                                        <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
-                                        <div class="col-sm-12 col-md-3 input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                            <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
                                         <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
                                         <div class="col-sm-2">
                                           <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
@@ -128,6 +116,18 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
+                                        <div class="col-sm-12 col-md-1">
+                                            <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
+                                        </div>
+                                        
+                                        <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
+                                        <div class="col-sm-12 col-md-3 input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                            <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <div class="col-sm-12 col-md-3">
                                         </div>
                                         <div class="col-sm-12 col-md-5">
@@ -149,7 +149,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         <tr>
                                                             <th style="width:10px">Cantidad</th>
                                                             <th style="width:200px">Producto</th>
-                                                            <th style="width:30px">Precio compra ($)</th>
+                                                            <th style="width:30px">Precio unitario ($)</th>
                                                             <th style="width:30px">Subtotal ($)</th>
                                                             <th style="width:50px">Acción</th>
                                                         </tr>

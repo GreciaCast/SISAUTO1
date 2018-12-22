@@ -125,9 +125,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Precio: </label>
-                                            <div class="col-sm-2">
-                                                <input type="tel" class="form-control" type="number" id="precioPr" name="precio" placeholder="Precio a vender">
+                                            <label class="col-sm-3 control-label">Precio: </label>
+                                            <div class="col-sm-2 input-group date">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <input class="form-control" type="text" id="precioPr" name="precio" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)">
                                             </div>
                                         </div>
                                         <hr width="75%">
@@ -147,6 +148,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             <?php include("generalidades/cierre.php"); ?>
 
             <script src="../assets/Validaciones/validarEntero.js"></script>
+            <script src="../assets/Validaciones/validarNumeros.js"></script>
             <script src="../assets/Validaciones/validarProducto.js"></script>
             <script src="../assets/Validaciones/mostrarProducto.js"></script>
             <script type="text/javascript">

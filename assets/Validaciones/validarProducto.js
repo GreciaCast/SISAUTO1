@@ -11,8 +11,9 @@ async function validarProducto() {
     }
     var descripcion = await validarDescripcionP();
     var stock = await validarStockP();
+    var precio = await validarPrecioP();
 
-    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio) {
         var comp = await existe();
       //  var compi=await existes();
         if(comp == 0){
@@ -79,8 +80,17 @@ function validarDescripcionP() {
 
 function validarStockP() {
 
-    if ($('#stockPr').val().trim()=="") {
+    if ($('#stockPr').val().trim() == "") {
         notaError("¡El stock mínimo, es obligatorio!");
+        return false;
+    }
+    return true;
+}
+
+function validarPrecioP() {
+
+    if ($('#precioPr').val().trim() == "") {
+        notaError("¡El precio es obligatorio!");
         return false;
     }
     return true;
@@ -127,8 +137,9 @@ async function validarProductoEditar() {
     }
     var descripcion = await validarDescripcionPE();
     var stock = await validarStockPE();
+    var precio = await validarPrecioPE();
 
-    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio) {
         $('#editarProd').submit();
     }
 }
@@ -193,6 +204,15 @@ function validarStockPE() {
 
     if ($('#stockPE').val().trim()=="") {
         notaError("¡El stock mínimo, es obligatorio!");
+        return false;
+    }
+    return true;
+}
+
+function validarPrecioPE() {
+
+    if ($('#precioPE').val().trim() == "") {
+        notaError("¡El precio es obligatorio!");
         return false;
     }
     return true;

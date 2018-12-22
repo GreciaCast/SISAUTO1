@@ -30,12 +30,12 @@ if (isset($_SESSION['usuarioActivo'])) {
   </div>
 </div>
 <?php if (!isset($_GET['tipo'])) {
-  $tipo=1;
+  $tipo = 1;
 }else{
   $tipo = $_GET['tipo'];
 }?>
 <?php
-$sql="SELECT * from producto where tipo_Prod='$tipo' order by idProducto ASC";
+$sql = "SELECT * from producto where tipo_Prod='$tipo' order by idProducto ASC";
 $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 ?>
 <div class="row">
@@ -110,12 +110,12 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                             ?>
                           <!-- ____________________________________________________ -->
                           <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProducto" href="" onclick="mostrarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>', '<?php echo $producto['categoria_Prod'] ?>',
-                            '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
+                            '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['stock_Prod'] ?>', '<?php echo $producto['precio_Prod'] ?>');"></button>
                             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                           <?php  if ($tipo == 1) {
                             ?>
                             <button title="Editar" type="button" class="btn btn-success fa fa-pencil-square-o" data-toggle="modal" data-target="#modalEditarProducto" onclick="editarProduc('<?php echo $producto['codigo_Prod'] ?>', '<?php echo $producto['nombre_Prod'] ?>',
-                               '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>', '<?php echo $producto['stock_Prod'] ?>');"></button>
+                               '<?php echo $producto['categoria_Prod'] ?>', '<?php echo $producto['marca_Prod'] ?>', '<?php echo $producto['modeloVehiculo_Prod'] ?>', '<?php echo $producto['anioVehiculo_Prod'] ?>', '<?php echo $producto['descripcion_Prod'] ?>', '<?php echo $producto['idProducto'] ?>', '<?php echo $producto['stock_Prod'] ?>', '<?php echo $producto['precio_Prod'] ?>');"></button>
                             <?php  }else{ }?>
                             <?php  if ($tipo == 1) {
                               if($cuenta == 0){
@@ -212,10 +212,19 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                            </div>
                         </div>
                         <br><br><br>
+
                         <div class="form-group">
-                          <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
+                          <label align="right"  class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
                           <div class="col-sm-3">
                             <input class="form-control" type="text" id="stockP" name="stock" readonly="readonly">
+                          </div>
+                        </div>
+                        <br><br>
+                        <div class="form-group">
+                          <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Precio: </label>
+                          <div class="col-sm-3 input-group date">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                            <input class="form-control" type="text" id="precioP" name="precio" style="width:150px;height:40px" readonly="readonly">
                           </div>
                         </div>
                  </div>
@@ -306,11 +315,19 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                       </div>
                       <br><br><br>
                       <div class="form-group">
-                       <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
+                       <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Stock mínimo:</label>
                        <div class="col-sm-3">
                          <input class="form-control" type="text" id="stockPE" name="stock" onkeypress="return validarEntero(this,event,this.value)">
                        </div>
                      </div>
+                     <br><br>
+                      <div class="form-group ">
+                        <label align="right" class="col-sm-4 control-label">Precio: </label>
+                        <div class="col-sm-3 input-group date">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                            <input class="form-control" type="text" id="precioPE" name="precio" style="width:150px;height:40px">
+                        </div>
+                      </div>
                    </form>
                   </div>
                   <br><br>

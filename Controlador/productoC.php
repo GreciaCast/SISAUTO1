@@ -31,10 +31,10 @@ if ($bandera == "EditarProd") {
     $anio = $_POST["anio"];
     $descripcion = $_POST["descripcion"];
     $idProducto = $_POST["idProducto"];
+    $stock = $_POST["stock"];
+    $precio = $_POST["precio"];
 
-
-
-    $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion' where idProducto = '$idProducto'";
+    $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod='$precio' where idProducto = '$idProducto'";
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] ="Registro editado exitosamente";
