@@ -31,8 +31,8 @@ if (isset($_SESSION['usuarioActivo'])) {
  $tipo = $_GET['tipo'];
 }?>
 <?php
-$sql="SELECT * from proveedor where tipo_Prov='$tipo' order by nombre_Prov ASC";
-$proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+$sql="SELECT * from venta order by fecha_Ven ASC";
+$ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 ?>
 <div class="row">
  <div class="col-12">
@@ -86,20 +86,39 @@ $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la cons
           </tr>
         </thead>
         <tbody>
-         <?php While($proveedore=mysqli_fetch_assoc($proveedores)){?>
+         <?php While($venta=mysqli_fetch_assoc($ventas)){?>
          <tr>
-          <td><?php echo $proveedore['nombre_Prov'] ?></td>
+            <td>
+            <?php $fechaVen = explode("-",$venta['fecha_Ven']);
+            $fechaVen = $fechaVen[2].'/'.$fechaVen[1].'/'.$fechaVen[0];
+            echo $fechaVen ?>
+            </td>
+            <td>
+             <?php
+             $aux = $venta['idVenta'];
+             $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
+             $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+             $cliente = mysqli_fetch_array($cliente);
+             echo $cliente['numero_Fac'];
+             ?>
+           </td>
+           <td>
+             <?php
+             $aux = $venta['id_Cliente'];
+             $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";
+             $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+             $cliente = mysqli_fetch_array($cliente);
+             echo $cliente['nombre_Cli'];
+             ?>
+           </td>
 
-          <td><?php echo $proveedore['telefono_Prov'] ?></td>
-          <td><?php echo $proveedore['nombreResp_Prov'] ?></td>
-
-          <th align="center">
+           <th align="center">
             <?php  if ($tipo == 1) {
-             
-               ?>
-               <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
-               <?php
-           
+
+             ?>
+             <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
+             <?php
+
            }else{ ?>
            <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
            <?php } ?>
