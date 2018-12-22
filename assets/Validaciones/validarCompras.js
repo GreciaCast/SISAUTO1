@@ -130,6 +130,7 @@ function mostrarAddProduc(){
 function agregar(){
     var cantidad = $('#cantidad').val();
     var precio = $('#precio').val();
+    //var precioventa = $('#precioventa').val();
     var obtenerC = $("#categoriaPro").find('option:selected');
     var obtenerP = $("#productoFiltrado").find('option:selected');
     var categoriaId = obtenerC.val();
@@ -140,10 +141,12 @@ function agregar(){
     var html = '<tr id="f'+productoId+'"><td>'+cantidad+'</td>';
     html = html+'<td>'+productoText+'</td>';
     html = html+'<td>'+precio+'</td>';
+   // html = html+'<td>'+precioventa+'</td>';
     html = html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>';
     html = html+'<td>';
     html = html+'<input type="hidden" name="cantidad_DCom[]" value="'+cantidad+'"/>';
     html = html+'<input type="hidden" name="precio_DCom[]" value="'+precio+'"/>';
+   // html = html+'<input type="hidden" name="precio_DVen[]" value="'+precioventa+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
     html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar('+productoId+','+subtotal+');"></button></td></tr>';
     
@@ -151,7 +154,7 @@ function agregar(){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe completar todos los datos del producto");
 
-     }else if(cantidad == 0 || precio == 0){
+     }else if(cantidad == 0 || precio == 0 ){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
 
@@ -177,21 +180,19 @@ function eliminar(id,subtotal){
 }
 
 function validarCompraDuplicada(){
-    if (!($('#numFacCom').val().trim() == "")) {
-        console.log($('#proves').val());
+    if (!($('#numFacCom').val().trim() == "") && !($('#proves').val().trim() == "")) {
         
         var param = {
             numerofac: $('#numFacCom').val(),
-            banderaf: "unnumerofac"
-            // ,
-            // proveedor: $('#proves').val(),
-            // banderap: "unproveedor"
+            idproveedor: $('#proves').val(),
+            bandera: "unnumerofac"
         };
         return $.ajax({
             data: param,
             url:"/SISAUTO1/Controlador/comprasC.php",
             method: "post",
             success: function(data){
+                console.log(data);
                 if (data == 0) {
                     return true;
                 }else{

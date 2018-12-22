@@ -6,7 +6,6 @@ if (isset($_SESSION['usuarioActivo'])) {
 <html lang="es">
 <?php include("generalidades/apertura.php"); ?>
 <body>
-
     <div id="wrapper">
         <?php include("generalidades/menu.php"); ?>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -73,20 +72,20 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
                                             <div  class="col-sm-2">
                                               <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();">
-                                        <option value="">[Selecionar Categoria]</option>
-                                        <option value="1">AMORTIGUADORES</option>
-                                        <option value="2">BUJÍAS</option>
-                                        <option value="3">COMBUSTIBLE</option>
-                                        <option value="4">ELÉCTRICO</option>
-                                        <option value="5">ENFRIAMIENTO</option>
-                                        <option value="6">FILTROS</option>
-                                        <option value="7">FRENOS</option>
-                                        <option value="8">MOTOR</option>
-                                        <option value="8">SENSORES</option>
-                                        <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-                                        <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-                                        <option value="12">UNIVERSALES</option>
-                                    </select>
+                                                <option value="">[Selecionar Categoria]</option>
+                                                <option value="1">AMORTIGUADORES</option>
+                                                <option value="2">BUJÍAS</option>
+                                                <option value="3">COMBUSTIBLE</option>
+                                                <option value="4">ELÉCTRICO</option>
+                                                <option value="5">ENFRIAMIENTO</option>
+                                                <option value="6">FILTROS</option>
+                                                <option value="7">FRENOS</option>
+                                                <option value="8">MOTOR</option>
+                                                <option value="8">SENSORES</option>
+                                                <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                                                <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                                                <option value="12">UNIVERSALES</option>
+                                            </select>
                                             </div>
                                         </div>
                                         <br>
@@ -105,23 +104,30 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Año </label>
+                                            <label for="tel2" class="col-sm-3 control-label">Año: </label>
                                             <div class="col-sm-2">
                                                 <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año" onkeypress="return validarAnio(this,event,this.value)">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Descripción</label>
+                                            <label for="tel2" class="col-sm-3 control-label">Descripción: </label>
                                             <div class="col-sm-15 col-md-7">
                                                 <textarea type="text" class="form-control" name="descripcion"  placeholder="Escriba aqui..." id="descripcionPr"></textarea>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Stock minimo </label>
+                                            <label for="tel2" class="col-sm-3 control-label">Stock minimo: </label>
                                             <div class="col-sm-2">
                                                 <input type="tel" class="form-control" type="number" id="stockPr" name="stock" placeholder="Stock" onkeypress="return validarEntero(this,event,this.value)">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group ">
+                                            <label for="tel2" class="col-sm-3 control-label">Precio: </label>
+                                            <div class="col-sm-2">
+                                                <input type="tel" class="form-control" type="number" id="precioPr" name="precio" placeholder="Precio a vender">
                                             </div>
                                         </div>
                                         <hr width="75%">

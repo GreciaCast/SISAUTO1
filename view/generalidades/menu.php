@@ -35,6 +35,7 @@
                     <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
                     <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
                     <li><a href="" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
+                    <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-database"> Configuracion</span></a></li>
                 </ul>
             </li>
             <?php } ?>
@@ -307,6 +308,43 @@
         <input type="hidden" name="valor" id="valor" />
     </form>
 </div>
+
+<!-- MODAL -->
+  <div class="modal inmodal" id="modalConfigFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-check-square-o modal-icon"></i>
+                <h4 class="modal-title"></h4>
+                <small>...</small>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
+                    <div class="form-group">
+                     <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
+                     <div class="col-sm-3">
+                         <input class="form-control" type="text" id="numF" name="numF">
+                         <input type="hidden" value="factura" name="bandera">
+                     </div>
+                 </div> 
+              <br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+              &nbsp;&nbsp;
+              <a class="pull-right">
+                <button type="submit" class="btn btn-success" style="font-size:14px;">
+                  Aceptar
+                </button>
+                &nbsp;
+              </a>
+              </form>
+            </div>
+        </div>
+    </div>
+  </div>
+<!---------------------------------------------------------------------------------------->
 
 <script src="../assets/Validaciones/mostrarUsuario.js"></script>
 <script src="../assets/Validaciones/validarContrasena.js"></script>

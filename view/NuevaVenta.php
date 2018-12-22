@@ -5,6 +5,7 @@ if (isset($_SESSION['usuarioActivo'])) {
   <!DOCTYPE html>
   <html lang="es">
   <?php include("generalidades/apertura.php"); ?>
+  <?php include("funciones.php"); ?>
   <body>
     <div id="wrapper">
       <?php include("generalidades/menu.php"); ?>
@@ -37,7 +38,15 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <div class="form-group row">
                         <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
                         <div class="col-sm-3 input-group">
-                          <input  id="numFacCom" name="numFac_Com" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
+                          <?php 
+                            $var = correlativoFactura();
+                            if($var == 0){
+                              ?>
+                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                              <?php
+                            }
+                          ?>
+                          <input  id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
                         </div>
                       </div>
                       <div class="form-group row" id="data_2">
@@ -50,54 +59,40 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $dia = date("d");
                         $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
                         ?>
-                        <label for="empresa" class="col-sm-3 control-label">Fecha: </label>
-                        <div class="col-sm-3 input-group date">
-                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                          <input id="fecha" name="fecha_Com" type="text" class="form-control" value="<?php echo $fech?>" min="01/01/2000" max="<?php echo $fech?>" style="width:150px;height:40px">
-                          <a id='mensajitoFecha'></a>
-                        </div>
+                          <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
                       </div>
                       <div class="form-group row">
                         <?php 
-                        $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
-                        $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                        $sql = "SELECT * from cliente where tipo_Cli = 1 order by nombre_Cli ASC";
+                        $clientes = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
                         ?>
-                        <label for="empresa" class="col-sm-3 control-label">Tipo de cliente:</label>
+                        <label for="empresa" class="col-sm-3 control-label">Tipo de cliente: </label>
                         <div class="col-sm-3 i-checks">
-                          <label> <input type="radio" value="option1" name="a"> <i></i> Cliente Jurídico </label><label><input type="radio" checked="" value="option2" name="a"> <i></i> Cliente Natural </label>
+                          <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Cliente Jurídico</label>
+                          <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Cliente Natural</label>
                         </div>
                       </div>
-
+                    <div id="clientesID" style="display:block">
                      <div class="form-group row">
                        <label for="empresa" class="col-sm-3 control-label"></label>
                        <div class="col-sm-3 input-group">
-                        <select data-placeholder="Choose a Country..." id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                        <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
                           <option value="">[Selecionar cliente]</option>
                           <?php
 
-                          While($proveedor=mysqli_fetch_array($proveedores)){
-                           echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                          While($cliente = mysqli_fetch_array($clientes)){
+                           echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
                          }
                          ?>
                        </select>
                      </div>
                    </div>
+                   </div>
                    <br><br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
-                   <div class="form-group row">
-                    <label for="direccion" class="col-sm-3 control-label">Cantidad:</label>
-                    <div class="col-sm-12 col-md-1">
-                      <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
-                    </div>
-
-                    <label for="direccion" class="col-sm-3 control-label">Precio unitario:</label>
-                    <div class="col-sm-12 col-md-3 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
-                    </div>
-                  </div>
-                  <div class="form-group row">
+                   
+                  <!-- <div class="form-group row">
                     <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
                     <div class="col-sm-2">
                       <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
@@ -116,18 +111,40 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <option value="12">UNIVERSALES</option>
                       </select>
                     </div>
+                  </div> -->
+                  <?php 
+                    $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
+                    $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
+                  ?>
+                  <div class="form-group row">
+                    <label for="empresa" class="col-sm-3 control-label">Codigo de producto:</label>
+                    <div class="form-group row">
+                       <div class="col-sm-3 input-group">
+                        <select  id="produs" name="id_Producto" class="chosen-select" style="width:400px;height:40px" tabindex="2">
+                          <option value="">[Selecionar producto]</option>
+                          <?php
+                          While($producto = mysqli_fetch_array($productos)){
+                           echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' '.$producto['nombre_Prod'].''.$producto['descripcion_Prod'].'</option>';
+                         }
+                         ?>
+                       </select>
+                     </div>
+                   </div>
                   </div>
                   <div class="form-group row">
-                    <label for="empresa" class="col-sm-3 control-label">Producto:</label>
-                    <div class="col-sm-12 col-md-7">
-                      <select id="productoFiltrado" name="productos" style="width:600px;height:40px" class="form-control"> 
-                        <option value="">[Selecionar producto]</option>
-                        <option value=""></option>
-                      </select>
-                    </div>
+                    <label for="direccion" class="col-sm-2 control-label">Cantidad: </label>
                     <div class="col-sm-12 col-md-1">
-                      <button title="Ver caracteristicas" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerAddProducto" href="" onclick="mostrarAddProduc();" style="width:39px;height:39px">
-                      </button>
+                      <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
+                    </div>
+                    <label for="direccion" class="col-sm-2 control-label">Costo: </label>
+                    <div class="col-sm-12 col-md-1 input-group date">
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                      <input id="costo" name="costoProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                    </div>
+                    <label for="direccion" class="col-sm-2 control-label">Precio: </label>
+                    <div class="col-sm-12 col-md-2 input-group date">
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                      <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -203,57 +220,11 @@ if (isset($_SESSION['usuarioActivo'])) {
                                  </div>
                                  <div class="modal-body">
                                    <hr width="75%" style="background-color:#007bff;"/>
-                                   <div class="form-group ">
-                                     <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Codigo: </label>
-                                     <div class="col-sm-7">
-                                       <input class="form-control" type="text" id="codigoAddP" name="codigoP" readonly="readonly" aria-required="true" value="">
-                                     </div>
-                                   </div>
-                                   <br><br><br><br>
-                                   <div class="form-group">
-                                     <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Nombre Producto:</label>
-                                     <div  class="col-sm-7">
-                                       <input class="form-control" type="text" id="nombreAddP" name="nombreAddP" readonly="readonly">
-                                     </div>
-                                   </div>
+                                   
+                                 
                                    <br><br><br>
-                                   <div class="form-group">
-                                     <label align="right" for="cateP" class="col-sm-4 control-label" style="font-size:15px;">Categoria:</label>
-                                     <div class="col-sm-3">
-                                       <input class="form-control" type="text" id="cateAddP" name="cateP" value="" readonly="readonly">
-                                     </div>
-                                   </div>
-                                   <br><br><br>
-                                   <div class="form-group">
-                                     <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Marca de Producto:</label>
-                                     <div class="col-sm-7">
-                                       <input class="form-control" type="text" type="text" name="marcaP"  id="marcaAddP" readonly="readonly">
-                                     </div>
-                                   </div>
-                                   <br><br><br>
-                                   <div class="form-group">
-                                     <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Modelo de Vehículo:</label>
-                                     <div class="col-sm-7">
-                                       <input class="form-control" type="text" id="modeloAddP" name="modeloP" readonly="readonly">
-                                     </div>
-                                   </div>
-                                   <br><br><br>
-                                   <div class="form-group">
-                                     <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Año del Vehículo:</label>
-                                     <div class="col-sm-3">
-                                       <input class="form-control" type="text" id="anioAddP" name="anioP" readonly="readonly">
-                                     </div>
-                                   </div>
-                                   <div id="ocultar">
-                                     <br><br><br>
-                                     <div class="form-group">
-                                       <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
-                                       <div class="col-sm-7">
-                                        <textarea class="form-control" type="text" name="descripcion" id="descripcionAddP"  placeholder="Escriba aqui..." readonly="readonly">
-                                        </textarea>
-                                      </div>
-                                    </div>
-                                  </div>
+                                   
+                                  
                                 </div>
                                 <br><br>
                                 <div class="modal-footer">
@@ -266,6 +237,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 
 
                          <script src="../assets/Validaciones/mostrarProducto.js"></script>
+                         <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
                          <script src="../assets/Validaciones/validarProducto.js"></script>
                          <script src="../assets/Validaciones/validarCompras.js"></script>
                          <script src="../assets/Validaciones/validarNumeros.js"></script>
@@ -276,13 +248,14 @@ if (isset($_SESSION['usuarioActivo'])) {
                          <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
 
 
-
+                        
 
 
 
 
 
                          <script>
+
                           $(document).ready(function(){
 
                             var $image = $(".image-crop > img")

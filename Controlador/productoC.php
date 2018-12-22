@@ -14,8 +14,9 @@ if ($bandera == "guardar") {
     $anio = $_POST["anio"];
     $descripcion = $_POST["descripcion"];
     $stock = $_POST["stock"];
+    $precio = $_POST["precio"];
 
-    $sql = "INSERT INTO producto (nombre_Prod,categoria_Prod,marca_Prod,descripcion_Prod,modeloVehiculo_Prod,anioVehiculo_Prod,codigo_Prod,tipo_Prod,stock_Prod) VALUES ('$nombrePro','$categoria','$marca','$descripcion','$modelo','$anio','$codigo',1,'$stock')";
+    $sql = "INSERT INTO producto (nombre_Prod,categoria_Prod,marca_Prod,descripcion_Prod,modeloVehiculo_Prod,anioVehiculo_Prod,codigo_Prod,tipo_Prod,stock_Prod,precio_Prod) VALUES ('$nombrePro','$categoria','$marca','$descripcion','$modelo','$anio','$codigo',1,'$stock','$precio')";
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] = "Registro guardado exitosamente";

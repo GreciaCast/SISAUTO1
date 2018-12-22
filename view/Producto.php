@@ -393,7 +393,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
             </div>
         </div>
     </div>
-</div>
+  </div>
 <!---------------------------------------------------------------------------------------->
 
 

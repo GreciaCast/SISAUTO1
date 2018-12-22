@@ -149,7 +149,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         <tr>
                                                             <th style="width:10px">Cantidad</th>
                                                             <th style="width:200px">Producto</th>
-                                                            <th style="width:30px">Precio unitario ($)</th>
+                                                            <th style="width:30px">Precio compra ($)</th>
                                                             <th style="width:30px">Subtotal ($)</th>
                                                             <th style="width:50px">Acción</th>
                                                         </tr>

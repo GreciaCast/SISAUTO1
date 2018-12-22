@@ -18,6 +18,7 @@ if(isset($_POST["bandera"])){
 		$idProvCom = $_POST["id_Proveedor"];
 		$cantidadProdCom = $_POST["cantidad_DCom"];
 		$precioProdCom = $_POST["precio_DCom"];
+		$precioProdVen = $_POST["precio_DVen"];
 		$idProdCom = $_POST["id_Producto"];
 		print_r($idProdCom);
 		echo("---------------------------");
@@ -50,7 +51,7 @@ if(isset($_POST["bandera"])){
 				$existencias = $resultadoo['nuevaExistencia_Inv'];
 				$precioActual = $resultadoo['nuevoPrecio_Inv'];
 				$nuevaExistencia = $resultadoo['nuevaExistencia_Inv'] + $cantidadProdCom[$key];
-				$nuevoPrecio = ($resultadoo['nuevoPrecio_Inv'] + $precioProdCom[$key])/2;
+				$nuevoPrecio = (($existencias*$precioActual) + ($cantidadProdCom[$key]*$precioProdCom[$key]))/$nuevaExistencia;
 
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,'$existencias','$precioActual','$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProdCom[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -182,6 +183,16 @@ if(isset($_POST["bandera"])){
 
 	}
 
+
+	//-------------------------------COMPRA DUPLICADA
+	if ($bandera == "unnumerofac"){
+		$num = $_POST["numerofac"];
+		$idprovee = $_POST["idproveedor"];
+		$sql = "SELECT * from compra where numFac_Com = '$num' and id_Proveedor = '$idprovee' ";
+		$compra = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+	    echo mysqli_num_rows($compra);
+	}
+
 }
 
 //----------------------------  AGREGAR AL COMBOBOX DE LOS PRODUCTOS
@@ -273,16 +284,5 @@ if(isset($_GET["bandera"])){
 		echo $pro;
 	}
 
-//-------------------------------COMPRA DUPLICADA
-	if ($banderaf == "unnumerofac"){
-		$sql = "SELECT * from compra where numFac_Com = BINARY '".$_POST["numerofac"]."'";
-		$compra = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-	    echo mysqli_num_rows($compra);
-	}
 
-	// if ($banderap == "unproveedor"){
-	// 	$sql = "SELECT * from compra where usuario_Usu = BINARY '".$_POST["proveedor"]."'";
-	// 	$proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-	//     echo mysqli_num_rows($proveedor);
-	// }
 ?>
