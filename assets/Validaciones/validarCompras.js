@@ -6,12 +6,10 @@ async function validarCompra(){
     var duplicada = await validarCompraDuplicada();
     if (fechaC && numeroFacC && proveedorC && detallesC && duplicada){
         $('#guardarCom').submit();
-    };
-    
+    };   
 }
 
 function validarFechaC(){
-
     var f = new Date();
     //FECHA ACTUAL
     var diaActual = f.getDate();

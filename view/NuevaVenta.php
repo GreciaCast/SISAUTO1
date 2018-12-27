@@ -91,60 +91,57 @@ if (isset($_SESSION['usuarioActivo'])) {
                    <br><br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
-                   
-                  <!-- <div class="form-group row">
-                    <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
-                    <div class="col-sm-2">
-                      <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
-                        <option value="">[Selecionar categoría]</option>
-                        <option value="1">AMORTIGUADORES</option>
-                        <option value="2">BUJÍAS</option>
-                        <option value="3">COMBUSTIBLE</option>
-                        <option value="4">ELÉCTRICO</option>
-                        <option value="5">ENFRIAMIENTO</option>
-                        <option value="6">FILTROS</option>
-                        <option value="7">FRENOS</option>
-                        <option value="8">MOTOR</option>
-                        <option value="8">SENSORES</option>
-                        <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-                        <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-                        <option value="12">UNIVERSALES</option>
-                      </select>
-                    </div>
-                  </div> -->
                   <?php 
                     $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
                     $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
                   ?>
                   <div class="form-group row">
-                    <label for="empresa" class="col-sm-3 control-label">Codigo de producto:</label>
+                    <label class="col-sm-3 control-label">Producto: </label>
                     <div class="form-group row">
                        <div class="col-sm-3 input-group">
-                        <select  id="produs" name="id_Producto" class="chosen-select" style="width:400px;height:40px" tabindex="2">
+                        <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
                           <option value="">[Selecionar producto]</option>
                           <?php
                           While($producto = mysqli_fetch_array($productos)){
-                           echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' '.$producto['nombre_Prod'].''.$producto['descripcion_Prod'].'</option>';
-                         }
-                         ?>
+                            if($producto['descripcion_Prod'] == "Ninguna"){
+                              if($producto['categoria_Prod'] == 12){
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
+                              }else{
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                              }
+                            }else{
+                              if($producto['categoria_Prod'] == 12){
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
+                              }else{
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                              }
+                            }
+                          }
+                          ?>
                        </select>
                      </div>
                    </div>
                   </div>
                   <div class="form-group row">
-                    <label for="direccion" class="col-sm-2 control-label">Cantidad: </label>
+                    <label class="col-sm-2 control-label">Cantidad en invetario: </label>
                     <div class="col-sm-12 col-md-1">
-                      <input id="cantidad" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
+                      <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px">
                     </div>
-                    <label for="direccion" class="col-sm-2 control-label">Costo: </label>
+                    <label class="col-sm-2 control-label">Costo: </label>
                     <div class="col-sm-12 col-md-1 input-group date">
                       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="costo" name="costoProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                      <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px">
                     </div>
-                    <label for="direccion" class="col-sm-2 control-label">Precio: </label>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 control-label">Cantidad: </label>
+                    <div class="col-sm-12 col-md-1">
+                      <input id="cantidadPV" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
+                    </div>
+                    <label class="col-sm-2 control-label">Precio: </label>
                     <div class="col-sm-12 col-md-2 input-group date">
                       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="precio" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                      <input id="precioPV" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -156,7 +153,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   </div>
                   <hr width="75%" /><br>
                   <div class="form-group" align="center">
-                    <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregar();"></button>
+                    <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregarProductosATabla();"></button>
                   </div>
                   <div class="card mb-3">
                     <div class="card-header">
@@ -174,7 +171,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                               <th style="width:50px">Acción</th>
                             </tr>
                           </thead>
-                          <tbody id = "tablaProductos">
+                          <tbody id = "tablaProductosVenta">
 
                           </tbody>
                         </table>
@@ -185,7 +182,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="form-group row">
                     <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
                     <div class="col-sm-12 col-md-2 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="total" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="totalVenta" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
                                             <!--
                                                 El id es para el js y el name para el controlador
                                               -->
@@ -239,6 +236,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                          <script src="../assets/Validaciones/mostrarProducto.js"></script>
                          <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
                          <script src="../assets/Validaciones/validarProducto.js"></script>
+                         <script src="../assets/Validaciones/validarVentas.js"></script>
                          <script src="../assets/Validaciones/validarCompras.js"></script>
                          <script src="../assets/Validaciones/validarNumeros.js"></script>
                          <script src="../assets/Validaciones/validarCliente.js"></script>

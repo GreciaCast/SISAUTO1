@@ -121,7 +121,6 @@ if(isset($_POST["bandera"])){
 		}
 
 		
-
 		//////////CAPTURA DATOS PARA BITACORA
 		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
 		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito una compra')";
@@ -137,20 +136,15 @@ if(isset($_POST["bandera"])){
 	if ($bandera == "eliminar") {
 		
 		$idCom=$_POST["id"];
-
 		$sql1 = "SELECT * from detallecompra  where id_Compra = '$idCom'";
 		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-
+		
 		foreach ($detalles as $detalle) {
-
 			$idProd = $detalle['id_Producto'];
 			$cantidad = $detalle['cantidad_DCom'];
-
 			$sql2 = " SELECT * from inventario where id_Producto = '$idProd'";
 			$resultado = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
-
 			$resultado = mysqli_fetch_array($resultado);
-
 			$existencia = $resultado['nuevaExistencia_Inv'];
 			$resta = $existencia-$cantidad;
 

@@ -52,7 +52,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                 Ver ventas 
                 <span class="fa fa-eye"></span>
               </button>
-
               &nbsp;
             </a>
 
@@ -67,9 +66,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <div class="ibox-content">
                         <form class="form-horizontal" action=" " method="POST"  autocomplete="off">
                           <div class="table-responsive">
-
                             <table class="table table-striped table-bordered display" id="example">
-
                               <thead>
                                 <div class="col-sm-3 input-group">
                                 <!-- <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del Producto:</label>
