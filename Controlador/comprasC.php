@@ -52,6 +52,7 @@ if(isset($_POST["bandera"])){
 				$precioActual = $resultadoo['nuevoPrecio_Inv'];
 				$nuevaExistencia = $resultadoo['nuevaExistencia_Inv'] + $cantidadProdCom[$key];
 				$nuevoPrecio = (($existencias*$precioActual) + ($cantidadProdCom[$key]*$precioProdCom[$key]))/$nuevaExistencia;
+				$nuevoPrecio = $nuevoPrecio.toFixed(2);
 
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,'$existencias','$precioActual','$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProdCom[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -250,7 +251,7 @@ if(isset($_GET["bandera"])){
 		$sql1 = "SELECT * from producto where idProducto = '$id' ";
 		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 		$producto = mysqli_fetch_array($productos);
-			$mod = $mod.''.$producto['modeloVehiculo_Prod'];
+		$mod = $mod.''.$producto['modeloVehiculo_Prod'];
 		echo $mod;
 	}
 
@@ -260,7 +261,7 @@ if(isset($_GET["bandera"])){
 		$sql1 = "SELECT * from producto where idProducto = '$id' ";
 		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 		$producto = mysqli_fetch_array($productos);
-			$ani = $ani.''.$producto['anioVehiculo_Prod'];
+		$ani = $ani.''.$producto['anioVehiculo_Prod'];
 		echo $ani;
 	}
 //-----------------------------------------------------------------------------------------------------
@@ -272,7 +273,7 @@ if(isset($_GET["bandera"])){
 		$sql1 = "SELECT * from proveedor where tipo_Prov = 1 and idProveedor = '$id' ";
 		$proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 		$prove = mysqli_fetch_array($proveedor);
-			$pro = $pro.''.$prove['nombre_Prov'];
+		$pro = $pro.''.$prove['nombre_Prov'];
 		echo $pro;
 	}
 

@@ -29,5 +29,15 @@ $conexion = conectarMysql();
 		$costo = $costo.''.$producto['nuevoPrecio_Inv'];
 		echo $costo;
 	}
+
+	if(isset($_GET["precio"])){
+		$id = $_GET["id"];
+		$pre = '';
+		$sql1 = "SELECT * from producto where idProducto = '$id' ";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);//CAPTURA EL ULTIMO REGISTRO
+		$pre = $pre.''.$producto['precio_Prod'];
+		echo $pre;
+	}
 //-------------------------------------------------------------
 ?>

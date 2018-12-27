@@ -123,25 +123,33 @@ if (isset($_SESSION['usuarioActivo'])) {
                    </div>
                   </div>
                   <div class="form-group row">
+                    <div class="col-sm-12 col-md-1">
+                    </div>
                     <label class="col-sm-2 control-label">Cantidad en invetario: </label>
                     <div class="col-sm-12 col-md-1">
-                      <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px">
+                      <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
                     </div>
                     <label class="col-sm-2 control-label">Costo: </label>
                     <div class="col-sm-12 col-md-1 input-group date">
                       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px">
+                      <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
                     </div>
                   </div>
                   <div class="form-group row">
+                    <div class="col-sm-1 col-md-1">
+                    </div>
                     <label class="col-sm-2 control-label">Cantidad: </label>
-                    <div class="col-sm-12 col-md-1">
+                    <div class="col-sm-3 col-md-1">
                       <input id="cantidadPV" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
                     </div>
                     <label class="col-sm-2 control-label">Precio: </label>
-                    <div class="col-sm-12 col-md-2 input-group date">
+                    <div class="col-sm-1 col-md-1 input-group date">
                       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                       <input id="precioPV" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                    </div>
+                    <label class="col-sm-8 control-label"></label>
+                    <div class="col-sm-1 col-md-1">
+                      <button title="Hacer descuento 15%" type="button" class="btn btn-primary" style="width:200px;height:40px" onclick="aplicarDescuento15();">Aplicar descuento 15%</button>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -182,248 +190,248 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="form-group row">
                     <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
                     <div class="col-sm-12 col-md-2 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="totalVenta" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
-                                            <!--
-                                                El id es para el js y el name para el controlador
-                                              -->
-                                            </div>
-                                          </div>
-                                          <br>
-                                          <hr width="75%">
-                                          <div class="form-group" align="center">
-                                            <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarCompra();">Aceptar</button>
-                                            <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
-                                  </div>
+                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="totalVenta" name="totalVenta" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
+                      <!--
+                          El id es para el js y el name para el controlador
+                        -->
+                    </div>
+                  </div>
+                  <br>
+                  <hr width="75%">
+                  <div class="form-group" align="center">
+                    <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarCompra();">Aceptar</button>
+                    <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
 
-                                </div>
-                              </div>
-                            </div>
-                            <?php include("generalidades/cierre.php"); ?>
-
-
-
-                            <!-- MODAL VER PROVEEDOR -->
-
-                            <div class="modal fade" id="modalVerAddProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                             <div class="modal-dialog modal-lg" role="document">
-                               <div class="modal-content">
-                                 <div class="modal-header" style="background-color:#007bff;color:black;">
-
-                                   <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
-                                 </div>
-                                 <div class="modal-body">
-                                   <hr width="75%" style="background-color:#007bff;"/>
-                                   
-                                 
-                                   <br><br><br>
-                                   
-                                  
-                                </div>
-                                <br><br>
-                                <div class="modal-footer">
-                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
-                               </div>
-                             </div>
-                           </div>
-
-                         </div>
+        </div>
+      </div>
+    </div>
+    <?php include("generalidades/cierre.php"); ?>
 
 
-                         <script src="../assets/Validaciones/mostrarProducto.js"></script>
-                         <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
-                         <script src="../assets/Validaciones/validarProducto.js"></script>
-                         <script src="../assets/Validaciones/validarVentas.js"></script>
-                         <script src="../assets/Validaciones/validarCompras.js"></script>
-                         <script src="../assets/Validaciones/validarNumeros.js"></script>
-                         <script src="../assets/Validaciones/validarCliente.js"></script>
-                         <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
-                         <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
-                         <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-                         <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
+
+    <!-- MODAL VER PROVEEDOR -->
+
+    <div class="modal fade" id="modalVerAddProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+     <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
+         <div class="modal-header" style="background-color:#007bff;color:black;">
+
+           <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
+         </div>
+         <div class="modal-body">
+           <hr width="75%" style="background-color:#007bff;"/>
+           
+         
+           <br><br><br>
+           
+          
+        </div>
+        <br><br>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+       </div>
+     </div>
+   </div>
+
+ </div>
 
 
-                        
+ <script src="../assets/Validaciones/mostrarProducto.js"></script>
+ <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
+ <script src="../assets/Validaciones/validarProducto.js"></script>
+ <script src="../assets/Validaciones/validarVentas.js"></script>
+ <script src="../assets/Validaciones/validarCompras.js"></script>
+ <script src="../assets/Validaciones/validarNumeros.js"></script>
+ <script src="../assets/Validaciones/validarCliente.js"></script>
+ <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
+ <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
+ <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+ <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
 
 
 
 
 
-                         <script>
 
-                          $(document).ready(function(){
 
-                            var $image = $(".image-crop > img")
-                            $($image).cropper({
-                              aspectRatio: 1.618,
-                              preview: ".img-preview",
-                              done: function(data) {
-                                    // Output the result data for cropping image.
-                                  }
-                                });
 
-                            var $inputImage = $("#inputImage");
-                            if (window.FileReader) {
-                              $inputImage.change(function() {
-                                var fileReader = new FileReader(),
-                                files = this.files,
-                                file;
+ <script>
 
-                                if (!files.length) {
-                                  return;
-                                }
+  $(document).ready(function(){
 
-                                file = files[0];
+    var $image = $(".image-crop > img")
+    $($image).cropper({
+      aspectRatio: 1.618,
+      preview: ".img-preview",
+      done: function(data) {
+            // Output the result data for cropping image.
+          }
+        });
 
-                                if (/^image\/\w+$/.test(file.type)) {
-                                  fileReader.readAsDataURL(file);
-                                  fileReader.onload = function () {
-                                    $inputImage.val("");
-                                    $image.cropper("reset", true).cropper("replace", this.result);
-                                  };
-                                } else {
-                                  showMessage("Please choose an image file.");
-                                }
-                              });
-                            } else {
-                              $inputImage.addClass("hide");
-                            }
+    var $inputImage = $("#inputImage");
+    if (window.FileReader) {
+      $inputImage.change(function() {
+        var fileReader = new FileReader(),
+        files = this.files,
+        file;
 
-                            $("#download").click(function() {
-                              window.open($image.cropper("getDataURL"));
-                            });
+        if (!files.length) {
+          return;
+        }
 
-                            $("#zoomIn").click(function() {
-                              $image.cropper("zoom", 0.1);
-                            });
+        file = files[0];
 
-                            $("#zoomOut").click(function() {
-                              $image.cropper("zoom", -0.1);
-                            });
+        if (/^image\/\w+$/.test(file.type)) {
+          fileReader.readAsDataURL(file);
+          fileReader.onload = function () {
+            $inputImage.val("");
+            $image.cropper("reset", true).cropper("replace", this.result);
+          };
+        } else {
+          showMessage("Please choose an image file.");
+        }
+      });
+    } else {
+      $inputImage.addClass("hide");
+    }
 
-                            $("#rotateLeft").click(function() {
-                              $image.cropper("rotate", 45);
-                            });
+    $("#download").click(function() {
+      window.open($image.cropper("getDataURL"));
+    });
 
-                            $("#rotateRight").click(function() {
-                              $image.cropper("rotate", -45);
-                            });
+    $("#zoomIn").click(function() {
+      $image.cropper("zoom", 0.1);
+    });
 
-                            $("#setDrag").click(function() {
-                              $image.cropper("setDragMode", "crop");
-                            });
+    $("#zoomOut").click(function() {
+      $image.cropper("zoom", -0.1);
+    });
 
-                            $('#data_1 .input-group.date').datepicker({
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              calendarWeeks: true,
-                              autoclose: true
-                            });
+    $("#rotateLeft").click(function() {
+      $image.cropper("rotate", 45);
+    });
 
-                            $('#data_2 .input-group.date').datepicker({
-                              startView: 1,
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true,
-                              format: "dd/mm/yyyy"
-                            });
+    $("#rotateRight").click(function() {
+      $image.cropper("rotate", -45);
+    });
 
-                            $('#data_3 .input-group.date').datepicker({
-                              startView: 2,
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true
-                            });
+    $("#setDrag").click(function() {
+      $image.cropper("setDragMode", "crop");
+    });
 
-                            $('#data_4 .input-group.date').datepicker({
-                              minViewMode: 1,
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true,
-                              todayHighlight: true
-                            });
+    $('#data_1 .input-group.date').datepicker({
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      calendarWeeks: true,
+      autoclose: true
+    });
 
-                            $('#data_5 .input-daterange').datepicker({
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true
-                            });
+    $('#data_2 .input-group.date').datepicker({
+      startView: 1,
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      autoclose: true,
+      format: "dd/mm/yyyy"
+    });
 
-                            var elem = document.querySelector('.js-switch');
-                            var switchery = new Switchery(elem, { color: '#1AB394' });
+    $('#data_3 .input-group.date').datepicker({
+      startView: 2,
+      todayBtn: "linked",
+      keyboardNavigation: false,
+      forceParse: false,
+      autoclose: true
+    });
 
-                            var elem_2 = document.querySelector('.js-switch_2');
-                            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+    $('#data_4 .input-group.date').datepicker({
+      minViewMode: 1,
+      keyboardNavigation: false,
+      forceParse: false,
+      autoclose: true,
+      todayHighlight: true
+    });
 
-                            var elem_3 = document.querySelector('.js-switch_3');
-                            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+    $('#data_5 .input-daterange').datepicker({
+      keyboardNavigation: false,
+      forceParse: false,
+      autoclose: true
+    });
 
-                            $('.i-checks').iCheck({
-                              checkboxClass: 'icheckbox_square-green',
-                              radioClass: 'iradio_square-green'
-                            });
+    var elem = document.querySelector('.js-switch');
+    var switchery = new Switchery(elem, { color: '#1AB394' });
 
-                            $('.demo1').colorpicker();
+    var elem_2 = document.querySelector('.js-switch_2');
+    var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
 
-                            var divStyle = $('.back-change')[0].style;
-                            $('#demo_apidemo').colorpicker({
-                              color: divStyle.backgroundColor
-                            }).on('changeColor', function(ev) {
-                              divStyle.backgroundColor = ev.color.toHex();
-                            });
+    var elem_3 = document.querySelector('.js-switch_3');
+    var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
 
-                            $('.clockpicker').clockpicker();
+    $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green'
+    });
 
-                            $('input[name="daterange"]').daterangepicker();
+    $('.demo1').colorpicker();
 
-                            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+    var divStyle = $('.back-change')[0].style;
+    $('#demo_apidemo').colorpicker({
+      color: divStyle.backgroundColor
+    }).on('changeColor', function(ev) {
+      divStyle.backgroundColor = ev.color.toHex();
+    });
 
-                            $('#reportrange').daterangepicker({
-                              format: 'MM/DD/YYYY',
-                              startDate: moment().subtract(29, 'days'),
-                              endDate: moment(),
-                              minDate: '01/01/2012',
-                              maxDate: '12/31/2015',
-                              dateLimit: { days: 60 },
-                              showDropdowns: true,
-                              showWeekNumbers: true,
-                              timePicker: false,
-                              timePickerIncrement: 1,
-                              timePicker12Hour: true,
-                              ranges: {
-                                'Hoy': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                              },
-                              opens: 'right',
-                              drops: 'down',
-                              buttonClasses: ['btn', 'btn-sm'],
-                              applyClass: 'btn-primary',
-                              cancelClass: 'btn-default',
-                              separator: ' to ',
-                              locale: {
-                                applyLabel: 'Submit',
-                                cancelLabel: 'Cancel',
-                                fromLabel: 'From',
-                                toLabel: 'To',
-                                customRangeLabel: 'Custom',
-                                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                firstDay: 1
-                              }
-                            }, function(start, end, label) {
-                              console.log(start.toISOString(), end.toISOString(), label);
-                              $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                            });
+    $('.clockpicker').clockpicker();
+
+    $('input[name="daterange"]').daterangepicker();
+
+    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+    $('#reportrange').daterangepicker({
+      format: 'MM/DD/YYYY',
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment(),
+      minDate: '01/01/2012',
+      maxDate: '12/31/2015',
+      dateLimit: { days: 60 },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      ranges: {
+        'Hoy': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      opens: 'right',
+      drops: 'down',
+      buttonClasses: ['btn', 'btn-sm'],
+      applyClass: 'btn-primary',
+      cancelClass: 'btn-default',
+      separator: ' to ',
+      locale: {
+        applyLabel: 'Submit',
+        cancelLabel: 'Cancel',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        firstDay: 1
+      }
+    }, function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    });
 
 $(".select2_demo_1").select2();
 $(".select2_demo_2").select2();

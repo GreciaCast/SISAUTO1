@@ -18,18 +18,35 @@ function radioSeleccionado(numero){
 function mostrarCostoyExistencias(id){
 	$('#cantidadDisponiblePV').empty();
 	$('#costoPV').empty();
+	$('#precioPV').empty();
     $.get('/SISAUTO1/Controlador/ventasC.php?existencias=1&id='+id,function(data){
-        console.log(data);
         $('#cantidadDisponiblePV').val(data);
     });
     $.get('/SISAUTO1/Controlador/ventasC.php?costo=1&id='+id,function(data){
-        console.log(data);
-    	$('#costoPV').val(data);
+    	$('#costoPV').val(data); 
+    });
+    $.get('/SISAUTO1/Controlador/ventasC.php?precio=1&id='+id,function(data){
+    	$('#precioPV').val(data); 
     });
 }
 
+function aplicarDescuento15(){
+	var precio = $('#precioPV').val();
+	$('#precioPV').val("");
+	if(precio != ""){
+		var p = parseFloat(precio)-(parseFloat(precio) * 0.15);
+    	$('#precioPV').val(parseFloat(p).toFixed(2));
+	}else{
+		$('#precioPV').val("");
+	}    
+}
+
 function agregarProductosATabla(){
+	var disponible = $('#cantidadDisponiblePV').val();
+	//console.log(disponible);
     var cantidad = $('#cantidadPV').val();
+
+	//console.log(cantidad);
     var precio = $('#precioPV').val();
     //var precioventa = $('#precioventa').val();
     var obtenerP = $("#produs").find('option:selected');
@@ -46,7 +63,7 @@ function agregarProductosATabla(){
     html = html+'<input type="hidden" name="precio_DCom[]" value="'+precio+'"/>';
    // html = html+'<input type="hidden" name="precio_DVen[]" value="'+precioventa+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
-    html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar('+productoId+','+subtotal+');"></button></td></tr>';
+    html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminarProductosDeTabla('+productoId+','+subtotal+');"></button></td></tr>';
     
      if(cantidad == "" || precio == "" || $('#produs').val() == ""){
         $('#mensajeee1').text("");
@@ -56,22 +73,28 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
 
+     }else if(parseInt(cantidad) > parseInt(disponible)){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* Cantidad solicitada NO disponible");
+
      }else{
         $('#mensajeee1').text("");
 
         $('#tablaProductosVenta').append(html);
-        var acumulado = parseFloat($('#total').val());
+        var acumulado = parseFloat($('#totalVenta').val());
         acumulado = acumulado + subtotal;
-        $('#total').val(parseFloat(acumulado).toFixed(2));
+        $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
         $('#cantidadPV').val("");
         $('#precioPV').val("");
+        $('#cantidadDisponiblePV').val("");
+        $('#costoPV').val("");
         $('#produs').val("");
     }
 }
 
 function eliminarProductosDeTabla(id,subtotal){
-    var acumulado = parseFloat($('#total').val());
+    var acumulado = parseFloat($('#totalVenta').val());
     acumulado = acumulado - subtotal;
-    $('#total').val(parseFloat(acumulado).toFixed(2));
+    $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
     $('#f'+id).remove();
 }
