@@ -31,14 +31,14 @@ if (isset($_SESSION['usuarioActivo'])) {
  $tipo = $_GET['tipo'];
 }?>
 <?php
-$sql="SELECT * from venta where estado_Ven='$tipo' order by fecha_Ven ASC";
+$sql="SELECT * from venta order by fecha_Ven ASC";
 $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 ?>
 <div class="row">
  <div class="col-12">
    <div class="row" style="padding:20px">
     <br>
-    <a class="pull-right" href="">
+    <a class="pull-right" href="Reportes/ReporteProveedor.php">
      <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
       Reporte
       <span class="fa fa-file-pdf-o"></span>
@@ -47,16 +47,16 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
   </a>
   <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
   <?php  if ($tipo == 1) { ?>
-  <a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=0">
+  <a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=0">
    <button class="btn btn-success" style="font-size:16px;">
     Ver ventas anuladas  <i class="fa fa-bars"></i>
   </button>
   &nbsp;
 </a>
 <?php  }else{ ?>
-<a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=1">
+<a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=1">
  <button class="btn btn-success" style="font-size:16px;">
-  Ver ventas <i class="fa fa-bars"></i>
+  Ver proveedores activos <i class="fa fa-bars"></i>
 </button>
 &nbsp;
 </a>
@@ -88,39 +88,39 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
         <tbody>
          <?php While($venta=mysqli_fetch_assoc($ventas)){?>
          <tr>
-          <td>
+            <td>
             <?php $fechaVen = explode("-",$venta['fecha_Ven']);
             $fechaVen = $fechaVen[2].'/'.$fechaVen[1].'/'.$fechaVen[0];
             echo $fechaVen ?>
-          </td>
-          <td>
-           <?php
-           $aux = $venta['idVenta'];
-           $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
-           $factura = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-           $factura = mysqli_fetch_array($factura);
-           echo $factura['numero_Fac'];
-           ?>
-         </td>
-         <td>
-           <?php
-           $aux = $venta['id_Cliente'];
-           $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";
-           $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-           $cliente = mysqli_fetch_array($cliente);
-           echo $cliente['nombre_Cli'];
-           ?>
-         </td>
+            </td>
+            <td>
+             <?php
+             $aux = $venta['idVenta'];
+             $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
+             $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+             $cliente = mysqli_fetch_array($cliente);
+             echo $cliente['numero_Fac'];
+             ?>
+           </td>
+           <td>
+             <?php
+             $aux = $venta['id_Cliente'];
+             $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";
+             $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+             $cliente = mysqli_fetch_array($cliente);
+             echo $cliente['nombre_Cli'];
+             ?>
+           </td>
 
-         <th align="center">
-           <button title="Ver"type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerProveedor" href="" onclick="mostrarPro('<?php echo $proveedore['nombre_Prov']?>','<?php echo $proveedore['correo_Prov']?>','<?php echo $proveedore['telefono_Prov']?>','<?php echo $proveedore['direccion_Prov']?>','<?php echo $proveedore['nombreResp_Prov']?>','<?php echo $proveedore['telefonoResp_Prov']?>','<?php echo $proveedore['descripcion_Prov']?>');"></button>
-           <?php  if ($tipo == 1) {
+           <th align="center">
+            <?php  if ($tipo == 1) {
 
              ?>
-             <button title="Anular venta" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $venta['idVenta'] ?>)"></button>
+             <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
              <?php
-           }else{ ?>
 
+           }else{ ?>
+           <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
            <?php } ?>
          </th>
        </tr>
@@ -144,7 +144,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 
 </div>
 
-<!-- MODAL VER VENTA -->
+<!-- MODAL VER PROVEEDOR -->
 
 <div class="modal fade" id="modalVerProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
@@ -216,24 +216,102 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
     </div>
   </div>
 </div>
-<!-- ___________________________________________________________________________________________ -->
-<form method="POST" id="cambioFac">
-  <input type="hidden" name="id" id="idFac"  />
-  <input type="hidden" name="bandera" id="banderaFac" />
-  <input type="hidden" name="valor" id="valorFac" />
-</form>
-<!-- ___________________________________________________________________________________________ -->
+
 </div>
 
+<!-- MODAL EDITAR PROVEEDOR -->
+
+<div class="modal fade" id="modalEditarProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#007bff;color:black;">
+
+        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
+      </div>
+      <div class="modal-body">
+       <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
+        <h3 align="center"><b>Datos Generales</b></h3>
+        <hr width="75%" style="background-color:#007bff;"/>
+        <input type="hidden" value="EditarPro" name="bandera"/>
+        <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
+        <div class="form-group ">
+          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
+          <div class="col-sm-7">
+            <input class="form-control" type="text" id="nombreProEditar" name="Nombre_Emp"  aria-required="true" value="">
+          </div>
+        </div>
+        <br><br><br><br>
+        <div class="form-group">
+          <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Correo:</label>
+          <div  class="col-sm-7">
+            <input class="form-control" type="email" id="correoProEditar" name="Correo_Emp" onkeyup="validarCorreoProvEditar(this)"><a id='correoProvEditar'></a>
+          </div>
+        </div>
+        <br><br><br>
+        <div class="form-group">
+          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
+          <div class="col-sm-3">
+            <input class="form-control" type="text" id="telefonoProEditar" name="Telefono_Emp" data-mask="9999-9999" value="" >
+          </div>
+        </div>
+        <br><br><br>
+        <div class="form-group">
+          <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Dirección:</label>
+          <div class="col-sm-7">
+            <input class="form-control" type="text" name="Direccion_Emp" id="direccionProEditar" >
+          </div>
+        </div>
+        <br><br>
+        <h3 align="center"><b>Datos del Responsable</b></h3>
+        <hr width="75%" style="background-color:#007bff;"/>
+        <div class="form-group">
+          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
+          <div class="col-sm-7">
+            <input class="form-control" type="text" id="nombreResEditar" name="Nombre_Res" >
+          </div>
+        </div>
+        <br><br><br><br>
+        <div class="form-group">
+          <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
+          <div class="col-sm-3">
+            <input class="form-control" type="text" id="telefonoResEditar" name="Telefono_Res" data-mask="9999-9999">
+          </div>
+        </div>
+        <br><br><br>
+        <div class="form-group">
+          <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
+          <div class="col-sm-7">
+           <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
+           </textarea>
+         </div>
+       </div>
+     </form>
+   </div>
+   <br><br>
+   <div class="modal-footer">
+    <input type="hidden" id="anterior" value=""  />
+    <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validareditarProveedor()">Aceptar</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+  </div>
+</div>
+</div>
+<form method="POST" id="cambioProv">
+  <input type="hidden" name="id" id="idProv"  />
+  <input type="hidden" name="bandera" id="banderaProv" />
+  <input type="hidden" name="valor" id="valorProv" />
+</form>
+</div>
 
 <!-- _______________________________________________________________________________________ -->
 <script src="../assets/Validaciones/mostrarProveedor.js"></script>
 <script src="../assets/Validaciones/validarProveedor.js"></script>
+<script src="../assets/Validaciones/validarCorreo.js"></script>
+<script src="../assets/Validaciones/validarNombreCompletoUsuario.js"></script>
 
 <script type="text/javascript">
   function baja(id){
     swal({
-      title: '¿Está seguro de anular ésta venta?',
+      title: '¿Está seguro en dar de baja?',
                   // text: "You won't be able to revert this!",
                   type: 'warning',
                   showCancelButton: true,
@@ -244,12 +322,12 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 
                 }).then((result) => {
                   if(result.value){
-                    $('#idFac').val(id);
-                    $('#banderaFac').val('cambio');
-                    $('#valorFac').val('0');
+                    $('#idProv').val(id);
+                    $('#banderaProv').val('cambio');
+                    $('#valorProv').val('0');
                     var dominio = window.location.host;
-                    $('#cambioFac').attr('action','http://'+dominio+'/SISAUTO1/Controlador/ventasC.php');
-                    $('#cambioFac').submit();
+                    $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
+                    $('#cambioProv').submit();
                   }else{
 
                   }
@@ -269,12 +347,12 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 
                 }).then((result) => {
                   if(result.value){
-                    $('#idFac').val(id);
-                    $('#banderaFac').val('cambio');
-                    $('#valorFac').val('1');
+                    $('#idProv').val(id);
+                    $('#banderaProv').val('cambio');
+                    $('#valorProv').val('1');
                     var dominio = window.location.host;
-                    $('#cambioFac').attr('action','http://'+dominio+'/SISAUTO1/Controlador/ventasC.php');
-                    $('#cambioFac').submit();
+                    $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
+                    $('#cambioProv').submit();
                   }else{
 
                   }

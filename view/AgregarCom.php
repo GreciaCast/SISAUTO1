@@ -68,7 +68,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         ?>
                                         <label for="empresa" class="col-sm-3 control-label">Proveedor:</label>
                                         <div class="col-sm-3 input-group">
-                                            <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="chosen-select"> 
+                                            <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="form-control"> 
                                                 <option value="">[Selecionar proveedor]</option>
                                                 <?php
 
@@ -85,7 +85,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <div class="form-group row">
                                         <label for="tele1" class="col-sm-3 control-label">Categoría:</label>
                                         <div class="col-sm-2">
-                                          <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="chosen-select" onchange="filtrarCategoria(this.value);">
+                                          <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarCategoria(this.value);">
                                             <option value="">[Selecionar categoría]</option>
                                             <option value="1">AMORTIGUADORES</option>
                                             <option value="2">BUJÍAS</option>

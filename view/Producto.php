@@ -267,7 +267,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                      <div class="form-group">
                        <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del producto:</label>
                        <div class="col-sm-5">
-                         <select class="form-control" name="categorias"  id="catePE" onchange="veruniversal();">
+                         <select name="categorias" class="form-control" id="catePE" onchange="veruniversal();">
                             <option value="">[Selecionar Categoria]</option>
                             <option value="1">AMORTIGUADORES</option>
                             <option value="2">BUJÍAS</option>

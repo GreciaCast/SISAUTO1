@@ -514,7 +514,7 @@
 
         AbstractChosen.default_single_text = "Select an Option";
 
-        AbstractChosen.default_no_result_text = "No se encontraron registro coincidentes";
+        AbstractChosen.default_no_result_text = "No results match";
 
         return AbstractChosen;
 
