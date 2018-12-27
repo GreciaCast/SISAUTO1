@@ -123,8 +123,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                    </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 control-label">Cantidad en invetario: </label>
-                    <div class="col-sm-12 col-md-1">
+                    <label class="col-sm-3 control-label">Cantidad en invetario: </label>
+                    <div class="col-sm-8 col-md-1">
                       <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px">
                     </div>
                     <label class="col-sm-2 control-label">Costo: </label>
@@ -134,7 +134,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-2 control-label">Cantidad: </label>
+                    <label class="col-sm-3 control-label">Cantidad: </label>
                     <div class="col-sm-12 col-md-1">
                       <input id="cantidadPV" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
                     </div>

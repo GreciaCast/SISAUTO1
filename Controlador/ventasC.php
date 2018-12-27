@@ -3,9 +3,7 @@
 session_start();
 include("../confi/Conexion.php");
 $conexion = conectarMysql();
-
-
-
+$bandera = $_POST["bandera"];
 
 
 
@@ -30,4 +28,27 @@ $conexion = conectarMysql();
 		echo $costo;
 	}
 //-------------------------------------------------------------
+
+	if ($bandera=="cambio") {
+
+	$sql = "UPDATE venta set estado_Ven='".$_POST["valor"]."' where idVenta = '".$_POST["id"]."'";
+	$venta = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+	if ($_POST["valor"]==1) {
+	$aux = 0;
+		$_SESSION['mensaje'] ="Venta anulada exitosamente";
+    //////////CAPTURA DATOS PARA BITACORA
+    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Anuló una factura de venta')";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+    ///////////////////////////////////////////////
+	}else{
+		$aux = 1;
+		$_SESSION['mensaje'] ="Venta anulada exitosamente";
+    //////////CAPTURA DATOS PARA BITACORA
+    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Anuló una factura de venta')";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	}
+    header("location: /SISAUTO1/view/Ventas.php?tipo=".$aux."");
+ }
 ?>
