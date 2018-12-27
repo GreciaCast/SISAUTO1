@@ -34,7 +34,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <form class="form-horizontal" action="../Controlador/comprasC.php" method="POST" id="guardarCom" align="center" autocomplete="off">
                       <h3><b>Datos generales</b></h3>
                       <hr width="75%" style="background-color:#007bff;"/><br>
-                      <input type="hidden" value="GuardarCom" name="bandera"></input>
+                      <input type="hidden" value="GuardarVen" name="bandera"></input>
                       <div class="form-group row">
                         <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
                         <div class="col-sm-3 input-group">
@@ -46,7 +46,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                               <?php
                             }
                           ?>
-                          <input  id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
+                          <input id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
                         </div>
                       </div>
                       <div class="form-group row" id="data_2">
@@ -76,7 +76,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group row">
                        <label for="empresa" class="col-sm-3 control-label"></label>
                        <div class="col-sm-3 input-group">
-                        <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                        <select  id="clientess" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
                           <option value="">[Selecionar cliente]</option>
                           <?php
 
@@ -199,7 +199,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <br>
                   <hr width="75%">
                   <div class="form-group" align="center">
-                    <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarCompra();">Aceptar</button>
+                    <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta();">Aceptar</button>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>
                 </form>

@@ -98,3 +98,30 @@ function eliminarProductosDeTabla(id,subtotal){
     $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
     $('#f'+id).remove();
 }
+
+async function validarVenta(){
+    var detallesV = await validarDetallesV();
+    var clienteV = await validarClienteV();
+    if (detallesV && clienteV){
+        $('#guardarVen').submit();
+    };   
+}
+
+function validarDetallesV(){
+    if (($('#totalVenta').val().trim() == "0")) {
+        notaError("¡Los detalles de la compra son obligatorios!");
+        return false;
+    }else if (($('#totalVenta').val().trim() == "")) {
+        notaError("¡Los detalles de la compra deben ser válidos!");
+        return false;
+    }
+    return true;
+}
+
+function validarClienteV(){
+    if ($('#clientess').val().trim() == "") {
+        notaError("¡Debe seleccionar un cliente!");
+        return false;
+    }
+    return true;
+}
