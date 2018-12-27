@@ -97,9 +97,9 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
            <?php
            $aux = $venta['idVenta'];
            $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
-           $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-           $cliente = mysqli_fetch_array($cliente);
-           echo $cliente['numero_Fac'];
+           $factura = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $factura = mysqli_fetch_array($factura);
+           echo $factura['numero_Fac'];
            ?>
          </td>
          <td>

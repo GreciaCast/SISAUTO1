@@ -39,12 +39,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
                         <div class="col-sm-3 input-group">
                           <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
+                          $var = correlativoFactura();
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
                           ?>
                           <input  id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
                         </div>
@@ -59,7 +59,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $dia = date("d");
                         $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
                         ?>
-                          <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
+                        <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
                       </div>
                       <div class="form-group row">
                         <?php 
@@ -72,117 +72,117 @@ if (isset($_SESSION['usuarioActivo'])) {
                           <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Cliente Natural</label>
                         </div>
                       </div>
-                    <div id="clientesID" style="display:block">
-                     <div class="form-group row">
-                       <label for="empresa" class="col-sm-3 control-label"></label>
-                       <div class="col-sm-3 input-group">
-                        <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
-                          <option value="">[Selecionar cliente]</option>
-                          <?php
+                      <div id="clientesID" style="display:block">
+                       <div class="form-group row">
+                         <label for="empresa" class="col-sm-3 control-label"></label>
+                         <div class="col-sm-3 input-group">
+                          <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                            <option value="">[Selecionar cliente]</option>
+                            <?php
 
-                          While($cliente = mysqli_fetch_array($clientes)){
-                           echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
-                         }
-                         ?>
-                       </select>
+                            While($cliente = mysqli_fetch_array($clientes)){
+                             echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+                           }
+                           ?>
+                         </select>
+                       </div>
                      </div>
-                   </div>
                    </div>
                    <br><br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
-                  <?php 
-                    $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
-                    $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
-                  ?>
-                  <div class="form-group row">
+                   <?php 
+                   $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
+                   $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
+                   ?>
+                   <div class="form-group row">
                     <label class="col-sm-3 control-label">Producto: </label>
                     <div class="form-group row">
-                       <div class="col-sm-3 input-group">
-                        <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
-                          <option value="">[Selecionar producto]</option>
-                          <?php
-                          While($producto = mysqli_fetch_array($productos)){
-                            if($producto['descripcion_Prod'] == "Ninguna"){
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
-                              }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
-                              }
+                     <div class="col-sm-3 input-group">
+                      <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
+                        <option value="">[Selecionar producto]</option>
+                        <?php
+                        While($producto = mysqli_fetch_array($productos)){
+                          if($producto['descripcion_Prod'] == "Ninguna"){
+                            if($producto['categoria_Prod'] == 12){
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
                             }else{
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
-                              }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
-                              }
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                            }
+                          }else{
+                            if($producto['categoria_Prod'] == 12){
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
+                            }else{
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
                             }
                           }
-                          ?>
-                       </select>
-                     </div>
-                   </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-3 control-label">Cantidad en invetario: </label>
-                    <div class="col-sm-8 col-md-1">
-                      <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px">
-                    </div>
-                    <label class="col-sm-2 control-label">Costo: </label>
-                    <div class="col-sm-12 col-md-1 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px">
+                        }
+                        ?>
+                      </select>
                     </div>
                   </div>
-                  <div class="form-group row">
-                    <label class="col-sm-3 control-label">Cantidad: </label>
-                    <div class="col-sm-12 col-md-1">
-                      <input id="cantidadPV" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
-                    </div>
-                    <label class="col-sm-2 control-label">Precio: </label>
-                    <div class="col-sm-12 col-md-2 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                      <input id="precioPV" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 control-label">Cantidad en invetario: </label>
+                  <div class="col-sm-8 col-md-1">
+                    <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px">
                   </div>
-                  <div class="form-group row">
-                    <div class="col-sm-12 col-md-3">
-                    </div>
-                    <div class="col-sm-12 col-md-5">
-                      <a id='mensajeee1'></a>
-                    </div>
+                  <label class="col-sm-2 control-label">Costo: </label>
+                  <div class="col-sm-12 col-md-1 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                    <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px">
                   </div>
-                  <hr width="75%" /><br>
-                  <div class="form-group" align="center">
-                    <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregarProductosATabla();"></button>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-3 control-label">Cantidad: </label>
+                  <div class="col-sm-12 col-md-1">
+                    <input id="cantidadPV" name="cantidadProd" class="form-control" type="text" placeholder="Cantidad" style="width:150px;height:40px" onkeypress="return validarCantidad(this,event,this.value)"><a id='mensajeCantidad'></a>
                   </div>
-                  <div class="card mb-3">
-                    <div class="card-header">
-                      <h3><b>Detalles de la venta</b></h3>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                          <thead>
-                            <tr>
-                              <th style="width:10px">Cantidad</th>
-                              <th style="width:200px">Producto</th>
-                              <th style="width:30px">Precio unitario ($)</th>
-                              <th style="width:30px">Subtotal ($)</th>
-                              <th style="width:50px">Acción</th>
-                            </tr>
-                          </thead>
-                          <tbody id = "tablaProductosVenta">
+                  <label class="col-sm-2 control-label">Precio: </label>
+                  <div class="col-sm-12 col-md-2 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                    <input id="precioPV" name="precioProd" class="form-control" type="text" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)"><a id='mensajePrecio'></a>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-3">
+                  </div>
+                  <div class="col-sm-12 col-md-5">
+                    <a id='mensajeee1'></a>
+                  </div>
+                </div>
+                <hr width="75%" /><br>
+                <div class="form-group" align="center">
+                  <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregarProductosATabla();"></button>
+                </div>
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h3><b>Detalles de la venta</b></h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th style="width:10px">Cantidad</th>
+                            <th style="width:200px">Producto</th>
+                            <th style="width:30px">Precio unitario ($)</th>
+                            <th style="width:30px">Subtotal ($)</th>
+                            <th style="width:50px">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody id = "tablaProductosVenta">
 
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                    <div class="card-footer small text-muted"></div>
                   </div>
-                  <div class="form-group row">
-                    <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
-                    <div class="col-sm-12 col-md-2 input-group date">
-                      <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="totalVenta" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
+                  <div class="card-footer small text-muted"></div>
+                </div>
+                <div class="form-group row">
+                  <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
+                  <div class="col-sm-12 col-md-2 input-group date">
+                    <span class="input-group-addon"><i class="fa fa-usd"></i></span><input value="0" id="totalVenta" name="total" class="form-control" type="number" readonly="readonly" style="width:150px;height:40px">
                                             <!--
                                                 El id es para el js y el name para el controlador
                                               -->
@@ -218,212 +218,212 @@ if (isset($_SESSION['usuarioActivo'])) {
                                  <div class="modal-body">
                                    <hr width="75%" style="background-color:#007bff;"/>
                                    
-                                 
+                                   
                                    <br><br><br>
                                    
-                                  
-                                </div>
-                                <br><br>
-                                <div class="modal-footer">
-                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                                   
+                                 </div>
+                                 <br><br>
+                                 <div class="modal-footer">
+                                   <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                                 </div>
                                </div>
                              </div>
+
                            </div>
 
-                         </div>
+
+                           <script src="../assets/Validaciones/mostrarProducto.js"></script>
+                           <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
+                           <script src="../assets/Validaciones/validarProducto.js"></script>
+                           <script src="../assets/Validaciones/validarVentas.js"></script>
+                           <script src="../assets/Validaciones/validarCompras.js"></script>
+                           <script src="../assets/Validaciones/validarNumeros.js"></script>
+                           <script src="../assets/Validaciones/validarCliente.js"></script>
+                           <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
+                           <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
+                           <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+                           <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
 
 
-                         <script src="../assets/Validaciones/mostrarProducto.js"></script>
-                         <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
-                         <script src="../assets/Validaciones/validarProducto.js"></script>
-                         <script src="../assets/Validaciones/validarVentas.js"></script>
-                         <script src="../assets/Validaciones/validarCompras.js"></script>
-                         <script src="../assets/Validaciones/validarNumeros.js"></script>
-                         <script src="../assets/Validaciones/validarCliente.js"></script>
-                         <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
-                         <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
-                         <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-                         <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
-
-
-                        
+                           
 
 
 
 
 
-                         <script>
+                           <script>
 
-                          $(document).ready(function(){
+                            $(document).ready(function(){
 
-                            var $image = $(".image-crop > img")
-                            $($image).cropper({
-                              aspectRatio: 1.618,
-                              preview: ".img-preview",
-                              done: function(data) {
+                              var $image = $(".image-crop > img")
+                              $($image).cropper({
+                                aspectRatio: 1.618,
+                                preview: ".img-preview",
+                                done: function(data) {
                                     // Output the result data for cropping image.
                                   }
                                 });
 
-                            var $inputImage = $("#inputImage");
-                            if (window.FileReader) {
-                              $inputImage.change(function() {
-                                var fileReader = new FileReader(),
-                                files = this.files,
-                                file;
+                              var $inputImage = $("#inputImage");
+                              if (window.FileReader) {
+                                $inputImage.change(function() {
+                                  var fileReader = new FileReader(),
+                                  files = this.files,
+                                  file;
 
-                                if (!files.length) {
-                                  return;
-                                }
+                                  if (!files.length) {
+                                    return;
+                                  }
 
-                                file = files[0];
+                                  file = files[0];
 
-                                if (/^image\/\w+$/.test(file.type)) {
-                                  fileReader.readAsDataURL(file);
-                                  fileReader.onload = function () {
-                                    $inputImage.val("");
-                                    $image.cropper("reset", true).cropper("replace", this.result);
-                                  };
-                                } else {
-                                  showMessage("Please choose an image file.");
-                                }
-                              });
-                            } else {
-                              $inputImage.addClass("hide");
-                            }
-
-                            $("#download").click(function() {
-                              window.open($image.cropper("getDataURL"));
-                            });
-
-                            $("#zoomIn").click(function() {
-                              $image.cropper("zoom", 0.1);
-                            });
-
-                            $("#zoomOut").click(function() {
-                              $image.cropper("zoom", -0.1);
-                            });
-
-                            $("#rotateLeft").click(function() {
-                              $image.cropper("rotate", 45);
-                            });
-
-                            $("#rotateRight").click(function() {
-                              $image.cropper("rotate", -45);
-                            });
-
-                            $("#setDrag").click(function() {
-                              $image.cropper("setDragMode", "crop");
-                            });
-
-                            $('#data_1 .input-group.date').datepicker({
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              calendarWeeks: true,
-                              autoclose: true
-                            });
-
-                            $('#data_2 .input-group.date').datepicker({
-                              startView: 1,
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true,
-                              format: "dd/mm/yyyy"
-                            });
-
-                            $('#data_3 .input-group.date').datepicker({
-                              startView: 2,
-                              todayBtn: "linked",
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true
-                            });
-
-                            $('#data_4 .input-group.date').datepicker({
-                              minViewMode: 1,
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true,
-                              todayHighlight: true
-                            });
-
-                            $('#data_5 .input-daterange').datepicker({
-                              keyboardNavigation: false,
-                              forceParse: false,
-                              autoclose: true
-                            });
-
-                            var elem = document.querySelector('.js-switch');
-                            var switchery = new Switchery(elem, { color: '#1AB394' });
-
-                            var elem_2 = document.querySelector('.js-switch_2');
-                            var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
-
-                            var elem_3 = document.querySelector('.js-switch_3');
-                            var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
-
-                            $('.i-checks').iCheck({
-                              checkboxClass: 'icheckbox_square-green',
-                              radioClass: 'iradio_square-green'
-                            });
-
-                            $('.demo1').colorpicker();
-
-                            var divStyle = $('.back-change')[0].style;
-                            $('#demo_apidemo').colorpicker({
-                              color: divStyle.backgroundColor
-                            }).on('changeColor', function(ev) {
-                              divStyle.backgroundColor = ev.color.toHex();
-                            });
-
-                            $('.clockpicker').clockpicker();
-
-                            $('input[name="daterange"]').daterangepicker();
-
-                            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-
-                            $('#reportrange').daterangepicker({
-                              format: 'MM/DD/YYYY',
-                              startDate: moment().subtract(29, 'days'),
-                              endDate: moment(),
-                              minDate: '01/01/2012',
-                              maxDate: '12/31/2015',
-                              dateLimit: { days: 60 },
-                              showDropdowns: true,
-                              showWeekNumbers: true,
-                              timePicker: false,
-                              timePickerIncrement: 1,
-                              timePicker12Hour: true,
-                              ranges: {
-                                'Hoy': [moment(), moment()],
-                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                              },
-                              opens: 'right',
-                              drops: 'down',
-                              buttonClasses: ['btn', 'btn-sm'],
-                              applyClass: 'btn-primary',
-                              cancelClass: 'btn-default',
-                              separator: ' to ',
-                              locale: {
-                                applyLabel: 'Submit',
-                                cancelLabel: 'Cancel',
-                                fromLabel: 'From',
-                                toLabel: 'To',
-                                customRangeLabel: 'Custom',
-                                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
-                                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                firstDay: 1
+                                  if (/^image\/\w+$/.test(file.type)) {
+                                    fileReader.readAsDataURL(file);
+                                    fileReader.onload = function () {
+                                      $inputImage.val("");
+                                      $image.cropper("reset", true).cropper("replace", this.result);
+                                    };
+                                  } else {
+                                    showMessage("Please choose an image file.");
+                                  }
+                                });
+                              } else {
+                                $inputImage.addClass("hide");
                               }
-                            }, function(start, end, label) {
-                              console.log(start.toISOString(), end.toISOString(), label);
-                              $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                            });
+
+                              $("#download").click(function() {
+                                window.open($image.cropper("getDataURL"));
+                              });
+
+                              $("#zoomIn").click(function() {
+                                $image.cropper("zoom", 0.1);
+                              });
+
+                              $("#zoomOut").click(function() {
+                                $image.cropper("zoom", -0.1);
+                              });
+
+                              $("#rotateLeft").click(function() {
+                                $image.cropper("rotate", 45);
+                              });
+
+                              $("#rotateRight").click(function() {
+                                $image.cropper("rotate", -45);
+                              });
+
+                              $("#setDrag").click(function() {
+                                $image.cropper("setDragMode", "crop");
+                              });
+
+                              $('#data_1 .input-group.date').datepicker({
+                                todayBtn: "linked",
+                                keyboardNavigation: false,
+                                forceParse: false,
+                                calendarWeeks: true,
+                                autoclose: true
+                              });
+
+                              $('#data_2 .input-group.date').datepicker({
+                                startView: 1,
+                                todayBtn: "linked",
+                                keyboardNavigation: false,
+                                forceParse: false,
+                                autoclose: true,
+                                format: "dd/mm/yyyy"
+                              });
+
+                              $('#data_3 .input-group.date').datepicker({
+                                startView: 2,
+                                todayBtn: "linked",
+                                keyboardNavigation: false,
+                                forceParse: false,
+                                autoclose: true
+                              });
+
+                              $('#data_4 .input-group.date').datepicker({
+                                minViewMode: 1,
+                                keyboardNavigation: false,
+                                forceParse: false,
+                                autoclose: true,
+                                todayHighlight: true
+                              });
+
+                              $('#data_5 .input-daterange').datepicker({
+                                keyboardNavigation: false,
+                                forceParse: false,
+                                autoclose: true
+                              });
+
+                              var elem = document.querySelector('.js-switch');
+                              var switchery = new Switchery(elem, { color: '#1AB394' });
+
+                              var elem_2 = document.querySelector('.js-switch_2');
+                              var switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+
+                              var elem_3 = document.querySelector('.js-switch_3');
+                              var switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+
+                              $('.i-checks').iCheck({
+                                checkboxClass: 'icheckbox_square-green',
+                                radioClass: 'iradio_square-green'
+                              });
+
+                              $('.demo1').colorpicker();
+
+                              var divStyle = $('.back-change')[0].style;
+                              $('#demo_apidemo').colorpicker({
+                                color: divStyle.backgroundColor
+                              }).on('changeColor', function(ev) {
+                                divStyle.backgroundColor = ev.color.toHex();
+                              });
+
+                              $('.clockpicker').clockpicker();
+
+                              $('input[name="daterange"]').daterangepicker();
+
+                              $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+                              $('#reportrange').daterangepicker({
+                                format: 'MM/DD/YYYY',
+                                startDate: moment().subtract(29, 'days'),
+                                endDate: moment(),
+                                minDate: '01/01/2012',
+                                maxDate: '12/31/2015',
+                                dateLimit: { days: 60 },
+                                showDropdowns: true,
+                                showWeekNumbers: true,
+                                timePicker: false,
+                                timePickerIncrement: 1,
+                                timePicker12Hour: true,
+                                ranges: {
+                                  'Hoy': [moment(), moment()],
+                                  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                                },
+                                opens: 'right',
+                                drops: 'down',
+                                buttonClasses: ['btn', 'btn-sm'],
+                                applyClass: 'btn-primary',
+                                cancelClass: 'btn-default',
+                                separator: ' to ',
+                                locale: {
+                                  applyLabel: 'Submit',
+                                  cancelLabel: 'Cancel',
+                                  fromLabel: 'From',
+                                  toLabel: 'To',
+                                  customRangeLabel: 'Custom',
+                                  daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                                  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                                  firstDay: 1
+                                }
+                              }, function(start, end, label) {
+                                console.log(start.toISOString(), end.toISOString(), label);
+                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                              });
 
 $(".select2_demo_1").select2();
 $(".select2_demo_2").select2();
