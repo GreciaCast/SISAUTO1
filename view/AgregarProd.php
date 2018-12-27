@@ -71,7 +71,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group ">
                                             <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
                                             <div  class="col-sm-2">
-                                              <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();">
+                                              <select name="categorias" style="width:600px;height:40px" class="chosen-select" id="categoriaPr" onchange="veruniversal();">
                                                 <option value="">[Selecionar Categoria]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>

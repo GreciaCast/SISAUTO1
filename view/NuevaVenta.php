@@ -39,12 +39,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
                         <div class="col-sm-3 input-group">
                           <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
+                          $var = correlativoFactura();
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
                           ?>
                           <input  id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)"><a id='mensajeNumFac'></a>
                         </div>
@@ -59,7 +59,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $dia = date("d");
                         $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
                         ?>
-                          <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
+                        <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
                       </div>
                       <div class="form-group row">
                         <?php 
@@ -72,49 +72,48 @@ if (isset($_SESSION['usuarioActivo'])) {
                           <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Cliente Natural</label>
                         </div>
                       </div>
-                    <div id="clientesID" style="display:block">
-                     <div class="form-group row">
-                       <label for="empresa" class="col-sm-3 control-label"></label>
-                       <div class="col-sm-3 input-group">
-                        <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
-                          <option value="">[Selecionar cliente]</option>
-                          <?php
+                      <div id="clientesID" style="display:block">
+                       <div class="form-group row">
+                         <label for="empresa" class="col-sm-3 control-label"></label>
+                         <div class="col-sm-3 input-group">
+                          <select  id="proves" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                            <option value="">[Selecionar cliente]</option>
+                            <?php
 
-                          While($cliente = mysqli_fetch_array($clientes)){
-                           echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
-                         }
-                         ?>
-                       </select>
+                            While($cliente = mysqli_fetch_array($clientes)){
+                             echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+                           }
+                           ?>
+                         </select>
+                       </div>
                      </div>
-                   </div>
                    </div>
                    <br><br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
-                  <?php 
-                    $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
-                    $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
-                  ?>
-                  <div class="form-group row">
+                   <?php 
+                   $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
+                   $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
+                   ?>
+                   <div class="form-group row">
                     <label class="col-sm-3 control-label">Producto: </label>
                     <div class="form-group row">
-                       <div class="col-sm-3 input-group">
-                        <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
-                          <option value="">[Selecionar producto]</option>
-                          <?php
-                          While($producto = mysqli_fetch_array($productos)){
-                            if($producto['descripcion_Prod'] == "Ninguna"){
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
-                              }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
-                              }
+                     <div class="col-sm-3 input-group">
+                      <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
+                        <option value="">[Selecionar producto]</option>
+                        <?php
+                        While($producto = mysqli_fetch_array($productos)){
+                          if($producto['descripcion_Prod'] == "Ninguna"){
+                            if($producto['categoria_Prod'] == 12){
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
                             }else{
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
-                              }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
-                              }
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                            }
+                          }else{
+                            if($producto['categoria_Prod'] == 12){
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
+                            }else{
+                              echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
                             }
                           }
                           ?>
@@ -151,41 +150,38 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <div class="col-sm-1 col-md-1">
                       <button title="Hacer descuento 15%" type="button" class="btn btn-primary" style="width:200px;height:40px" onclick="aplicarDescuento15();">Aplicar descuento 15%</button>
                     </div>
+                <div class="form-group row">
+                  <div class="col-sm-12 col-md-3">
                   </div>
-                  <div class="form-group row">
-                    <div class="col-sm-12 col-md-3">
-                    </div>
-                    <div class="col-sm-12 col-md-5">
-                      <a id='mensajeee1'></a>
-                    </div>
+                  <div class="col-sm-12 col-md-5">
+                    <a id='mensajeee1'></a>
                   </div>
-                  <hr width="75%" /><br>
-                  <div class="form-group" align="center">
-                    <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregarProductosATabla();"></button>
+                </div>
+                <hr width="75%" /><br>
+                <div class="form-group" align="center">
+                  <button title="Agregar a tabla" type="button" class="btn btn-primary fa fa-plus" style="width:80px;height:40px" onclick="agregarProductosATabla();"></button>
+                </div>
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h3><b>Detalles de la venta</b></h3>
                   </div>
-                  <div class="card mb-3">
-                    <div class="card-header">
-                      <h3><b>Detalles de la venta</b></h3>
-                    </div>
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                          <thead>
-                            <tr>
-                              <th style="width:10px">Cantidad</th>
-                              <th style="width:200px">Producto</th>
-                              <th style="width:30px">Precio unitario ($)</th>
-                              <th style="width:30px">Subtotal ($)</th>
-                              <th style="width:50px">Acción</th>
-                            </tr>
-                          </thead>
-                          <tbody id = "tablaProductosVenta">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                          <tr>
+                            <th style="width:10px">Cantidad</th>
+                            <th style="width:200px">Producto</th>
+                            <th style="width:30px">Precio unitario ($)</th>
+                            <th style="width:30px">Subtotal ($)</th>
+                            <th style="width:50px">Acción</th>
+                          </tr>
+                        </thead>
+                        <tbody id = "tablaProductosVenta">
 
-                          </tbody>
-                        </table>
-                      </div>
+                        </tbody>
+                      </table>
                     </div>
-                    <div class="card-footer small text-muted"></div>
                   </div>
                   <div class="form-group row">
                     <label align="right" for="nrc" class="col-sm-12 col-md-8 control-label">Total de venta:</label>
