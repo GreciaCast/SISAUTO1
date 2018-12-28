@@ -95,6 +95,10 @@ and open the template in the editor.
                                                                             </button>
                                                                             <button title="Eliminar" type="button" class="btn btn-danger fa fa-trash-o" onclick="eliminarC(<?php echo $compra['idCompra'] ?>)">
                                                                             </button>
+                                                                            <a  href="DevolucionesCompras.php?idcompra=<?php echo $compra['idCompra'] ?>">
+                                                                            <button title="Devolución" type="button" class="btn btn-primary fa fa-times" >
+                                                                            </button>
+                                                                            </a>
                                                                         </th>
                                                                     </tr>
                                                                     <?php } ?>

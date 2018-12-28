@@ -444,4 +444,10 @@ if (isset($_SESSION['mensaje'])) {
 </script>");
    unset($_SESSION['mensaje']);
 }
+if (isset($_SESSION['error'])) {
+   echo ("<script type='text/javascript'>
+    notaError('".$_SESSION['error']."');
+</script>");
+   unset($_SESSION['error']);
+}
 ?>
