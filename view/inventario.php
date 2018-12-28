@@ -27,7 +27,7 @@ if (isset($_SESSION['usuarioActivo'])) {
       </div>
       <?php
 
-      $sql="SELECT * from inventario GROUP BY id_Producto";
+      $sql = "SELECT * from inventario GROUP BY id_Producto";
       $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); ?>
       
       <div class="row">

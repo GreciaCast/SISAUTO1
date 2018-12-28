@@ -19,13 +19,13 @@ function mostrarCostoyExistencias(id){
 	$('#cantidadDisponiblePV').empty();
 	$('#costoPV').empty();
 	$('#precioPV').empty();
-    $.get('/SISAUTO1/Controlador/ventasC.php?existencias=1&id='+id,function(data){
+    $.get('/SISAUTO1/Controlador/datosProductoC.php?existencias=1&id='+id,function(data){
         $('#cantidadDisponiblePV').val(data);
     });
-    $.get('/SISAUTO1/Controlador/ventasC.php?costo=1&id='+id,function(data){
+    $.get('/SISAUTO1/Controlador/datosProductoC.php?costo=1&id='+id,function(data){
     	$('#costoPV').val(data); 
     });
-    $.get('/SISAUTO1/Controlador/ventasC.php?precio=1&id='+id,function(data){
+    $.get('/SISAUTO1/Controlador/datosProductoC.php?precio=1&id='+id,function(data){
     	$('#precioPV').val(data); 
     });
 }
@@ -42,6 +42,8 @@ function aplicarDescuento15(){
 }
 
 function agregarProductosATabla(){
+	var limpiar = $('#limpiarPV').val();
+	console.log(limpiar);
 	var disponible = $('#cantidadDisponiblePV').val();
 	//console.log(disponible);
     var cantidad = $('#cantidadPV').val();
@@ -59,8 +61,8 @@ function agregarProductosATabla(){
    // html = html+'<td>'+precioventa+'</td>';
     html = html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>';
     html = html+'<td>';
-    html = html+'<input type="hidden" name="cantidad_DCom[]" value="'+cantidad+'"/>';
-    html = html+'<input type="hidden" name="precio_DCom[]" value="'+precio+'"/>';
+    html = html+'<input type="hidden" name="cantidad_DVen[]" value="'+cantidad+'"/>';
+    html = html+'<input type="hidden" name="precio_DVen[]" value="'+precio+'"/>';
    // html = html+'<input type="hidden" name="precio_DVen[]" value="'+precioventa+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
     html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminarProductosDeTabla('+productoId+','+subtotal+');"></button></td></tr>';
