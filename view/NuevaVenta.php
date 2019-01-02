@@ -31,12 +31,12 @@ if (isset($_SESSION['usuarioActivo'])) {
               <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                   <div class="ibox-content">
-                    <form class="form-horizontal" action="../Controlador/comprasC.php" method="POST" id="guardarCom" align="center" autocomplete="off">
+                    <form class="form-horizontal" action="../Controlador/ventasC.php" method="POST" id="guardarVen" align="center" autocomplete="off">
                       <h3><b>Datos generales</b></h3>
                       <hr width="75%" style="background-color:#007bff;"/><br>
                       <input type="hidden" value="GuardarVen" name="bandera"></input>
                       <div class="form-group row">
-                        <label for="empresa" class="col-sm-3 control-label">Número de factura: </label>
+                        <label class="col-sm-3 control-label">Número de factura: </label>
                         <div class="col-sm-3 input-group">
                           <?php 
                             $var = correlativoFactura();
@@ -46,7 +46,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                               <?php
                             }
                           ?>
-                          <input id="numFacCom" name="numFac_Com" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
+                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
                         </div>
                       </div>
                       <div class="form-group row" id="data_2">
@@ -59,7 +59,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $dia = date("d");
                         $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
                         ?>
-                          <input id="fecha" name="fecha_Com" type="hidden" value="<?php echo $fech?>">
+                          <input id="fecha" name="fecha_Ven" type="hidden" value="<?php echo $fech?>">
                       </div>
                       <div class="form-group row">
                         <?php 
@@ -76,7 +76,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group row">
                        <label for="empresa" class="col-sm-3 control-label"></label>
                        <div class="col-sm-3 input-group">
-                        <select  id="clientess" name="id_Proveedor" class="chosen-select" style="width:500px;height:40px" tabindex="2">
+                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2">
                           <option value="">[Selecionar cliente]</option>
                           <?php
 
@@ -91,9 +91,15 @@ if (isset($_SESSION['usuarioActivo'])) {
                    <br><br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
-                  <?php 
-                    $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
-                    $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
+                  <?php
+                  $sql = "SELECT * from inventario GROUP BY id_Producto";
+                  $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+      
+
+
+
+                    // $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
+                    // $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
                   ?>
                   <div class="form-group row">
                     <label class="col-sm-3 control-label">Producto: </label>
@@ -102,25 +108,36 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <select id="produs" name="id_Producto" class="chosen-select" style="width:600px;height:40px" tabindex="2" onchange="mostrarCostoyExistencias(this.value);">
                           <option value="">[Selecionar producto]</option>
                           <?php
-                          While($producto = mysqli_fetch_array($productos)){
+                          $a = 0;
+                          While($inventario = mysqli_fetch_array($inventarios)){
+                            $aux = $inventario['id_Producto']; 
+                            $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
+                            $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+                            $producto = mysqli_fetch_array($productos);
+                            if ($a == 0) {
+                              $aa = $producto['idProducto'];
+                            }
+
                             if($producto['descripcion_Prod'] == "Ninguna"){
                               if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].'</option>';
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')'.'</option>';
                               }else{
                                 echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
                               }
                             }else{
                               if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].'</option>';
+                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')'.'</option>';
                               }else{
                                 echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
                               }
                             }
+                            $a++;
                           }
                           ?>
                        </select>
                      </div>
                    </div>
+                   <input id="limpiarPV" name="limpiarPV" type="hidden" value="<?php echo $aa?>">
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-12 col-md-1">

@@ -30,7 +30,7 @@ function contarProductoInventario($id){
 
 function correlativoFactura(){
 	$conexion = conectarMysql();
-	$sql = "SELECT * from factura ";
+	$sql = "SELECT * from factura order by idFactura asc";
 	$var = mysqli_query($conexion,$sql);
 	$total = mysqli_num_rows($var);
 	if($total == 0){
