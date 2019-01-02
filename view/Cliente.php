@@ -81,7 +81,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                    <th style="width:175px">Nombre</th>
                                    <!-- <th style="width:175px">Dirección</th> -->
                                    <th style="width:85px">Teléfono</th>
-                                   <th style="width:85px">NCR</th>
+                                   <th style="width:85px">NRC</th>
                                    <th style="width:85px">NIT</th>
                                    <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
                                      <th align="center" style="width:2px">Acciones</th>

@@ -101,7 +101,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                             </td>
                                                             <td>
                                                                 <input type="hidden" name="id_detallecompra[]" value="<?php echo $compra['idDetalleCompra'] ?>">
-                                                                <input class="form-control" type="number" id="devolucion<?php echo $devolver?>" name="devolucion[]"  aria-required="true" value="">
+                                                                <input type="hidden" id="dis<?php echo $devolver?>" value="<?php echo $disponible ?>">
+                                                                <input class="form-control" type="number" id="devolucion<?php echo $devolver?>" name="devolucion[]" onkeyPress="return validar(this,event,this.value,'<?php echo $devolver?>');" aria-required="true">
                                                             </td>
 
                                                         </tr>
@@ -122,6 +123,19 @@ if (isset($_SESSION['usuarioActivo'])) {
                         </div>
                     </div>
                 </div>
+
+                <script type="text/javascript">
+                    function validar(obj,e,valor,id){
+                        tecla = (document.all) ? e.keyCode : e.which;
+                        var dev=parseFloat(valor+String.fromCharCode(tecla));
+                        var disp=parseFloat($("#dis"+id).val());
+                        
+                        if(dev > disp || dev < 0){
+                            return false;
+                        }
+
+                    }
+                </script>
 
             </div>
         </div>
