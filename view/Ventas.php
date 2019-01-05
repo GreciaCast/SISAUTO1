@@ -113,10 +113,11 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
            </td>
 
            <th align="center">
+            <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra"></button>
             <?php  if ($tipo == 1) {
 
              ?>
-             <button title="Dar de baja" type="button" class="btn btn-danger fa fa-arrow-circle-down" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
+             <button title="Anular" type="button" class="btn btn-warning fa fa-times" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
              <?php
 
            }else{ ?>

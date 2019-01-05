@@ -40,16 +40,16 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <div class="form-group">
                                             </div>
                                             <?php 
-                                            $sql = "SELECT  detallecompra.*,producto.nombre_Prod FROM detallecompra left OUTER JOIN producto on detallecompra.id_Producto=producto.idProducto where detallecompra.id_Compra='$var'";
+                                            $sql = "SELECT  detallecompra.*,producto.nombre_Prod,producto.categoria_Prod,producto.marca_Prod,producto.descripcion_Prod,producto.modeloVehiculo_Prod,producto.anioVehiculo_Prod FROM detallecompra left OUTER JOIN producto on detallecompra.id_Producto=producto.idProducto where detallecompra.id_Compra='$var'";
                                             $compras = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
                                             ?>
                                             <div class="form-group">
                                                 <label for="empresa" class="col-sm-3 control-label">Justificar:</label>
                                                 <div class="col-sm-6">
-                                                   <textarea class="form-control" type="text" name="justificacion"  placeholder="" id="justificar" ></textarea>
-                                               </div>
-                                           </div>
-                                           <div class="card mb-3">
+                                                 <textarea class="form-control" type="text" name="justificacion"  placeholder="" id="justificar" ></textarea>
+                                             </div>
+                                         </div>
+                                         <div class="card mb-3">
                                             <br>
                                             <div class="card-body">
                                                 <div class="table-responsive">
@@ -63,16 +63,29 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                             <?php While($compra = mysqli_fetch_assoc($compras)){?>
-                                                             <tr>
-                                                                <td>
-                                                                    <?php echo $compra['nombre_Prod'];?>
-                                                                </td>   
-                                                                <td>
-                                                                    <?php 
-                                                                    $idProducto= $compra['id_Producto'];
-                                                                    $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
-                                                                    $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                                               <?php While($compra = mysqli_fetch_assoc($compras)){?>
+                                                               <tr>
+                                                               <td><?php  
+                                                                   if($compra['descripcion_Prod'] == "Ninguna"){
+                                                                   if($compra['categoria_Prod'] == 12){
+                                                                   echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].')';
+                                                               }else{
+                                                               echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                                           }
+                                                       }else{
+                                                       if($compra['categoria_Prod'] == 12){
+                                                       echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].')';
+                                                   }else{
+                                                   echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].' para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                               }
+                                           }
+                                           ?>
+                                       </td>   
+                                       <td>
+                                        <?php 
+                                        $idProducto= $compra['id_Producto'];
+                                        $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                                        $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
                                                                 $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
                                                                 $resta = $inventario['nuevaExistencia_Inv'];
 
@@ -82,9 +95,9 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                 foreach ($resultados as $resultado) {
                                                                     $idResultado = $resultado["idDetalleCompra"];
                                                                     $sql1 = "SELECT SUM(cantidad_DDev) as totalD from detallesdevoluciones  where id_DetalleCompra = '$idResultado'";
-                                                                            $totald=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-                                                                            $totald = mysqli_fetch_array($totald);
-                                                                            $menos=$resultado["cantidad_DCom"]-$totald['totalD'];
+                                                                    $totald=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                                                    $totald = mysqli_fetch_array($totald);
+                                                                    $menos=$resultado["cantidad_DCom"]-$totald['totalD'];
                                                                     if($resta > $menos){
                                                                         $resta = $resta - $menos;
                                                                     }else{
@@ -97,7 +110,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                         }else if($devolver == $stop){
                                                                             $disponible = $resta;
                                                                         }else{
-                                                                            
+
                                                                             $idDetalle = $compra["idDetalleCompra"];
                                                                             $sql1 = "SELECT SUM(cantidad_DDev) as totalD from detallesdevoluciones  where id_DetalleCompra = '$idDetalle'";
                                                                             $totald=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
