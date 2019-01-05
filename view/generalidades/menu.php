@@ -13,7 +13,7 @@
                 </ul>
             </li>
             <li>
-                <a href="" style="font-size:15px;"><i class="fa fa-folder"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
+                <a href="" style="font-size:15px;"><i class="fa fa-folder"></i> <span class="nav-label">Catálogo</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="Cliente.php" style="font-size:15px;"><span class="fa fa-user"> Cliente</span></a></li>
                     <li><a href="Proveedor.php" style="font-size:15px;"><span class="fa fa-group"> Proveedor</span></a></li>
@@ -34,7 +34,7 @@
                 <ul class="nav nav-second-level">
                     <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
                     <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
-                    <li><a href="" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
+                    <li><a href="Respaldo.php" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
                     <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-database"> Configuracion</span></a></li>
                 </ul>
             </li>
@@ -69,53 +69,68 @@
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-success" href="#"><i class="fa fa-bars"></i> </a>
                 <a class="navbar-brand" href="index.php" style="color: white">SISAUTO</a>
             </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-success">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
 
                 <?php include("../confi/Conexion.php");
                 $conexion = conectarMysql();
+                $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+                $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
+                $contador = 0;
+                $label = "label-success";
+                        While($producto = mysqli_fetch_assoc($productos)){
+                            $idProducto= $producto["idProducto"];
+                            $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                            $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                            if (mysqli_num_rows($inventario) == 0) {
+                                $inventario = 0;
+                            }else{
+                            $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
+                            $inventario = $inventario['nuevaExistencia_Inv'];
+                            }
+                            if ($producto["stock_Prod"] > $inventario) {
+                                $contador++;
+                                $label = "label-danger";   
+                            }
+                        }
+                    $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+                    $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
+                
                 ?>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label <?php echo $label ?>" id="infocolor"><?php echo $contador ?></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <?php 
+                        While($producto = mysqli_fetch_assoc($productos)){
+                            $idProducto= $producto["idProducto"];
+                            $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                            $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                            if (mysqli_num_rows($inventario) == 0) {
+                                $inventario = 0;
+                            }else{
+                            $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
+                            $inventario = $inventario['nuevaExistencia_Inv'];
+                            }
+                            if ($producto["stock_Prod"] > $inventario) {
+                                ?>
+                                <li>
+                                    <a href="#">
+                                        <div>
+                                        <i class="fa fa-envelope fa-fw"></i><?php echo $producto["nombre_Prod"]; ?>  
+                                            <span class="pull-right text-muted medium"> Existencias: <?php echo $inventario."/".$producto["stock_Prod"]; ?></span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </ul>
+                </li>
 
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">

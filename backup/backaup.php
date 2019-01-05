@@ -27,11 +27,12 @@ if($bandera=="backup"){
 		$tables[]=$row[0];
 	}
 
-	$backupSQL="";
+	$backupSQL="SET FOREIGN_KEY_CHECKS=0;"."\n\n";
 	foreach($tables as $table){
 		$query="SHOW CREATE TABLE $table";
 		$result=mysqli_query($conn,$query);
 		$row=mysqli_fetch_row($result);
+		$backupSQL.='DROP TABLE IF EXISTS '.$table.' CASCADE;';
 		$backupSQL.="\n\n".$row[1].";\n\n";
 
 		$query="SELECT * FROM $table";
@@ -57,8 +58,10 @@ if($bandera=="backup"){
 					$backupSQL.=");\n";
 }
 }
-$backupSQL.="\n";
+$backupSQL.="\n\n";
 }
+$backupSQL.="SET FOREIGN_KEY_CHECKS=1;"."\n\n";
+
 
 if(!empty($backupSQL)){
 	$backup_file_name="db/sisauto".date("Y-m-d-H-i-s").'.sql';
@@ -119,14 +122,37 @@ if ($bandera == "respaldar") {
         if (substr(trim($line), -1, 1) == ';'){
             // Perform the query
             if(!$db->query($templine)){
-                $error .= $db->error . '---------';
+                $error .= $db->errors;
             }
             
             // Reset temp variable to empty
             $templine = '';
         }
     }
-    echo !empty($error)?$error:true;
+    $resultado=!empty($error)?false:true;
+    if($resultado){
+    	$_SESSION['mensaje'] = "Restauración realizada exitosamente";
+
+    }else{
+    	$_SESSION['error'] = "No se pudo restaurar";
+
+    }
+}
+
+if ($bandera == "eliminar") {
+	$nombre = $_POST["nombre"];
+
+	$filePath = '../backup/db/' . $nombre;
+	$resultado = unlink($filePath);
+
+	if($resultado){
+    	$_SESSION['mensaje'] = "Respaldo eliminado exitosamente";
+
+    }else{
+    	$_SESSION['error'] = "No se pudo eliminar el respaldo";
+
+    }
+
 }
 
 ?>

@@ -42,7 +42,7 @@ and open the template in the editor.
         <div class="col-12">
             <div class="row" style="padding:20px">
                 <br>
-                <a class="pull-right" href="Reportes/ReporteUsuario.php">
+                <a class="pull-right" target="_blank" href="Reportes/ReporteUsuario.php">
                     <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
                         Reporte
                         <span class="fa fa-file-pdf-o"></span>

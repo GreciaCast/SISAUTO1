@@ -15,28 +15,33 @@ if (isset($_SESSION['usuarioActivo'])) {
 						<li>
 							<a href="index.php" style="font-size:15px;color:blue;">Inicio</a>
 						</li>
+						<li>
+							<a style="font-size:15px;">Backup</a>
+						</li>
 					</ol>
 				</div>
 				<div class="col-lg-2">
 				</div>
 			</div>
-			<form class="form-horizontal" action="../backup/backaup.php" method="POST">
-				<input type="hidden" name="bandera" value="backup" />
-				<a class="pull-right" href="">
-					<button class="btn btn-success" style="font-size:16px;" type="submit">
-						Nuevo
-						<span class="fa fa-file-pdf-o"></span>
-					</button>
-					&nbsp;
-				</a>
-				<a class="pull-right" href="" data-toggle="modal" data-target="#modalSubirBackup">
-					<button class="btn btn-success" style="font-size:16px;">
-						Subir
-						<span class="fa fa-file-pdf-o"></span>
-					</button>
-					&nbsp;
-				</a>
-			</form>
+			<div class="row" style="padding:20px">
+				<form class="form-horizontal" action="../backup/backaup.php" method="POST">
+					<input type="hidden" name="bandera" value="backup" />
+					<a class="pull-right" href="">
+						<button class="btn btn-success" style="font-size:16px;" type="submit">
+							Agregar Nuevo
+							<span class="fa fa-plus"></span>
+						</button>
+						&nbsp;
+					</a>
+					<a class="pull-right" href="" data-toggle="modal" data-target="#modalSubirBackup">
+						<button class="btn btn-success" style="font-size:16px;">
+							Subir
+							<i class="fa fa-arrow-up"></i>
+						</button>
+						&nbsp;
+					</a>
+				</form>
+			</div>
 			<div class="row">
 
 				<div class="col-lg-12">
@@ -86,9 +91,9 @@ if (isset($_SESSION['usuarioActivo'])) {
 																			<?php echo date("d-m-Y g:i:s a", filemtime($ruta."/".$archivo)); ?>
 																		</td>	
 																		<td>
-																			<a title="Descargar"  class="btn btn-success fa fa-pencil-square-o" href="/SISAUTO1/backup/db/<?php echo $archivo ?><?php  ?>" ></a>
-																			<a title="Respaldar"  class="btn btn-success " onclick="restaurar('<?php echo $archivo ?>');"></a>
-
+																			<a title="Descargar"  class="btn btn-success fa fa-download" href="/SISAUTO1/backup/db/<?php echo $archivo ?><?php  ?>" ></a>
+																			<a title="Restaurar"  class="btn btn-primary fa fa-exchange" onclick="restaurar('<?php echo $archivo ?>');"></a>
+																			<a title="Eliminar"  class="btn btn-danger fa fa-trash-o" onclick="eliminar('<?php echo $archivo ?>');"></a>
 																		</td>		
 																	</tr>
 																	<?php
@@ -114,29 +119,102 @@ if (isset($_SESSION['usuarioActivo'])) {
 						</div>
 					</div>
 				</div>
+				<?php include("generalidades/cierre.php"); ?>
 			</div>
 
 			<script type="text/javascript">
-			function restaurar(n){
-				$.ajax({
-					type: 'post',
-					url: '/SISAUTO1/backup/backaup.php',
-					data: {
-						nombre: n,
-						bandera: "respaldar",
-					},
-					success: function(r){
-						console.log(r);
+				function restaurar(n){
+                swal({
+                    title: '¿Está seguro de restaurar el respaldo?',
+                  // text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Si',
+                  cancelButtonText: 'No',
+
+              }).then((result) => {
+                if(result.value){
+               		let timerInterval
+					Swal({
+						title: 'Restaurando...',
+						html: 'Espere por favor<strong></strong>.',
+						onBeforeOpen: () => {
+							Swal.showLoading()
+							timerInterval = setInterval(() => {
+								Swal.getContent().querySelector('strong')
+								.textContent = Swal.getTimerLeft()
+							}, 100)
+						},
+						onClose: () => {
+							clearInterval(timerInterval)
+						}
+					}).then((result) => {
+						if (
+    // Read more about handling dismissals
+    result.dismiss === Swal.DismissReason.timer
+    ) {
+							console.log('I was closed by the timer')
 					}
-				});
-			}
+				})
+					$.ajax({
+						type: 'post',
+						url: '/SISAUTO1/backup/backaup.php',
+						data: {
+							nombre: n,
+							bandera: "respaldar",
+						},
+						success: function(r){
+							console.log(r);
+						}
+					});
+					
+					window.location.href= "/SISAUTO1/view/Respaldo.php";
+                 }else{
+
+                }
+            })
+            }
+
+				function eliminar(n){
+                swal({
+                    title: '¿Está seguro de eliminar el respaldo?',
+                  // text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Si',
+                  cancelButtonText: 'No',
+
+              }).then((result) => {
+                if(result.value){
+                $.ajax({
+						type: 'post',
+						url: '/SISAUTO1/backup/backaup.php',
+						data: {
+							nombre: n,
+							bandera: "eliminar",
+						},
+						success: function(r){
+							console.log(r);
+						}
+					});
+					
+					window.location.href= "/SISAUTO1/view/Respaldo.php";
+                 }else{
+
+                }
+            })
+            }
 			</script>
 
 			<div class="modal fade" id="modalSubirBackup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog modal-md" role="document">
 					<div class="modal-content">
-					<form class="form-horizontal" action="../backup/backaup.php" method="POST" enctype="multipart/form-data">
-					<input type="hidden" name="bandera" value="subida"/>
+						<form class="form-horizontal" action="../backup/backaup.php" method="POST" enctype="multipart/form-data">
+							<input type="hidden" name="bandera" value="subida"/>
 							<div class="modal-header" style="background-color:#007bff;color:black;">
 
 								<h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Backup</h3>
@@ -164,27 +242,22 @@ if (isset($_SESSION['usuarioActivo'])) {
 			</div>
 
 
-
-			<?php include("generalidades/cierre.php"); ?>
-		</div>
-
-
-	</body>
-	</html>
+		</body>
+		</html>
 
 
-	<?php
-}else{
+		<?php
+	}else{
+		?>
+		<!DOCTYPE HTML>
+		<html>
+		<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+		</head>
+		<body>
+		</body>
+		</html>
+		<?php
+	}
 	?>
-	<!DOCTYPE HTML>
-	<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
-	</head>
-	<body>
-	</body>
-	</html>
-	<?php
-}
-?>

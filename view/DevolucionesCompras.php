@@ -80,8 +80,13 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                 $resultados = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
                                                                 
                                                                 foreach ($resultados as $resultado) {
-                                                                    if($resta > $resultado["cantidad_DCom"]){
-                                                                        $resta = $resta - $resultado["cantidad_DCom"];
+                                                                    $idResultado = $resultado["idDetalleCompra"];
+                                                                    $sql1 = "SELECT SUM(cantidad_DDev) as totalD from detallesdevoluciones  where id_DetalleCompra = '$idResultado'";
+                                                                            $totald=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                                                            $totald = mysqli_fetch_array($totald);
+                                                                            $menos=$resultado["cantidad_DCom"]-$totald['totalD'];
+                                                                    if($resta > $menos){
+                                                                        $resta = $resta - $menos;
                                                                     }else{
 
                                                                         $stop = $resultado["idDetalleCompra"];
@@ -92,7 +97,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                         }else if($devolver == $stop){
                                                                             $disponible = $resta;
                                                                         }else{
-                                                                            $disponible = $compra["cantidad_DCom"];
+                                                                            
+                                                                            $idDetalle = $compra["idDetalleCompra"];
+                                                                            $sql1 = "SELECT SUM(cantidad_DDev) as totalD from detallesdevoluciones  where id_DetalleCompra = '$idDetalle'";
+                                                                            $totald=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                                                            $totald = mysqli_fetch_array($totald);
+                                                                            $disponible = $compra["cantidad_DCom"] - $totald["totalD"];
                                                                         }
                                                                     }
                                                                 }

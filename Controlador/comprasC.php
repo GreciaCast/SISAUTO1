@@ -231,6 +231,7 @@ if(isset($_POST["bandera"])){
 		echo mysqli_num_rows($compra);
 	}
 
+	//-------------------------------DEVOLUCIÓN DE COMPRA
 	if ($bandera =="devolucion") {
 		$justificacion = $_POST["justificacion"];
 		$id_DC = $_POST["id_detallecompra"];

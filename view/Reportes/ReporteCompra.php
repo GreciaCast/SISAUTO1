@@ -1,3 +1,7 @@
+<?php 
+$desde = $_GET["desde"];
+$hasta = $_GET["hasta"];
+ ?>
 <!doctype html>
 <html>
 <head>
@@ -65,7 +69,7 @@
     <p>Teléfono: 2393-0214.</p></span></td>
   </tr>
   <tr align="center">
-    <td colspan="2"><strong class="titulos">REPORTE DE PROVEEDORES</strong></td>
+    <td colspan="2"><strong class="titulos">REPORTE DE COMPRAS</strong></td>
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
@@ -92,10 +96,21 @@
 		$conexion = conectarMysql();
 	//$fechainicio=$_REQUEST["fechainicio"];
 	//$fechafinal=$_REQUEST["fechafinal"];
+    date_default_timezone_set('america/el_salvador');
+                $hoy = getdate();
+                $dia = date("d");
+                $today = $hoy['year'].'-'.$hoy['mon'].'-'.$dia; 
 
-	$contador=1;
-	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from compra ";
+                $contador=1;
+                if($desde == ""&& $hasta== ""){
+                 $sql = "select * from compra order by fecha_Com ASC";
+               }else if($hasta == ""){
+                $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' order by fecha_Com ASC";
+              }else if($desde == ""){
+                $sql = "select * from compra  where fecha_Com <= '$hasta' order by fecha_Com ASC";
+              }else{
+                $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' order by fecha_Com ASC";
+              }
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
 	$consulta=mysqli_query($conexion,$sql);
