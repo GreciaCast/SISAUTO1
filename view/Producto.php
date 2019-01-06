@@ -585,20 +585,18 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
 
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-              &nbsp;&nbsp;
-              <a class="pull-right" href="Reportes/ReporteProductosCat.php">
+            <!-- <a class="pull-right" target="_blank" href="Reportes/ReporteProductosCat.php"> -->
                 <button type="button" class="btn btn-success" style="font-size:14px;">
                   Generar reporte
-                  <span class="fa fa-file-pdf-o"></span>
                 </button>
-                &nbsp;
-              </a>
+              <!-- </a> -->
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+              &nbsp;
             </div>
         </div>
     </div>
   </div>
-<!---------------------------------------------------------------------------------------->
 
 
      <!-- _______________________________________________________________ -->

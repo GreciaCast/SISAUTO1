@@ -95,7 +95,8 @@
             <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Empresa</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Correo</td>
-            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
+            <td width="80" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
+            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Responsable</td>
           </tr>
           <?php
 	//try {
@@ -121,6 +122,7 @@
             <td bgcolor=""><?php echo $fila[1];?></td>
             <td bgcolor=""><?php echo $fila[2];?></td>
             <td bgcolor=""><?php echo $fila[3];?></td>
+            <td bgcolor=""><?php echo $fila[5];?></td>
           </tr>
           <?php $contador++;
         }

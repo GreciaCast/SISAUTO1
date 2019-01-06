@@ -239,6 +239,7 @@ if(isset($_POST["bandera"])){
 		echo mysqli_num_rows($compra);
 	}
 
+	//-------------------------------DEVOLUCIÓN DE COMPRA
 	if ($bandera =="devolucion") {
 		$justificacion = $_POST["justificacion"];
 		$id_DC = $_POST["id_detallecompra"];
@@ -246,41 +247,45 @@ if(isset($_POST["bandera"])){
 		$fecha = date("Y")."-".date("m")."-".date("d");
 
 		$sql = "INSERT INTO devoluciones (fecha_Dev,justificacion_Dev) VALUES ('$fecha','$justificacion ')";
-		$dev = mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
+		$dev = mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD 1".mysqli_connect_error());
 		
 		$sql1 = "SELECT * FROM devoluciones order by idDevoluciones desc";
-		$resultado = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+		$resultado = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD 2".mysqli_connect_error());
 		$resultado =  mysqli_fetch_array($resultado);
 		$id = $resultado['idDevoluciones'];
+		echo $id;
 
 		foreach ($id_DC as $key => $detallecompra) {
+			echo $detallecompra;
 			if($devolucion[$key]!= "" && $devolucion[$key] != 0){
-				$sql = "INSERT INTO detalledevoluciones (id_Devoluciones,id_DetalleCompra,cantidad_DDev) VALUES ('$id','$detallecompra','$devolucion[$key]')";
-				$dev = mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				$sql = "INSERT INTO detallesdevoluciones (id_Devoluciones,id_DetalleCompra,cantidad_DDev) VALUES ('$id','$detallecompra','$devolucion[$key]')";
+				$dev = mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD 3".mysqli_connect_error());
 
 
 				$sql1 = " SELECT * from detallecompra where idDetalleCompra = '$detallecompra'";
-				$resultados = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				$resultados = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD 4".mysqli_connect_error());
 				$resultados =  mysqli_fetch_array($resultados);
 				$idproducto = $resultados['id_Producto'];
 
 				$sql2 = " SELECT * from inventario where id_Producto = '$idproducto' order by idInventario desc";
-				$inventario = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				$inventario = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD 5".mysqli_connect_error());
 				$inventario = mysqli_fetch_array($inventario);
 
 				$existencia = $inventario['nuevaExistencia_Inv'];
 				$nuevaExistencia = $existencia-$devolucion[$key];
 				$precioActual = $inventario['nuevoPrecio_Inv'];
-				$nuevoPrecio = (($existencia*$precioActual) - ($cdevolucion[$key]*$resultados['precio_DCom']))/$nuevaExistencia;
+				$nuevoPrecio = (($existencia*$precioActual) - ($devolucion[$key]*$resultados['precio_DCom']))/$nuevaExistencia;
 				$precio = $resultados['precio_DCom'];
 
 				//Tipo de movimiento = 3 -> para devolucion compra
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (3,'$existencia','$precioActual','$devolucion[$key]','$precio','$fecha','$nuevaExistencia','$nuevoPrecio','$idproducto')";
-				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD 6".mysqli_connect_error());
 
 			}
 
 		}
+		$_SESSION['mensaje'] = "Devolución realizada exitosamente";
+			header("location: /SISAUTO1/view/Compras.php");
 	}
 
 }
