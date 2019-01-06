@@ -37,14 +37,14 @@ if (isset($_SESSION['usuarioActivo'])) {
 			<div class="row" style="padding:20px">
 				<br>
 				<a class="pull-right" target="_blank" href="Reportes/ReporteClienteUnico.php">
-					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
+					<button class="btn btn-success" style="font-size:16px;">
 						Reporte
 						<span class="fa fa-file-pdf-o"></span>
 					</button>
           &nbsp;
 				</a>
 				<a class="pull-right" href="AgregarCli.php">
-					<button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
+					<button class="btn btn-success" style="font-size:16px;">
 						Agregar nuevo
 						<span class="fa fa-plus"></span>
 					</button>

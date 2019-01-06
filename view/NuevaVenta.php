@@ -66,23 +66,28 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $sql = "SELECT * from cliente where tipo_Cli = 1 order by nombre_Cli ASC";
                         $clientes = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
                         ?>
+                        <!-- 
                         <label for="empresa" class="col-sm-3 control-label">Tipo de cliente: </label>
                         <div class="col-sm-3 i-checks">
                           <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Cliente Jurídico</label>
                           <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Cliente Natural</label>
                         </div>
+                        -->
+
                       </div>
                     <div id="clientesID" style="display:block">
                      <div class="form-group row">
-                       <label for="empresa" class="col-sm-3 control-label"></label>
+                       <label for="empresa" class="col-sm-3 control-label">Cliente: </label>
                        <div class="col-sm-3 input-group">
-                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2">
-                          <option value="">[Selecionar cliente]</option>
+                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2" onchange="vercliente();">
+                          <option value="28">Cliente Repuestos Vaquerano</option>
                           <?php
 
                           While($cliente = mysqli_fetch_array($clientes)){
-                           echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
-                         }
+                            if($cliente['idCliente'] != 28){
+                              echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+                            }
+                          }
                          ?>
                        </select>
                      </div>
@@ -93,13 +98,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                    <hr width="75%" style="background-color:#007bff;"/><br>
                   <?php
                   $sql = "SELECT * from inventario GROUP BY id_Producto";
-                  $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-      
-
-
-
-                    // $sql1 = "SELECT * from producto where tipo_Prod = 1 order by codigo_Prod ASC";
-                    // $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); 
+                  $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
                   ?>
                   <div class="form-group row">
                     <label class="col-sm-3 control-label">Producto: </label>
@@ -111,25 +110,33 @@ if (isset($_SESSION['usuarioActivo'])) {
                           $a = 0;
                           While($inventario = mysqli_fetch_array($inventarios)){
                             $aux = $inventario['id_Producto']; 
-                            $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
-                            $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-                            $producto = mysqli_fetch_array($productos);
-                            if ($a == 0) {
-                              $aa = $producto['idProducto'];
-                            }
+                            $sqle = "SELECT nuevaExistencia_Inv from inventario where id_Producto = '$aux' order by idInventario desc";
+                            $produus = mysqli_query($conexion, $sqle) or die("No se puedo ejecutar la consulta");
+                            $produu = mysqli_fetch_array($produus);//CAPTURA EL ULTIMO REGISTRO
+                            $exis = $produu['nuevaExistencia_Inv'];
 
-                            if($producto['descripcion_Prod'] == "Ninguna"){
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')'.'</option>';
-                              }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                            if ($exis != 0) {
+                              $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
+                              $productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+                              $producto = mysqli_fetch_array($productos);
+                              if ($a == 0) {
+                                $aa = $producto['idProducto'];
                               }
-                            }else{
-                              if($producto['categoria_Prod'] == 12){
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')'.'</option>';
+
+                              if($producto['descripcion_Prod'] == "Ninguna"){
+                                if($producto['categoria_Prod'] == 12){
+                                  echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')'.'</option>';
+                                }else{
+                                  echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                                }
                               }else{
-                                echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                                if($producto['categoria_Prod'] == 12){
+                                  echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')'.'</option>';
+                                }else{
+                                  echo '<option value="'.$producto['idProducto'].'">'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') '.'</option>';
+                                }
                               }
+                            
                             }
                             $a++;
                           }
@@ -166,7 +173,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     </div>
                     <label class="col-sm-8 control-label"></label>
                     <div class="col-sm-1 col-md-1">
-                      <button title="Hacer descuento 15%" type="button" class="btn btn-primary" style="width:200px;height:40px" onclick="aplicarDescuento15();">Aplicar descuento 15%</button>
+                      <button id="descuento" title="Hacer descuento 15%" type="button" class="btn btn-primary" style="width:200px;height:40px" onclick="aplicarDescuento15();">Aplicar descuento 15%</button>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -216,14 +223,27 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <br>
                   <hr width="75%">
                   <div class="form-group" align="center">
-                    <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta();">Aceptar</button>
+                    <div id="sinF" style="display:none;">
+                      <a target="_blank" href="Reportes/ReporteUsuario.php">
+                        <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Factura</button>
+                      </a>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>
-                </form>
+                  <div id="conF" style="display:block;">
+                    <label class="col-sm-2 control-label">Desea factura?: </label>
+                    <a target="_blank" href="Reportes/ReporteUsuario.php">
+                      <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Si</button>
+                    </a>
+                    <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(2);">No</button>
+                    <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
+                  </div>
+                    
+                  </div>
               </div>
             </div>
           </div>
-
+<!--  -->
+                </form>
         </div>
       </div>
     </div>
@@ -231,31 +251,69 @@ if (isset($_SESSION['usuarioActivo'])) {
 
 
 
-    <!-- MODAL VER PROVEEDOR -->
+<!-- MODAL VER PROVEEDOR -->
 
-    <div class="modal fade" id="modalVerAddProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-     <div class="modal-dialog modal-lg" role="document">
-       <div class="modal-content">
-         <div class="modal-header" style="background-color:#007bff;color:black;">
+<div class="modal fade" id="modalVerAddProducto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:#007bff;color:black;">
+        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
+      </div>
+      <div class="modal-body">
+        <hr width="75%" style="background-color:#007bff;"/>
+        <br><br><br>
+      </div>
+      <br><br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-           <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Producto</h3>
-         </div>
-         <div class="modal-body">
-           <hr width="75%" style="background-color:#007bff;"/>
-           
-         
-           <br><br><br>
-           
-          
+<!-- MODAL -->
+  <div class="modal inmodal" id="modalFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <i class="fa fa-check-square-o modal-icon"></i>
+                <h4 class="modal-title">Desea generar factura?</h4>
+                <small>...</small>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
+                    <div class="form-group row">
+                        <label class="col-sm-3 control-label">Número de factura: </label>
+                        <div class="col-sm-3 input-group">
+                          <?php 
+                            $var = correlativoFactura();
+                            if($var == 0){
+                              ?>
+                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                              <?php
+                            }
+                          ?>
+                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
+                        </div>
+                      </div> 
+              <br>
+            </div>
+            <div class="modal-footer">
+              <a target="_blank" href="Reportes/ReporteUsuario.php">
+                <button type="button" class="btn btn-white" data-dismiss="modal" onclick="validarVenta(1);">SI</button>
+              </a>
+              &nbsp;&nbsp;
+              <a class="pull-right">
+                <button type="submit" class="btn btn-success" style="font-size:14px;" onclick="validarVenta(2);">NO</button>
+                &nbsp;
+              </a>
+              </form>
+            </div>
         </div>
-        <br><br>
-        <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
-       </div>
-     </div>
-   </div>
-
- </div>
+    </div>
+  </div>
+<!---------------------------------------------------------------------------------------->
 
 
  <script src="../assets/Validaciones/mostrarProducto.js"></script>
@@ -269,7 +327,58 @@ if (isset($_SESSION['usuarioActivo'])) {
  <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
  <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
  <script src="../assets/js/plugins/fullcalendar/moment.min.js"></script>
+ 
 
+<script type="text/javascript">
+    function vercliente() {
+      console.log($('#clientess').val());
+        if ($('#clientess').val() != 28) {
+
+          $("#sinF").css('display','block');//mostrar
+          $("#conF").css('display','none');//ocultar
+//             $('#universal').val(1);
+// //                                        $("#marcaPr").attr("disabled", "disabled");
+//             $("#modeloPE").val("");
+//             $("#anioPE").val("");
+//             $("#modeloPE").attr("disabled", "disabled");
+//             $("#anioPE").attr("disabled", "disabled");
+        } else {
+          $("#conF").css('display','block');//mostrar
+          $("#sinF").css('display','none');//ocultar
+//             $('#universal').val(0);
+// //                                        $("#marcaPr").removeAttr("disabled");
+//             $("#modeloPE").removeAttr("disabled");
+//             $("#anioPE").removeAttr("disabled");
+        }
+    }
+</script>
+
+<script type="text/javascript">
+  function emitirFactura(id){
+      swal({
+          title: '¿Está seguro en dar de baja?',
+        // text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No',
+      }).then((result) => {
+          if(result.value){
+              $('#idUsu').val(id);
+              $('#banderaUsu').val('cambio');
+              $('#valorUsu').val('0');
+              var dominio = window.location.host;
+              $('#cambioUsu').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
+              $('#cambioUsu').submit();
+          }else{
+
+          }
+
+      })
+  }
+</script>
 
 
 

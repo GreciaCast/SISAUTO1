@@ -19,6 +19,7 @@ function mostrarCostoyExistencias(id){
 	$('#cantidadDisponiblePV').empty();
 	$('#costoPV').empty();
 	$('#precioPV').empty();
+	$('#descuento').css('display','block');
     $.get('/SISAUTO1/Controlador/datosProductoC.php?existencias=1&id='+id,function(data){
         $('#cantidadDisponiblePV').val(data);
     });
@@ -31,6 +32,7 @@ function mostrarCostoyExistencias(id){
 }
 
 function aplicarDescuento15(){
+	$('#descuento').css('display','none');
 	var precio = $('#precioPV').val();
 	$('#precioPV').val("");
 	if(precio != ""){
@@ -45,12 +47,10 @@ function agregarProductosATabla(){
 	var limpiar = $('#limpiarPV').val();
 	console.log(limpiar);
 	var disponible = $('#cantidadDisponiblePV').val();
-	//console.log(disponible);
     var cantidad = $('#cantidadPV').val();
 
-	//console.log(cantidad);
+    var costo = $('#costoPV').val();
     var precio = $('#precioPV').val();
-    //var precioventa = $('#precioventa').val();
     var obtenerP = $("#produs").find('option:selected');
     var productoId = obtenerP.val();
     var productoText = obtenerP.text();
@@ -58,15 +58,20 @@ function agregarProductosATabla(){
     var html = '<tr id="f'+productoId+'"><td>'+cantidad+'</td>';
     html = html+'<td>'+productoText+'</td>';
     html = html+'<td>'+precio+'</td>';
-   // html = html+'<td>'+precioventa+'</td>';
     html = html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>';
     html = html+'<td>';
     html = html+'<input type="hidden" name="cantidad_DVen[]" value="'+cantidad+'"/>';
     html = html+'<input type="hidden" name="precio_DVen[]" value="'+precio+'"/>';
-   // html = html+'<input type="hidden" name="precio_DVen[]" value="'+precioventa+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
+   // html = html+'<input type="hidden" name="indicador_Descuento[]" value="'+productoId+'"/>';
     html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminarProductosDeTabla('+productoId+','+subtotal+');"></button></td></tr>';
     
+    var id = productoId;
+    $.get('/SISAUTO1/Controlador/ventasC.php?repetidos=1&id='+id,function(data){
+            //$("#descripcionAddP").val(data); 
+            v
+     });
+
      if(cantidad == "" || precio == "" || $('#produs').val() == ""){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe completar todos los datos del producto");
@@ -74,6 +79,10 @@ function agregarProductosATabla(){
      }else if(cantidad == 0 || precio == 0 ){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
+
+     }else if((parseFloat(costo) == parseFloat(precio))|| (parseFloat(costo) > parseFloat(precio))){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* Verifique que el precio a vender no sea menor que el costo");
 
      }else if(parseInt(cantidad) > parseInt(disponible)){
         $('#mensajeee1').text("");
@@ -91,6 +100,7 @@ function agregarProductosATabla(){
         $('#cantidadDisponiblePV').val("");
         $('#costoPV').val("");
         $('#produs').val("");
+        $('#descuento').css('display','none');
     }
 }
 
@@ -101,7 +111,8 @@ function eliminarProductosDeTabla(id,subtotal){
     $('#f'+id).remove();
 }
 
-async function validarVenta(){
+async function validarVenta(sino){
+    if (sino == 1) {} else {}
     var detallesV = await validarDetallesV();
     var clienteV = await validarClienteV();
     if (detallesV && clienteV){

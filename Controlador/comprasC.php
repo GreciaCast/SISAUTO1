@@ -43,8 +43,6 @@ if(isset($_POST["bandera"])){
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,0,0.0,'$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$cantidadProdCom[$key]','$precioProdCom[$key]','$idProdCom[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-				
-				
 			}else{
 
 				$existencias = $resultadoo['nuevaExistencia_Inv'];
@@ -56,14 +54,24 @@ if(isset($_POST["bandera"])){
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,'$existencias','$precioActual','$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProdCom[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-				
 			}
+
+			$sql5 = "SELECT * FROM producto where idProducto = '$idProdCom[$key]'"; 
+			$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
+			$res = mysqli_fetch_assoc($ress);
+			$cat = $res['categoria_Prod'];
+
+			$pre = $precioProdCom[$key] + ($precioProdCom[$key] * 0.75);
+			//$pre = $precioProdCom + ($precioProdCom * 0.25);
+			//--------- ACTUALIZA PRECIO DEL PRODUCTO, ASIGNANDOLE EL 75% DE GANANCIA
+			$sql6 = "UPDATE producto set precio_Prod = '$pre' where idProducto = '$idProdCom[$key]'";
+			mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 
 
 		}
 		//////////CAPTURA DATOS PARA BITACORA
-		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
 		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardo una compra')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		///////////////////////////////////////////////

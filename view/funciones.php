@@ -2,8 +2,8 @@
 
 function contarProducto($id){
 	$conexion = conectarMysql();
-	$sql="SELECT * from compra where id_Proveedor = '$id' ";
-	$var= mysqli_query($conexion,$sql);
+	$sql = "SELECT * from compra where id_Proveedor = '$id' ";
+	$var = mysqli_query($conexion,$sql);
 	$total = mysqli_num_rows($var);
 	return $total; 
 }
@@ -29,8 +29,11 @@ function contarProductoInventario($id){
 }
 
 function correlativoFactura(){
+
+
+	
 	$conexion = conectarMysql();
-	$sql = "SELECT * from factura order by idFactura asc";
+	$sql = "SELECT * from factura order by idFactura desc";
 	$var = mysqli_query($conexion,$sql);
 	$total = mysqli_num_rows($var);
 	if($total == 0){
@@ -47,7 +50,7 @@ function correlativoFactura(){
 		
 	}else{
 		$result = mysqli_fetch_array($var);//CAPTURA EL ULTIMO REGISTRO
-		return $result['numero_Fac'];
+		return $result['numero_Fac'] + 1;
 
 	}
 	

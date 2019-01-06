@@ -11,9 +11,9 @@ async function validarProducto() {
     }
     var descripcion = await validarDescripcionP();
     var stock = await validarStockP();
-    var precio = await validarPrecioP();
+    //var precio = await validarPrecioP();
 
-    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio) {
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
         var comp = await existe();
       //  var compi=await existes();
         if(comp == 0){
@@ -87,14 +87,13 @@ function validarStockP() {
     return true;
 }
 
-function validarPrecioP() {
-
-    if ($('#precioPr').val().trim() == "") {
-        notaError("¡El precio es obligatorio!");
-        return false;
-    }
-    return true;
-}
+// function validarPrecioP() {
+//     if ($('#precioPr').val().trim() == "") {
+//         notaError("¡El precio es obligatorio!");
+//         return false;
+//     }
+//     return true;
+// }
 
 async function existe(){
     var param = {
@@ -137,7 +136,26 @@ async function validarProductoEditar() {
     }
     var descripcion = await validarDescripcionPE();
     var stock = await validarStockPE();
-    var precio = await validarPrecioPE();
+
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock) {
+        $('#editarProd').submit();
+    }
+}
+
+async function validarProductoEditarP() {
+    var nombre = await validarNombrePEP();
+    var categoria = await validarCategoriaPEP();
+    var marca = await validarMarcaPEP();
+    if($("#universal").val()=='0'){
+      var modelo = await validarModeloPEP();
+      var anio = await validarAnioPEP();
+    }else{
+      var modelo = 1;
+      var anio = 1;
+    }
+    var descripcion = await validarDescripcionPEP();
+    var stock = await validarStockPEP();
+    var precio = await validarPrecioPEP();
 
     if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio) {
         $('#editarProd').submit();
@@ -145,7 +163,7 @@ async function validarProductoEditar() {
 }
 
 function validarNombrePE() {
-    if ($('#nombrePE').val().trim() == "") {
+    if (($('#nombrePE').val().trim() == "")) {
         notaError("¡El nombre es obligatorio!");
         return false;
     }
@@ -153,8 +171,7 @@ function validarNombrePE() {
 }
 
 function validarCategoriaPE() {
-
-    if ($('#catePE').val().trim() == "") {
+    if (($('#catePE').val().trim() == "")) {
         notaError("¡La categoria es obligatoria!");
         return false;
     }
@@ -162,8 +179,7 @@ function validarCategoriaPE() {
 }
 
 function validarMarcaPE() {
-
-    if ($('#marcaPE').val().trim() == "") {
+    if (($('#marcaPE').val().trim() == "")) {
         notaError("¡La marca es obligatoria!");
         return false;
     }
@@ -172,7 +188,7 @@ function validarMarcaPE() {
 
 function validarModeloPE() {
 
-    if ($('#modeloPE').val().trim() == "") {
+    if (($('#modeloPE').val().trim() == "")) {
         notaError("¡El modelo es obligatorio!");
         return false;
     }
@@ -181,10 +197,10 @@ function validarModeloPE() {
 
 function validarAnioPE() {
 
-     if ($('#anioPE').val().trim()=="") {
+     if (($('#anioPE').val().trim()=="")) {
         notaError("¡El año es obligatorio!");
         return false;
-    }else if ($('#anioPE').val().trim().length!=4) {
+    }else if (($('#anioPE').val().trim().length!=4)) {
         notaError("¡El año debe contener 4 dígitos!");
         return false;
     }
@@ -193,7 +209,7 @@ function validarAnioPE() {
 
 function validarDescripcionPE() {
 
-    if ($('#descripcionPE').val().trim() == "") {
+    if (($('#descripcionPE').val().trim() == "")) {
         notaError("¡La descripcion es obligatoria!");
         return false;
     }
@@ -202,16 +218,75 @@ function validarDescripcionPE() {
 
 function validarStockPE() {
 
-    if ($('#stockPE').val().trim()=="") {
+    if (($('#stockPE').val().trim()=="")) {
         notaError("¡El stock mínimo, es obligatorio!");
         return false;
     }
     return true;
 }
 
-function validarPrecioPE() {
+//-------------------------------------------------------------
+function validarNombrePEP() {
+    if (($('#nombrePEP').val().trim() == "")) {
+        notaError("¡El nombre es obligatorio!");
+        return false;
+    }
+    return true;
+}
 
-    if ($('#precioPE').val().trim() == "") {
+function validarCategoriaPEP() {
+    if (($('#catePEP').val().trim() == "")) {
+        notaError("¡La categoria es obligatoria!");
+        return false;
+    }
+    return true;
+}
+
+function validarMarcaPEP() {
+    if (($('#marcaPEP').val().trim() == "")) {
+        notaError("¡La marca es obligatoria!");
+        return false;
+    }
+    return true;
+}
+
+function validarModeloPEP() {
+    if (($('#modeloPEP').val().trim() == "")) {
+        notaError("¡El modelo es obligatorio!");
+        return false;
+    }
+    return true;
+}
+
+function validarAnioPEP() {
+     if (($('#anioPEP').val().trim()=="")) {
+        notaError("¡El año es obligatorio!");
+        return false;
+    }else if (($('#anioPEP').val().trim().length!=4)) {
+        notaError("¡El año debe contener 4 dígitos!");
+        return false;
+    }
+    return true;
+}
+
+function validarDescripcionPEP() {
+    if (($('#descripcionPEP').val().trim() == "")) {
+        notaError("¡La descripcion es obligatoria!");
+        return false;
+    }
+    return true;
+}
+
+function validarStockPEP() {
+    if (($('#stockPEP').val().trim()=="")) {
+        notaError("¡El stock mínimo, es obligatorio!");
+        return false;
+    }
+    return true;
+}
+
+function validarPrecioPEP() {
+    if (($('#precioPEP').val().trim() == "")) {
         notaError("¡El precio es obligatorio!");
         return false;
     }

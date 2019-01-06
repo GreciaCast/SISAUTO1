@@ -36,10 +36,10 @@ if(isset($_POST["bandera"])){
 
 			if($idD == ""){
 
-				echo "SIGNIFICA QUE EL PRODUCTO NO HA TENIDO NUNCA UNA ENTRADA";
+				//echo "SIGNIFICA QUE EL PRODUCTO NO HA TENIDO NUNCA UNA ENTRADA";
 				
 		 	}else{
-		 		echo "SIGNIFICA QUE HAY REGISTRO EN INVENTARIO DE ESTE PRODUCTO";
+		 		//echo "SIGNIFICA QUE HAY REGISTRO EN INVENTARIO DE ESTE PRODUCTO";
 
 				$existencias = $resultadoo['nuevaExistencia_Inv'];
 				$precioActual = $resultadoo['nuevoPrecio_Inv'];
@@ -53,9 +53,38 @@ if(isset($_POST["bandera"])){
 				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
 				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-				$sql5 = "UPDATE producto set precio_Prod = '$precioProdVen[$key]' where idProducto = '$idProdVen[$key]'";
-				mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
+
+
+
+
+
+
+
+				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
+				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				$res = mysqli_fetch_assoc($ress);
+				$pre = $res['precio_Prod'];//precio actual
+				// $calculo = $res['precio_Prod'] - ($res['precio_Prod'] * 0.15);
+
+				// echo $pre;4
+				// echo " -- ";
+				// echo $calculo;3.4
+				// echo " -- ";
+				// echo $precioProdVen[$key];5
+				// if ($calculo == $precioProdVen[$key]) {
+					$sql6 = "UPDATE producto set precio_Prod = '$pre' where idProducto = '$idProdVen[$key]'";
+					mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				// } else {
+				// 	$sql6 = "UPDATE producto set precio_Prod = '$precioProdVen[$key]' where idProducto = '$idProdVen[$key]'";
+				// 	mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+				// }
+				
+
+
+
+				
 
 
 		 	}
@@ -66,9 +95,36 @@ if(isset($_POST["bandera"])){
 	
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
+	//header("location: /SISAUTO1/view/Reportes/ReporteUsuario.php?");
+
 	header("location: /SISAUTO1/view/NuevaVenta.php?");
+	//target="_blank" href="Reportes/ReporteUsuario.php"
 }
 
+//----------------------------  AGREGAR A TABLA DETALLES DE VENTA
+if(isset($_GET["repetidos"])){
+	$id = $_GET["id"];
+	$idProdVen = $_GET["id_Producto"];
+	//$variable = 10;
+	$aux = 0;
+	for ($i=0; $i < 10; $i++) { 
+		for ($j=1; $j <= 10; $j++) { 
+			if($idProdVen[$i] == $idProdVen[$j]){
+				echo "Valor en i: ";
+				echo $idProdVen[$i];
+				echo "Valor en j: ";
+				echo $idProdVen[$j];
+				$aux = $aux + 1;
+			}
+		}
+	}
+	// foreach ($variable as $key => $value) {
+	// 	if($idProdVen[$key] == $idProdVen[$key+1]){
+	// 		$aux = $aux + 1;
+	// 	}
+	// }
+	echo $aux;
+}
 
 
 ?>

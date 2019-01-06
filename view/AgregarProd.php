@@ -90,21 +90,21 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="direccion" class="col-sm-3 control-label">Marca:</label>
+                                            <label for="direccion" class="col-sm-3 control-label">Marca de producto:</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" name="marca" id="marcaPr" placeholder="Marca del Producto">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="responsable" class="col-sm-3 control-label">Modelo:</label>
+                                            <label for="responsable" class="col-sm-3 control-label">Modelo vehiculo:</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" name="modelo" id="modeloPr" placeholder="Modelo de Auto">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Año: </label>
+                                            <label for="tel2" class="col-sm-3 control-label">Año vehiculo: </label>
                                             <div class="col-sm-2">
                                                 <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año" onkeypress="return validarAnio(this,event,this.value)">
                                             </div>
@@ -124,13 +124,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="form-group ">
-                                            <label class="col-sm-3 control-label">Precio: </label>
-                                            <div class="col-sm-2 input-group date">&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                <input class="form-control" type="text" id="precioPr" name="precio" style="width:150px;height:40px" onkeypress="return validarPrecioUnitario(this,event,this.value)">
-                                            </div>
-                                        </div>
                                         <hr width="75%">
                                         <div class="form-group" align="center">
                                             <button title="Aceptar" type="button" class="btn" style="color:#fff; background-color:#28a745" onclick="validarProducto();">Aceptar</button>
