@@ -38,7 +38,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <h2><b>Datos Generales</b></h2>
                                         <input type="hidden" value="GuardarCli" name="bandera">
                                         <div class="form-group">
-
                                         </div>
                                         <div class="form-group">
                                             <label for="empresa" class="col-sm-3 control-label">Nombre:</label>
@@ -47,7 +46,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             </div>
                                         </div>
                                         <br>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                             <label for="empresa" class="col-sm-3 control-label">Dirección:</label>
                                             <div class="col-sm-6">
                                                 <input class="form-control" placeholder="Dirección" name="DireccionC" type="text" id="direccion">
