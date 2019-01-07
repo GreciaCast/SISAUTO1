@@ -97,9 +97,9 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
              <?php
              $aux = $venta['idVenta'];
              $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
-             $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-             $cliente = mysqli_fetch_array($cliente);
-             echo $cliente['numero_Fac'];
+             $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+             $numFac= mysqli_fetch_array($numFac);
+             echo $numFac['numero_Fac'];
              ?>
            </td>
            <td>
@@ -113,7 +113,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
            </td>
 
            <th align="center">
-            <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerCompra"></button>
+            <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerVenta" onclick="VerVen('<?php echo $venta['fecha_Ven']?>','<?php echo $venta['total_Ven']?>','<?php echo $venta['idVenta']?>','<?php echo $venta['id_Cliente']?>')" ></button>
             <?php  if ($tipo == 1) {
 
              ?>
@@ -145,165 +145,100 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 
 </div>
 
-<!-- MODAL VER PROVEEDOR -->
 
-<div class="modal fade" id="modalVerProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:#007bff;color:black;">
 
-        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
-      </div>
-      <div class="modal-body">
-        <h3 align="center"><b>Datos Generales</b></h3>
-        <hr width="75%" style="background-color:#007bff;"/>
-        <div class="form-group ">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" id="nombrePro" name="Nombre_Prov" readonly="readonly" aria-required="true" value="">
-          </div>
-        </div>
-        <br><br><br><br>
-        <div class="form-group">
-          <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Correo:</label>
-          <div  class="col-sm-7">
-            <input class="form-control" type="email" id="correoPro" data-inputmask="'mask' : '9999-9999'" name="Correo_Pro" disabled="true">
-          </div>
-        </div>
-        <br><br><br>
-        <div class="form-group">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
-          <div class="col-sm-3">
-            <input class="form-control" type="text" id="telefonoPro" name="Correo_Usu" value="" disabled="true">
-          </div>
-        </div>
-        <br><br><br>
-        <div class="form-group">
-          <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Dirección:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" name="Direccion_Pro" id="direccionPro" disabled="true">
-          </div>
-        </div>
-        <br><br>
-        <h3 align="center"><b>Datos del Responsable</b></h3>
-        <hr width="75%" style="background-color:#007bff;"/>
-        <div class="form-group">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" id="nombreRes" name="NombreUsu_Usu" disabled="true">
-          </div>
-        </div>
-        <br><br><br><br>
-        <div class="form-group">
-          <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
-          <div class="col-sm-3">
-            <input class="form-control" type="text" id="telefonoRes" name="DUI_Usu" disabled="true">
-          </div>
-        </div>
-        <div id="ocultar">
-          <br><br><br>
-          <div class="form-group">
-            <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
-            <div class="col-sm-7">
-             <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui..." id="descripcionProv" disabled="true">
-             </textarea>
-           </div>
-         </div>
-       </div>
-     </div>
-     <br><br>
-     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
-    </div>
-  </div>
-</div>
 
-</div>
+<!-- MODAL VER VENTAS-->
+                    <div class="modal fade" id="modalVerVenta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <?php
+                        $sql="SELECT * from cliente where tipo_Cli = 1 order by nombre_Cli ASC";
+                        $clientes= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+                        ?>
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background-color:#007bff;color:black;">
 
-<!-- MODAL EDITAR PROVEEDOR -->
+                                    <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver Venta</h3>
+                                </div>
+                                <div class="modal-body">
+                                   <h3 align="center"><b>Datos Generales</b></h3>
+                                   <hr width="75%" style="background-color:#007bff;"/>
+                                   <input type="hidden" name="bandera1"/>
+                                   <div class="form-group ">
+                                    <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Fecha:</label>
+                                    <div class="col-sm-3 input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input class="form-control" type="text" id="fechaVen"  disabled="true" aria-required="true" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
+                                    <div class="col-sm-3">
 
-<div class="modal fade" id="modalEditarProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color:#007bff;color:black;">
+                                        <input class="form-control" type="text" id="numeroFacVenVer" name="" disabled="true" aria-required="true" value="">
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="form-group ">
+                                    <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Cliente:</label>
+                                    <div class="col-sm-3">
+                                        <!-- <input class="form-control" type="text" name="proveedorComE" id="proveedorComVer" readonly="readonly" aria-required="true" value=""> -->
 
-        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Proveedor</h3>
-      </div>
-      <div class="modal-body">
-       <form action="../Controlador/proveedorC.php" method="POST" id="editarPro" align="center" autocomplete="off">
-        <h3 align="center"><b>Datos Generales</b></h3>
-        <hr width="75%" style="background-color:#007bff;"/>
-        <input type="hidden" value="EditarPro" name="bandera"/>
-        <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
-        <div class="form-group ">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" id="nombreProEditar" name="Nombre_Emp"  aria-required="true" value="">
-          </div>
-        </div>
-        <br><br><br><br>
-        <div class="form-group">
-          <label align="right" for="tel3" class="col-sm-4 control-label" style="font-size:15px;">Correo:</label>
-          <div  class="col-sm-7">
-            <input class="form-control" type="email" id="correoProEditar" name="Correo_Emp" onkeyup="validarCorreoProvEditar(this)"><a id='correoProvEditar'></a>
-          </div>
-        </div>
-        <br><br><br>
-        <div class="form-group">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
-          <div class="col-sm-3">
-            <input class="form-control" type="text" id="telefonoProEditar" name="Telefono_Emp" data-mask="9999-9999" value="" >
-          </div>
-        </div>
-        <br><br><br>
-        <div class="form-group">
-          <label align="right" for="direccion" class="col-sm-4 control-label" style="font-size:15px;">Dirección:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" name="Direccion_Emp" id="direccionProEditar" >
-          </div>
-        </div>
-        <br><br>
-        <h3 align="center"><b>Datos del Responsable</b></h3>
-        <hr width="75%" style="background-color:#007bff;"/>
-        <div class="form-group">
-          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Responsable:</label>
-          <div class="col-sm-7">
-            <input class="form-control" type="text" id="nombreResEditar" name="Nombre_Res" >
-          </div>
-        </div>
-        <br><br><br><br>
-        <div class="form-group">
-          <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Teléfono:</label>
-          <div class="col-sm-3">
-            <input class="form-control" type="text" id="telefonoResEditar" name="Telefono_Res" data-mask="9999-9999">
-          </div>
-        </div>
-        <br><br><br>
-        <div class="form-group">
-          <label align="right" for="usuario" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
-          <div class="col-sm-7">
-           <textarea class="form-control" type="text" name="descripcion"  placeholder="Escriba aqui porque va a modificar el nombre de la empresa " id="descripcionProvEditar" >
-           </textarea>
-         </div>
-       </div>
-     </form>
-   </div>
-   <br><br>
-   <div class="modal-footer">
-    <input type="hidden" id="anterior" value=""  />
-    <button type="button" class="btn btn-default" style="background-color:#007bff;color:black;font-size:15px;" onclick="validareditarProveedor()">Aceptar</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
-  </div>
-</div>
-</div>
-<form method="POST" id="cambioProv">
-  <input type="hidden" name="id" id="idProv"  />
-  <input type="hidden" name="bandera" id="banderaProv" />
-  <input type="hidden" name="valor" id="valorProv" />
-</form>
-</div>
+                                        <select style="width:350px;height:40px" class="form-control" name="id_Cliente" id="cliVenVer" disabled="true" > 
+                                            <?php
+
+                                            While($cliente=mysqli_fetch_array($clientes)){
+                                               echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+                                           }
+                                           ?>
+                                       </select>
+                                   </div>
+                               </div>
+                               <br><br>
+
+                               <div class="modal-footer">
+                               </div>
+                               <div class="card mb-3">
+                                <div class="card-header" align="center">
+                                    <h3><b>Detalle de venta</b></h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:10px">Cantidad</th>
+                                                    <th style="width:200px">Producto</th>
+                                                    <th style="width:30px">Precio unitario ($)</th>
+                                                    <th style="width:30px">Subtotal ($)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="productosVer">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer small text-muted"></div>
+                            </div>
+                            <br><br><br>
+                            <div class="form-group ">
+                                <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Total Venta:</label>
+                                <div class="col-sm-5">
+                                    <div class="input-group m-b"><span class="input-group-addon">$</span> <input type="number" class="form-control" id="totalVenVer" disabled="true"></div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#007bff;color:black;font-size:15px;">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 <!-- _______________________________________________________________________________________ -->
+<script src="../assets/Validaciones/mostrarVentas.js"></script>
 <script src="../assets/Validaciones/mostrarProveedor.js"></script>
 <script src="../assets/Validaciones/validarProveedor.js"></script>
 <script src="../assets/Validaciones/validarCorreo.js"></script>

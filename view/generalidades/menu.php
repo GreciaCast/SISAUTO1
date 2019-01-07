@@ -7,9 +7,9 @@
             </li>
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-cart-plus"></i> <span class="nav-label">Compras/Ventas</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Compras.php" style="font-size:15px;">Compras</a></li>
-                    <li><a href="Ventas.php" style="font-size:15px;">Ventas</a></li>
+                <ul class="nav nav-second-level">  
+                    <li><a href="Compras.php" style="font-size:15px;"><span class="fa fa-shopping-cart"> Compras</span></a></li>
+                    <li><a href="Ventas.php" style="font-size:15px;"><span class="fa fa-money"> Ventas</span></a></li> 
                 </ul>
             </li>
             <li>
@@ -26,6 +26,8 @@
                     <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>    
                 </ul>
             </li>
+            <?php include("../confi/Conexion.php");
+            $conexion = conectarMysql(); ?>
             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
@@ -33,13 +35,24 @@
                     <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
                     <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
                     <li><a href="Respaldo.php" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
-                    <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-wrench"> Configuración</span></a></li>
-                </ul>
-            </li>
-            <?php } ?>
-        </ul>
 
-    </div>
+                    <?php 
+
+                    $sql = "SELECT  * FROM numerofactura";
+                    $numerosFac = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta"); 
+                    $rows = mysqli_num_rows($numerosFac);
+                    if ($rows == 0) {?>
+
+                    <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-wrench"> Configuración</span></a></li>
+                    <?php 
+                }
+                ?>
+            </ul>
+        </li>
+        <?php } ?>
+    </ul>
+
+</div>
 </nav>
 <!-- Logout Modal-->
 <div class="modal inmodal" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -68,8 +81,7 @@
                 <a class="navbar-brand" href="index.php" style="color: white">SISAUTO</a>
             </div>
 
-            <?php include("../confi/Conexion.php");
-            $conexion = conectarMysql();
+            <?php 
             $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
             $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
             $contador = 0;
@@ -119,33 +131,33 @@
                                         <i class="fa fa-envelope fa-fw"></i><?php 
                                         // echo $producto['codigo_Prod'].' - '.$producto["nombre_Prod"]; 
                                         if($producto['descripcion_Prod'] == "Ninguna"){
-                                         if($producto['categoria_Prod'] == 12){
-                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
-                                         }else{
-                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
-                                         }
-                                     }else{
-                                         if($producto['categoria_Prod'] == 12){
-                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
-                                         }else{
-                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
-                                         }
-                                     }
-                                     ?>  
-                                     <span class="pull-right text-muted medium"> Existencias: <?php echo $inventario."/".$producto["stock_Prod"]; ?></span>
-                                 </div>
-                             </a>
-                         </li>
-                         <li class="divider"></li>
-                         <?php
-                     }
-                 }
-                 ?>
+                                           if($producto['categoria_Prod'] == 12){
+                                               echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
+                                           }else{
+                                               echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                           }
+                                       }else{
+                                           if($producto['categoria_Prod'] == 12){
+                                               echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
+                                           }else{
+                                               echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                           }
+                                       }
+                                       ?>  
+                                       <span class="pull-right text-muted medium"> Existencias: <?php echo $inventario."/".$producto["stock_Prod"]; ?></span>
+                                   </div>
+                               </a>
+                           </li>
+                           <li class="divider"></li>
+                           <?php
+                       }
+                   }
+                   ?>
 
-             </ul>
-         </li>
+               </ul>
+           </li>
 
-         <li class="dropdown">
+           <li class="dropdown">
             <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                 <i class="fa fa-user"></i>&nbsp;<?php echo $_SESSION['usuarioActivo']['nombre_Usu']?>
             </a>
@@ -350,26 +362,26 @@
             <div class="modal-body">
                 <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
                     <div class="form-group">
-                       <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
-                       <div class="col-sm-3">
-                           <input class="form-control" type="text" id="numF" name="numF">
-                           <input type="hidden" value="factura" name="bandera">
-                       </div>
-                   </div> 
-                   <br>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-                  &nbsp;&nbsp;
-                  <a class="pull-right">
-                    <button type="submit" class="btn btn-success" style="font-size:14px;">
-                      Aceptar
-                  </button>
-                  &nbsp;
-              </a>
-          </form>
-      </div>
+                     <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
+                     <div class="col-sm-3">
+                         <input class="form-control" type="text" id="numF" name="numF">
+                         <input type="hidden" value="factura" name="bandera">
+                     </div>
+                 </div> 
+                 <br>
+             </div>
+             <div class="modal-footer">
+              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+              &nbsp;&nbsp;
+              <a class="pull-right">
+                <button type="submit" class="btn btn-success" style="font-size:14px;">
+                  Aceptar
+              </button>
+              &nbsp;
+          </a>
+      </form>
   </div>
+</div>
 </div>
 </div>
 <!---------------------------------------------------------------------------------------->
