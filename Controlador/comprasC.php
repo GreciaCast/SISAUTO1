@@ -72,7 +72,7 @@ if(isset($_POST["bandera"])){
 		}
 		//////////CAPTURA DATOS PARA BITACORA
 		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardo una compra')";
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardó una compra')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		///////////////////////////////////////////////
 
@@ -131,7 +131,7 @@ if(isset($_POST["bandera"])){
 		
 		//////////CAPTURA DATOS PARA BITACORA
 		$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Edito una compra')";
+		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó una compra')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		///////////////////////////////////////////////
 		$_SESSION['mensaje'] = "Registro editado exitosamente";
@@ -219,7 +219,7 @@ if(isset($_POST["bandera"])){
 
 		//////////CAPTURA DATOS PARA BITACORA
 			$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Elimino una compra')";
+			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Eliminó una compra')";
 			mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		///////////////////////////////////////////////
 
@@ -284,8 +284,15 @@ if(isset($_POST["bandera"])){
 			}
 
 		}
+
+		//////////CAPTURA DATOS PARA BITACORA
+			$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Realizó una devolución de producto')";
+			mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		///////////////////////////////////////////////
+
 		$_SESSION['mensaje'] = "Devolución realizada exitosamente";
-			header("location: /SISAUTO1/view/Compras.php");
+		header("location: /SISAUTO1/view/Compras.php");
 	}
 
 }

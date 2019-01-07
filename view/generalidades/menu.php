@@ -23,9 +23,7 @@
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-area-chart"></i> <span class="nav-label">Inventario</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>
-                    <li><a href="" style="font-size:15px;"><span class="fa fa-book"> Kardex</span></a></li>
-                
+                    <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>    
                 </ul>
             </li>
             <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
@@ -35,7 +33,7 @@
                     <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
                     <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
                     <li><a href="Respaldo.php" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
-                    <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-database"> Configuracion</span></a></li>
+                    <li><a data-toggle="modal" data-target="#modalConfigFactura" style="font-size:15px;"><span class="fa fa-wrench"> Configuración</span></a></li>
                 </ul>
             </li>
             <?php } ?>
@@ -54,8 +52,8 @@
                 <p>Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</p>
             </div>
             <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-success" href="../Controlador/cerrar.php">Cerrar sesión</a>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-success" href="../Controlador/cerrar.php">Cerrar sesión</a>
             </div>
         </div>
     </div>
@@ -70,102 +68,117 @@
                 <a class="navbar-brand" href="index.php" style="color: white">SISAUTO</a>
             </div>
 
-                <?php include("../confi/Conexion.php");
-                $conexion = conectarMysql();
-                $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
-                $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
-                $contador = 0;
-                $label = "label-success";
-                        While($producto = mysqli_fetch_assoc($productos)){
-                            $idProducto= $producto["idProducto"];
-                            $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
-                            $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-                            if (mysqli_num_rows($inventario) == 0) {
-                                $inventario = 0;
-                            }else{
+            <?php include("../confi/Conexion.php");
+            $conexion = conectarMysql();
+            $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+            $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
+            $contador = 0;
+            $label = "label-success";
+            While($producto = mysqli_fetch_assoc($productos)){
+                $idProducto= $producto["idProducto"];
+                $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                if (mysqli_num_rows($inventario) == 0) {
+                    $inventario = 0;
+                }else{
                             $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
                             $inventario = $inventario['nuevaExistencia_Inv'];
-                            }
-                            if ($producto["stock_Prod"] > $inventario) {
-                                $contador++;
-                                $label = "label-danger";   
-                            }
                         }
+                        if ($producto["stock_Prod"] > $inventario) {
+                            $contador++;
+                            $label = "label-danger";   
+                        }
+                    }
                     $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
                     $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
-                
-                ?>
+                    
+                    ?>
 
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label <?php echo $label ?>" id="infocolor"><?php echo $contador ?></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <?php 
-                        While($producto = mysqli_fetch_assoc($productos)){
-                            $idProducto= $producto["idProducto"];
-                            $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
-                            $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-                            if (mysqli_num_rows($inventario) == 0) {
-                                $inventario = 0;
-                            }else{
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i>  <span class="label <?php echo $label ?>" id="infocolor"><?php echo $contador ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <?php 
+                                While($producto = mysqli_fetch_assoc($productos)){
+                                    $idProducto= $producto["idProducto"];
+                                    $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                                    $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                    if (mysqli_num_rows($inventario) == 0) {
+                                        $inventario = 0;
+                                    }else{
                             $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
                             $inventario = $inventario['nuevaExistencia_Inv'];
-                            }
-                            if ($producto["stock_Prod"] > $inventario) {
-                                ?>
-                                <li>
-                                    <a href="#">
-                                        <div>
-                                        <i class="fa fa-envelope fa-fw"></i><?php echo $producto["nombre_Prod"]; ?>  
-                                            <span class="pull-right text-muted medium"> Existencias: <?php echo $inventario."/".$producto["stock_Prod"]; ?></span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <?php
-                            }
                         }
-                        ?>
+                        if ($producto["stock_Prod"] > $inventario) {
+                            ?>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i><?php 
+                                        // echo $producto['codigo_Prod'].' - '.$producto["nombre_Prod"]; 
+                                        if($producto['descripcion_Prod'] == "Ninguna"){
+                                         if($producto['categoria_Prod'] == 12){
+                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
+                                         }else{
+                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                         }
+                                     }else{
+                                         if($producto['categoria_Prod'] == 12){
+                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
+                                         }else{
+                                             echo $producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                         }
+                                     }
+                                     ?>  
+                                     <span class="pull-right text-muted medium"> Existencias: <?php echo $inventario."/".$producto["stock_Prod"]; ?></span>
+                                 </div>
+                             </a>
+                         </li>
+                         <li class="divider"></li>
+                         <?php
+                     }
+                 }
+                 ?>
 
-                    </ul>
-                </li>
+             </ul>
+         </li>
 
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user"></i>&nbsp;<?php echo $_SESSION['usuarioActivo']['nombre_Usu']?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#modalVerUsuario" onclick="mostrarUsu('<?php echo $_SESSION['usuarioActivo']['nombre_Usu']?>','<?php echo $_SESSION['usuarioActivo']['telefono_Usu']?>','<?php echo $_SESSION['usuarioActivo']['correo_Usu']?>','<?php echo $_SESSION['usuarioActivo']['direccion_Usu']?>','<?php echo $_SESSION['usuarioActivo']['dui_Usu']?>','<?php echo $_SESSION['usuarioActivo']['usuario_Usu']?>','<?php echo $_SESSION['usuarioActivo']['tipo_Usu']?>');">
-                                <span class="text-success">
-                                    <strong><h4>Perfil</h4></strong>
-                                </span>
-                                <div class="dropdown-message small"><h4><i class="fa fa-at"></i> <?php echo $_SESSION['usuarioActivo']['usuario_Usu'] ?></h4></div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#modalEditarUsuarioContrasena" onclick="editarUsuContrasena('<?php echo $_SESSION['usuarioActivo']['usuario_Usu']?>','<?php echo $_SESSION['usuarioActivo']['tipo_Usu']?>','<?php echo $_SESSION['usuarioActivo']['idUsuario']?>');" >
-                                <span class="text-success">
-                                    <strong><h4>Cambiar contraseña</h4></strong>
-                                </span>
-                                <div class="dropdown-message small"></div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                &nbsp;&nbsp;
+         <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-user"></i>&nbsp;<?php echo $_SESSION['usuarioActivo']['nombre_Usu']?>
+            </a>
+            <ul class="dropdown-menu dropdown-alerts">
                 <li>
-                    <a  data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-sign-out"></i> Cerrar sesión
+                    <a class="dropdown-item" data-toggle="modal" data-target="#modalVerUsuario" onclick="mostrarUsu('<?php echo $_SESSION['usuarioActivo']['nombre_Usu']?>','<?php echo $_SESSION['usuarioActivo']['telefono_Usu']?>','<?php echo $_SESSION['usuarioActivo']['correo_Usu']?>','<?php echo $_SESSION['usuarioActivo']['direccion_Usu']?>','<?php echo $_SESSION['usuarioActivo']['dui_Usu']?>','<?php echo $_SESSION['usuarioActivo']['usuario_Usu']?>','<?php echo $_SESSION['usuarioActivo']['tipo_Usu']?>');">
+                        <span class="text-success">
+                            <strong><h4>Perfil</h4></strong>
+                        </span>
+                        <div class="dropdown-message small"><h4><i class="fa fa-at"></i> <?php echo $_SESSION['usuarioActivo']['usuario_Usu'] ?></h4></div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#modalEditarUsuarioContrasena" onclick="editarUsuContrasena('<?php echo $_SESSION['usuarioActivo']['usuario_Usu']?>','<?php echo $_SESSION['usuarioActivo']['tipo_Usu']?>','<?php echo $_SESSION['usuarioActivo']['idUsuario']?>');" >
+                        <span class="text-success">
+                            <strong><h4>Cambiar contraseña</h4></strong>
+                        </span>
+                        <div class="dropdown-message small"></div>
                     </a>
                 </li>
             </ul>
-        </nav>
-    </div>
+        </li>
+
+        &nbsp;&nbsp;
+        <li>
+            <a  data-toggle="modal" data-target="#exampleModal">
+                <i class="fa fa-sign-out"></i> Cerrar sesión
+            </a>
+        </li>
+    </ul>
+</nav>
+</div>
 
 
 <!-- MODAL VER USUARIOS -->
@@ -325,7 +338,7 @@
 </div>
 
 <!-- MODAL -->
-  <div class="modal inmodal" id="modalConfigFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+<div class="modal inmodal" id="modalConfigFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -337,28 +350,28 @@
             <div class="modal-body">
                 <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
                     <div class="form-group">
-                     <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
-                     <div class="col-sm-3">
-                         <input class="form-control" type="text" id="numF" name="numF">
-                         <input type="hidden" value="factura" name="bandera">
-                     </div>
-                 </div> 
-              <br>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-              &nbsp;&nbsp;
-              <a class="pull-right">
-                <button type="submit" class="btn btn-success" style="font-size:14px;">
-                  Aceptar
-                </button>
-                &nbsp;
+                       <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
+                       <div class="col-sm-3">
+                           <input class="form-control" type="text" id="numF" name="numF">
+                           <input type="hidden" value="factura" name="bandera">
+                       </div>
+                   </div> 
+                   <br>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                  &nbsp;&nbsp;
+                  <a class="pull-right">
+                    <button type="submit" class="btn btn-success" style="font-size:14px;">
+                      Aceptar
+                  </button>
+                  &nbsp;
               </a>
-              </form>
-            </div>
-        </div>
-    </div>
+          </form>
+      </div>
   </div>
+</div>
+</div>
 <!---------------------------------------------------------------------------------------->
 
 <script src="../assets/Validaciones/mostrarUsuario.js"></script>
