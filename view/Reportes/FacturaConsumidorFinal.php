@@ -118,10 +118,29 @@
       </td>
     </tr>
   </table>
+<?php
+  include("../../confi/Conexion.php");
+  $conexion = conectarMysql();
 
+
+  $sql1 = "SELECT * FROM venta order by idVenta desc";
+  $resultado = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+  $resultado = mysqli_fetch_array($resultado);
+  $id = $resultado['idVenta'];
+  $clienteId = $resultado['id_Cliente'];
+
+
+  
+
+  $sql2 = "SELECT * FROM cliente where idCliente = '$clienteId'";
+  $resultadooo = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+  $res = mysqli_fetch_assoc($resultadooo);
+
+
+?>
   <table width="700" border="1" rules="all" align="center">
     <tr>
-      <td width="450">Cliente: </td>
+      <td width="450">Cliente: <?php echo $res['nombre_Cli']; ?></td>
       <td width="250">N.I.T. No.: </td>
     </tr>
     <tr>
@@ -145,17 +164,49 @@
         <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">VENTAS AFECTAS</td>
       </tr>
       <?php
-      include("../../confi/Conexion.php");
-      $conexion = conectarMysql();
+      
 
 
-      $contador = 1;
-      $sql = "select * from usuario where estado_Usu = 1 order by nombre_Usu ASC";
-      $consulta = mysqli_query($conexion,$sql);
+
+
+
+
+
+      $sql2 = "SELECT * FROM detalleventa WHERE id_Venta = '$id' order by idDetalleVenta desc";
+      $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+      
+
+      $contador = 0;
+      // $sql = "select * from usuario where estado_Usu = 1 order by nombre_Usu ASC";
+      // $consulta = mysqli_query($conexion,$sql);
 
       $fila = 13;
       //while($fila = mysqli_fetch_array($consulta)){
-      while($contador <= $fila){ 
+      while($resultadoo = mysqli_fetch_array($resultadooS)){ 
+      ?>
+
+      <?php
+
+      $productoId = $resultadoo['id_Producto'];
+      $sql2 = "SELECT * FROM producto WHERE idProducto = '$productoId'";
+      $resultadoP = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+      $resP = mysqli_fetch_assoc($resultadoP);
+      ?>
+
+        <tr align="left" class="">
+          <td align="center" bgcolor=""><?php echo $resultadoo['cantidad_DVen'];?></td>
+          <td bgcolor=""><?php echo $resP['nombre_Prod'].' '.$resP['marca_Prod'];?></td>
+          <td align="right" bgcolor=""><?php echo $resultadoo['precio_DVen'];?></td>
+          <td bgcolor=""><?php  ?></td>
+          <td bgcolor=""><?php  ?></td>
+          <td align="right" bgcolor=""><?php echo $resultadoo['cantidad_DVen'] * $resultadoo['precio_DVen'];?></td>
+        </tr>
+        <?php 
+        $contador++;
+       }
+       $a = 0;
+       $fila = $fila - $contador;
+       while($a < $fila){ 
       ?>
         <tr align="left" class="">
           <td align="center" bgcolor=""><?php echo ".";?></td>
@@ -166,15 +217,18 @@
           <td bgcolor=""><?php  ?></td>
         </tr>
         <?php 
-        $contador++;
+        $a++;
        }
+
+
+
        ?> 
   </table>
   <table width="700" border="1" align="center" rules="all">
     <tr>
-      <td width="400" bgcolor=""><?php echo ".";?> 
+      <td width="400" bgcolor=""><?php echo "SON: ";?> 
       </td>
-      <td width="158" bgcolor=""><?php  ?>
+      <td width="158" bgcolor=""><?php echo "SUMAS"?>
       </td>
       <td width="31" bgcolor=""><?php  ?>
       </td>
@@ -186,23 +240,9 @@
   </table>
   <table width="700" border="1" align="center" rules="all">
     <tr>
-      <td width="397" bgcolor=""><?php echo ".";?> 
+      <td width="397" bgcolor=""><?php echo "Llenar si la operacion es igual o Superior a $200.00";?> 
       </td>
-      <td rowspan="4" width="158" bgcolor=""><?php  ?>
-      </td>
-      <td width="53" bgcolor="#c4eeff"><?php  ?>
-      </td>
-      <td width="92" bgcolor=""><?php  ?>
-      </td>
-    </tr> 
-  </table>
-  <table width="700" border="1" align="center" rules="all">
-    <tr>
-      <td width="198" bgcolor=""><?php echo ".";?> 
-      </td>
-      <td width="198" bgcolor=""><?php echo ".";?> 
-      </td>
-      <td width="158" bgcolor=""><?php  ?>
+      <td rowspan="4" width="158" bgcolor=""><?php echo "SUB-TOTAL"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
@@ -212,11 +252,11 @@
   </table>
   <table width="700" border="1" align="center" rules="all">
     <tr>
-      <td width="198" bgcolor=""><?php echo ".";?> 
+      <td width="198" bgcolor=""><?php echo "Nombre: ";?> 
       </td>
-      <td width="198" bgcolor=""><?php echo ".";?> 
+      <td width="198" bgcolor=""><?php echo "Nombre: ";?> 
       </td>
-      <td width="158" bgcolor=""><?php  ?>
+      <td width="158" bgcolor=""><?php echo "VENTAS NO SUJETAS"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
@@ -226,15 +266,29 @@
   </table>
   <table width="700" border="1" align="center" rules="all">
     <tr>
-      <td width="198" bgcolor=""><?php echo ".";?> 
+      <td width="198" bgcolor=""><?php echo "NIT./DUI.:";?> 
       </td>
-      <td width="198" bgcolor=""><?php echo ".";?> 
+      <td width="198" bgcolor=""><?php echo "NIT./DUI.:";?> 
       </td>
-      <td width="158" bgcolor=""><?php  ?>
+      <td width="158" bgcolor=""><?php echo "VENTAS EXENTAS"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
       <td width="92" bgcolor=""><?php  ?>
+      </td>
+    </tr> 
+  </table>
+  <table width="700" border="1" align="center" rules="all">
+    <tr>
+      <td width="198" bgcolor=""><?php echo "Firma Entregado:";?> 
+      </td>
+      <td width="198" bgcolor=""><?php echo "Firma recibido: ";?> 
+      </td>
+      <td width="158" bgcolor=""><?php echo "VENTAS TOTAL"?>
+      </td>
+      <td width="53" bgcolor="#c4eeff"><?php  ?>
+      </td>
+      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven'];?>
       </td>
     </tr> 
   </table>
