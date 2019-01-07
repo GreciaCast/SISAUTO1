@@ -69,7 +69,7 @@ $hasta = $_GET["hasta"];
           <p>Teléfono: 2393-0214.</p></span></td>
         </tr>
         <tr align="center">
-          <td colspan="2"><strong class="titulos">REPORTE DE COMPRAS</strong></td>
+          <td colspan="2"><strong class="titulos">REPORTE DE VENTAS</strong></td>
         </tr>
         <tr align="right">
           <td>&nbsp;</td>
@@ -88,8 +88,8 @@ $hasta = $_GET["hasta"];
             <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">N° de factura</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
-            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Total de la compra</td>
-            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Proveedor</td>
+            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Total de Venta</td>
+            <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Cliente</td>
           </tr>
           <?php
 	//try {
@@ -104,13 +104,13 @@ $hasta = $_GET["hasta"];
 
           $contador=1;
           if($desde == ""&& $hasta== ""){
-           $sql = "select * from compra order by fecha_Com ASC";
+           $sql = "select * from venta order by fecha_Ven ASC";
          }else if($hasta == ""){
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' order by fecha_Com ASC";
+          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$today' order by fecha_Ven ASC";
         }else if($desde == ""){
-          $sql = "select * from compra  where fecha_Com <= '$hasta' order by fecha_Com ASC";
+          $sql = "select * from venta  where fecha_Ven <= '$hasta' order by fecha_Ven ASC";
         }else{
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' order by fecha_Com ASC";
+          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$hasta' order by fecha_Ven ASC";
         }
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
@@ -123,17 +123,26 @@ $hasta = $_GET["hasta"];
          ?>
          <tr align="left" class="">
           <td bgcolor=""><?php echo $contador;?></td>
-          <td bgcolor=""><?php echo $fila[1];?></td>
-          <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[2]));?></td>
-          <td bgcolor=""><a>$</a><?php echo $fila[3];?></td>
+          <td bgcolor="">
+            <?php
+           $aux = $fila['idVenta'];
+           $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
+           $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $numFac= mysqli_fetch_array($numFac);
+           echo $numFac['numero_Fac'];
+           ?>
+
+          </td>
+          <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
+          <td bgcolor=""><a>$</a><?php echo $fila[2];?></td>
           <td bgcolor="">
           <?php
-          $aux = $fila['id_Proveedor'];
-          $sql1 = "SELECT nombre_Prov FROM proveedor where idProveedor = '$aux'";
-          $proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-          $proveedor = mysqli_fetch_array($proveedor);
-          echo $proveedor['nombre_Prov'];
-          ?>
+           $aux = $fila['id_Cliente'];
+           $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";
+           $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $cliente = mysqli_fetch_array($cliente);
+           echo $cliente['nombre_Cli'];
+           ?>
           </td>
         </tr>
         <?php $contador++;
