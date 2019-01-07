@@ -53,14 +53,6 @@ if(isset($_POST["bandera"])){
 				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
 				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-
-
-
-
-
-
-
-
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				$res = mysqli_fetch_assoc($ress);
@@ -101,6 +93,32 @@ if(isset($_POST["bandera"])){
 	//target="_blank" href="Reportes/ReporteUsuario.php"
 }
 
+if(isset($_GET["bandera1"])){
+	$id = $_GET["id"];
+	$cadena='';
+	$sql1 = "SELECT * from detalleventa where id_Venta = '$id'";
+	$detalles = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+	$cadena="";
+	While ($detalle = mysqli_fetch_assoc($detalles)){
+		$idP=$detalle['id_Producto'];
+		$sql1 = "SELECT * from producto where idProducto = '$idP'";
+		$producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($producto);
+		$cadena.='<tr id="f'.$producto['idProducto'].'">';
+		$cadena=$cadena.'<td>'.$detalle['cantidad_DVen'].'</td>';
+		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'].'</td>';
+		$cadena=$cadena.'<td>'.$detalle['precio_DVen'].'</td>';
+		$subtotal = $detalle['cantidad_DVen']*$detalle['precio_DVen'];
+		$cadena=$cadena.'<td>'.number_format($subtotal,2,'.','').'</td>';
+		// $cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';
+		$cadena.='</tr>';
+	}
+	
+	// .= ---> $cadena=$cadena.variable
+	echo $cadena;
+
+
+}
 //----------------------------  AGREGAR A TABLA DETALLES DE VENTA
 if(isset($_GET["repetidos"])){
 	$id = $_GET["id"];

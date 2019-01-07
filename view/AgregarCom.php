@@ -68,7 +68,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         ?>
                                         <label for="empresa" class="col-sm-3 control-label">Proveedor:</label>
                                         <div class="col-sm-3 input-group">
-                                            <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="form-control"> 
+                                            <select id="proves" name="id_Proveedor" style="width:600px;height:40px" class="chosen-select"> 
                                                 <option value="">[Selecionar proveedor]</option>
                                                 <?php
 
