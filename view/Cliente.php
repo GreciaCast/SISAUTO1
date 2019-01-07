@@ -92,6 +92,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 														</thead>
 														<tbody>
 															<?php While($cliente=mysqli_fetch_assoc($clientes)){?>
+                              <?php if($cliente['idCliente'] != 28){ ?>
                                         <tr>
                                             <td><?php echo $cliente['nombre_Cli'] ?></td>
                                             <td><?php echo $cliente['telefono_Cli'] ?></td>
@@ -115,6 +116,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                 <?php } }?>
                                             </th>
                                         </tr>
+                                        <?php } ?>
                                         <?php } ?>
 																</tbody>
 															</table>
@@ -241,7 +243,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group">
                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">NRC:</label>
                       <div class="col-sm-3">
-                        <input class="form-control" type="text" name="nrcCli" id="nrcCliEditar" data-mask="9999-9999" readonly="readonly"aria-required="true"  value="" >
+                        <input class="form-control" type="text" name="nrcCli" id="nrcCliEditar" data-mask="9999-9999" readonly="readonly" aria-required="true"  value="" >
                       </div>
                     </div>
                         <br><br><br>

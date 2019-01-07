@@ -81,8 +81,10 @@ if ($bandera == "subida") {
 
 	if (move_uploaded_file($_FILES['archivo']['tmp_name'], $fichero_subido)) {
 		$_SESSION['mensaje'] = "El archivo es válido y se subió con éxito";
+		header("location: /SISAUTO1/view/Respaldo.php?");
 	} else {
 		$_SESSION['error'] = "El archivo no fue subido";
+		header("location: /SISAUTO1/view/Respaldo.php?");
 	}
 
 }

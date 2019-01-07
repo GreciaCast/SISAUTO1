@@ -23,7 +23,7 @@ if($bandera=="guardar"){
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registró nuevo proveedor')";
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registró un proveedor')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
 }
@@ -47,7 +47,7 @@ if($bandera=="EditarPro"){
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó datos de un proveedor')";
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó un proveedor')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
 }
@@ -59,19 +59,23 @@ if ($bandera=="cambio") {
 	if ($_POST["valor"]==1) {
 		$aux = 0;
 		$_SESSION['mensaje'] ="Proveedor dado de alta exitosamente";
+
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
     $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de alta a un proveedor')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
+	
 	}else{
 		$aux = 1;
 		$_SESSION['mensaje'] ="Proveedor dado de baja exitosamente";
+
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
     $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un proveedor')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
+	
 	}
     header("location: /SISAUTO1/view/Proveedor.php?tipo=".$aux."");
 }

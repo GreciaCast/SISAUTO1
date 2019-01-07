@@ -40,7 +40,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <div class="form-group">
                                             </div>
                                             <?php 
-                                            $sql = "SELECT  detallecompra.*,producto.nombre_Prod,producto.categoria_Prod,producto.marca_Prod,producto.descripcion_Prod,producto.modeloVehiculo_Prod,producto.anioVehiculo_Prod FROM detallecompra left OUTER JOIN producto on detallecompra.id_Producto=producto.idProducto where detallecompra.id_Compra='$var'";
+                                            $sql = "SELECT  detallecompra.*,producto.nombre_Prod,producto.categoria_Prod,producto.marca_Prod,producto.descripcion_Prod,producto.modeloVehiculo_Prod,producto.anioVehiculo_Prod,producto.codigo_Prod FROM detallecompra left OUTER JOIN producto on detallecompra.id_Producto=producto.idProducto where detallecompra.id_Compra='$var'";
                                             $compras = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
                                             ?>
                                             <div class="form-group">
@@ -68,15 +68,15 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                                <td><?php  
                                                                    if($compra['descripcion_Prod'] == "Ninguna"){
                                                                    if($compra['categoria_Prod'] == 12){
-                                                                   echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].')';
+                                                                   echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].')';
                                                                }else{
-                                                               echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                                               echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
                                                            }
                                                        }else{
                                                        if($compra['categoria_Prod'] == 12){
-                                                       echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].')';
+                                                       echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].')';
                                                    }else{
-                                                   echo $compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].' para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                                   echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].' para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
                                                }
                                            }
                                            ?>

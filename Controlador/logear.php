@@ -11,12 +11,14 @@ session_start();
     		$_SESSION['usuarioActivo']=$row;
             $_SESSION['mensaje']="Usted a iniciado sesión - BIENVENIDO";
     		header("location: /SISAUTO1/view/index.php");
+
         //////////CAPTURA DATOS PARA BITACORA
         $usuari=$row['usuario_Usu'];
         $conexion = conectarMysql();
-        $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inicio de Sesion')";
+        $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inició de sesión')";
         mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
         ///////////////////////////////////////////////
+        
     	}else{
         $_SESSION['error']="Usuario y Contraseña Incorrectos";
       	header("location: /SISAUTO1/view/login.php");

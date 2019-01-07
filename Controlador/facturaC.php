@@ -14,7 +14,7 @@
 	    header("location: /SISAUTO1/view/index.php?");
 			//////////CAPTURA DATOS PARA BITACORA
 			$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inicio numero de factura')";
+			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inició número de factura')";
 			mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 			///////////////////////////////////////////////
 	}

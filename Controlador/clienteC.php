@@ -21,7 +21,7 @@ if($bandera=="GuardarCli"){
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registró nuevo cliente')";
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Registró un cliente')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
 
@@ -46,7 +46,7 @@ if($bandera=="EditarCli"){
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
-    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó datos de un cliente')";
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó un cliente')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
     ///////////////////////////////////////////////
 }

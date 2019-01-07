@@ -119,6 +119,7 @@
 
           {
            ?>
+           <?php if($fila[0] != 28){ ?>
            <tr align="left" class="">
             <td bgcolor=""><?php echo $contador;?></td>
             <td bgcolor=""><?php echo $fila[1];?></td>
@@ -127,6 +128,7 @@
             <td bgcolor=""><?php echo $fila[4];?></td>
             <td bgcolor=""><?php echo $fila[5];?></td>
           </tr>
+          <?php } ?>
           <?php $contador++;
         }
   // }
