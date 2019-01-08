@@ -49,7 +49,8 @@ if(isset($_GET["bandera1"])){
 		$cadena.='<tr id="f'.$producto['idProducto'].'">';
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DCom'].'</td>';
 		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'].'</td>';
-		$cadena=$cadena.'<td>'.$detalle['precio_DCom'].'</td>';
+		$preciouni = $detalle['precio_DCom'];
+		$cadena=$cadena.'<td>'.number_format($preciouni,2,'.','').'</td>';
 		$subtotal = $detalle['cantidad_DCom']*$detalle['precio_DCom'];
 		$cadena=$cadena.'<td>'.number_format($subtotal,2,'.','').'</td>';
 		// $cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';
