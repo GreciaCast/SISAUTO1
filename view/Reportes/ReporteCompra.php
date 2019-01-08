@@ -125,7 +125,9 @@ $hasta = $_GET["hasta"];
           <td bgcolor=""><?php echo $contador;?></td>
           <td bgcolor=""><?php echo $fila[1];?></td>
           <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[2]));?></td>
-          <td bgcolor=""><a>$</a><?php echo $fila[3];?></td>
+          <td bgcolor=""><a>$</a><?php 
+          $preciocom = $fila[3];
+          echo number_format($preciocom,2,'.','');?></td>
           <td bgcolor="">
           <?php
           $aux = $fila['id_Proveedor'];
