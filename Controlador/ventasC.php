@@ -53,6 +53,7 @@ if(isset($_POST["bandera"])){
 				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
 				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
+
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				$res = mysqli_fetch_assoc($ress);

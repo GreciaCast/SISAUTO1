@@ -231,7 +231,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   </div>
                   <div id="conF" style="display:block;">
                     <label class="col-sm-2 control-label">Desea factura?: </label>
-                    <a target="_blank" href="Reportes/ReporteUsuario.php">
+                    <a target="_blank" href="Reportes/FacturaConsumidorFinal.php">
                       <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Si</button>
                     </a>
                     <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(2);">No</button>
