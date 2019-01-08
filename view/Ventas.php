@@ -169,7 +169,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Fecha:</label>
         <div class="col-sm-3 input-group date">
           <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          <input class="form-control" type="text" id="fechaVen"  disabled="true" aria-required="true" >
+          <input class="form-control" type="text" id="fechaVen"  disabled="true" aria-required="true">
         </div>
       </div>
       <br>

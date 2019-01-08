@@ -52,6 +52,10 @@ if(isset($_POST["bandera"])){
 				//.toFixed(2)
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+
+				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
+				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				
 				if ($indicador != 2) {
 					$sql4 = "INSERT INTO facturaconsumidor (numero_Fac,id_Venta) VALUES ('$numFacConVen','$id')";
@@ -62,6 +66,7 @@ if(isset($_POST["bandera"])){
 					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				}
 				
+
 
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -85,21 +90,11 @@ if(isset($_POST["bandera"])){
 				
 
 
-
-				
-
-
 		 	}
 
 		}
 		
 	}
-
-		//////////CAPTURA DATOS PARA BITACORA
-		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardó una venta')";
-		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-		///////////////////////////////////////////////
 	
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
@@ -122,7 +117,24 @@ if(isset($_GET["bandera1"])){
 		$producto = mysqli_fetch_array($producto);
 		$cadena.='<tr id="f'.$producto['idProducto'].'">';
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DVen'].'</td>';
-		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'].'</td>';
+
+		// $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+		
+		if($producto['descripcion_Prod'] == "Ninguna"){
+			if($producto['categoria_Prod'] == 12){
+				// $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+				   $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].' )'.'</td>';
+			}else{
+				$cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+			}
+		}else{
+			 if($producto['categoria_Prod'] == 12){
+				$cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' )'.'</td>';
+			 }else{
+				 $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+			 }
+		}
+		
 		$precioven = $detalle['precio_DVen'];
 		$cadena=$cadena.'<td>'.number_format($precioven,2,'.','').'</td>';
 		$subtotal = $detalle['cantidad_DVen']*$detalle['precio_DVen'];

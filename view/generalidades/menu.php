@@ -360,17 +360,17 @@
                 <small>...</small>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
+                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarFac" autocomplete="off">
                     <div class="form-group">
                         <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Credito fiscal:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="numFCredito" name="numFCredito">
+                            <input class="form-control" type="number" id="numFCredito" name="numFCredito" onkeypress="return validarEntero(this,event,this.value)">
                         </div>
                     </div>
                     <div class="form-group">
                         <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Consumidor final:</label>
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="numFConsumidor" name="numFConsumidor">
+                            <input class="form-control" type="number" id="numFConsumidor" name="numFConsumidor" onkeypress="return validarEntero(this,event,this.value)">
                         </div>
                     </div>
                     <input type="hidden" value="factura" name="bandera"> 
@@ -380,7 +380,7 @@
               <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
               &nbsp;&nbsp;
               <a class="pull-right">
-                <button type="submit" class="btn btn-success" style="font-size:14px;">
+                <button type="button" class="btn btn-success" style="font-size:14px;" onclick="validarNumFacturas();">
                   Aceptar
               </button>
               &nbsp;
@@ -390,8 +390,10 @@
 </div>
 </div>
 </div>
-<!---------------------------------------------------------------------------------------->
+<!--___________________________________________________________________________________-->
 
 <script src="../assets/Validaciones/mostrarUsuario.js"></script>
 <script src="../assets/Validaciones/validarContrasena.js"></script>
 <script src="../assets/Validaciones/validarUsuario.js"></script>
+<script src="../assets/Validaciones/validarEntero.js"></script>
+<script src="../assets/Validaciones/validarNumFacturas.js"></script>
