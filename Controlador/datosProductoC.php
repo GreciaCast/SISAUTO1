@@ -22,7 +22,8 @@ $conexion = conectarMysql();
 		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 		$producto = mysqli_fetch_array($productos);//CAPTURA EL ULTIMO REGISTRO
 		$costo = $costo.''.$producto['nuevoPrecio_Inv'];
-		echo $costo;
+		$format_number = number_format($costo, 2, '.', '');
+		echo $format_number;
 	}
 
 	if(isset($_GET["precio"])){
