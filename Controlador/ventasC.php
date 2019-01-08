@@ -50,7 +50,7 @@ if(isset($_POST["bandera"])){
 				$nuevaExistencia = $resultadoo['nuevaExistencia_Inv'] - $cantidadProdVen[$key];
 				$nuevoPrecio = $precioActual;
 				// $nuevoPrecio = $nuevoPrecio;
-				//.toFixed(2)
+				//$preciovp = format_number($nuevoPrecio,2,'.','');
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 

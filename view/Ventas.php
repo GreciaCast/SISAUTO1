@@ -163,7 +163,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
     <div class="modal-content">
       <div class="modal-header" style="background-color:#007bff;color:black;">
 
-        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver Venta</h3>
+        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver venta</h3>
       </div>
       <div class="modal-body">
        <h3 align="center"><b>Datos Generales</b></h3>
