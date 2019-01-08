@@ -33,22 +33,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="ibox-content">
                     <form class="form-horizontal" action="../Controlador/ventasC.php" method="POST" id="guardarVen" align="center" autocomplete="off">
                       <h3><b>Datos generales</b></h3>
-                      <hr width="75%" style="background-color:#007bff;"/><br>
+                      <hr width="75%" style="background-color:#007bff;"/>
                       <input type="hidden" value="GuardarVen" name="bandera"></input>
-                      <div class="form-group row">
-                        <label class="col-sm-3 control-label">Número de factura: </label>
-                        <div class="col-sm-3 input-group">
-                          <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
-                          ?>
-                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
-                        </div>
-                      </div>
                       <div class="form-group row" id="data_2">
                         <?php
 
@@ -79,7 +65,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group row">
                        <label for="empresa" class="col-sm-3 control-label">Cliente: </label>
                        <div class="col-sm-3 input-group">
-                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2" onchange="vercliente();">
+                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2" onchange="verclienteee();">
                           <option value="28">Cliente Repuestos Vaquerano</option>
                           <?php
 
@@ -93,7 +79,36 @@ if (isset($_SESSION['usuarioActivo'])) {
                      </div>
                    </div>
                    </div>
-                   <br><br>
+                   <div id="consumidor" style="display:block;" class="form-group row">
+                      <label class="col-sm-3 control-label">Número de factura: </label>
+                      <div class="col-sm-3 input-group">
+                        <?php 
+                          $var = correlativoFacturaConsumidor();
+                       
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
+                        ?>
+                        <input id="numFacConVen" name="numFacCon_Ven" value="<?php echo $var ?>" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
+                      </div>
+                    </div>
+                    <div id="credito" style="display:none;" class="form-group row">
+                      <label class="col-sm-3 control-label">Número de factura: </label>
+                      <div class="col-sm-3 input-group">
+                        <?php 
+                          $var = correlativoFacturaCredito();
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
+                        ?>
+                        <input id="numFacCreVen" name="numFacCre_Ven" value="<?php echo $var ?>" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
+                      </div>
+                    </div>
+                   <br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
                   <?php
@@ -144,7 +159,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                        </select>
                      </div>
                    </div>
-                   <input id="limpiarPV" name="limpiarPV" type="hidden" value="<?php echo $aa?>">
+                   
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-12 col-md-1">
@@ -218,19 +233,23 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <!--
                           El id es para el js y el name para el controlador
                         -->
+
+                      <input id="indicador" name="indicador" type="hidden">
                     </div>
                   </div>
                   <br>
                   <hr width="75%">
                   <div class="form-group" align="center">
                     <div id="sinF" style="display:none;">
-                      <a target="_blank" href="Reportes/ReporteUsuario.php">
+                      <a target="_blank" href="Reportes/FacturaCreditoFiscal.php">
                         <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Factura</button>
                       </a>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>
                   <div id="conF" style="display:block;">
-                    <label class="col-sm-2 control-label">Desea factura?: </label>
+                    <div class="card-header">
+                      <h3><b>¿Desea emitir factura?</b></h3>
+                    </div>
                     <a target="_blank" href="Reportes/FacturaConsumidorFinal.php">
                       <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Si</button>
                     </a>
@@ -271,50 +290,6 @@ if (isset($_SESSION['usuarioActivo'])) {
   </div>
 </div>
 
-<!-- MODAL -->
-  <div class="modal inmodal" id="modalFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content animated fadeIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <i class="fa fa-check-square-o modal-icon"></i>
-                <h4 class="modal-title">Desea generar factura?</h4>
-                <small>...</small>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
-                    <div class="form-group row">
-                        <label class="col-sm-3 control-label">Número de factura: </label>
-                        <div class="col-sm-3 input-group">
-                          <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
-                          ?>
-                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
-                        </div>
-                      </div> 
-              <br>
-            </div>
-            <div class="modal-footer">
-              <a target="_blank" href="Reportes/ReporteUsuario.php">
-                <button type="button" class="btn btn-white" data-dismiss="modal" onclick="validarVenta(1);">SI</button>
-              </a>
-              &nbsp;&nbsp;
-              <a class="pull-right">
-                <button type="submit" class="btn btn-success" style="font-size:14px;" onclick="validarVenta(2);">NO</button>
-                &nbsp;
-              </a>
-              </form>
-            </div>
-        </div>
-    </div>
-  </div>
-<!---------------------------------------------------------------------------------------->
-
 
  <script src="../assets/Validaciones/mostrarProducto.js"></script>
  <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
@@ -330,25 +305,18 @@ if (isset($_SESSION['usuarioActivo'])) {
  
 
 <script type="text/javascript">
-    function vercliente() {
+    function verclienteee(){
       console.log($('#clientess').val());
         if ($('#clientess').val() != 28) {
-
           $("#sinF").css('display','block');//mostrar
           $("#conF").css('display','none');//ocultar
-//             $('#universal').val(1);
-// //                                        $("#marcaPr").attr("disabled", "disabled");
-//             $("#modeloPE").val("");
-//             $("#anioPE").val("");
-//             $("#modeloPE").attr("disabled", "disabled");
-//             $("#anioPE").attr("disabled", "disabled");
+          $("#consumidor").css('display','none');//ocultar
+          $("#credito").css('display','block');//mostrar
         } else {
           $("#conF").css('display','block');//mostrar
           $("#sinF").css('display','none');//ocultar
-//             $('#universal').val(0);
-// //                                        $("#marcaPr").removeAttr("disabled");
-//             $("#modeloPE").removeAttr("disabled");
-//             $("#anioPE").removeAttr("disabled");
+          $("#consumidor").css('display','block');//mostrar
+          $("#credito").css('display','none');//ocultar
         }
     }
 </script>

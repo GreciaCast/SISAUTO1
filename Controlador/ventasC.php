@@ -11,12 +11,15 @@ if(isset($_POST["bandera"])){
 		$fechaVen = explode("/",$fechaVen);
 		$fechaVen = $fechaVen[2].'-'.$fechaVen[1].'-'.$fechaVen[0];
 
-		$numFacVen = $_POST["numFac_Ven"];
+		$numFacConVen = $_POST["numFacCon_Ven"];
+		$numFacCreVen = $_POST["numFacCre_Ven"];
 		$totalVen = $_POST["totalVenta"];
 		$idCliVen = $_POST["id_Clientes"];
 		$cantidadProdVen = $_POST["cantidad_DVen"];
 		$precioProdVen = $_POST["precio_DVen"];
 		$idProdVen = $_POST["id_Producto"];
+
+		$indicador = $_POST["indicador"];
 
 		$sql = "INSERT INTO venta (fecha_Ven,total_Ven,id_Cliente) VALUES ('$fechaVen','$totalVen','$idCliVen')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -50,8 +53,19 @@ if(isset($_POST["bandera"])){
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
+
 				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
 				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				
+				if ($indicador != 2) {
+					$sql4 = "INSERT INTO facturaconsumidor (numero_Fac,id_Venta) VALUES ('$numFacConVen','$id')";
+					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				}else{
+					$sql4 = "INSERT INTO facturacredito (numero_Fac,id_Venta) VALUES ('$numFacCreVen','$id')";
+					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				}
+				
+
 
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -103,7 +117,8 @@ if(isset($_GET["bandera1"])){
 		$cadena.='<tr id="f'.$producto['idProducto'].'">';
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DVen'].'</td>';
 		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'].'</td>';
-		$cadena=$cadena.'<td>'.$detalle['precio_DVen'].'</td>';
+		$precioven = $detalle['precio_DVen'];
+		$cadena=$cadena.'<td>'.number_format($precioven,2,'.','').'</td>';
 		$subtotal = $detalle['cantidad_DVen']*$detalle['precio_DVen'];
 		$cadena=$cadena.'<td>'.number_format($subtotal,2,'.','').'</td>';
 		// $cadena=$cadena.'<td>'.$detalle['cantidad_DCom']*$detalle['precio_DCom'].'</td>';

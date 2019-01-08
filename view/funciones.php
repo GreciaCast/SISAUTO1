@@ -28,17 +28,41 @@ function contarProductoInventario($id){
 	return $total; 
 }
 
-function correlativoFactura(){
+function correlativoFacturaConsumidor(){
 
-
-	
 	$conexion = conectarMysql();
-	$sql = "SELECT * from factura order by idFactura desc";
+	$sql = "SELECT * from facturaconsumidor order by idFactura desc";
 	$var = mysqli_query($conexion,$sql);
 	$total = mysqli_num_rows($var);
 	if($total == 0){
 
-		$sql2 = "SELECT numeroInicial_numF FROM numerofactura";
+		$sql2 = "SELECT numeroInicial_numF FROM numerofactura where tipo_numF = 2";
+		$resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+		$total2 = mysqli_num_rows($resultadooS);
+		if($total2 == 0){
+			return 0;
+		}else{
+			$resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
+			return $resultadoo['numeroInicial_numF'];
+		}
+		
+	}else{
+		$result = mysqli_fetch_array($var);//CAPTURA EL ULTIMO REGISTRO
+		return $result['numero_Fac'] + 1;
+
+	}
+	
+}
+
+function correlativoFacturaCredito(){
+
+	$conexion = conectarMysql();
+	$sql = "SELECT * from facturacredito order by idFactura desc";
+	$var = mysqli_query($conexion,$sql);
+	$total = mysqli_num_rows($var);
+	if($total == 0){
+
+		$sql2 = "SELECT numeroInicial_numF FROM numerofactura where tipo_numF = 1";
 		$resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		$total2 = mysqli_num_rows($resultadooS);
 		if($total2 == 0){

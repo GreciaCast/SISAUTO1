@@ -133,7 +133,9 @@ $hasta = $_GET["hasta"];
            ?>
           </td>
           <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
-          <td bgcolor=""><a>$</a><?php echo $fila[2];?></td>
+          <td bgcolor=""><a>$</a><?php
+          $precioven = $fila[2];
+           echo number_format($precioven,2,'.','');?></td>
           <td bgcolor="">
           <?php
            $aux = $fila['id_Cliente'];
