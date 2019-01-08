@@ -356,19 +356,25 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
                 <i class="fa fa-check-square-o modal-icon"></i>
-                <h4 class="modal-title"></h4>
+                <h4 class="modal-title">Generar numero de facturas desde:</h4>
                 <small>...</small>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
                     <div class="form-group">
-                     <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Generar numero de facturas desde:</label>
-                     <div class="col-sm-3">
-                         <input class="form-control" type="text" id="numF" name="numF">
-                         <input type="hidden" value="factura" name="bandera">
-                     </div>
-                 </div> 
-                 <br>
+                        <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Credito fiscal:</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" id="numFCredito" name="numFCredito">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Consumidor final:</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" id="numFConsumidor" name="numFConsumidor">
+                        </div>
+                    </div>
+                    <input type="hidden" value="factura" name="bandera"> 
+                <br>
              </div>
              <div class="modal-footer">
               <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>

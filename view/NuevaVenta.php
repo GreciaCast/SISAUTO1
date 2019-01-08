@@ -33,22 +33,8 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="ibox-content">
                     <form class="form-horizontal" action="../Controlador/ventasC.php" method="POST" id="guardarVen" align="center" autocomplete="off">
                       <h3><b>Datos generales</b></h3>
-                      <hr width="75%" style="background-color:#007bff;"/><br>
+                      <hr width="75%" style="background-color:#007bff;"/>
                       <input type="hidden" value="GuardarVen" name="bandera"></input>
-                      <div class="form-group row">
-                        <label class="col-sm-3 control-label">Número de factura: </label>
-                        <div class="col-sm-3 input-group">
-                          <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
-                          ?>
-                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
-                        </div>
-                      </div>
                       <div class="form-group row" id="data_2">
                         <?php
 
@@ -93,7 +79,22 @@ if (isset($_SESSION['usuarioActivo'])) {
                      </div>
                    </div>
                    </div>
-                   <br><br>
+                   <div class="form-group row">
+                      <label class="col-sm-3 control-label">Número de factura: </label>
+                      <div class="col-sm-3 input-group">
+                        <?php 
+                          $var = correlativoFacturaConsumidor();
+                          $var1 = correlativoFacturaCredito();
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
+                        ?>
+                        <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
+                      </div>
+                    </div>
+                   <br>
                    <h3><b>Datos del producto</b></h3>
                    <hr width="75%" style="background-color:#007bff;"/><br>
                   <?php
@@ -218,19 +219,23 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <!--
                           El id es para el js y el name para el controlador
                         -->
+
+                      <input id="indicador" name="indicador" type="hidden">
                     </div>
                   </div>
                   <br>
                   <hr width="75%">
                   <div class="form-group" align="center">
                     <div id="sinF" style="display:none;">
-                      <a target="_blank" href="Reportes/ReporteUsuario.php">
+                      <a target="_blank" href="Reportes/FacturaCreditoFiscal.php">
                         <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Factura</button>
                       </a>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>
                   <div id="conF" style="display:block;">
-                    <label class="col-sm-2 control-label">Desea factura?: </label>
+                    <div class="card-header">
+                      <h3><b>¿Desea emitir factura?</b></h3>
+                    </div>
                     <a target="_blank" href="Reportes/FacturaConsumidorFinal.php">
                       <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Si</button>
                     </a>
@@ -336,19 +341,9 @@ if (isset($_SESSION['usuarioActivo'])) {
 
           $("#sinF").css('display','block');//mostrar
           $("#conF").css('display','none');//ocultar
-//             $('#universal').val(1);
-// //                                        $("#marcaPr").attr("disabled", "disabled");
-//             $("#modeloPE").val("");
-//             $("#anioPE").val("");
-//             $("#modeloPE").attr("disabled", "disabled");
-//             $("#anioPE").attr("disabled", "disabled");
         } else {
           $("#conF").css('display','block');//mostrar
           $("#sinF").css('display','none');//ocultar
-//             $('#universal').val(0);
-// //                                        $("#marcaPr").removeAttr("disabled");
-//             $("#modeloPE").removeAttr("disabled");
-//             $("#anioPE").removeAttr("disabled");
         }
     }
 </script>

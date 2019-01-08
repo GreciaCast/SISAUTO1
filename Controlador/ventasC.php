@@ -18,6 +18,8 @@ if(isset($_POST["bandera"])){
 		$precioProdVen = $_POST["precio_DVen"];
 		$idProdVen = $_POST["id_Producto"];
 
+		$indicador = $_POST["indicador"];
+
 		$sql = "INSERT INTO venta (fecha_Ven,total_Ven,id_Cliente) VALUES ('$fechaVen','$totalVen','$idCliVen')";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		$sql1 = "SELECT * FROM venta order by idVenta desc";
@@ -49,10 +51,12 @@ if(isset($_POST["bandera"])){
 				//.toFixed(2)
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
-
-				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
-				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
-
+				
+				if ($indicador != 2) {
+					$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
+					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				}
+				
 
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
