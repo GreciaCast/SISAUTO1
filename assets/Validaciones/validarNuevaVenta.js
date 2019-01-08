@@ -44,8 +44,6 @@ function aplicarDescuento15(){
 }
 
 function agregarProductosATabla(){
-	var limpiar = $('#limpiarPV').val();
-	console.log(limpiar);
 	var disponible = $('#cantidadDisponiblePV').val();
     var cantidad = $('#cantidadPV').val();
 

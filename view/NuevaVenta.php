@@ -65,7 +65,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group row">
                        <label for="empresa" class="col-sm-3 control-label">Cliente: </label>
                        <div class="col-sm-3 input-group">
-                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2" onchange="vercliente();">
+                        <select  id="clientess" name="id_Clientes" class="chosen-select" style="width:500px;height:40px" tabindex="2" onchange="verclienteee();">
                           <option value="28">Cliente Repuestos Vaquerano</option>
                           <?php
 
@@ -79,19 +79,33 @@ if (isset($_SESSION['usuarioActivo'])) {
                      </div>
                    </div>
                    </div>
-                   <div class="form-group row">
+                   <div id="consumidor" style="display:block;" class="form-group row">
                       <label class="col-sm-3 control-label">Número de factura: </label>
                       <div class="col-sm-3 input-group">
                         <?php 
                           $var = correlativoFacturaConsumidor();
-                          $var1 = correlativoFacturaCredito();
+                       
                           if($var == 0){
                             ?>
                             <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
                             <?php
                           }
                         ?>
-                        <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
+                        <input id="numFacConVen" name="numFacCon_Ven" value="<?php echo $var ?>" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
+                      </div>
+                    </div>
+                    <div id="credito" style="display:none;" class="form-group row">
+                      <label class="col-sm-3 control-label">Número de factura: </label>
+                      <div class="col-sm-3 input-group">
+                        <?php 
+                          $var = correlativoFacturaCredito();
+                          if($var == 0){
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
+                            <?php
+                          }
+                        ?>
+                        <input id="numFacCreVen" name="numFacCre_Ven" value="<?php echo $var ?>" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
                       </div>
                     </div>
                    <br>
@@ -145,7 +159,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                        </select>
                      </div>
                    </div>
-                   <input id="limpiarPV" name="limpiarPV" type="hidden" value="<?php echo $aa?>">
+                   
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-12 col-md-1">
@@ -276,50 +290,6 @@ if (isset($_SESSION['usuarioActivo'])) {
   </div>
 </div>
 
-<!-- MODAL -->
-  <div class="modal inmodal" id="modalFactura" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content animated fadeIn">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
-                <i class="fa fa-check-square-o modal-icon"></i>
-                <h4 class="modal-title">Desea generar factura?</h4>
-                <small>...</small>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" action="../Controlador/facturaC.php" method="POST" id="guardarProd" autocomplete="off">
-                    <div class="form-group row">
-                        <label class="col-sm-3 control-label">Número de factura: </label>
-                        <div class="col-sm-3 input-group">
-                          <?php 
-                            $var = correlativoFactura();
-                            if($var == 0){
-                              ?>
-                              <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view">
-                              <?php
-                            }
-                          ?>
-                          <input id="numFacVen" name="numFac_Ven" value="<?php echo $var ?>" class="form-control" type="text" id="num" style="width:150px;height:40px" onkeypress="return validarNumFac(this,event,this.value)" readonly="readonly"><a id='mensajeNumFac'></a>
-                        </div>
-                      </div> 
-              <br>
-            </div>
-            <div class="modal-footer">
-              <a target="_blank" href="Reportes/ReporteUsuario.php">
-                <button type="button" class="btn btn-white" data-dismiss="modal" onclick="validarVenta(1);">SI</button>
-              </a>
-              &nbsp;&nbsp;
-              <a class="pull-right">
-                <button type="submit" class="btn btn-success" style="font-size:14px;" onclick="validarVenta(2);">NO</button>
-                &nbsp;
-              </a>
-              </form>
-            </div>
-        </div>
-    </div>
-  </div>
-<!---------------------------------------------------------------------------------------->
-
 
  <script src="../assets/Validaciones/mostrarProducto.js"></script>
  <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
@@ -335,15 +305,18 @@ if (isset($_SESSION['usuarioActivo'])) {
  
 
 <script type="text/javascript">
-    function vercliente() {
+    function verclienteee(){
       console.log($('#clientess').val());
         if ($('#clientess').val() != 28) {
-
           $("#sinF").css('display','block');//mostrar
           $("#conF").css('display','none');//ocultar
+          $("#consumidor").css('display','none');//ocultar
+          $("#credito").css('display','block');//mostrar
         } else {
           $("#conF").css('display','block');//mostrar
           $("#sinF").css('display','none');//ocultar
+          $("#consumidor").css('display','block');//mostrar
+          $("#credito").css('display','none');//ocultar
         }
     }
 </script>

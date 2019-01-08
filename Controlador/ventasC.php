@@ -11,7 +11,8 @@ if(isset($_POST["bandera"])){
 		$fechaVen = explode("/",$fechaVen);
 		$fechaVen = $fechaVen[2].'-'.$fechaVen[1].'-'.$fechaVen[0];
 
-		$numFacVen = $_POST["numFac_Ven"];
+		$numFacConVen = $_POST["numFacCon_Ven"];
+		$numFacCreVen = $_POST["numFacCre_Ven"];
 		$totalVen = $_POST["totalVenta"];
 		$idCliVen = $_POST["id_Clientes"];
 		$cantidadProdVen = $_POST["cantidad_DVen"];
@@ -53,7 +54,10 @@ if(isset($_POST["bandera"])){
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				
 				if ($indicador != 2) {
-					$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
+					$sql4 = "INSERT INTO facturaconsumidor (numero_Fac,id_Venta) VALUES ('$numFacConVen','$id')";
+					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
+				}else{
+					$sql4 = "INSERT INTO facturacredito (numero_Fac,id_Venta) VALUES ('$numFacCreVen','$id')";
 					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				}
 				
