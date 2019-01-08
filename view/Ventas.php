@@ -247,41 +247,66 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
         <small>...</small>
       </div>
       <div class="modal-body">
-        <br>
-        <div class="form-group row" id="data_2">
+        <div class=" i-checks" align="left">
+
           <?php
-
-          date_default_timezone_set('america/el_salvador');
-          $hora1 = date("A");
-          $hoy = getdate();
-          $hora = date("g");
-          $dia = date("d");
-          $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
+          $sql="SELECT * from cliente where tipo_Cli = 1 order by nombre_Cli ASC";
+          $clientes= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
           ?>
-          <label for="empresa" class="col-sm-3 control-label">Desde: </label>
-          <div class="col-sm-3 input-group date">
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
-          </div>
-        </div>
-        <div class="form-group row" id="data_2">
+          <label > <input type="radio" value="option1" name=""> Cliente:</label>
 
-          <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
-          <div class="col-sm-3 input-group date">
-            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
-          </div>
+          <div class="col-sm-3 input-group" >
+            <select id="proves" name="id_Proveedor" style="width:500px;height:30px" class="chosen-select"> 
+              <option value="">[Selecionar cliente]</option>
+             <?php
+
+            While($cliente=mysqli_fetch_array($clientes)){
+             echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+           }
+           ?>
+           </select>
+         </div>
+       </div>
+       <br>
+       <br>
+       <div class="i-checks" align="left">
+                <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label>
+                <br>
+       <div class="form-group row" id="data_2">
+        <?php
+
+        date_default_timezone_set('america/el_salvador');
+        $hora1 = date("A");
+        $hoy = getdate();
+        $hora = date("g");
+        $dia = date("d");
+        $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
+        ?>
+        <label for="empresa" class="col-sm-3 control-label">Desde: </label>
+        <div class="col-sm-3 input-group date">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
         </div>
       </div>
-      <div class="modal-footer">
-       <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
-        Generar reporte
-      </button>
-      &nbsp;&nbsp;
-      <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-      &nbsp;
+      <div class="form-group row" id="data_2">
+
+        <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
+        <div class="col-sm-3 input-group date">
+          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+        </div>
+      </div>
     </div>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
+      Generar reporte
+    </button>
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+    &nbsp;
   </div>
+</div>
 </div>
 </div>
 

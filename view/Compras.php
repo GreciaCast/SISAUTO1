@@ -388,14 +388,40 @@ and open the template in the editor.
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Cerrar</span></button>
                 <i class="fa fa-check-square-o modal-icon"></i>
                 <h4 class="modal-title">Reporte de Compras</h4>
                 <small>...</small>
             </div>
             <div class="modal-body">
-              <br>
-              <div class="form-group row" id="data_2">
+            <div class=" i-checks" align="left">
+
+            <?php 
+            $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
+            $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+            ?>
+            <label > <input type="radio" value="option1" name=""> Proveedor:</label>
+          
+           
+            <div class="col-sm-3 input-group" >
+                <select id="proves" name="id_Proveedor" style="width:500px;height:30px" class="chosen-select"> 
+                    <option value="">[Selecionar proveedor]</option>
+                    <?php
+
+                    While($proveedor=mysqli_fetch_array($proveedores)){
+                       echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                   }
+                   ?>
+               </select>
+           </div>
+       </div>
+        <br>
+       
+            <div class="i-checks" align="left">
+            <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label>
+            <br>
+       
+              <div class="form-group row" id="data_2" align="left">
                 <?php
 
                 date_default_timezone_set('america/el_salvador');
@@ -411,7 +437,8 @@ and open the template in the editor.
                     <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
                 </div>
             </div>
-            <div class="form-group row" id="data_2">
+
+            <div class="form-group row" id="data_2" align="left">
 
                 <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
                 <div class="col-sm-3 input-group date">
@@ -420,7 +447,8 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        </div>
+       <div class="modal-footer">
            <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
               Generar reporte
           </button>
