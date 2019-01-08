@@ -56,7 +56,8 @@ if(isset($_POST["bandera"])){
 				if ($indicador != 2) {
 					$sql4 = "INSERT INTO facturaconsumidor (numero_Fac,id_Venta) VALUES ('$numFacConVen','$id')";
 					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
-				}else{
+				}
+				if($indicador == 3){
 					$sql4 = "INSERT INTO facturacredito (numero_Fac,id_Venta) VALUES ('$numFacCreVen','$id')";
 					mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				}
