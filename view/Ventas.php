@@ -100,6 +100,10 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
            $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
            $numFac= mysqli_fetch_array($numFac);
            echo $numFac['numero_Fac'];
+           $sql1 = "SELECT numero_Fac FROM facturacredito where id_Venta = '$aux'";
+           $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $numFac= mysqli_fetch_array($numFac);
+           echo $numFac['numero_Fac'];
            ?>
          </td>
          <td>
