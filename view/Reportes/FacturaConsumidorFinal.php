@@ -57,7 +57,15 @@
   <table width="685" border="0" align="center">
     <tr>
       <td width="5"><img src="../../assets/img/aut3.png" width="150" height="75"> </td>
+      <?php
+      include("../../confi/Conexion.php");
+      $conexion = conectarMysql();
 
+      $sql1 = "SELECT * FROM facturaconsumidor order by idFactura desc";
+      $resultadof = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+      $resultadof = mysqli_fetch_array($resultadof);
+
+      ?>
       <td  align="center">
         <span class="titulos">
           <p style="font-size: 20px; font-family: sans-serif">AUTO REPUESTOS <br>VAQUERANO
@@ -67,7 +75,7 @@
       </td>
       <td>
         <p align="center">FACTURA 18VS000F</p>
-        <p>No. </p>
+        <p style="font-size: 25px;" align="center">No. <?php echo $resultadof['numero_Fac'];?></p>
         <p align="center">REGISTRO No.: 79905-8 <br>NIT.: 1010-160856-001-0</p>
       </td>
     </tr>
@@ -119,8 +127,6 @@
     </tr>
   </table>
 <?php
-  include("../../confi/Conexion.php");
-  $conexion = conectarMysql();
 
 
   $sql1 = "SELECT * FROM venta order by idVenta desc";
@@ -129,8 +135,6 @@
   $id = $resultado['idVenta'];
   $clienteId = $resultado['id_Cliente'];
 
-
-  
 
   $sql2 = "SELECT * FROM cliente where idCliente = '$clienteId'";
   $resultadooo = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());

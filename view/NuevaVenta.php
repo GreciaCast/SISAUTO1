@@ -242,7 +242,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="form-group" align="center">
                     <div id="sinF" style="display:none;">
                       <a target="_blank" href="Reportes/FacturaCreditoFiscal.php">
-                        <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Factura</button>
+                        <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(3);">Factura</button>
                       </a>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>

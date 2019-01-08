@@ -57,7 +57,15 @@
   <table width="685" border="0" align="center">
     <tr>
       <td width="5"><img src="../../assets/img/aut3.png" width="150" height="75"> </td>
+      <?php
+      include("../../confi/Conexion.php");
+      $conexion = conectarMysql();
 
+      $sql1 = "SELECT * FROM facturacredito order by idFactura desc";
+      $resultadof = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+      $resultadof = mysqli_fetch_array($resultadof);
+
+      ?>
       <td  align="center">
         <span class="titulos">
           <p style="font-size: 20px; font-family: sans-serif">AUTO REPUESTOS <br>VAQUERANO
@@ -66,9 +74,9 @@
         </span>
       </td>
       <td>
-        <p align="center">FACTURA 18VS000F</p>
-        <p>No. </p>
-        <p align="center">REGISTRO No.: 79905-8 <br>NIT.: 1010-160856-001-0</p>
+        <p align="center">COMPROBANTE DE CREDITO FISCAL<br>FACTURA 17SV000C</p>
+        <p style="font-size: 25px;" align="center">No. <?php echo $resultadof['numero_Fac'];?></p>
+        <p align="center">REGISTRO No.: 79906-8 <br>NIT.: 1010-160856-001-0</p>
       </td>
     </tr>
     <tr>
@@ -119,8 +127,6 @@
     </tr>
   </table>
 <?php
-  include("../../confi/Conexion.php");
-  $conexion = conectarMysql();
 
 
   $sql1 = "SELECT * FROM venta order by idVenta desc";
@@ -130,30 +136,42 @@
   $clienteId = $resultado['id_Cliente'];
 
 
-  
-
   $sql2 = "SELECT * FROM cliente where idCliente = '$clienteId'";
   $resultadooo = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
   $res = mysqli_fetch_assoc($resultadooo);
 
 
 ?>
-  <table width="700" border="1" rules="all" align="center">
+  <table width="700" border="1px" rules="all" align="center">
     <tr>
       <td width="450">Cliente: <?php echo $res['nombre_Cli']; ?></td>
       <td width="250">N.I.T. No.: </td>
     </tr>
     <tr>
       <td>Direccion: </td>
-      <td>Depto: </td>
+      <td>Registro: <?php echo $res['nrc_Cli']; ?></td>
     </tr>
+  </table>
+  <table width="700" border="1px" rules="all" align="center">
     <tr>
-      <td>Municipio: </td>
+      <td>No. de Nota de Remision: </td>
+      <td width="200">Municipio: </td>
+      <td width="248">Depto: </td>
+    </tr>
+  </table>
+  <table width="700" border="1px" rules="all" align="center">
+    <tr>
+      <td>Fecha de N. de Remision Ant: </td>
       <td>Venta a Cuenta de: </td>
     </tr>
-
+    <tr>
+      <td>Giro: </td>
+      <td>Cond de la Operacion: </td>
+    </tr>
   </table>
+
   <br>
+
   <table width="700" border="1" align="center" rules="all">
       <tr bgcolor="#c4eeff">
         <td width="10" align="center" bgcolor="#c4eeff" class=""><strong>CANT.</strong></td>
@@ -234,15 +252,43 @@
       </td>
       <td width="18" bgcolor=""><?php  ?>
       </td>
-      <td width="93" bgcolor=""><?php  ?>
+      <td align="right" width="93" bgcolor=""><?php echo $resultado['total_Ven'];?>
       </td>
     </tr>
   </table>
   <table width="700" border="1" align="center" rules="all">
     <tr>
-      <td width="397" bgcolor=""><?php echo "Llenar si la operacion es igual o Superior a $200.00";?> 
+      <td width="400" bgcolor=""><?php echo ".";?> 
+      </td>
+      <td width="158" bgcolor=""><?php echo "IVA"?>
+      </td>
+      <td width="53" bgcolor="#c4eeff"><?php  ?>
+      </td>
+      <td align="right" width="92" bgcolor="">
+        <?php 
+        $var = round(($resultado['total_Ven'] * 0.13),2);
+        echo $var;
+        ?>
+      </td>
+    </tr>
+  </table>
+  <table width="700" border="1" align="center" rules="all">
+    <tr>
+      <td width="397" bgcolor=""><?php echo "Llenar si la operacion es igual o Superior a $11,428.58";?> 
       </td>
       <td rowspan="4" width="158" bgcolor=""><?php echo "SUB-TOTAL"?>
+      </td>
+      <td width="53" bgcolor="#c4eeff"><?php  ?>
+      </td>
+      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven']+$var;?>
+      </td>
+    </tr> 
+  </table>
+  <table width="700" border="1" align="center" rules="all">
+    <tr>
+      <td width="400" bgcolor=""><?php echo ".";?> 
+      </td>
+      <td rowspan="4" width="158" bgcolor=""><?php echo " (-) IVA RETENIDO"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
@@ -284,11 +330,11 @@
       </td>
       <td width="198" bgcolor=""><?php echo "Firma recibido: ";?> 
       </td>
-      <td width="158" bgcolor=""><?php echo "VENTAS TOTAL"?>
+      <td width="160" bgcolor=""><?php echo "VENTAS TOTAL"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
-      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven'];?>
+      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven']+$var;?>
       </td>
     </tr> 
   </table>
