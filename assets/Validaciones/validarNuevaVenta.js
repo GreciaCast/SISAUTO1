@@ -44,8 +44,6 @@ function aplicarDescuento15(){
 }
 
 function agregarProductosATabla(){
-	var limpiar = $('#limpiarPV').val();
-	console.log(limpiar);
 	var disponible = $('#cantidadDisponiblePV').val();
     var cantidad = $('#cantidadPV').val();
 
@@ -67,10 +65,7 @@ function agregarProductosATabla(){
     html = html+'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminarProductosDeTabla('+productoId+','+subtotal+');"></button></td></tr>';
     
     var id = productoId;
-    $.get('/SISAUTO1/Controlador/ventasC.php?repetidos=1&id='+id,function(data){
-            //$("#descripcionAddP").val(data); 
-            v
-     });
+    
 
      if(cantidad == "" || precio == "" || $('#produs').val() == ""){
         $('#mensajeee1').text("");
@@ -92,6 +87,7 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("");
 
         $('#tablaProductosVenta').append(html);
+
         var acumulado = parseFloat($('#totalVenta').val());
         acumulado = acumulado + subtotal;
         $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
@@ -112,7 +108,11 @@ function eliminarProductosDeTabla(id,subtotal){
 }
 
 async function validarVenta(sino){
-    if (sino == 1) {} else {}
+    if (sino == 2) {
+        $('#indicador').val(2);
+    } else {
+        $('#indicador').val(1);
+    }
     var detallesV = await validarDetallesV();
     var clienteV = await validarClienteV();
     if (detallesV && clienteV){
