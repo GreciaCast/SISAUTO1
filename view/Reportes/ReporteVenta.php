@@ -131,7 +131,6 @@ $hasta = $_GET["hasta"];
            $numFac= mysqli_fetch_array($numFac);
            echo $numFac['numero_Fac'];
            ?>
-
           </td>
           <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
           <td bgcolor=""><a>$</a><?php echo $fila[2];?></td>

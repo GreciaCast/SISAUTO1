@@ -53,7 +53,6 @@ if(isset($_POST["bandera"])){
 				$sql4 = "INSERT INTO factura (numero_Fac,id_Venta) VALUES ('$numFacVen','$id')";
 				mysqli_query($conexion,$sql4) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
-
 				$sql5 = "SELECT * FROM producto where idProducto = '$idProdVen[$key]'"; 
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				$res = mysqli_fetch_assoc($ress);
@@ -76,21 +75,11 @@ if(isset($_POST["bandera"])){
 				
 
 
-
-				
-
-
 		 	}
 
 		}
 		
 	}
-
-		//////////CAPTURA DATOS PARA BITACORA
-		$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
-		$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardó una venta')";
-		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
-		///////////////////////////////////////////////
 	
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
