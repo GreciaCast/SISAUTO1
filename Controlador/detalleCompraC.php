@@ -18,7 +18,24 @@ if(isset($_GET["bandera"])){
 		$producto = mysqli_fetch_array($producto);
 		$cadena.='<tr  id="f'.$producto['idProducto'].'">';
 		$cadena=$cadena.'<td>'.$detalle['cantidad_DCom'].'</td>';
-		$cadena=$cadena.'<td>'.$producto['nombre_Prod'].' '.$producto['marca_Prod'].' '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' '.$producto['descripcion_Prod'].'</td>';
+		// $cadena=$cadena.'<td>'.$producto['nombre_Prod'].' '.$producto['marca_Prod'].' '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' '.$producto['descripcion_Prod'].'</td>';
+		
+		if($producto['descripcion_Prod'] == "Ninguna"){
+			if($producto['categoria_Prod'] == 12){
+				// $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+				   $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].' )'.'</td>';
+			}else{
+				$cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+			}
+		}else{
+			 if($producto['categoria_Prod'] == 12){
+				$cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' )'.'</td>';
+			 }else{
+				 $cadena=$cadena.'<td>'.$producto['codigo_Prod'].' - '.$producto['nombre_Prod'].' ( '.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].' )'.'</td>';
+			 }
+		}
+
+
 		$preciodcom = $detalle['precio_DCom'];
 		$cadena=$cadena.'<td>'.number_format($preciodcom,2,'.','').'</td>';
 		$subtotal = $detalle['cantidad_DCom']*$detalle['precio_DCom'];
