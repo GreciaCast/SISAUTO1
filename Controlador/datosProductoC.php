@@ -33,7 +33,8 @@ $conexion = conectarMysql();
 		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 		$producto = mysqli_fetch_array($productos);//CAPTURA EL ULTIMO REGISTRO
 		$pre = $pre.''.$producto['precio_Prod'];
-		echo $pre;
+		$format_number1 = number_format($pre, 2, '.', '');
+		echo $format_number1;
 	}
 //----------------------------------------------------------------------------------------------------------
 //
