@@ -110,7 +110,7 @@ function eliminarProductosDeTabla(id,subtotal){
 async function validarVenta(sino){
     if (sino == 2) {
         $('#indicador').val(2);
-    } if (sino == 3){
+    } else if (sino == 3){
         $('#indicador').val(3);
     } else {
         $('#indicador').val(1);
