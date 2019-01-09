@@ -395,7 +395,6 @@ and open the template in the editor.
                 <small>...</small>
             </div>
             <div class="modal-body">
-
                 <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
                 <div class="col-sm-6 i-checks">
                   <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por proveedor</label>
@@ -463,6 +462,7 @@ and open the template in the editor.
 </div>
 </div>
 
+</div>
 </div>
 </div>
 </div>

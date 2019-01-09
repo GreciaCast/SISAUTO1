@@ -245,6 +245,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
   <div class="modal-dialog">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
+
               <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button> -->
 
         <i class="fa fa-check-square-o modal-icon"></i>
