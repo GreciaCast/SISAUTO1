@@ -54,6 +54,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 </button>
                 &nbsp;
               </a>
+
             </div>
 
             <div class="row">
@@ -132,30 +133,37 @@ if (isset($_SESSION['usuarioActivo'])) {
                             </table>
                           </div>
                         </form>
-
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
-            <?php include("generalidades/cierre.php"); ?>
           </div>
-        </body>
-        </html>
+          <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+        </div>
 
-        <?php
-      }else{
-        ?>
-        <!DOCTYPE HTML>
-        <html>
-        <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-          <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
-        </head>
-        <body>
-        </body>
-        </html>
-        <?php
-      }
-      ?>
+
+        <?php include("generalidades/cierre.php"); ?>
+      </div>
+    </div>
+
+  </body>
+  </html>
+
+  <?php
+}else{
+  ?>
+  <!DOCTYPE HTML>
+  <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+  </head>
+  <body>
+  </body>
+  </html>
+  <?php
+}
+?>

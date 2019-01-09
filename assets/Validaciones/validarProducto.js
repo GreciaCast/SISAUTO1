@@ -1,3 +1,5 @@
+var aux;
+
 async function validarProducto() {
     var nombre = await validarNombreP();
     var categoria = await validarCategoriaP();
@@ -154,11 +156,20 @@ async function validarProductoEditarP() {
       var anio = 1;
     }
     var descripcion = await validarDescripcionPEP();
+
+    var vali = await validacionPrecio();
+     console.log(aux);
     var stock = await validarStockPEP();
     var precio = await validarPrecioPEP();
-
-    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio) {
-        $('#editarProd').submit();
+   
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio && (aux = 1)) {
+        
+          //  var compi=await existes();
+        // console.log("VALI");
+        // console.log(aux)
+        // if(aux == 1){
+           $('#editarProdP').submit();
+        // }
     }
 }
 
@@ -291,6 +302,31 @@ function validarPrecioPEP() {
         return false;
     }
     return true;
+}
+
+async function validacionPrecio(){
+    var param = {
+        codigo: $('#codigoPEP').val(),
+        precio: $('#precioPEP').val(),
+        bandera: "unprecio"
+    };
+    return $.ajax({
+        data: param,
+        url:"/SISAUTO1/Controlador/productoC.php",
+        method: "post",
+        success: function(data){
+            // console.log("DATA");
+            // console.log(data);
+            // console.log("Naaaaaaaa");
+            // console.log($('#precioPEP').val());
+            if (($('#precioPEP').val().trim()) > (data)) {
+                aux = 1;
+            }else{
+                notaError("¡El precio del producto no puede ser menor al costo promedio de inventario!"); 
+                aux = 0;
+            }
+        }
+    });
 }
 
 function filtrarModelos(id){

@@ -103,16 +103,16 @@ and open the template in the editor.
                                                                                 </button>
                                                                                 <?php      
                                                                             }else{
-                                                                             ?>
-                                                                             <button title="No puede editar" type="button" class="btn btn-success fa fa-pencil-square-o disabled">
-                                                                             </button>
-                                                                             <button title="No puede eliminar" type="button" class="btn btn-danger fa fa-trash-o disabled">
-                                                                             </button>
-                                                                             <?php   
-                                                                         }
-                                                                         ?>
+                                                                               ?>
+                                                                               <button title="No puede editar" type="button" class="btn btn-success fa fa-pencil-square-o disabled">
+                                                                               </button>
+                                                                               <button title="No puede eliminar" type="button" class="btn btn-danger fa fa-trash-o disabled">
+                                                                               </button>
+                                                                               <?php   
+                                                                           }
+                                                                           ?>
 
-                                                                         <a  href="DevolucionesCompras.php?idcompra=<?php echo $compra['idCompra'] ?>">
+                                                                           <a  href="DevolucionesCompras.php?idcompra=<?php echo $compra['idCompra'] ?>">
                                                                             <button title="Devolución" type="button" class="btn btn-primary fa fa-times" >
                                                                             </button>
                                                                         </a>
@@ -143,10 +143,10 @@ and open the template in the editor.
                                     <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Ver Compra</h3>
                                 </div>
                                 <div class="modal-body">
-                                   <h3 align="center"><b>Datos Generales</b></h3>
-                                   <hr width="75%" style="background-color:#007bff;"/>
-                                   <input type="hidden" name="bandera1"/>
-                                   <div class="form-group ">
+                                 <h3 align="center"><b>Datos Generales</b></h3>
+                                 <hr width="75%" style="background-color:#007bff;"/>
+                                 <input type="hidden" name="bandera1"/>
+                                 <div class="form-group ">
                                     <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Fecha:</label>
                                     <div class="col-sm-3 input-group date">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -170,17 +170,17 @@ and open the template in the editor.
                                             <?php
 
                                             While($proveedor=mysqli_fetch_array($proveedores)){
-                                               echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
-                                           }
-                                           ?>
-                                       </select>
-                                   </div>
-                               </div>
-                               <br><br>
+                                             echo '<option value="'.$proveedor['idProveedor'].'">'.$proveedor['nombre_Prov'].'</option>';
+                                         }
+                                         ?>
+                                     </select>
+                                 </div>
+                             </div>
+                             <br><br>
 
-                               <div class="modal-footer">
-                               </div>
-                               <div class="card mb-3">
+                             <div class="modal-footer">
+                             </div>
+                             <div class="card mb-3">
                                 <div class="card-header" align="center">
                                     <h3><b>Detalle de compra</b></h3>
                                 </div>
@@ -222,18 +222,18 @@ and open the template in the editor.
 
                 <!-- MODAL EDITAR COMPRA -->
                 <div class="modal fade" id="modalEditarCompra" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                   <?php
-                   $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
-                   $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-                   ?>
-                   <div class="modal-dialog modal-lg" role="document">
+                 <?php
+                 $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
+                 $proveedores= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+                 ?>
+                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#007bff;color:black;">
 
                             <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-user"></i> Compra</h3>
                         </div>
                         <div class="modal-body">
-                           <form action="../Controlador/comprasC.php" method="POST" id="editarCompra" align="center" autocomplete="off">
+                         <form action="../Controlador/comprasC.php" method="POST" id="editarCompra" align="center" autocomplete="off">
                             <h3><b>Datos generales</b></h3>
                             <hr width="75%" style="background-color:#007bff;"/><br>
                             <input type="hidden" value="EditarCom" name="bandera"/>
@@ -366,6 +366,7 @@ and open the template in the editor.
           <script src="../assets/Validaciones/mostrarCompra.js"></script>
           <script src="../assets/Validaciones/validarCompras.js"></script>
           <script src="../assets/Validaciones/validarNumeros.js"></script>
+          <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
           <script src="../assets/js/plugins/chosen/chosen.jquery.js"></script>
           <script src="../assets/js/plugins/jsKnob/jquery.knob.js"></script>
           <script src="../assets/js/plugins/jasny/jasny-bootstrap.min.js"></script>
@@ -388,23 +389,27 @@ and open the template in the editor.
     <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Cerrar</span></button>
+                <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Cerrar</span></button> -->
                 <i class="fa fa-check-square-o modal-icon"></i>
                 <h4 class="modal-title">Reporte de Compras</h4>
                 <small>...</small>
             </div>
             <div class="modal-body">
-            <div class=" i-checks" align="left">
 
-            <?php 
-            $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
-            $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
-            ?>
-            <label > <input type="radio" value="option1" name=""> Proveedor:</label>
-          
-           
-            <div class="col-sm-3 input-group" >
-                <select id="proves" name="id_Proveedor" style="width:500px;height:30px" class="chosen-select"> 
+                <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
+                <div class="col-sm-6 i-checks">
+                  <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por proveedor</label>
+                  <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Por fecha</label>
+              </div>
+              <div class=" form-group row" align="center">
+               <br><br>
+                <?php 
+                $sql="SELECT * from proveedor where tipo_Prov = 1 order by nombre_Prov ASC";
+                $proveedores = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"); 
+                ?>
+                <div class="col-sm-3 input-group" >
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <select id="clientesID" name="id_Proveedor" aling="center" style="width:500px;height:40px" class="form-control"> 
                     <option value="">[Selecionar proveedor]</option>
                     <?php
 
@@ -415,48 +420,50 @@ and open the template in the editor.
                </select>
            </div>
        </div>
+       <br>
+
+       <div class="i-checks" align="center">
+        <!-- <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label> -->
         <br>
-       
-            <div class="i-checks" align="left">
-            <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label>
-            <br>
-       
-              <div class="form-group row" id="data_2" align="left">
-                <?php
 
-                date_default_timezone_set('america/el_salvador');
-                $hora1 = date("A");
-                $hoy = getdate();
-                $hora = date("g");
-                $dia = date("d");
-                $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
-                ?>
-                <label for="empresa" class="col-sm-3 control-label">Desde: </label>
-                <div class="col-sm-3 input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
-                </div>
-            </div>
+        <div class="form-group row" id="data_2">
+            <?php
 
-            <div class="form-group row" id="data_2" align="left">
-
-                <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
-                <div class="col-sm-3 input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
-                </div>
+            date_default_timezone_set('america/el_salvador');
+            $hora1 = date("A");
+            $hoy = getdate();
+            $hora = date("g");
+            $dia = date("d");
+            $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
+            ?>
+            <label for="empresa" class="col-sm-4 control-label">Desde: </label>
+            <div class="col-sm-3 input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
             </div>
         </div>
+
+        <div class="form-group row" id="data_2" >
+
+            <label for="empresa" class="col-sm-4 control-label">Hasta: </label>
+            <div class="col-sm-3 input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+            </div>
         </div>
-       <div class="modal-footer">
-           <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
-              Generar reporte
-          </button>
-          &nbsp;&nbsp;
-          <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
-          &nbsp;
-      </div>
-  </div>
+    </div>
+</div>
+<div class="modal-footer">
+   <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
+      Generar reporte
+  </button>
+  &nbsp;&nbsp;
+  <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+  &nbsp;
+</div>
+</div>
+
+</div>
 </div>
 </div>
 

@@ -180,9 +180,9 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
       <div class="form-group">
         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
         <div class="col-sm-3">
-
-          <input class="form-control" type="text" id="numeroFacVenVer" name="" disabled="true" aria-required="true" value="">
-        </div>
+          <input class="form-control" type="text" id="numFacVer" name="" disabled="true" aria-required="true" value=" <?php echo $numFac['numero_Fac'];?>">
+       
+         </div>
       </div>
       <br><br>
       <div class="form-group ">
@@ -245,7 +245,8 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
   <div class="modal-dialog">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+              <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button> -->
+
         <i class="fa fa-check-square-o modal-icon"></i>
         <h4 class="modal-title">Reporte de Ventas</h4>
         <small>...</small>
@@ -253,7 +254,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
       <div class="modal-body">
         <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
         <div class="col-sm-6 i-checks">
-          <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por proveedor</label>
+          <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por cliente</label>
           <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Por fecha</label>
         </div>
         <div class=" form-group row" align="center">
@@ -291,7 +292,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
           $dia = date("d");
           $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
           ?>
-          <label for="empresa" class="col-sm-3 control-label">Desde: </label>
+          <label for="empresa" class="col-sm-4 control-label">Desde: </label>
           <div class="col-sm-3 input-group date">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
@@ -299,7 +300,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
         </div>
         <div class="form-group row" id="data_2">
 
-          <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
+          <label for="empresa" class="col-sm-4 control-label">Hasta: </label>
           <div class="col-sm-3 input-group date">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
