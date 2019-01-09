@@ -180,9 +180,9 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
       <div class="form-group">
         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
         <div class="col-sm-3">
-
-          <input class="form-control" type="text" id="numeroFacVenVer" name="" disabled="true" aria-required="true" value="">
-        </div>
+          <input class="form-control" type="text" id="numFacVer" name="" disabled="true" aria-required="true" value=" <?php echo $numFac['numero_Fac'];?>">
+       
+         </div>
       </div>
       <br><br>
       <div class="form-group ">
@@ -245,7 +245,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
   <div class="modal-dialog">
     <div class="modal-content animated fadeIn">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Cerrar</span></button>
         <i class="fa fa-check-square-o modal-icon"></i>
         <h4 class="modal-title">Reporte de Ventas</h4>
         <small>...</small>

@@ -1,5 +1,5 @@
 function VerVen(fecha,totalVenta,idventa,idcliente){
-	//$("#numeroFacVenVer").val(numeroFac);
+	//$("#numFacVer").val(numFact);
 	$("#fechaVen").val(fecha.split('-').reverse().join('/'));
 	$("#totalVenVer").val(parseFloat(totalVenta).toFixed(2));
 	$("#cliVenVer>option[value="+idcliente+"]").attr("selected",true);
