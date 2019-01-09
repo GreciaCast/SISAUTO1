@@ -214,10 +214,20 @@
         <tr align="left" class="">
           <td align="center" bgcolor=""><?php echo $resultadoo['cantidad_DVen'];?></td>
           <td bgcolor=""><?php echo $resP['nombre_Prod'].' '.$resP['marca_Prod'];?></td>
-          <td align="right" bgcolor=""><?php echo $resultadoo['precio_DVen'];?></td>
+          <td align="right" bgcolor="">
+            <?php
+            $preciosiniva = $resultadoo['precio_DVen'] - ($resultadoo['precio_DVen'] * 0.13);
+            echo round($preciosiniva,2);
+            ?>
+          </td>
           <td bgcolor=""><?php  ?></td>
           <td bgcolor=""><?php  ?></td>
-          <td align="right" bgcolor=""><?php echo $resultadoo['cantidad_DVen'] * $resultadoo['precio_DVen'];?></td>
+          <td align="right" bgcolor="">
+            <?php
+            $subtotalsiniva = $resultadoo['cantidad_DVen'] * $preciosiniva;
+            echo round($subtotalsiniva,2);
+            ?>
+          </td>
         </tr>
         <?php 
         $contador++;
@@ -252,7 +262,7 @@
       </td>
       <td width="18" bgcolor=""><?php  ?>
       </td>
-      <td align="right" width="93" bgcolor=""><?php echo $resultado['total_Ven'];?>
+      <td align="right" width="93" bgcolor=""><?php echo round($subtotalsiniva,2);?>
       </td>
     </tr>
   </table>
@@ -266,8 +276,8 @@
       </td>
       <td align="right" width="92" bgcolor="">
         <?php 
-        $var = round(($resultado['total_Ven'] * 0.13),2);
-        echo $var;
+        $var = (($resultado['total_Ven']) * 0.13);
+        echo round($var,2);
         ?>
       </td>
     </tr>
@@ -280,7 +290,7 @@
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
-      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven']+$var;?>
+      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven'];?>
       </td>
     </tr> 
   </table>
@@ -334,7 +344,7 @@
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
-      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven']+$var;?>
+      <td align="right" width="92" bgcolor=""><?php echo $resultado['total_Ven'];?>
       </td>
     </tr> 
   </table>
