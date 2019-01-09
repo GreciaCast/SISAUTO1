@@ -14,9 +14,9 @@ if ($bandera == "guardar") {
     $anio = $_POST["anio"];
     $descripcion = $_POST["descripcion"];
     $stock = $_POST["stock"];
-    $precio = $_POST["precio"];
+    
 
-    $sql = "INSERT INTO producto (nombre_Prod,categoria_Prod,marca_Prod,descripcion_Prod,modeloVehiculo_Prod,anioVehiculo_Prod,codigo_Prod,tipo_Prod,stock_Prod,precio_Prod) VALUES ('$nombrePro','$categoria','$marca','$descripcion','$modelo','$anio','$codigo',1,'$stock','$precio')";
+    $sql = "INSERT INTO producto (nombre_Prod,categoria_Prod,marca_Prod,descripcion_Prod,modeloVehiculo_Prod,anioVehiculo_Prod,codigo_Prod,tipo_Prod,stock_Prod,precio_Prod) VALUES ('$nombrePro','$categoria','$marca','$descripcion','$modelo','$anio','$codigo',1,'$stock',0)";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     
     $_SESSION['mensaje'] = "Registro guardado exitosamente";
@@ -38,13 +38,44 @@ if ($bandera == "EditarProd") {
     $descripcion = $_POST["descripcion"];
     $idProducto = $_POST["idProducto"];
     $stock = $_POST["stock"];
-    $precio = $_POST["precio"];
+
+    echo "SIN precio ";
+    
+
+    $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod = '$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod = 0 where idProducto = '$idProducto'";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
+    
+    $_SESSION['mensaje'] = "Registro editado exitosamente";
+     header("location: /SISAUTO1/view/Producto.php");
+
+    //////////CAPTURA DATOS PARA BITACORA
+    $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+    $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Editó un producto')";
+    mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+    ///////////////////////////////////////////////
+}
+if ($bandera == "EditarProdP") {
+    $nombrePro = $_POST["nombreProP"];
+    $categoria = $_POST["categorias"];
+    $marca = $_POST["marcaP"];
+    $modelo = $_POST["modeloP"];
+    $anio = $_POST["anioP"];
+    $descripcion = $_POST["descripcionP"];
+    $idProducto = $_POST["idProductoP"];
+    $stock = $_POST["stockPEP"];
+    $precio = $_POST["precioP"];
+
+    echo "Con precio ";
+
+    echo $precio;
 
     $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod='$precio' where idProducto = '$idProducto'";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
-    
-    $_SESSION['mensaje'] ="Registro editado exitosamente";
-    header("location: /SISAUTO1/view/Producto.php");
+    echo "Con precio ";
+
+    echo $precio;
+    $_SESSION['mensaje'] = "Registro editado exitosamente";
+    // header("location: /SISAUTO1/view/Producto.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -81,10 +112,24 @@ if ($bandera=="cambio") {
     header("location: /SISAUTO1/view/Producto.php?tipo=".$aux."");
 }
 
-if ($bandera=="existe") {
+if ($bandera == "existe") {
     $sql="SELECT * from producto where nombre_Prod like '".$_POST["nombre"]."' AND categoria_Prod like '".$_POST["categoria"]."' AND marca_Prod like '".$_POST["marca"]."' AND modeloVehiculo_Prod like '".$_POST["modelo"]."' AND anioVehiculo_Prod like '".$_POST["anio"]."'";
     $proveedor = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
     echo mysqli_num_rows($proveedor);
+}
+
+if ($bandera == "unprecio") {
+    $sql = "SELECT * from producto where codigo_Prod = '".$_POST["codigo"]."'";
+    $producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+    $producto = mysqli_fetch_assoc($producto);
+    $id = $producto['idProducto'];
+
+    $sql = "SELECT * from inventario where id_Producto like '$id' order by idInventario DESC";
+    $inventarios = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+    $resultadoo = mysqli_fetch_array($inventarios);//CAPTURA EL ULTIMO REGISTRO
+    $nuevoPrecio = $resultadoo['nuevoPrecio_Inv'];
+    echo $nuevoPrecio;
+
 }
 
 //----------------------------  AGREGAR AL COMBOBOX DE LOS MODELOS

@@ -436,20 +436,20 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
        <h3 class="modal-title" id="myModalLabel"> <i class="fa fa-tag"></i> Producto</h3>
      </div>
      <div class="modal-body">
-      <form action="../Controlador/productoC.php" method="POST" id="editarProd" align="center" autocomplete="off">
-         <input type="hidden" value="EditarProd" name="bandera"/>
-         <input type="hidden" value="" id="idProducto" name="idProducto"/>
+      <form action="../Controlador/productoC.php" method="POST" id="editarProdP" align="center" autocomplete="off">
+         <input type="hidden" value="EditarProdP" name="bandera"/>
+         <input type="hidden" value="" id="idProducto" name="idProductoP"/>
        <div class="form-group ">
          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Código:</label>
          <div class="col-sm-7">
-           <input class="form-control" type="text" id="codigoPEP" name="codigoP"  aria-required="true" value="" readonly="readonly">
+           <input class="form-control" type="text" id="codigoPEP" name="codigoPP"  aria-required="true" value="" readonly="readonly">
          </div>
        </div>
        <br><br><br>
        <div class="form-group">
          <label align="right" for="nombrePro" class="col-sm-4 control-label" style="font-size:15px;">Nombre producto:</label>
          <div  class="col-sm-7">
-           <input class="form-control" type="text" id="nombrePEP" name="nombrePro">
+           <input class="form-control" type="text" id="nombrePEP" name="nombreProP">
          </div>
        </div>
        <br><br>
@@ -475,30 +475,30 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
        </div>
        <br><br>
        <div class="form-group">
-         <label align="right" for="marca" class="col-sm-4 control-label" style="font-size:15px;">Marca de producto:</label>
+         <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Marca de producto:</label>
          <div class="col-sm-7">
-           <input class="form-control" type="text" name="marca" id="marcaPEP">
+           <input class="form-control" type="text" name="marcaP" id="marcaPEP">
          </div>
        </div>
        <br><br>
        <div class="form-group">
-         <label align="right" for="modelo" class="col-sm-4 control-label" style="font-size:15px;">Modelo de vehículo:</label>
+         <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Modelo de vehículo:</label>
          <div class="col-sm-7">
-           <input class="form-control" type="text" id="modeloPEP" name="modelo" >
+           <input class="form-control" type="text" id="modeloPEP" name="modeloP" >
          </div>
        </div>
        <br><br>
        <div class="form-group">
-         <label align="right" for="anio" class="col-sm-4 control-label" style="font-size:15px;">Año del vehículo:</label>
+         <label align="right" class="col-sm-4 control-label" style="font-size:15px;">Año del vehículo:</label>
          <div class="col-sm-3">
-           <input class="form-control" type="text" id="anioPEP" name="anio" onkeypress="return validarAnio(this,event,this.value)">
+           <input class="form-control" type="text" id="anioPEP" name="anioP" onkeypress="return validarAnio(this,event,this.value)">
          </div>
        </div>
          <br><br>
          <div class="form-group">
            <label align="right" for="descripcion" class="col-sm-4 control-label" style="font-size:15px;">Descripción:</label>
            <div class="col-sm-7">
-            <textarea class="form-control" type="text" name="descripcion" id="descripcionPEP" placeholder="Escriba aqui porque va a modificar el nombre de la empresa " >
+            <textarea class="form-control" type="text" name="descripcionP" id="descripcionPEP" placeholder="Escriba aqui porque va a modificar el nombre de la empresa " >
             </textarea>
           </div>
         </div>
@@ -514,7 +514,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
           <label align="right" class="col-sm-4 control-label">Precio: </label>
           <div class="col-sm-3 input-group date">&nbsp;&nbsp;&nbsp;&nbsp;
               <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-              <input class="form-control" type="text" id="precioPEP" name="precio" style="width:150px;height:40px">
+              <input class="form-control" type="text" id="precioPEP" name="precioP" style="width:150px;height:40px">
           </div>
         </div>
      </form>
