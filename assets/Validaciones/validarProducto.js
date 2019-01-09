@@ -310,15 +310,9 @@ async function validacionPrecio(){
         url:"/SISAUTO1/Controlador/productoC.php",
         method: "post",
         success: function(data){
-            // console.log("DATA");
-            // console.log(data);
-            // console.log("Naaaaaaaa");
-            // console.log($('#precioPEP').val());
             nuevoprecio = $('#precioPEP').val().trim();
             nuevoprecio = parseFloat(nuevoprecio);
             costopromedio = parseFloat(data);
-            console.log(nuevoprecio);
-            console.log(costopromedio);
             if (nuevoprecio > costopromedio) {
                 aux = 1;
             }else{
