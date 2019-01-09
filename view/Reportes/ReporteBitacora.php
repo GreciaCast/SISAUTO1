@@ -1,3 +1,7 @@
+<?php 
+$desde = $_GET["desde"];
+$hasta = $_GET["hasta"];
+?>
 <!doctype html>
 <html>
 <head>
@@ -82,8 +86,8 @@
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
   </tr>
     <?php
@@ -95,9 +99,19 @@
 
 	$contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	$sql = "select * from bitacora ";
+	// $sql = "select * from bitacora ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
+   if($desde == ""&& $hasta== ""){
+           $sql = "select * from bitacora order by idBitacora DESC";
+         }else if($hasta == ""){
+          $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' order by idBitacora DESC";
+        }else if($desde == ""){
+          $sql = "select * from bitacora  where sesionInicio <= '$hasta' order by idBitacora DESC";
+        }else{
+          $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' order by idBitacora DESC";
+        }
+
 	$consulta=mysqli_query($conexion,$sql);
 //  var_dump($consulta);
 
@@ -106,10 +120,10 @@
 	{
 	?>
   <tr align="left" class="">
-    <td bgcolor=""><?php echo $contador;?></td>
-    <td bgcolor=""><?php echo $fila[1];?></td>
-    <td bgcolor=""><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
-    <td bgcolor=""><?php echo $fila[3];?></td>
+    <td bgcolor="" align="center"><?php echo $contador;?></td>
+    <td bgcolor="" align="center"><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
+    <td bgcolor="" align="center"><?php echo $fila[1];?></td>
+    <td bgcolor="" align="center"><?php echo $fila[3];?></td>
   </tr>
   <?php $contador++;
 }

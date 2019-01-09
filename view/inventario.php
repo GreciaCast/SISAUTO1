@@ -54,7 +54,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                 </button>
                 &nbsp;
               </a>
-
             </div>
 
             <div class="row">
@@ -124,6 +123,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 </td>
                                 <th align="center">
                                   <a href="Kardex.php?idinventario=<?php echo $inventario['idInventario'] ?>">
+<<<<<<< HEAD
                                     <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" onclick="VerKardex('<?php echo $inventario['codigo_Prod']?>');"></button>
                                   </a>
                                 </th>
@@ -133,8 +133,19 @@ if (isset($_SESSION['usuarioActivo'])) {
                             </table>
                           </div>
                         </form>
+=======
+                                    <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
+                                  </a>
+                                </th>
+                                <?php } ?>
+>>>>>>> 1baca1bb5fb68c7d3c83e3943bfe0407aedb7cc7
 
+                              </tbody>
+                            </table>
+                          </div>
+                        </form>
 
+<<<<<<< HEAD
                         <?php include("generalidades/cierre.php"); ?>
                       </div>
                     </div>
@@ -158,3 +169,31 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <?php
                 }
                 ?>
+=======
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php include("generalidades/cierre.php"); ?>
+          </div>
+        </body>
+        </html>
+
+        <?php
+      }else{
+        ?>
+        <!DOCTYPE HTML>
+        <html>
+        <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+        </head>
+        <body>
+        </body>
+        </html>
+        <?php
+      }
+      ?>
+>>>>>>> 1baca1bb5fb68c7d3c83e3943bfe0407aedb7cc7

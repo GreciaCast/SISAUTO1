@@ -15,7 +15,7 @@ session_start();
         //////////CAPTURA DATOS PARA BITACORA
         $usuari=$row['usuario_Usu'];
         $conexion = conectarMysql();
-        $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inició de sesión')";
+        $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Inició sesión')";
         mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
         ///////////////////////////////////////////////
         

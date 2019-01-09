@@ -50,7 +50,7 @@ if(isset($_POST["bandera"])){
 				$nuevaExistencia = $resultadoo['nuevaExistencia_Inv'] - $cantidadProdVen[$key];
 				$nuevoPrecio = $precioActual;
 				// $nuevoPrecio = $nuevoPrecio;
-				//.toFixed(2)
+				//$preciovp = format_number($nuevoPrecio,2,'.','');
 				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
@@ -93,6 +93,11 @@ if(isset($_POST["bandera"])){
 		
 	}
 	
+	//////////CAPTURA DATOS PARA BITACORA
+	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardó una venta')";
+	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	///////////////////////////////////////////////
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
 	//header("location: /SISAUTO1/view/Reportes/ReporteUsuario.php?");

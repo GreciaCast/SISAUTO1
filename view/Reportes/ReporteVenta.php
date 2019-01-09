@@ -1,6 +1,7 @@
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
+$idcliente = $_GET["idcliente"];
 ?>
 <!doctype html>
 <html>
@@ -85,7 +86,7 @@ $hasta = $_GET["hasta"];
 
         <table width="700" border="1" align="center" rules="all">
           <tr bgcolor="#CCCCCC">
-            <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
+            <td width="29" bgcolor="#fcf3b3" align="center" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">N° de factura</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Total de Venta</td>
@@ -104,7 +105,7 @@ $hasta = $_GET["hasta"];
 
           $contador=1;
           if($desde == ""&& $hasta== ""){
-           $sql = "select * from venta order by fecha_Ven ASC";
+           $sql = "select * from venta where where id_Cliente = '$idcliente' order by fecha_Ven ASC";
          }else if($hasta == ""){
           $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$today' order by fecha_Ven ASC";
         }else if($desde == ""){
@@ -122,21 +123,25 @@ $hasta = $_GET["hasta"];
         {
          ?>
          <tr align="left" class="">
-          <td bgcolor=""><?php echo $contador;?></td>
-          <td bgcolor="">
+          <td bgcolor="" align="center"><?php echo $contador;?></td>
+          <td bgcolor="" align="center">
             <?php
            $aux = $fila['idVenta'];
-           $sql1 = "SELECT numero_Fac FROM factura where id_Venta = '$aux'";
+           $sql1 = "SELECT numero_Fac FROM facturaconsumidor where id_Venta = '$aux'";
+           $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $numFac= mysqli_fetch_array($numFac);
+           echo $numFac['numero_Fac'];
+           $sql1 = "SELECT numero_Fac FROM facturacredito where id_Venta = '$aux'";
            $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
            $numFac= mysqli_fetch_array($numFac);
            echo $numFac['numero_Fac'];
            ?>
           </td>
-          <td bgcolor=""><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
-          <td bgcolor=""><a>$</a><?php
+          <td bgcolor="" align="center"><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
+          <td bgcolor="" align="center"><a>$</a><?php
           $precioven = $fila[2];
            echo number_format($precioven,2,'.','');?></td>
-          <td bgcolor="">
+          <td bgcolor="" align="center">
           <?php
            $aux = $fila['id_Cliente'];
            $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";

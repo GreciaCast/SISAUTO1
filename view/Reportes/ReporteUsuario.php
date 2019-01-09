@@ -91,7 +91,7 @@
         <br>
         <table width="700" border="1" align="center" rules="all">
           <tr bgcolor="#CCCCCC">
-            <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
+            <td width="29" bgcolor="#fcf3b3" align="center" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Nombre</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Correo</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Teléfono</td>
@@ -116,10 +116,10 @@
           {
            ?>
            <tr align="left" class="">
-            <td bgcolor=""><?php echo $contador;?></td>
-            <td bgcolor=""><?php echo $fila[3];?></td>
-            <td bgcolor=""><?php echo $fila[4];?></td>
-            <td bgcolor=""><?php echo $fila[6];?></td>
+            <td bgcolor="" align="center"><?php echo $contador;?></td>
+            <td bgcolor="" align="center"><?php echo $fila[3];?></td>
+            <td bgcolor="" align="center"><?php echo $fila[4];?></td>
+            <td bgcolor="" align="center"><?php echo $fila[6];?></td>
           </tr>
           <?php $contador++;
         }
