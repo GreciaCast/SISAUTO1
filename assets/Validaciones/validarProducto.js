@@ -1,4 +1,6 @@
 var aux;
+var nuevoprecio;
+var costopromedio;
 
 async function validarProducto() {
     var nombre = await validarNombreP();
@@ -156,20 +158,13 @@ async function validarProductoEditarP() {
       var anio = 1;
     }
     var descripcion = await validarDescripcionPEP();
-
     var vali = await validacionPrecio();
-     console.log(aux);
+    console.log(aux);
     var stock = await validarStockPEP();
     var precio = await validarPrecioPEP();
    
-    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio && (aux = 1)) {
-        
-          //  var compi=await existes();
-        // console.log("VALI");
-        // console.log(aux)
-        // if(aux == 1){
-           $('#editarProdP').submit();
-        // }
+    if (nombre && categoria && marca && modelo && anio && descripcion && stock && precio && (aux == 1)) {
+        $('#editarProdP').submit();
     }
 }
 
@@ -319,7 +314,12 @@ async function validacionPrecio(){
             // console.log(data);
             // console.log("Naaaaaaaa");
             // console.log($('#precioPEP').val());
-            if (($('#precioPEP').val().trim()) > (data)) {
+            nuevoprecio = $('#precioPEP').val().trim();
+            nuevoprecio = parseFloat(nuevoprecio);
+            costopromedio = parseFloat(data);
+            console.log(nuevoprecio);
+            console.log(costopromedio);
+            if (nuevoprecio > costopromedio) {
                 aux = 1;
             }else{
                 notaError("¡El precio del producto no puede ser menor al costo promedio de inventario!"); 
