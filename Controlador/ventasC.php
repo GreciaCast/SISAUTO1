@@ -93,6 +93,11 @@ if(isset($_POST["bandera"])){
 		
 	}
 	
+	//////////CAPTURA DATOS PARA BITACORA
+	$usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
+	$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Guardó una venta')";
+	mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+	///////////////////////////////////////////////
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
 	//header("location: /SISAUTO1/view/Reportes/ReporteUsuario.php?");

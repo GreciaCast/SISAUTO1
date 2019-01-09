@@ -54,7 +54,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                 </button>
                 &nbsp;
               </a>
-
             </div>
 
             <div class="row">
@@ -68,92 +67,95 @@ if (isset($_SESSION['usuarioActivo'])) {
                             <div class="table-responsive">
                               <table class="table table-striped table-bordered display" id="example">
                                 <thead>
-                                                                      
-                                &nbsp;
-                                <tr>
-                                 <th style="width:70px" >Código Producto</th>
-                                 <th style="width:125px" >Nombre</th>
-                                 <th style="width:20px" >Existencias</th>
-                                 <th style="width:35px" >Acción</th>
-                               </tr>
-                             </thead>
-                             <tbody>
-
-                              <?php While($inventario = mysqli_fetch_assoc($inventarios)){?>
-                              <tr>
-                                <td align="center">
-                                  <?php
-                                  $aux1 = $inventario['id_Producto']; 
-                                  $sql1 = "SELECT codigo_Prod FROM producto where idProducto = '$aux1'";
-                                  $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-                                  $producto = mysqli_fetch_array($producto);
-                                  echo $producto['codigo_Prod'];
-                                  ?>
-                                </td>
-                                <td>
-                                  <?php
-                                  $aux = $inventario['id_Producto']; 
-                                  $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
-                                  $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-                                  $producto = mysqli_fetch_array($producto);
-                                  // echo $producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'];
                                   
-                                  if($producto['descripcion_Prod'] == "Ninguna"){
-                                   if($producto['categoria_Prod'] == 12){
-                                     echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
-                                   }else{
-                                     echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
-                                   }
-                                 }else{
-                                   if($producto['categoria_Prod'] == 12){
-                                     echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
-                                   }else{
-                                     echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
-                                   }
-                                 }
+                                  &nbsp;
+                                  <tr>
+                                   <th style="width:70px" >Código Producto</th>
+                                   <th style="width:125px" >Nombre</th>
+                                   <th style="width:20px" >Existencias</th>
+                                   <th style="width:35px" >Acción</th>
+                                 </tr>
+                               </thead>
+                               <tbody>
 
-                                 ?>
-                               </td>
-                               <td align="center">
-                                <?php 
-                                $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
-                                $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                <?php While($inventario = mysqli_fetch_assoc($inventarios)){?>
+                                <tr>
+                                  <td align="center">
+                                    <?php
+                                    $aux1 = $inventario['id_Producto']; 
+                                    $sql1 = "SELECT codigo_Prod FROM producto where idProducto = '$aux1'";
+                                    $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+                                    $producto = mysqli_fetch_array($producto);
+                                    echo $producto['codigo_Prod'];
+                                    ?>
+                                  </td>
+                                  <td>
+                                    <?php
+                                    $aux = $inventario['id_Producto']; 
+                                    $sql1 = "SELECT * FROM producto where idProducto = '$aux'";
+                                    $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+                                    $producto = mysqli_fetch_array($producto);
+                                  // echo $producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'];
+                                    
+                                    if($producto['descripcion_Prod'] == "Ninguna"){
+                                     if($producto['categoria_Prod'] == 12){
+                                       echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
+                                     }else{
+                                       echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                     }
+                                   }else{
+                                     if($producto['categoria_Prod'] == 12){
+                                       echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
+                                     }else{
+                                       echo $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+                                     }
+                                   }
+
+                                   ?>
+                                 </td>
+                                 <td align="center">
+                                  <?php 
+                                  $sql2 = "SELECT nuevaExistencia_Inv FROM inventario WHERE id_Producto = '$aux1' order by idInventario desc";
+                                  $resultadooS = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
                                   $resultadoo = mysqli_fetch_array($resultadooS);//CAPTURA EL ULTIMO REGISTRO
                                   $cant = $resultadoo['nuevaExistencia_Inv'];
                                   echo $cant ?>
                                 </td>
-                                  <th align="center">
+                                <th align="center">
                                   <a href="Kardex.php?idinventario=<?php echo $inventario['idInventario'] ?>">
-                                  <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
+                                    <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
                                   </a>
-                                  </th>
-                                  <?php } ?>
+                                </th>
+                                <?php } ?>
 
-                                </tbody>
-                              </table>
-                            </div>
-                          </form>
+                              </tbody>
+                            </table>
+                          </div>
+                        </form>
 
-
-                          <?php include("generalidades/cierre.php"); ?>
-                        </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php include("generalidades/cierre.php"); ?>
+          </div>
+        </body>
+        </html>
 
-                    </body>
-                    </html>
-
-                    <?php
-                  }else{
-                    ?>
-                    <!DOCTYPE HTML>
-                    <html>
-                    <head>
-                      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                      <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
-                    </head>
-                    <body>
-                    </body>
-                    </html>
-                    <?php
-                  }
-                  ?>
+        <?php
+      }else{
+        ?>
+        <!DOCTYPE HTML>
+        <html>
+        <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+        </head>
+        <body>
+        </body>
+        </html>
+        <?php
+      }
+      ?>

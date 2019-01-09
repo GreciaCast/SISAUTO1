@@ -251,56 +251,61 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
         <small>...</small>
       </div>
       <div class="modal-body">
-        <div class=" i-checks" align="left">
-
+        <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
+        <div class="col-sm-6 i-checks">
+          <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por proveedor</label>
+          <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Por fecha</label>
+        </div>
+        <div class=" form-group row" align="center">
+          <br><br>
           <?php
           $sql="SELECT * from cliente where tipo_Cli = 1 order by nombre_Cli ASC";
           $clientes= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
           ?>
-          <label > <input type="radio" value="option1" name=""> Cliente:</label>
+          <!-- <label > <input type="radio" value="option1" name=""> Cliente:</label> -->
 
           <div class="col-sm-3 input-group" >
-            <select id="proves" name="id_Proveedor" style="width:500px;height:30px" class="chosen-select"> 
+           &nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="clientesID" aling="center" name="clientesID" style="width:500px;height:40px" class="form-control" tabindex="2"> 
               <option value="">[Selecionar cliente]</option>
-             <?php
+              <?php
 
-            While($cliente=mysqli_fetch_array($clientes)){
-             echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
-           }
-           ?>
+              While($cliente=mysqli_fetch_array($clientes)){
+               echo '<option value="'.$cliente['idCliente'].'">'.$cliente['nombre_Cli'].'</option>';
+             }
+             ?>
            </select>
          </div>
        </div>
        <br>
-       <br>
-       <div class="i-checks" align="left">
-                <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label>
-                <br>
-       <div class="form-group row" id="data_2">
-        <?php
+       <div class="i-checks" align="center">
+        <!-- <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label> -->
+        <br>
+        <div class="form-group row" id="data_2">
+          <?php
 
-        date_default_timezone_set('america/el_salvador');
-        $hora1 = date("A");
-        $hoy = getdate();
-        $hora = date("g");
-        $dia = date("d");
-        $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
-        ?>
-        <label for="empresa" class="col-sm-3 control-label">Desde: </label>
-        <div class="col-sm-3 input-group date">
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+          date_default_timezone_set('america/el_salvador');
+          $hora1 = date("A");
+          $hoy = getdate();
+          $hora = date("g");
+          $dia = date("d");
+          $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
+          ?>
+          <label for="empresa" class="col-sm-3 control-label">Desde: </label>
+          <div class="col-sm-3 input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+          </div>
+        </div>
+        <div class="form-group row" id="data_2">
+
+          <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
+          <div class="col-sm-3 input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+          </div>
         </div>
       </div>
-      <div class="form-group row" id="data_2">
-
-        <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
-        <div class="col-sm-3 input-group date">
-          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-          <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
-        </div>
-      </div>
-    </div>
     </div>
     <div class="modal-footer">
      <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
@@ -320,6 +325,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 <script src="../assets/Validaciones/validarProveedor.js"></script>
 <script src="../assets/Validaciones/validarCorreo.js"></script>
 <script src="../assets/Validaciones/validarNombreCompletoUsuario.js"></script>
+<script src="../assets/Validaciones/validarNuevaVenta.js"></script>
 
 <script type="text/javascript">
   function baja(id){
@@ -371,18 +377,24 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
                   }
                 })
               }
+
+          //REPORTE------------------------------------------------------
               function reporte(){
                 desde = $('#fecha1').val();
                 hasta = $('#fecha2').val();
 
+                idcliente = $('#clientesID').val();
+                console.log(idcliente);
+
                 desde=desde.split('/').reverse().join('-');
                 hasta=hasta.split('/').reverse().join('-');
+                //idcliente=idcliente.split('/').reverse().join('-');
 
                 if (desde > hasta) {
                   notaError("Verifique las fecha");
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta,'_blank');
+                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente,'_blank');
                 }
 
               }

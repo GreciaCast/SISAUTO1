@@ -43,7 +43,7 @@ if (isset($_SESSION['usuarioActivo'])) {
     <div class="row" style="padding:20px">
       <br>
       <a class="pull-right">
-        <button type="button" title="Editar" class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalReporteBitacora" style="font-size:16px;">
           Reporte
           <span class="fa fa-file-pdf-o"></span>
         </button>
@@ -131,7 +131,112 @@ if (isset($_SESSION['usuarioActivo'])) {
             </div>
         </div>
     </div>
-</div><!---------------------------------------------------------------------------------------->
+</div><!--______________________________________________________________________________________-->
+
+<!-- MODAL REPORTE BITACORA-->
+<div class="modal inmodal" id="modalReporteBitacora" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content animated fadeIn">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button>
+        <i class="fa fa-check-square-o modal-icon"></i>
+        <h4 class="modal-title">Reporte de Bitácora</h4>
+        <small>...</small>
+      </div>
+      <div class="modal-body">
+        <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
+        <div class="col-sm-6 i-checks">
+          <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por usuario</label>
+          <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Por fecha</label>
+        </div>
+        <div class=" form-group row" align="center">
+          <br><br>
+          
+          <!-- <label > <input type="radio" value="option1" name=""> Cliente:</label> -->
+
+         <div class="col-sm-3 input-group" >
+          <div class="col-sm-2">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <select id="clientesID" name="categorias" style="width:400px;height:40px" class="form-control" >
+              <option value="">[Selecionar categoría]</option>
+              <option value="1">AMORTIGUADORES</option>
+              <option value="2">BUJÍAS</option>
+              <option value="3">COMBUSTIBLE</option>
+              <option value="4">ELÉCTRICO</option>
+              <option value="5">ENFRIAMIENTO</option>
+              <option value="6">FILTROS</option>
+              <option value="7">FRENOS</option>
+              <option value="8">MOTOR</option>
+              <option value="8">SENSORES</option>
+              <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+              <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+              <option value="12">UNIVERSALES</option>
+            </select>
+          </div>
+         </div> 
+       </div>
+       <br>
+       <div class="i-checks" align="center">
+        <!-- <label> <input type="radio" value="option1" name="" align="left"> Fecha:</label> -->
+        <br>
+        <div class="form-group row" id="data_2">
+          <?php
+
+          date_default_timezone_set('america/el_salvador');
+          $hora1 = date("A");
+          $hoy = getdate();
+          $hora = date("g");
+          $dia = date("d");
+          $fech = $dia.'/'.$hoy['mon'].'/'.$hoy['year'];                                           
+          ?>
+          <label for="empresa" class="col-sm-3 control-label">Desde: </label>
+          <div class="col-sm-3 input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+          </div>
+        </div>
+        <div class="form-group row" id="data_2">
+
+          <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
+          <div class="col-sm-3 input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <input id="fecha2" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+     <button type="button" class="btn btn-success" onclick="reporte();" style="font-size:14px;">
+      Generar reporte
+    </button>
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+    &nbsp;
+  </div>
+</div>
+</div>
+</div>
+
+<script src="../assets/Validaciones/validarNuevaVenta.js"></script>
+
+<script type="text/javascript">
+  //REPORTE------------------------------------------------------
+              function reporte(){
+            desde = $('#fecha1').val();
+            hasta = $('#fecha2').val();
+
+            desde=desde.split('/').reverse().join('-');
+            hasta=hasta.split('/').reverse().join('-');
+
+            if (desde > hasta) {
+                notaError("Verifique las fecha");
+            }else{
+                var dominio = window.location.host;
+                window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteBitacora.php?desde='+desde+'&hasta='+hasta,'_blank');
+            }
+
+        }
+</script>
 
   </body>
 </html>
