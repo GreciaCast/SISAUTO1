@@ -1,3 +1,5 @@
+var productosagregados = [];
+
 function radioSeleccionado(numero){
 
 	if(numero == 1){
@@ -6,6 +8,7 @@ function radioSeleccionado(numero){
 
 		$("#clientesID").css('display','block');//mostrar
 
+
 	}else{
 		$("#r2").css('background','green');
 		$("#r1").css('background','');
@@ -13,6 +16,7 @@ function radioSeleccionado(numero){
 		$("#clientesID").css('display','none');//ocultar
 		
 	}
+        $("#tiporeporte").val(numero);
 }
 
 function mostrarCostoyExistencias(id){
@@ -75,6 +79,9 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
 
+     }else if(productosagregados.includes(productoId)){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* El producto seleccionado ya ha sido agregado");
      }else if((parseFloat(costo) == parseFloat(precio))|| (parseFloat(costo) > parseFloat(precio))){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Verifique que el precio a vender no sea menor que el costo");
@@ -84,6 +91,7 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("* Cantidad solicitada NO disponible");
 
      }else{
+        productosagregados.push(productoId);
         $('#mensajeee1').text("");
 
         $('#tablaProductosVenta').append(html);
@@ -105,6 +113,8 @@ function eliminarProductosDeTabla(id,subtotal){
     acumulado = acumulado - subtotal;
     $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
     $('#f'+id).remove();
+    var indice = productosagregados.indexOf(""+id+"");
+    productosagregados.splice(indice,1);
 }
 
 async function validarVenta(sino){

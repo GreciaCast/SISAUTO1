@@ -3,6 +3,7 @@ function editarCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
 	$("#fecha").val(fecha.split('-').reverse().join('/'));
 	$("#total").val(totalCompra);
 	$("#idcompra").val(idcompra);
+	var contador;
 	$.get('/SISAUTO1/Controlador/comprasC.php?provee=1&id='+idproveedor,function(data){
             $("#proveedorComEditar").val(data);
      });
@@ -11,6 +12,11 @@ function editarCom(numeroFac,fecha,totalCompra,idcompra,idproveedor){
 		var r=JSON.parse(data);
 			$('#tablaProductos').append(r[0]);
 			$('#total').val(parseFloat(r[1]).toFixed(2));
+			contador = r[2];
+			for(i=0 ; i < contador; i++){
+				var producto_temp = $("#id_prod"+i).val();
+				productosagregados.push(producto_temp);
+			}
 	});
 
 }

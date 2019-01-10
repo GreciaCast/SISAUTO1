@@ -69,10 +69,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
+                                            <label  for="tele1" class="col-sm-3 control-label">Categoría:</label>
                                             <div  class="col-sm-2">
                                               <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();">
-                                                <option value="">[Selecionar Categoria]</option>
+                                                <option value="">[Selecionar Categoría]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>
                                                 <option value="3">COMBUSTIBLE</option>

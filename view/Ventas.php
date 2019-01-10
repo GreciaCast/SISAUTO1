@@ -47,7 +47,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
    </a>
    <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
    <?php  if ($tipo == 1) { ?>
-   <a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=0">
+   <a class="pull-right" >
      <button class="btn btn-success" style="font-size:16px;">
       Ver ventas anuladas  <i class="fa fa-bars"></i>
     </button>
@@ -299,6 +299,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
             <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
           </div>
         </div>
+        <input type="hidden" id="tiporeporte" value="1" />
         <div class="form-group row" id="data_2">
 
           <label for="empresa" class="col-sm-4 control-label">Hasta: </label>
@@ -386,19 +387,21 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
                 hasta = $('#fecha2').val();
 
                 idcliente = $('#clientesID').val();
+                tipor = $('#tiporeporte').val();
                 console.log(idcliente);
 
                 desde=desde.split('/').reverse().join('-');
                 hasta=hasta.split('/').reverse().join('-');
-                //idcliente=idcliente.split('/').reverse().join('-');
 
-                if (desde > hasta) {
+                if(tipor == '1' && idcliente == ""){
+                  notaError("Debe seleccionar un cliente");
+
+                }else if (desde > hasta && hasta !="") {
                   notaError("Verifique las fecha");
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente,'_blank');
+                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
                 }
-
               }
             </script>
           </body>

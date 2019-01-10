@@ -13,7 +13,7 @@
    function validarNombreE(){
 
     if ($('#nombreEmp').val().trim()=="") {
-    	notaError("El nombre de la empresa es obligatorio!");
+    	notaError("¡El nombre de la empresa es obligatorio!");
     	return false;
     }
     else{
@@ -30,7 +30,7 @@
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   notaError("¡El nombre ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -60,7 +60,7 @@
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El correo ingresado ya ha sido registrado!"); 
+                   notaError("¡El correo ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -72,12 +72,12 @@
     function validarTelefonoE(){
 
      if ($('#telefonoEmp').val().length!=9) {
-        notaError("El teléfono debe contener 8 dígitos!");
+        notaError("¡El teléfono debe contener 8 dígitos!");
         return true;
     }   
 
     else if ($('#telefonoEmp').val().trim()=="") {
-        notaError("El teléfono de la empresa es obligatorio!");
+        notaError("¡El teléfono de la empresa es obligatorio!");
         return true;
     }
     else{
@@ -94,7 +94,7 @@
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El teléfono ingresado ya ha sido registrado!"); 
+                   notaError("¡El teléfono ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -108,7 +108,7 @@
      function validarDireccionE(){
 
     if ($('#direccionEmp').val().trim()=="") {
-    	notaError("La Dirección es obligatoria!");
+    	notaError("¡La dirección es obligatoria!");
     	return false;
     }
 
@@ -119,7 +119,7 @@ return true;
       function validarNombreR(){
 
     if ($('#nombreResp').val().trim()=="") {
-    	notaError("El nombre del responsable es obligatorio!");
+    	notaError("¡El nombre del responsable es obligatorio!");
     	return false;
     }
     
@@ -130,12 +130,12 @@ return true;
       function validarTelefonoR(){
 
     if ($('#telefonoResp').val().length!=9) {
-        notaError("El teléfono del proveedor debe contener 8 dígitos!");
+        notaError("¡El teléfono del proveedor debe contener 8 dígitos!");
         return true;
     }
 
     else if ($('#telefonoResp').val().trim()=="") {
-    	notaError("El teléfono del responsable es obligatorio!");
+    	notaError("¡El teléfono del responsable es obligatorio!");
     	return true;
     }
     else{
@@ -152,7 +152,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El teléfono del responsable ingresado ya ha sido registrado!"); 
+                   notaError("¡El teléfono del responsable ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -210,7 +210,7 @@ function validarproveedorEditar(){
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   notaError("¡El nombre ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -242,7 +242,7 @@ function validarproveedorEditar(){
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El correo ingresado ya ha sido registrado!"); 
+                   notaError("¡El correo ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -254,12 +254,12 @@ function validarproveedorEditar(){
     function validareditarTelefonoE(){
 
        if ($('#telefonoProEditar').val().length!=9) {
-        notaError("El teléfono debe contener 8 dígitos!");
+        notaError("¡El teléfono debe contener 8 dígitos!");
         return true;
     }   
 
     else if ($('#telefonoProEditar').val().trim()=="") {
-        notaError("El teléfono de la empresa es obligatorio!");
+        notaError("¡El teléfono de la empresa es obligatorio!");
         return true;
     }
     else{
@@ -277,7 +277,7 @@ function validarproveedorEditar(){
                 if (data==0) {
                     return true;
                 }else{
-                 notaError("El teléfono ingresado ya ha sido registrado!"); 
+                 notaError("¡El teléfono ingresado ya ha sido registrado!"); 
                  return false;
              }
          }
@@ -289,7 +289,7 @@ function validarproveedorEditar(){
     function validareditarDireccionE(){
 
         if ($('#direccionProEditar').val().trim()=="") {
-            notaError("La Dirección es obligatoria!");
+            notaError("¡La dirección es obligatoria!");
             return false;
         }
 
@@ -300,7 +300,7 @@ function validarproveedorEditar(){
     function validareditarNombreR(){
 
         if ($('#nombreResEditar').val().trim()=="") {
-            notaError("El nombre del responsable es obligatorio!");
+            notaError("¡El nombre del responsable es obligatorio!");
             return false;
         }
 
@@ -311,12 +311,12 @@ function validarproveedorEditar(){
     function validareditarTelefonoR(){
 
         if ($('#telefonoResEditar').val().length!=9) {
-            notaError("El teléfono del proveedor debe contener 8 dígitos!");
+            notaError("¡El teléfono del proveedor debe contener 8 dígitos!");
             return true;
         }
 
         else if ($('#telefonoResEditar').val().trim()=="") {
-            notaError("El teléfono del responsable es obligatorio!");
+            notaError("¡El teléfono del responsable es obligatorio!");
             return true;
         }
         else{
@@ -334,7 +334,7 @@ function validarproveedorEditar(){
                     if (data==0) {
                         return true;
                     }else{
-                     notaError("El teléfono del responsable ingresado ya ha sido registrado!"); 
+                     notaError("¡El teléfono del responsable ingresado ya ha sido registrado!"); 
                      return false;
                  }
              }

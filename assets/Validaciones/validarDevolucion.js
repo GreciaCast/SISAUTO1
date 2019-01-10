@@ -9,7 +9,7 @@ async function validarDevolucion(){
 
 function validarjustificacion(){
     if ($('#justificar').val().trim() == "") {
-        notaError("¡La justificación de la devolución es obligatorio!");
+        notaError("¡La justificación es obligatoria!");
         return false;
     }
     return true;

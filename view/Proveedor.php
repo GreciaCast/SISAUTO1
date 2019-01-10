@@ -157,7 +157,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                         <h3 align="center"><b>Datos Generales</b></h3>
                         <hr width="75%" style="background-color:#007bff;"/>
                         <div class="form-group ">
-                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
+                            <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Empresa:</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" id="nombrePro" name="Nombre_Prov" readonly="readonly" aria-required="true" value="">
                             </div>
@@ -235,7 +235,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                       <input type="hidden" value="EditarPro" name="bandera"/>
                       <input type="hidden" value="" name="idproveedor" id="idproveedor"/>
                     <div class="form-group ">
-                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre de la Empresa:</label>
+                      <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Nombre Empresa:</label>
                       <div class="col-sm-7">
                         <input class="form-control" type="text" id="nombreProEditar" name="Nombre_Emp"  aria-required="true" value="">
                       </div>
