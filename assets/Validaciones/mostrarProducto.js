@@ -30,7 +30,8 @@ function mostrarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,
     }
     $("#descripcionPP").val(descripcionP);
     $("#stockPP").val(stockP);
-    $("#precioPP").val(precioP);
+    var pre = parseFloat(precioP);
+    $("#precioPP").val(pre.toFixed(2));
 }
 
 function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP){
@@ -81,5 +82,7 @@ function editarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,i
         $("#anioPEP").removeAttr("disabled");
     }
     $("#stockPEP").val(stockP);
-    $("#precioPEP").val(precioP);
+    
+    var pre = parseFloat(precioP);
+    $("#precioPEP").val(pre.toFixed(2));
 }
