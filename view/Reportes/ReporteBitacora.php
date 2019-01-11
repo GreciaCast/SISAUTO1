@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (isset($_SESSION['usuarioActivo'])) {
+  if ($_SESSION['usuarioActivo']['tipo_Usu']=='0') {
+?>
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
@@ -137,3 +142,34 @@ $hasta = $_GET["hasta"];
 <p>&nbsp;</p>
 </body>
 </html>
+
+<?php
+}else{
+    ?>
+    <!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/index.php">
+</head>
+<body>
+</body>
+</html>
+    <?php
+}
+?>
+<?php
+}else{
+    ?>
+    <!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+</head>
+<body>
+</body>
+</html>
+    <?php
+}
+?>
