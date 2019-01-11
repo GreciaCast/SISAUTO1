@@ -34,8 +34,7 @@ if (isset($_SESSION['usuarioActivo'])) {
       $producto = mysqli_fetch_array($producto);
       ?>
 
-      <?php                                  // echo $producto['nombre_Prod'].' -'.$producto['marca_Prod'].' -'.$producto['modeloVehiculo_Prod'].' -'.$producto['anioVehiculo_Prod'].' -'.$producto['descripcion_Prod'];
-
+      <?php                                  
       if($producto['descripcion_Prod'] == "Ninguna"){
        if($producto['categoria_Prod'] == 12){
          $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
@@ -157,7 +156,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                    </table>
 
                  </div>
-
+                 
+                    <a target="_blank" href="Reportes/ReporteKardex.php" >
+                      <button title="Imprimir" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="">Imprimir</button>
+                    </a>
                </form>
              </div>
            </div>
