@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="es">
     <script src="../assets/Validaciones/validarCliente.js"></script>
@@ -46,10 +46,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <div class="form-group">
                                                 <label for="empresa" class="col-sm-3 control-label">Justificar:</label>
                                                 <div class="col-sm-6">
-                                                 <textarea class="form-control" type="text" name="justificacion"  placeholder="" id="justificar" ></textarea>
-                                             </div>
-                                         </div>
-                                         <div class="card mb-3">
+                                                   <textarea class="form-control" type="text" name="justificacion"  placeholder="" id="justificar" ></textarea>
+                                               </div>
+                                           </div>
+                                           <div class="card mb-3">
                                             <br>
                                             <div class="card-body">
                                                 <div class="table-responsive">
@@ -63,29 +63,29 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                               <?php While($compra = mysqli_fetch_assoc($compras)){?>
-                                                               <tr>
-                                                               <td><?php  
-                                                                   if($compra['descripcion_Prod'] == "Ninguna"){
-                                                                   if($compra['categoria_Prod'] == 12){
-                                                                   echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].')';
-                                                               }else{
-                                                               echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
-                                                           }
-                                                       }else{
-                                                       if($compra['categoria_Prod'] == 12){
-                                                       echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].')';
-                                                   }else{
-                                                   echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].' para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
-                                               }
-                                           }
-                                           ?>
-                                       </td>   
-                                       <td>
-                                        <?php 
-                                        $idProducto= $compra['id_Producto'];
-                                        $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
-                                        $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
+                                                             <?php While($compra = mysqli_fetch_assoc($compras)){?>
+                                                             <tr>
+                                                                 <td><?php  
+                                                                     if($compra['descripcion_Prod'] == "Ninguna"){
+                                                                         if($compra['categoria_Prod'] == 12){
+                                                                             echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].')';
+                                                                         }else{
+                                                                             echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                                                         }
+                                                                     }else{
+                                                                         if($compra['categoria_Prod'] == 12){
+                                                                             echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].')';
+                                                                         }else{
+                                                                             echo $compra['codigo_Prod'].' - '.$compra['nombre_Prod'].' ('.$compra['marca_Prod'].', '.$compra['descripcion_Prod'].' para '.$compra['modeloVehiculo_Prod'].' '.$compra['anioVehiculo_Prod'].') ';
+                                                                         }
+                                                                     }
+                                                                     ?>
+                                                                 </td>   
+                                                                 <td>
+                                                                    <?php 
+                                                                    $idProducto= $compra['id_Producto'];
+                                                                    $sql1 = "SELECT * FROM inventario WHERE id_Producto = '$idProducto' order by idInventario desc";
+                                                                    $inventario = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
                                                                 $inventario = mysqli_fetch_array($inventario);//CAPTURA EL ULTIMO REGISTRO
                                                                 $resta = $inventario['nuevaExistencia_Inv'];
 
