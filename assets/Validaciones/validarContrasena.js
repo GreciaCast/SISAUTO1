@@ -18,7 +18,7 @@ function validarContrasena(obj,e,valor){
   
   var tamanio = $('#contrasenaUsu').val().length + 1;
   if( tamanio < 6){
-    $('#mensajitoo').text("Debe contener al menos 6 caracteres");
+    $('#mensajitoo').text("Debe contener al menos 6 carácteres");
   }else{
     $('#mensajitoo').text("");
   }
@@ -59,7 +59,7 @@ function validareditarContrasena(obj,e,valor){
   
   var tamanio = $('#contrasenaUsuEditar').val().length+1;
   if( tamanio < 6){
-    $('#mensajito1').text("Debe contener al menos 6 caracteres");
+    $('#mensajito1').text("Debe contener al menos 6 carácteres");
   }else{
     $('#mensajito1').text("");
   }
@@ -96,7 +96,7 @@ function validarContrasenaActual(obj,e,valor){
   
   var tamanio = $('#contrasenaActualUsuEditar').val().length+1;
   if( tamanio < 6){
-    $('#mensajito2').text("Debe contener al menos 6 caracteres");
+    $('#mensajito2').text("Debe contener al menos 6 carácteres");
   }else{
     $('#mensajito2').text("");
   }

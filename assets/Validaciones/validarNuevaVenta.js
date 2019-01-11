@@ -1,3 +1,5 @@
+var productosagregados = [];
+
 function radioSeleccionado(numero){
 
 	if(numero == 1){
@@ -6,6 +8,7 @@ function radioSeleccionado(numero){
 
 		$("#clientesID").css('display','block');//mostrar
 
+
 	}else{
 		$("#r2").css('background','green');
 		$("#r1").css('background','');
@@ -13,6 +16,7 @@ function radioSeleccionado(numero){
 		$("#clientesID").css('display','none');//ocultar
 		
 	}
+        $("#tiporeporte").val(numero);
 }
 
 function mostrarCostoyExistencias(id){
@@ -28,6 +32,9 @@ function mostrarCostoyExistencias(id){
     });
     $.get('/SISAUTO1/Controlador/datosProductoC.php?precio=1&id='+id,function(data){
     	$('#precioPV').val(data); 
+    });
+    $.get('/SISAUTO1/Controlador/datosProductoC.php?costocompleto=1&id='+id,function(data){
+        $('#costoauxiliar').val(data); 
     });
 }
 
@@ -47,7 +54,7 @@ function agregarProductosATabla(){
 	var disponible = $('#cantidadDisponiblePV').val();
     var cantidad = $('#cantidadPV').val();
 
-    var costo = $('#costoPV').val();
+    var costo = $('#costoauxiliar').val();
     var precio = $('#precioPV').val();
     var obtenerP = $("#produs").find('option:selected');
     var productoId = obtenerP.val();
@@ -58,6 +65,7 @@ function agregarProductosATabla(){
     html = html+'<td>'+precio+'</td>';
     html = html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>';
     html = html+'<td>';
+    html = html+'<input type="hidden" name="costo_DVen[]" value="'+costo+'"/>';
     html = html+'<input type="hidden" name="cantidad_DVen[]" value="'+cantidad+'"/>';
     html = html+'<input type="hidden" name="precio_DVen[]" value="'+precio+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';
@@ -75,6 +83,9 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
 
+     }else if(productosagregados.includes(productoId)){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* El producto seleccionado ya ha sido agregado");
      }else if((parseFloat(costo) == parseFloat(precio))|| (parseFloat(costo) > parseFloat(precio))){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Verifique que el precio a vender no sea menor que el costo");
@@ -84,6 +95,7 @@ function agregarProductosATabla(){
         $('#mensajeee1').text("* Cantidad solicitada NO disponible");
 
      }else{
+        productosagregados.push(productoId);
         $('#mensajeee1').text("");
 
         $('#tablaProductosVenta').append(html);
@@ -105,6 +117,8 @@ function eliminarProductosDeTabla(id,subtotal){
     acumulado = acumulado - subtotal;
     $('#totalVenta').val(parseFloat(acumulado).toFixed(2));
     $('#f'+id).remove();
+    var indice = productosagregados.indexOf(""+id+"");
+    productosagregados.splice(indice,1);
 }
 
 async function validarVenta(sino){

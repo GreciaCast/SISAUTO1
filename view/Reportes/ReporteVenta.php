@@ -6,6 +6,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
 $idcliente = $_GET["idcliente"];
+$tipor = $_GET["tipor"];
 ?>
 <!doctype html>
 <html>
@@ -51,7 +52,7 @@ $idcliente = $_GET["idcliente"];
   <script language="javascript">
    function imprimir(){
     if(!window.print){
-     alert("El navegador no permite la impresion..");
+     alert("El navegador no permite la impresión..");
      return;
    }
    else{
@@ -88,18 +89,33 @@ $idcliente = $_GET["idcliente"];
           </tr>
         </table>
 
+        <?php
+
+        include("../../confi/Conexion.php");
+        $conexion = conectarMysql(); 
+
+        if($tipor == 1){
+          $aux = $idcliente;
+           $sql1 = "SELECT nombre_Cli FROM cliente where idCliente = '$aux'";
+           $cliente = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+           $cliente = mysqli_fetch_array($cliente);
+           echo $cliente['nombre_Cli'];
+          } ?>
         <table width="700" border="1" align="center" rules="all">
           <tr bgcolor="#CCCCCC">
             <td width="29" bgcolor="#fcf3b3" align="center" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">N° de factura</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Total de Venta</td>
+            <?php if ($tipor == 2) {
+
+            ?>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Cliente</td>
+            <?php }  ?>
           </tr>
           <?php
 	//try {
-          include("../../confi/Conexion.php");
-          $conexion = conectarMysql();
+          
 	//$fechainicio=$_REQUEST["fechainicio"];
 	//$fechafinal=$_REQUEST["fechafinal"];
           date_default_timezone_set('america/el_salvador');
@@ -108,14 +124,24 @@ $idcliente = $_GET["idcliente"];
           $today = $hoy['year'].'-'.$hoy['mon'].'-'.$dia; 
 
           $contador=1;
+          if($tipor == 1){
+            
+            if($desde == ""&& $hasta== ""){
+              $cliente = "where id_Cliente = '$idcliente'";
+            }else{
+              $cliente = "and id_Cliente = '$idcliente'";
+            }
+          }else{
+            $cliente = "";
+          }
           if($desde == ""&& $hasta== ""){
-           $sql = "select * from venta where where id_Cliente = '$idcliente' order by fecha_Ven ASC";
+           $sql = "select * from venta ".$cliente." order by fecha_Ven ASC";
          }else if($hasta == ""){
-          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$today' order by fecha_Ven ASC";
+          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$today' ".$cliente." order by fecha_Ven ASC";
         }else if($desde == ""){
-          $sql = "select * from venta  where fecha_Ven <= '$hasta' order by fecha_Ven ASC";
+          $sql = "select * from venta  where fecha_Ven <= '$hasta' ".$cliente." order by fecha_Ven ASC";
         }else{
-          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$hasta' order by fecha_Ven ASC";
+          $sql = "select * from venta  where fecha_Ven BETWEEN '$desde' and '$hasta' ".$cliente." order by fecha_Ven ASC";
         }
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
@@ -145,6 +171,7 @@ $idcliente = $_GET["idcliente"];
           <td bgcolor="" align="center"><a>$</a><?php
           $precioven = $fila[2];
            echo number_format($precioven,2,'.','');?></td>
+           <?php if($tipor == 2){ ?>
           <td bgcolor="" align="center">
           <?php
            $aux = $fila['id_Cliente'];
@@ -154,6 +181,7 @@ $idcliente = $_GET["idcliente"];
            echo $cliente['nombre_Cli'];
            ?>
           </td>
+          <?php } ?>
         </tr>
         <?php $contador++;
       }

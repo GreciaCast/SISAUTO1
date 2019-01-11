@@ -42,7 +42,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             
                                         </div>
                                         <div class="form-group">
-                                            <label for="empresa" class="col-sm-3 control-label">Nombre de la Empresa:</label>
+                                            <label for="empresa" class="col-sm-3 control-label">Nombre Empresa:</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" placeholder="Nombre Completo" type="text" id="nombreEmp" name="Nombre_Emp">
                                             </div>

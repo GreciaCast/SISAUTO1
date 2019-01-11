@@ -1,3 +1,8 @@
+var productosagregados = [];
+$(document).on('ready', function(){
+   
+});
+
 async function validarCompra(){
     var fechaC = await validarFechaC();    
     var numeroFacC = await validarNumeroFacC();
@@ -156,7 +161,11 @@ function agregar(){
         $('#mensajeee1').text("");
         $('#mensajeee1').text("* Debe escribir datos correctos");
 
+     }else if(productosagregados.includes(productoId)){
+        $('#mensajeee1').text("");
+        $('#mensajeee1').text("* El producto seleccionado ya ha sido agregado");
      }else{
+        productosagregados.push(productoId);
         $('#mensajeee1').text("");
 
         $('#tablaProductos').append(html);
@@ -168,6 +177,7 @@ function agregar(){
         $('#categoriaPro').val("");
         $('#productoFiltrado').val("");
     }
+    console.log(productosagregados);
 }
 
 function eliminar(id,subtotal){
@@ -175,6 +185,10 @@ function eliminar(id,subtotal){
     acumulado = acumulado - subtotal;
     $('#total').val(parseFloat(acumulado).toFixed(2));
     $('#f'+id).remove();
+    console.log(id);
+    var indice = productosagregados.indexOf(""+id+"");
+    productosagregados.splice(indice,1);
+    console.log(productosagregados);
 }
 
 function validarCompraDuplicada(){
@@ -216,7 +230,7 @@ async function validarCompraE(){
    function validarnumFacE(){
 
     if ($('#numFacCom').val().trim()=="") {
-        notaError("¡El numero de factura es obligatorio!");
+        notaError("¡El número de factura es obligatorio!");
         return false;
     }
 
@@ -241,7 +255,7 @@ async function validarCompraE(){
         notaError("¡Los detalles de la compra son obligatorios!");
         return false;
     }else if (($('#total').val().trim() == "")) {
-        notaError("¡Los detalles de la compra deben ser validos!");
+        notaError("¡Los detalles de la compra deben ser válidos!");
         return false;
     }
 
@@ -267,22 +281,22 @@ async function validarCompraE(){
         notaError("¡La fecha es obligatoria!");
         return false;
     }else if (anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado > mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado > diaActual && mesSeleccionado == mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado == mesActual && anioSeleccionado > anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (diaSeleccionado == diaActual && mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }else if (mesSeleccionado > mesActual && anioSeleccionado == anioActual) {
-        notaError("¡La fecha debe ser valida!");
+        notaError("¡La fecha debe ser válida!");
         return false;
     }
     return true;

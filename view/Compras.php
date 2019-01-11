@@ -111,11 +111,19 @@ and open the template in the editor.
                                                                                <?php   
                                                                            }
                                                                            ?>
-
+                                                                           <?php 
+                                                                           $fechasumada= date("Y/m/d",strtotime($compra['fecha_Com']."+ 20 days"));
+                                                                           if($fechasumada >= date("Y/m/d")){ 
+                                                                            ?>
                                                                            <a  href="DevolucionesCompras.php?idcompra=<?php echo $compra['idCompra'] ?>">
                                                                             <button title="Devolución" type="button" class="btn btn-primary fa fa-times" >
                                                                             </button>
                                                                         </a>
+                                                                        <?php  }else{?>
+
+                                                                            <button title="No puede devolver" type="button" class="btn btn-primary fa fa-times disabled" >
+                                                                            </button>
+                                                                        <?php } ?>
                                                                     </th>
                                                                 </tr>
                                                                 <?php } ?>
@@ -276,10 +284,10 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoria:</label>
+                            <label for="empresa" class="col-sm-12 col-md-2 col-form-label">Categoría:</label>
                             <div class="col-sm-12 col-md-10">
                                 <select style="width:400px;height:40px" class="form-control" id="categoriaPro" name="categorias" onchange="filtrarCategoria(this.value);">
-                                    <option value="">[Selecionar categoria]</option>
+                                    <option value="">[Selecionar categoría]</option>
                                     <option value="1">AMORTIGUADORES</option>
                                     <option value="2">BUJÍAS</option>
                                     <option value="3">COMBUSTIBLE</option>
@@ -505,7 +513,7 @@ and open the template in the editor.
             desde=desde.split('/').reverse().join('-');
             hasta=hasta.split('/').reverse().join('-');
 
-            if (desde > hasta) {
+            if (desde > hasta && hasta != "") {
                 notaError("Verifique las fecha");
             }else{
                 var dominio = window.location.host;

@@ -18,6 +18,7 @@ if(isset($_POST["bandera"])){
 		$cantidadProdVen = $_POST["cantidad_DVen"];
 		$precioProdVen = $_POST["precio_DVen"];
 		$idProdVen = $_POST["id_Producto"];
+		$costoVen = $_POST["costo_DVen"];
 
 		$indicador = $_POST["indicador"];
 		echo( $indicador);
@@ -30,7 +31,7 @@ if(isset($_POST["bandera"])){
 		$id = $resultado['idVenta'];
 		foreach ($cantidadProdVen as $key => $producto) {
 			
-		$sql1 = "INSERT INTO detalleventa (cantidad_DVen,precio_DVen,id_Venta,id_Producto) VALUES ('$cantidadProdVen[$key]','$precioProdVen[$key]','$id','$idProdVen[$key]')";
+		$sql1 = "INSERT INTO detalleventa (cantidad_DVen,precio_DVen,id_Venta,id_Producto,costo_DVen) VALUES ('$cantidadProdVen[$key]','$precioProdVen[$key]','$id','$idProdVen[$key]','$costoVen[$key]')";
 		mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 		$sql2 = "SELECT * FROM inventario WHERE id_Producto = '$idProdVen[$key]' order by idInventario desc";
@@ -51,7 +52,8 @@ if(isset($_POST["bandera"])){
 				$nuevoPrecio = $precioActual;
 				// $nuevoPrecio = $nuevoPrecio;
 				//$preciovp = format_number($nuevoPrecio,2,'.','');
-				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$precioProdVen[$key]','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
+				$costoSalida=$resultadoo['nuevoPrecio_Inv'];
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (1,'$existencias','$precioActual','$cantidadProdVen[$key]','$costoSalida','$fechaVen','$nuevaExistencia','$nuevoPrecio','$idProdVen[$key]')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 				if ($indicador == 1) {
@@ -173,6 +175,56 @@ if(isset($_GET["repetidos"])){
 	// 	}
 	// }
 	echo $aux;
+}
+
+//------------------------------ DEVOLUCIÓN
+
+if(isset($_GET["anular"])){
+
+		$idventa=$_GET["idventa"];
+		$comentario=$_GET["comentario"];
+		$aux = 0;
+		echo $idventa.$comentario;
+
+		$sql = "UPDATE venta set estado_Ven =1, comentarioanular_Ven = '".$comentario."' where idVenta = '$idventa'";
+		$detalles=mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD 1".mysqli_connect_error());
+
+
+		$sql1 = "SELECT * from detalleventa where id_Venta = '$idventa'";
+		$detalles=mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD 2".mysqli_connect_error());
+
+			$fecha = date('Y-m-d');
+
+			foreach ($detalles as $detalle) {
+				$idProd = $detalle['id_Producto'];
+				$cantidad = $detalle['cantidad_DVen'];
+				$precio = $detalle['costo_DVen'];
+
+				$sql2 = " SELECT * from inventario where id_Producto = '$idProd' order by idInventario desc";
+				$resultado = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD 3".mysqli_connect_error());
+
+				$resultado = mysqli_fetch_array($resultado);
+
+				$existencia = $resultado['nuevaExistencia_Inv'];
+				$nuevaExistencia = $existencia+$cantidad;
+				$precioActual = $resultado['nuevoPrecio_Inv'];
+				$nuevoPrecio = (($existencia*$precioActual) + ($cantidad*$precio))/$nuevaExistencia;
+
+				//Tipo de movimiento = 5 -> para anular venta
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (5,'$existencia','$precioActual','$cantidad','$precio','$fecha','$nuevaExistencia','$nuevoPrecio','$idProd')";
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD 4".mysqli_connect_error());
+
+			}
+
+		//////////CAPTURA DATOS PARA BITACORA
+			$usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
+			$sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Anuló una venta')";
+			mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
+		///////////////////////////////////////////////
+
+			$_SESSION['mensaje'] = "Venta anulada exitosamente";
+			header("location: /SISAUTO1/view/Ventas.php?");
+
 }
 
 

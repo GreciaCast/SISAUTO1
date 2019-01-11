@@ -123,7 +123,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                   echo $cant ?>
                                 </td>
                                 <th align="center">
-                                  <a href="Kardex.php?idinventario=<?php echo $inventario['idInventario'] ?>">
+                                  <a href="Kardex.php?idproducto=<?php echo $inventario['id_Producto'] ?>">
                                     <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="" ></button>
                                   </a>
                                 </th>

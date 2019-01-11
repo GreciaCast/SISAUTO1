@@ -47,7 +47,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
    </a>
    <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
    <?php  if ($tipo == 1) { ?>
-   <a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=0">
+   <a class="pull-right" >
      <button class="btn btn-success" style="font-size:16px;">
       Ver ventas anuladas  <i class="fa fa-bars"></i>
     </button>
@@ -99,11 +99,16 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
            $sql1 = "SELECT numero_Fac FROM facturaconsumidor where id_Venta = '$aux'";
            $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
            $numFac= mysqli_fetch_array($numFac);
-           echo $numFac['numero_Fac'];
-           $sql1 = "SELECT numero_Fac FROM facturacredito where id_Venta = '$aux'";
+           if($numFac['numero_Fac']!=""){
+            echo $numFac['numero_Fac'];
+            $nf=$numFac['numero_Fac'];
+          }else{
+            $sql1 = "SELECT numero_Fac FROM facturacredito where id_Venta = '$aux'";
            $numFac = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
            $numFac= mysqli_fetch_array($numFac);
            echo $numFac['numero_Fac'];
+            $nf=$numFac['numero_Fac'];
+          }
            ?>
          </td>
          <td>
@@ -117,16 +122,14 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
          </td>
 
          <th align="center">
-          <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerVenta" onclick="VerVen('<?php echo $venta['fecha_Ven']?>','<?php echo $venta['total_Ven']?>','<?php echo $venta['idVenta']?>','<?php echo $venta['id_Cliente']?>')" ></button>
+          <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerVenta" onclick="VerVen('<?php echo $venta['fecha_Ven']?>','<?php echo $venta['total_Ven']?>','<?php echo $venta['idVenta']?>','<?php echo $venta['id_Cliente']?>','<?php echo $nf?>')" ></button>
           <?php  if ($tipo == 1) {
 
            ?>
-           <button title="Anular" type="button" class="btn btn-warning fa fa-times" onclick="baja(<?php echo $proveedore['idProveedor'] ?>)"></button>
+           <button title="Anular" type="button" class="btn btn-warning fa fa-times" onclick="anular('<?php echo $venta['idVenta']?>');"></button>
            <?php
 
-         }else{ ?>
-         <button title="Dar de alta" type="button" class="btn fa fa-arrow-circle-up" style="color:#fff; background-color:#28a745" onclick="alta(<?php echo $proveedore['idProveedor'] ?>)"></button>
-         <?php } ?>
+         } ?>
        </th>
      </tr>
      <?php } ?>
@@ -180,7 +183,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
       <div class="form-group">
         <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Número de factura:</label>
         <div class="col-sm-3">
-          <input class="form-control" type="text" id="numFacVer" name="" disabled="true" aria-required="true" value=" <?php echo $numFac['numero_Fac'];?>">
+          <input class="form-control" type="text" id="numFacVer" name="" disabled="true" aria-required="true" >
        
          </div>
       </div>
@@ -299,6 +302,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
             <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
           </div>
         </div>
+        <input type="hidden" id="tiporeporte" value="1" />
         <div class="form-group row" id="data_2">
 
           <label for="empresa" class="col-sm-4 control-label">Hasta: </label>
@@ -386,21 +390,52 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
                 hasta = $('#fecha2').val();
 
                 idcliente = $('#clientesID').val();
+                tipor = $('#tiporeporte').val();
                 console.log(idcliente);
 
                 desde=desde.split('/').reverse().join('-');
                 hasta=hasta.split('/').reverse().join('-');
-                //idcliente=idcliente.split('/').reverse().join('-');
 
-                if (desde > hasta) {
+                if(tipor == '1' && idcliente == ""){
+                  notaError("Debe seleccionar un cliente");
+
+                }else if (desde > hasta && hasta !="") {
                   notaError("Verifique las fecha");
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente,'_blank');
+                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
                 }
-
               }
+
+              function anular(id){
+                aux='¿Está seguro? ¡El registro no podrá ser recuperado!'+
+                '<label style="color: red;">Debe comentar la razón para anular la factura</label>'+
+                '<input class="swal2-input" id="comentario" placeholder="Razón">';
+                return swal({
+                  title: 'Anular Venta',
+                  html:aux,
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#DD6B55',
+                  confirmButtonText: 'Si, ¡Anular!',
+                  cancelButtonText: 'No, ¡Cancelar!',
+                  confirmButtonClass: 'btn btn-danger',
+                  cancelButtonClass: 'btn btn-light',
+                  buttonsStyling: false
+                }).then((result) => {
+                  if (result.value) {
+                    if($('#comentario').val().trim()==""){
+                      anularVenta(id);
+                    }else{
+                      var dominio = window.location.host;
+                      location.href ='http://'+dominio+'/SISAUTO1/Controlador/ventasC.php?'+ 'idventa='+id+'&comentario='+$('#comentario').val()+'&anular=1';
+                    }
+                  }
+                });
+              }
+
             </script>
+
           </body>
           </html>
 

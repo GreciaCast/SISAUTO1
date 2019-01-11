@@ -11,6 +11,7 @@ if(isset($_GET["bandera"])){
 	$detalles = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
 	$cadena="";
 	$acumulado=0;
+	$contador = 0;
 	While ($detalle = mysqli_fetch_assoc($detalles)){
 		$idP=$detalle['id_Producto'];
 		$sql1 = "SELECT * from producto where idProducto = '$idP'";
@@ -41,13 +42,16 @@ if(isset($_GET["bandera"])){
 		$subtotal = $detalle['cantidad_DCom']*$detalle['precio_DCom'];
 		$cadena=$cadena.'<td>'.number_format($subtotal,2,'.','').'</td>';
 		$cadena=$cadena.'<td>';
+		$cadena=$cadena.'<input type="hidden" id="id_prod'.$contador.'" value="'.$producto['idProducto'].'"/>';
 		$cadena=$cadena.'<input type="hidden" name="cantidad_DCom[]" value="'.$detalle['cantidad_DCom'].'"/>';
 	    $cadena=$cadena.'<input type="hidden" name="precio_DCom[]" value="'.$detalle['precio_DCom'].'"/>';
 	    $cadena=$cadena.'<input type="hidden" name="id_Producto[]" value="'.$producto['idProducto'].'"/>';
 		$cadena=$cadena.'<button title="Eliminar" type="button" class="btn btn-danger fa fa-trash" onclick="eliminar('.$producto['idProducto'].','.$subtotal.');"></button></td></tr>';
 		$acumulado=$acumulado+$subtotal;
+
+		$contador++;
 	}
-	$retornar= [$cadena,$acumulado];
+	$retornar= [$cadena,$acumulado,$contador];
 	
 	// .= ---> $cadena=$cadena.variable
 	echo json_encode($retornar);

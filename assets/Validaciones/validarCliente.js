@@ -11,7 +11,7 @@
    function validarNombre(){
 
     if ($('#nombre').val().trim()=="") {
-    	notaError("El nombre es obligatorio!");
+    	notaError("¡El nombre es obligatorio!");
     	return false;
     }else{
         var param = {
@@ -27,7 +27,7 @@
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   notaError("¡El nombre ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -40,7 +40,7 @@ return true;
      function validarDireccion(){
 
     if ($('#direccion').val().trim()=="") {
-    	notaError("La Dirección es obligatoria!");
+    	notaError("¡La dirección es obligatoria!");
     	return false;
     }
 
@@ -50,11 +50,11 @@ return true;
       function validarTelefono(){
 
     if ($('#telefono').val().length!=9) {
-        notaError("El teléfono debe contener 8 dígitos!");
+        notaError("¡El teléfono debe contener 8 dígitos!");
         return true;
     }
     else if ($('#telefono').val().trim()=="") {
-    	notaError("El teléfono es obligatorio!");
+    	notaError("¡El teléfono es obligatorio!");
     	return true;
     }else{
         var param = {
@@ -70,7 +70,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El teléfono ingresado ya ha sido registrado!"); 
+                   notaError("¡El teléfono ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -82,11 +82,11 @@ return true;
       function validarNRC(){
 
     if ($('#nrc').val().length!=8) {
-        notaError("El NRC debe contener 7 dígitos!");
+        notaError("¡El NRC debe contener 7 dígitos!");
         return true;
     }
     else if ($('#nrc').val().trim()=="") {
-    	notaError("El NRC es obligatorio!");
+    	notaError("¡El NRC es obligatorio!");
     	return true;
     }
     else{
@@ -103,7 +103,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El NCR ingresado ya ha sido registrado!"); 
+                   notaError("¡El NRC ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -115,11 +115,11 @@ return true;
       function validarNIT(){
 
     if ($('#nit').val().length!=17) {
-        notaError("El NIT debe contener 14 dígitos!");
+        notaError("¡El NIT debe contener 14 dígitos!");
         return true;
     }
     else if ($('#nit').val().trim()=="") {
-    	notaError("El NIT es obligatorio!");
+    	notaError("¡El NIT es obligatorio!");
     	return true;
     }else{
         var param = {
@@ -135,7 +135,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El NIT ingresado ya ha sido registrado!"); 
+                   notaError("¡El NIT ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -162,14 +162,14 @@ return true;
     anteriorC = $("#anterior").val();
 
     if ($('#nombreCliEditar').val().trim()=="") {
-        notaError("¡El nombre del cliente es obligatorio!");
+        notaError("¡El nombre es obligatorio!");
         return 1;
     }else if (nombreC == anteriorC) {
         retornar= 0;
     }else if(descripcionC.length > 14){
         retornar= 0;
     }else if(descripcionC.length !=0 && descripcionC.length <= 14){
-        notaError("Descripción muy corta");
+        notaError("La descripción es muy corta");
         return 1;
     }else{
         notaError("Justifique en la descripción porque modificó el nombre del cliente");
@@ -190,7 +190,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El nombre ingresado ya ha sido registrado!"); 
+                   notaError("¡El nombre ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -222,7 +222,7 @@ return true;
     function validarDireccionEditar(){
 
     if ($('#direccionCliEditar').val().trim()=="") {
-        notaError("La Dirección es obligatoria!");
+        notaError("¡La dirección es obligatoria!");
         return false;
     }
         return true;
@@ -232,11 +232,11 @@ return true;
       function validarTelefonoEditar(){
 
     if ($('#telefonoCliEditar').val().length!=9) {
-        notaError("El teléfono debe contener 8 dígitos!");
+        notaError("¡El teléfono debe contener 8 dígitos!");
         return true;
     }
     else if ($('#telefonoCliEditar').val().trim()=="") {
-        notaError("El teléfono es obligatorio!");
+        notaError("¡El teléfono es obligatorio!");
         return true;
     }else{
         var param = {
@@ -253,7 +253,7 @@ return true;
                 if (data==0) {
                     return true;
                 }else{
-                   notaError("El teléfono ingresado ya ha sido registrado!"); 
+                   notaError("¡El teléfono ingresado ya ha sido registrado!"); 
                    return false;
                 }
             }
@@ -265,7 +265,7 @@ return true;
       function validarNRCEditar(){
 
     if ($('#nrcCliEditar').val().trim()=="") {
-        notaError("El NRC es obligatorio!");
+        notaError("¡El NRC es obligatorio!");
         return 1;
     }
     else{
@@ -277,7 +277,7 @@ return true;
     function validarNITEditar(){
 
        if ($('#nitCliEditar').val().trim()=="") {
-        notaError("El NIT es obligatorio!");
+        notaError("¡El NIT es obligatorio!");
         return 1;
     }else{
         return 0;     

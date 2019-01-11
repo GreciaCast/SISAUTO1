@@ -37,7 +37,7 @@ function validarNombreP() {
 function validarCategoriaP() {
 
     if ($('#categoriaPr').val().trim() == "") {
-        notaError("¡La categoria es obligatoria!");
+        notaError("¡La categoría es obligatoria!");
         return false;
     }
     return true;
@@ -76,7 +76,7 @@ function validarAnioP() {
 function validarDescripcionP() {
 
     if ($('#descripcionPr').val().trim() == "") {
-        notaError("¡La descripcion es obligatoria!");
+        notaError("¡La descripción es obligatoria!");
         return false;
     }
     return true;
@@ -178,7 +178,7 @@ function validarNombrePE() {
 
 function validarCategoriaPE() {
     if (($('#catePE').val().trim() == "")) {
-        notaError("¡La categoria es obligatoria!");
+        notaError("¡La categoría es obligatoria!");
         return false;
     }
     return true;
@@ -216,7 +216,7 @@ function validarAnioPE() {
 function validarDescripcionPE() {
 
     if (($('#descripcionPE').val().trim() == "")) {
-        notaError("¡La descripcion es obligatoria!");
+        notaError("¡La descripción es obligatoria!");
         return false;
     }
     return true;
@@ -277,7 +277,7 @@ function validarAnioPEP() {
 
 function validarDescripcionPEP() {
     if (($('#descripcionPEP').val().trim() == "")) {
-        notaError("¡La descripcion es obligatoria!");
+        notaError("¡La descripción es obligatoria!");
         return false;
     }
     return true;
