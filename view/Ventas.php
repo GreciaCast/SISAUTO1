@@ -31,7 +31,7 @@ if (isset($_SESSION['usuarioActivo'])) {
  $tipo = $_GET['tipo'];
 }?>
 <?php
-$sql="SELECT * from venta order by fecha_Ven ASC";
+$sql="SELECT * from venta where estado_Ven='$tipo' order by fecha_Ven ASC";
 $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
 ?>
 <div class="row">
@@ -46,17 +46,17 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
      &nbsp;
    </a>
    <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
-   <?php  if ($tipo == 1) { ?>
-   <a class="pull-right" >
+   <?php  if ($tipo == 0) { ?>
+   <a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=1">
      <button class="btn btn-success" style="font-size:16px;">
-      Ver ventas anuladas  <i class="fa fa-bars"></i>
+      Ver ventas anuladas<i class="fa fa-bars"></i>
     </button>
     &nbsp;
   </a>
   <?php  }else{ ?>
-  <a class="pull-right" href="/SISAUTO1/view/Proveedor.php?tipo=1">
+  <a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=0">
    <button class="btn btn-success" style="font-size:16px;">
-    Ver proveedores activos <i class="fa fa-bars"></i>
+    Lista de ventas  <i class="fa fa-bars"></i>
   </button>
   &nbsp;
 </a>
@@ -78,7 +78,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
             <th style="width:150px">Fecha</th>
             <th style="width:80px">N° de factura</th>
             <th style="width:175px">Cliente</th>
-            <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
+            <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 && $tipo == 0){?>
             <th align="center" style="width:2px">Acciones</th>
             <?php  }else{ ?>
             <th align="center" style="width:2px">Acción</th>
@@ -123,7 +123,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 
          <th align="center">
           <button title="Ver" type="button" class="btn btn-info fa fa-eye" data-toggle="modal" data-target="#modalVerVenta" onclick="VerVen('<?php echo $venta['fecha_Ven']?>','<?php echo $venta['total_Ven']?>','<?php echo $venta['idVenta']?>','<?php echo $venta['id_Cliente']?>','<?php echo $nf?>')" ></button>
-          <?php  if ($tipo == 1) {
+          <?php  if ($tipo == 0) {
 
            ?>
            <button title="Anular" type="button" class="btn btn-warning fa fa-times" onclick="anular('<?php echo $venta['idVenta']?>');"></button>

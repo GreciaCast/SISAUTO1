@@ -66,61 +66,70 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <hr width="75%" style="background-color:#007bff;"/><br>
 
                   <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Código:</label>
-                    <div class="col-sm-3">
-                      <input class="form-control" placeholder="" type="text" name="" id="kardexCodigo" value="<?php echo $producto['codigo_Prod']; ?>">
+                    <label class="col-sm-3 control-label">Metodo:</label>
+                    <div class="col-sm-2">
+                    <input class="form-control" disabled="true" type="text"  value="Costo Promedio">
+                   </div>
+                 </div>
 
-                    </div>
+                 <div class="form-group">
+                  <label for="" class="col-sm-3 control-label">Código:</label>
+                  <div class="col-sm-2">
+                    <input class="form-control" placeholder="" disabled="true" type="text" name="" id="kardexCodigo" value="<?php echo $producto['codigo_Prod']; ?>">
                   </div>
+                </div>
 
-                  <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Producto:</label>
-                    <div class="col-sm-6">
-                      <input class="form-control" placeholder="" type="text" name="" id="kardexProduc" value="<?php echo  $nombreProKar; ?>">
+                <div class="form-group">
+                  <label for="" class="col-sm-3 control-label">Producto:</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" placeholder="" disabled="true" type="text" name="" id="kardexProduc" value="<?php echo  $nombreProKar; ?>">
 
-                    </div>
-                  </div>  
-                  <div class="form-group">
-                    <label for="" class="col-sm-3 control-label">Stock mínimo:</label>
-                    <div class="col-sm-3">
-                      <input class="form-control" placeholder="" type="text" name="" id="kardexStock" value="<?php echo $producto['stock_Prod']; ?>">
-                    </div>
-                  </div> 
-                  <hr width="100%" style="background-color:#007bff;"/><br>
-                  <div class="table-responsive" align="center" >
-                    <table class="table table-striped table-bordered display" align="center" border="5"> 
+                  </div>
+                </div>  
+                <div class="form-group">
+                  <label for="" class="col-sm-3 control-label">Stock mínimo:</label>
+                  <div class="col-sm-2">
+                    <input class="form-control" placeholder="" disabled="true" type="text" name="" id="kardexStock" value="<?php echo $producto['stock_Prod']; ?>">
+                  </div>
+                </div> 
+                <hr width="100%" style="background-color:#007bff;"/><br>
+                <div class="table-responsive" align="center" >
+                  <table class="table table-striped table-bordered display" align="center" border="5"> 
                     <thead align="center" style="width:100%">
-                        <tr align="center">
-                          <th rowspan="2" align="center">Fecha</th>
-                          <th rowspan="2" align="center">Detalle</th>
-                          <th colspan="3" align="center">Entradas</th>                               
-                          <th colspan="3" align="center">Salidas</th>
-                          <th colspan="3" align="center">Existencias</th>
-                        </tr>
-                        <tr>
-                          <th style="width:28px" align="center">Cantidad</th>
-                         <th style="width:28px" align="center">V/Unitario</th>
-                         <th style="width:28px" align="center">V/Total</th>                             
-                         <th style="width:28px" align="center">Cantidad</th>
-                         <th style="width:28px" align="center">V/Unitario</th>
-                         <th style="width:28px" align="center">V/Total</th>
-                         <th style="width:28px" align="center">Cantidad</th>
-                         <th style="width:28px" align="center">V/Unitario</th>
-                         <th style="width:28px" align="center">V/Total</th>
-                        </tr>
+                      <tr align="center">
+                        <th rowspan="2" align="center">Fecha</th>
+                        <th rowspan="2" align="center">Detalle</th>
+                        <th colspan="3" align="center">Entradas</th>                               
+                        <th colspan="3" align="center">Salidas</th>
+                        <th colspan="3" align="center">Existencias</th>
+                      </tr>
+                      <tr>
+                        <th style="width:28px" align="center">Cantidad</th>
+                        <th style="width:28px" align="center">V/Unitario</th>
+                        <th style="width:28px" align="center">V/Total</th>                             
+                        <th style="width:28px" align="center">Cantidad</th>
+                        <th style="width:28px" align="center">V/Unitario</th>
+                        <th style="width:28px" align="center">V/Total</th>
+                        <th style="width:28px" align="center">Cantidad</th>
+                        <th style="width:28px" align="center">V/Unitario</th>
+                        <th style="width:28px" align="center">V/Total</th>
+                      </tr>
 
-                        <?php While ($inventario = mysqli_fetch_assoc($inventarios)) { ?>
+                      <?php While ($inventario = mysqli_fetch_assoc($inventarios)) { ?>
 
-                        <tr align="center">
-                         <td  align="center"><?php echo $inventario["fechaMovimiento_Inv"]; ?></td>
+                      <tr align="center">
+                       <td  align="center">
+                         <?php $fechaK = explode("-",$inventario['fechaMovimiento_Inv']);
+                         $fechaK = $fechaK[2].'/'.$fechaK[1].'/'.$fechaK[0];
+                         echo $fechaK ?>
                          <td  align="center">
-                         <?php if ($inventario["tipoMovimiento_Inv"]==0) {
-                           echo "Compra";
-                         } else if($inventario["tipoMovimiento_Inv"]==1){
-                           echo "Venta";
-                         } else if($inventario["tipoMovimiento_Inv"]==2){
-                          echo "Modificación de la compra";
-                         } else if($inventario["tipoMovimiento_Inv"]==3){
+                           <?php if ($inventario["tipoMovimiento_Inv"]==0) {
+                             echo "Compra";
+                           } else if($inventario["tipoMovimiento_Inv"]==1){
+                             echo "Venta";
+                           } else if($inventario["tipoMovimiento_Inv"]==2){
+                            echo "Modificación de la compra";
+                          } else if($inventario["tipoMovimiento_Inv"]==3){
                            echo "Eliminación de la compra";
                          } else if($inventario["tipoMovimiento_Inv"]==4){
                            echo "Devolución de la compra";
@@ -128,47 +137,59 @@ if (isset($_SESSION['usuarioActivo'])) {
                            echo "Anulación de la venta";
                          }
 
+                         ?>
+                         <?php if ($inventario["existencias_Inv"]<$inventario["nuevaExistencia_Inv"]) {
                           ?>
-                          <?php if ($inventario["existencias_Inv"]<$inventario["nuevaExistencia_Inv"]) {
-                            ?>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["precio_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td><td></td><td></td> <td></td>
-                            <?php
-                           
-                         }else{
+                          <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
+                          <?php $v_unitarioen = $inventario["precio_Inv"];
+                          $v_unitarioen = number_format($v_unitarioen, 2, '.', '');?>
+                          <td  align="center"><?php  echo $v_unitarioen ?></td>
+                          <?php $v_totalen = $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; 
+                          $v_totalen = number_format($v_totalen, 2, '.', '');?>
+                          <td  align="center"><?php  echo $v_totalen ?></td><td></td><td></td> <td></td>
+                          <?php
+
+                        }else{
                           ?>
-                            <td></td><td></td> <td></td>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["precio_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
-                            <?php
-                          } ?>
-                          <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["nuevoPrecio_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
-                            
-                                     
-                       </tr>
-                       <?php  }?>
-
-                     </thead>
-
-                   </table>
-
-                 </div>
-
-               </form>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-   <?php include("generalidades/cierre.php"); ?>
+                          <td></td><td></td> <td></td>
+                          <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
+                          <?php $v_unitarios = $inventario["precio_Inv"];
+                          $v_unitarios = number_format($v_unitarios, 2, '.', '');?>
+                          <td  align="center"><?php  echo $v_unitarios?></td>
+                          <?php $v_totals = $inventario["cantidad_Inv"]* $inventario["precio_Inv"];
+                          $v_totals = number_format($v_totals, 2, '.', '');?>
+                          <td  align="center"><?php  echo $v_totals?></td>
+                          <?php
+                        } ?>
+                        <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
+                        <?php $v_unitarioe = $inventario["nuevoPrecio_Inv"];
+                        $v_unitarioe = number_format($v_unitarioe, 2, '.', '');?>
+                        <td  align="center"><?php  echo $v_unitarioe?></td>
+                        <?php $v_totale = $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; 
+                        $v_totale = number_format($v_totale, 2, '.', '');?>
+                        <td  align="center"><?php  echo  $v_totale?></td>
 
 
- </div>
+                      </tr>
+                      <?php  }?>
+
+                    </thead>
+
+                  </table>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <?php include("generalidades/cierre.php"); ?>
+
+
+</div>
 </div>
 <!--_____________________________________________________________________________-->
 
