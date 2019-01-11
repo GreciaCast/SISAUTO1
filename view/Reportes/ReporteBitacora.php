@@ -6,6 +6,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
+$idcliente = $_GET["idcliente"];
+$tipor = $_GET["tipor"];
 ?>
 <!doctype html>
 <html>
@@ -88,17 +90,39 @@ $hasta = $_GET["hasta"];
   </tr>
 </table>
 
+<?php 
+include("../../confi/Conexion.php");
+$conexion = conectarMysql();
+
+if($tipor == 1){
+  $aux = $idcliente;
+
+  $sql1 = "SELECT nombre_Usu FROM usuario where idCliente = '$aux'";
+  $usuario = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+  $usuario = mysqli_fetch_array($usuario);
+  ?>
+  <table width="685" border="0" align="center">
+    <tr align="center">
+      <br><br>
+      <td ><strong class="titulos" align="center">USUARIO: </strong>
+        <?php echo $usuario['nombre_Cli']; ?>
+      </td>
+    </tr>
+  </table>
+  <br><br>
+  <?php }?>
+
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
+    <?php if ($tipor == 2) {?>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
+    <?php }  ?>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
   </tr>
     <?php
 	//try {
-		include("../../confi/Conexion.php");
-		$conexion = conectarMysql();
 	//$fechainicio=$_REQUEST["fechainicio"];
 	//$fechafinal=$_REQUEST["fechafinal"];
 
@@ -107,15 +131,26 @@ $hasta = $_GET["hasta"];
 	// $sql = "select * from bitacora ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
-   if($desde == ""&& $hasta== ""){
-           $sql = "select * from bitacora order by idBitacora DESC";
-         }else if($hasta == ""){
-          $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' order by idBitacora DESC";
-        }else if($desde == ""){
-          $sql = "select * from bitacora  where sesionInicio <= '$hasta' order by idBitacora DESC";
-        }else{
-          $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' order by idBitacora DESC";
-        }
+
+  // if($tipor == 1){
+
+  //   if($desde == ""&& $hasta== ""){
+  //     $cliente = "where id_Cliente = '$idcliente'";
+  //   }else{
+  //     $cliente = "and id_Cliente = '$idcliente'";
+  //   }
+  // }else{
+  //   $cliente = "";
+  // }
+  if($desde == ""&& $hasta== ""){
+   $sql = "select * from bitacora order by idBitacora DESC";
+ }else if($hasta == ""){
+  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' order by idBitacora DESC";
+}else if($desde == ""){
+  $sql = "select * from bitacora  where sesionInicio <= '$hasta' order by idBitacora DESC";
+}else{
+  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' order by idBitacora DESC";
+}
 
 	$consulta=mysqli_query($conexion,$sql);
 //  var_dump($consulta);
@@ -127,7 +162,9 @@ $hasta = $_GET["hasta"];
   <tr align="left" class="">
     <td bgcolor="" align="center"><?php echo $contador;?></td>
     <td bgcolor="" align="center"><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
+    <?php if($tipor == 2){ ?>
     <td bgcolor="" align="center"><?php echo $fila[1];?></td>
+    <?php } ?>
     <td bgcolor="" align="center"><?php echo $fila[3];?></td>
   </tr>
   <?php $contador++;

@@ -334,55 +334,6 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
 <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
 
 <script type="text/javascript">
-  function baja(id){
-    swal({
-      title: '¿Está seguro en dar de baja?',
-                  // text: "You won't be able to revert this!",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Si',
-                  cancelButtonText: 'No',
-
-                }).then((result) => {
-                  if(result.value){
-                    $('#idProv').val(id);
-                    $('#banderaProv').val('cambio');
-                    $('#valorProv').val('0');
-                    var dominio = window.location.host;
-                    $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
-                    $('#cambioProv').submit();
-                  }else{
-
-                  }
-                })
-              }
-
-              function alta(id){
-                swal({
-                  title: '¿Está seguro en dar de alta?',
-                  // text: "You won't be able to revert this!",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Si',
-                  cancelButtonText: 'No',
-
-                }).then((result) => {
-                  if(result.value){
-                    $('#idProv').val(id);
-                    $('#banderaProv').val('cambio');
-                    $('#valorProv').val('1');
-                    var dominio = window.location.host;
-                    $('#cambioProv').attr('action','http://'+dominio+'/SISAUTO1/Controlador/proveedorC.php');
-                    $('#cambioProv').submit();
-                  }else{
-
-                  }
-                })
-              }
 
           //REPORTE------------------------------------------------------
               function reporte(){

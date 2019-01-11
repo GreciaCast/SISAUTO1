@@ -1,6 +1,8 @@
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
+$idcliente = $_GET["idcliente"];
+$tipor = $_GET["tipor"];
 ?>
 <!doctype html>
 <html>
@@ -83,18 +85,41 @@ $hasta = $_GET["hasta"];
           </tr>
         </table>
 
+        <?php
+
+        include("../../confi/Conexion.php");
+        $conexion = conectarMysql(); 
+
+        if($tipor == 1){
+          $aux = $idcliente;
+          $sql1 = "SELECT nombre_Prov FROM proveedor where idProveedor = '$aux'";
+          $proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+          $proveedor = mysqli_fetch_array($proveedor);
+          // echo $cliente['nombre_Cli'];
+          ?>
+          <table width="685" border="0" align="center">
+            <tr align="center">
+              <br><br>
+              <td ><strong class="titulos" align="center">PROVEEDOR: </strong>
+                <?php echo $proveedor['nombre_Prov']; ?>
+              </td>
+            </tr>
+          </table>
+          <br><br>
+          <?php }?>
+
         <table width="700" border="1" align="center" rules="all">
           <tr bgcolor="#CCCCCC">
             <td width="29" bgcolor="#fcf3b3" align="center" class=""><strong>N°</strong></td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">N° de factura</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Total de la compra</td>
+            <?php if ($tipor == 2) {?>
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Proveedor</td>
+            <?php }  ?>
           </tr>
           <?php
 	//try {
-          include("../../confi/Conexion.php");
-          $conexion = conectarMysql();
 	//$fechainicio=$_REQUEST["fechainicio"];
 	//$fechafinal=$_REQUEST["fechafinal"];
           date_default_timezone_set('america/el_salvador');
@@ -103,14 +128,23 @@ $hasta = $_GET["hasta"];
           $today = $hoy['year'].'-'.$hoy['mon'].'-'.$dia; 
 
           $contador=1;
+          if($tipor == 1){
+              if($desde == ""&& $hasta== ""){
+                $cliente = "where id_Proveedor = '$idcliente'";
+              }else{
+                $cliente = "and id_Proveedor = '$idcliente'";
+              }
+            }else{
+              $cliente = "";
+            }
           if($desde == ""&& $hasta== ""){
-           $sql = "select * from compra order by fecha_Com ASC";
+           $sql = "select * from compra ".$cliente." order by fecha_Com ASC";
          }else if($hasta == ""){
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' ".$cliente." order by fecha_Com ASC";
         }else if($desde == ""){
-          $sql = "select * from compra  where fecha_Com <= '$hasta' order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com <= '$hasta' ".$cliente." order by fecha_Com ASC";
         }else{
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' ".$cliente." order by fecha_Com ASC";
         }
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
@@ -128,6 +162,7 @@ $hasta = $_GET["hasta"];
           <td bgcolor="" align="center"><a>$</a><?php 
           $preciocom = $fila[3];
           echo number_format($preciocom,2,'.','');?></td>
+          <?php if($tipor == 2){ ?>
           <td bgcolor="">
           <?php
           $aux = $fila['id_Proveedor'];
@@ -137,6 +172,7 @@ $hasta = $_GET["hasta"];
           echo $proveedor['nombre_Prov'];
           ?>
           </td>
+          <?php } ?>
         </tr>
         <?php $contador++;
       }

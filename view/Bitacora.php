@@ -192,6 +192,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 <input id="fecha1" type="text" class="form-control" max="<?php echo $fech?>" style="width:150px;height:40px">
               </div>
             </div>
+            <input type="hidden" id="tiporeporte" value="1" />
             <div class="form-group row" id="data_2">
 
               <label for="empresa" class="col-sm-3 control-label">Hasta: </label>
@@ -222,14 +223,20 @@ if (isset($_SESSION['usuarioActivo'])) {
     desde = $('#fecha1').val();
     hasta = $('#fecha2').val();
 
+     idcliente = $('#clientesID').val();
+     tipor = $('#tiporeporte').val();
+
     desde=desde.split('/').reverse().join('-');
     hasta=hasta.split('/').reverse().join('-');
 
-    if (desde > hasta) {
+    if(tipor == '1' && idcliente == ""){
+      notaError("Debe seleccionar un usuario");
+
+    }else if(desde > hasta) {
       notaError("Verifique las fecha");
     }else{
       var dominio = window.location.host;
-      window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteBitacora.php?desde='+desde+'&hasta='+hasta,'_blank');
+      window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteBitacora.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
     }
 
   }
