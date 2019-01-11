@@ -48,5 +48,56 @@ $conexion = conectarMysql();
 //----------------------------------------------------------------------------------------------------------
 //
 //
+	if(isset($_GET["codigo"])){
+		$id = $_GET["id"];
+		$exis = '';
+
+
+		$sql = "SELECT * from producto where categoria_Prod = '$id' order by idProducto ASC";
+		      $producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
+		$contador = mysqli_num_rows($producto);
+		if ($contador > -1 && $contador < 9) {
+		   $ceros = "0000";
+		} else if ($contador >= 9 && $contador < 100) {
+		   $ceros = "000";
+		} else if ($contador >= 99 && $contador < 1000) {
+		   $ceros = "00";
+		} else if ($contador >= 999 && $contador < 10000) {
+		   $ceros = "0";
+		} else {
+		   $ceros = "";
+		}
+
+		$correlativo = $ceros . ($contador + 1);
+		if ($id == 1) {
+			$codigo = "AM" . $correlativo;
+		}else if ($id == 2) {
+			$codigo = "BU" . $correlativo;
+		}else if ($id == 3) {
+			$codigo = "CO" . $correlativo;
+		}else if ($id == 4) {
+			$codigo = "EL" . $correlativo;
+		}else if ($id == 5) {
+			$codigo = "EN" . $correlativo;
+		}else if ($id == 6) {
+			$codigo = "FI" . $correlativo;
+		}else if ($id == 7) {
+			$codigo = "FR" . $correlativo;
+		}else if ($id == 8) {
+			$codigo = "MO" . $correlativo;
+		}else if ($id == 9) {
+			$codigo = "SE" . $correlativo;
+		}else if ($id == 10) {
+			$codigo = "SU" . $correlativo;
+		}else if ($id == 11) {
+			$codigo = "TR" . $correlativo;
+		}else if ($id == 12) {
+			$codigo = "UN" . $correlativo;
+		}else {
+			$codigo = $correlativo;
+		}
+		
+		echo $codigo;
+	}
 
 ?>

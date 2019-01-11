@@ -28,22 +28,6 @@ if (isset($_SESSION['usuarioActivo'])) {
         </div>
         <div class="row">
             <div class="col-lg-12">
-              <?php
-              $sql = "SELECT * from producto order by idProducto ASC";
-                      $producto = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");
-               $contador = mysqli_num_rows($producto);
-               if ($contador > -1 && $contador < 9) {
-                   $ceros = "0000";
-               } else if ($contador >= 9 && $contador < 100) {
-                   $ceros = "000";
-               } else if ($contador >= 99 && $contador < 1000) {
-                   $ceros = "00";
-               } else if ($contador >= 999 && $contador < 10000) {
-                   $ceros = "0";
-               } else {
-                   $ceros = "";
-               }
-               ?>
                 <div class="wrapper wrapper-content">
                     <div class="row">
                         <div class="col-lg-12">
@@ -52,27 +36,12 @@ if (isset($_SESSION['usuarioActivo'])) {
                                     <form class="form-horizontal" action="../Controlador/productoC.php" method="POST" id="guardarProd" align="center" autocomplete="off">
                                         <input type="hidden" value="guardar" name="bandera">
                                         <div class="form-group">
-
                                         </div>
-                                        <div class="form-group">
-                                            <label for="empresa" class="col-sm-3 control-label">Codigo:</label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control" type="text" name="codigoPro" value="<?php echo $ceros . ($contador + 1) ?>" id="codigoP" readonly="readonly">
-                                            </div>
-                                        </div>
-                                        <br>
                                         <div class="form-group ">
-                                            <label for="empresa" class="col-sm-3 control-label">Nombre:</label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control" placeholder="Nombre del Producto" type="text" id="nombrePr" name="nombrePro">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="form-group ">
-                                            <label  for="tele1" class="col-sm-3 control-label">Categoría:</label>
+                                            <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
                                             <div  class="col-sm-2">
-                                              <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal();">
-                                                <option value="">[Selecionar Categoría]</option>
+                                              <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal(this.value);">
+                                                <option value="">[Selecionar Categoria]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>
                                                 <option value="3">COMBUSTIBLE</option>
@@ -86,6 +55,20 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                 <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
                                                 <option value="12">UNIVERSALES</option>
                                             </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="empresa" class="col-sm-3 control-label">Codigo:</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" name="codigoPro" value="" id="codigoP" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="form-group ">
+                                            <label for="empresa" class="col-sm-3 control-label">Nombre:</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" placeholder="Nombre del Producto" type="text" id="nombrePr" name="nombrePro">
                                             </div>
                                         </div>
                                         <br>
@@ -145,7 +128,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             <script src="../assets/Validaciones/validarProducto.js"></script>
             <script src="../assets/Validaciones/mostrarProducto.js"></script>
             <script type="text/javascript">
-                function veruniversal() {
+                function veruniversal(id) {
                     if ($('#categoriaPr').find('option:selected').text() == "UNIVERSALES") {
                         $('#universal').val(1);
     //                                        $("#marcaPr").attr("disabled", "disabled");
@@ -157,6 +140,11 @@ if (isset($_SESSION['usuarioActivo'])) {
                         $("#modeloPr").removeAttr("disabled");
                         $("#anioPr").removeAttr("disabled");
                     }
+
+                    $.get('/SISAUTO1/Controlador/datosProductoC.php?codigo=1&id='+id,function(data){
+                        $('#codigoP').val(data);
+                    });
+
                 }
              </script>
              
