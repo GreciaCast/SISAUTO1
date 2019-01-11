@@ -26,6 +26,15 @@ $conexion = conectarMysql();
 		echo $format_number;
 	}
 
+	if(isset($_GET["costocompleto"])){
+		$id = $_GET["id"];
+		$sql1 = "SELECT nuevoPrecio_Inv from inventario where id_Producto = '$id' order by idInventario desc";
+		$productos = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+		$producto = mysqli_fetch_array($productos);//CAPTURA EL ULTIMO REGISTRO
+		$costo = $producto['nuevoPrecio_Inv'];
+		echo $costo;
+	}
+
 	if(isset($_GET["precio"])){
 		$id = $_GET["id"];
 		$pre = '';

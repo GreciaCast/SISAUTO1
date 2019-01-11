@@ -33,6 +33,9 @@ function mostrarCostoyExistencias(id){
     $.get('/SISAUTO1/Controlador/datosProductoC.php?precio=1&id='+id,function(data){
     	$('#precioPV').val(data); 
     });
+    $.get('/SISAUTO1/Controlador/datosProductoC.php?costocompleto=1&id='+id,function(data){
+        $('#costoauxiliar').val(data); 
+    });
 }
 
 function aplicarDescuento15(){
@@ -51,7 +54,7 @@ function agregarProductosATabla(){
 	var disponible = $('#cantidadDisponiblePV').val();
     var cantidad = $('#cantidadPV').val();
 
-    var costo = $('#costoPV').val();
+    var costo = $('#costoauxiliar').val();
     var precio = $('#precioPV').val();
     var obtenerP = $("#produs").find('option:selected');
     var productoId = obtenerP.val();
@@ -62,6 +65,7 @@ function agregarProductosATabla(){
     html = html+'<td>'+precio+'</td>';
     html = html+'<td>'+parseFloat(subtotal).toFixed(2)+'</td>';
     html = html+'<td>';
+    html = html+'<input type="hidden" name="costo_DVen[]" value="'+costo+'"/>';
     html = html+'<input type="hidden" name="cantidad_DVen[]" value="'+cantidad+'"/>';
     html = html+'<input type="hidden" name="precio_DVen[]" value="'+precio+'"/>';
     html = html+'<input type="hidden" name="id_Producto[]" value="'+productoId+'"/>';

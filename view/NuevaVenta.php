@@ -172,6 +172,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <div class="col-sm-12 col-md-1 input-group date">
                       <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                       <input id="costoPV" name="costoPV" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
+                      <input type="hidden" id="costoauxiliar" value="">
                     </div>
                   </div>
                   <div class="form-group row">

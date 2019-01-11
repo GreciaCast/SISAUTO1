@@ -126,6 +126,27 @@ if(isset($_POST["bandera"])){
 		foreach ($cantidadProdCom as $key => $producto) {
 			$sql5 = "INSERT INTO detallecompra (cantidad_DCom,precio_DCom,id_Compra,id_Producto) VALUES ('$cantidadProdCom[$key]','$precioProdCom[$key]','$idcompra','$idProdCom[$key]')";
 			mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
+			
+			$sql2 = " SELECT * from inventario where id_Producto = '$idProdCom[$key]' order by idInventario desc";
+			$resultado = mysqli_query($conexion,$sql2) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+			$resultado = mysqli_fetch_array($resultado);
+		
+			if($resultado == ""){
+				
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (0,0,0.0,'$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$cantidadProdCom[$key]','$precioProdCom[$key]','$idProdCom[$key]')";
+				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+
+			}else{
+
+			$existencia = $resultado['nuevaExistencia_Inv'];
+			$nuevaExistencia = $existencia+$cantidadProdCom[$key];
+			$precioActual = $resultado['nuevoPrecio_Inv'];
+			$nuevoPrecio = (($existencia*$precioActual) + ($cantidadProdCom[$key]*$precioProdCom[$key]))/$nuevaExistencia;
+
+			$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (2,'$existencia','$precioActual','$cantidadProdCom[$key]','$precioProdCom[$key]','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProdCom[$key]')";
+			mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
+			}
 		}
 
 		
@@ -206,7 +227,7 @@ if(isset($_POST["bandera"])){
 				$precioActual = $resultado['nuevoPrecio_Inv'];
 				$nuevoPrecio = (($existencia*$precioActual) - ($cantidad*$precio))/$nuevaExistencia;
 
-				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (2,'$existencia','$precioActual','$cantidad','$precio','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProd')";
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (3,'$existencia','$precioActual','$cantidad','$precio','$fechaCom','$nuevaExistencia','$nuevoPrecio','$idProd')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
 			}
@@ -277,8 +298,8 @@ if(isset($_POST["bandera"])){
 				$nuevoPrecio = (($existencia*$precioActual) - ($devolucion[$key]*$resultados['precio_DCom']))/$nuevaExistencia;
 				$precio = $resultados['precio_DCom'];
 
-				//Tipo de movimiento = 3 -> para devolucion compra
-				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (3,'$existencia','$precioActual','$devolucion[$key]','$precio','$fecha','$nuevaExistencia','$nuevoPrecio','$idproducto')";
+				//Tipo de movimiento = 4 -> para devolucion compra
+				$sql3 = "INSERT INTO inventario (tipoMovimiento_Inv,existencias_Inv,precioActual_Inv,cantidad_Inv,precio_Inv,fechaMovimiento_Inv,nuevaExistencia_Inv,nuevoPrecio_Inv,id_Producto) VALUES (4,'$existencia','$precioActual','$devolucion[$key]','$precio','$fecha','$nuevaExistencia','$nuevoPrecio','$idproducto')";
 				mysqli_query($conexion,$sql3) or die ("Error a Conectar en la BD 6".mysqli_connect_error());
 
 			}

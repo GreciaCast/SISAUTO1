@@ -243,14 +243,14 @@ if (isset($_SESSION['usuarioActivo'])) {
                      <div class="form-group">
                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">NRC:</label>
                       <div class="col-sm-3">
-                        <input class="form-control" type="text" name="nrcCli" id="nrcCliEditar" data-mask="9999-9999" readonly="readonly" aria-required="true"  value="" >
+                        <input class="form-control" type="text" name="nrcCli" id="nrcCliEditar" readonly="readonly" aria-required="true"  value="" >
                       </div>
                     </div>
                         <br><br><br>
                         <div class="form-group">
                       <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">NIT:</label>
                       <div class="col-sm-3">
-                        <input class="form-control" type="text" name="nitCli" id="nitCliEditar" data-mask="9999-9999" readonly="readonly"aria-required="true" value="" >
+                        <input class="form-control" type="text" name="nitCli" id="nitCliEditar" readonly="readonly"aria-required="true" value="" >
                       </div>
                     </div>
                       <br><br><br>
