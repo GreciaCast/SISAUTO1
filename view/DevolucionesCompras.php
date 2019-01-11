@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="es">
     <script src="../assets/Validaciones/validarCliente.js"></script>

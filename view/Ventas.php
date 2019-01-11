@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
-  ?>
+?>
   <!DOCTYPE html>
   <html>
   <?php include("generalidades/apertura.php"); ?>

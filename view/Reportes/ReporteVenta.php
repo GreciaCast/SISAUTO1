@@ -1,3 +1,7 @@
+<?php
+session_start();
+if (isset($_SESSION['usuarioActivo'])) {
+?>
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
@@ -161,3 +165,18 @@ $idcliente = $_GET["idcliente"];
     <p>&nbsp;</p>
   </body>
   </html>
+<?php
+}else{
+    ?>
+    <!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+</head>
+<body>
+</body>
+</html>
+    <?php
+}
+?>
