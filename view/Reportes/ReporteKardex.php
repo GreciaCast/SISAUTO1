@@ -1,3 +1,7 @@
+<?php
+session_start();
+if (isset($_SESSION['usuarioActivo'])) {
+?>
 <!doctype html>
 <html>
 <head>
@@ -138,6 +142,7 @@
     <table width="900" border="1" align="center" rules="all">
       <thead align="center" style="width:100%">
         <tr align="center">
+
           <th rowspan="2" style="width:95px" align="center">Fecha</th>
           <th rowspan="2" align="center">Detalle</th>
           <th colspan="3" align="center">Entradas</th>                               
@@ -215,3 +220,4 @@
     <p>&nbsp;</p>
   </body>
   </html>
+

@@ -15,15 +15,15 @@
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-folder"></i> <span class="nav-label">Catálogo</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="Cliente.php" style="font-size:15px;"><span class="fa fa-user"> Cliente</span></a></li>
-                    <li><a href="Proveedor.php" style="font-size:15px;"><span class="fa fa-group"> Proveedor</span></a></li>
-                    <li><a href="Producto.php"><span class="fa fa-tags" style="font-size:15px;"> Producto</span></a></li>
+                    <li><a href="Cliente.php" style="font-size:15px;"><span class="fa fa-user"> Clientes</span></a></li>
+                    <li><a href="Proveedor.php" style="font-size:15px;"><span class="fa fa-group"> Proveedores</span></a></li>
+                    <li><a href="Producto.php"><span class="fa fa-tags" style="font-size:15px;"> Productos</span></a></li>
                 </ul>
             </li>
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-area-chart"></i> <span class="nav-label">Inventario</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario Principal</span></a></li>    
+                    <li><a href="inventario.php" style="font-size:15px;"><span class="fa fa-book"> Inventario principal</span></a></li>    
                 </ul>
             </li>
             <?php include("../confi/Conexion.php");
@@ -32,9 +32,9 @@
             <li>
                 <a href="" style="font-size:15px;"><i class="fa fa-unlock-alt"></i> <span class="nav-label">Seguridad</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control Usuarios</span></a></li>
+                    <li><a href="Usuarios.php" style="font-size:15px;"><span class="fa fa-group">  Control de usuarios</span></a></li>
                     <li><a href="Bitacora.php" style="font-size:15px;"><span class="fa fa-history"> Bitácora</span></a></li>
-                    <li><a href="Respaldo.php" style="font-size:15px;"><span class="fa fa-database"> Administrar Backup</span></a></li>
+                    <li><a href="Respaldo.php" style="font-size:15px;"><span class="fa fa-database"> Administración de backup</span></a></li>
 
                     <?php 
 
@@ -82,7 +82,7 @@
             </div>
 
             <?php 
-            $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+            $sql = "SELECT  * FROM producto where tipo_Prod='1' order by nombre_Prod ASC";
             $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
             $contador = 0;
             $label = "label-success";
@@ -101,7 +101,7 @@
                             $label = "label-danger";   
                         }
                     }
-                    $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+                    $sql = "SELECT  * FROM producto where tipo_Prod='1' order by nombre_Prod ASC";
                     $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
                     
                     ?>
