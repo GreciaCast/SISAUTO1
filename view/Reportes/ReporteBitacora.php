@@ -6,7 +6,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
-$idcliente = $_GET["idcliente"];
+$idusu = $_GET["idcliente"];
 $tipor = $_GET["tipor"];
 ?>
 <!doctype html>
@@ -95,11 +95,13 @@ include("../../confi/Conexion.php");
 $conexion = conectarMysql();
 
 if($tipor == 1){
-  $aux = $idcliente;
+  $aux = $idusu;
 
   $sql1 = "SELECT * FROM usuario where idUsuario = '$aux'";
   $usuario = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
   $usuario = mysqli_fetch_assoc($usuario);
+  $nusu = $usuario['usuario_Usu'];
+
   ?>
   <table width="685" border="0" align="center">
     <tr align="center">
@@ -122,18 +124,28 @@ if($tipor == 1){
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
   </tr>
   <?php
-  $contador=1;
-  if($desde == ""&& $hasta== ""){
-  $sql = "select * from bitacora order by idBitacora DESC";
-  }else if($hasta == ""){
-  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' order by idBitacora DESC";
-  }else if($desde == ""){
-  $sql = "select * from bitacora  where sesionInicio <= '$hasta' order by idBitacora DESC";
+  $contador = 1;
+  if($tipor == 1){
+    if($desde == ""&& $hasta== ""){
+      $usuarion = "where usuario_Usu = '$nusu'";
+    }else{
+      $usuarion = "and usuario_Usu = '$nusu'";
+    }
   }else{
-  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' order by idBitacora DESC";
+    $usuarion = "";
   }
 
-  $consulta=mysqli_query($conexion,$sql);
+  if($desde == ""&& $hasta== ""){
+  $sql = "select * from bitacora ".$usuarion." order by idBitacora DESC";
+  }else if($hasta == ""){
+  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' ".$usuarion." order by idBitacora DESC";
+  }else if($desde == ""){
+  $sql = "select * from bitacora  where sesionInicio <= '$hasta' ".$usuarion." order by idBitacora DESC";
+  }else{
+  $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' ".$usuarion." order by idBitacora DESC";
+  }
+
+  $consulta = mysqli_query($conexion,$sql);
   //  var_dump($consulta);
 
   while($fila=mysqli_fetch_array($consulta))
