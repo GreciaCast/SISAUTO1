@@ -28,12 +28,6 @@ if (isset($_SESSION['usuarioActivo'])) {
           </div>
         </div>
 
- <!--  <?php if (!isset($_GET['tipo'])) {
-    $tipo = 0;
-  }else{
-    $tipo = $_GET['tipo'];
-  }?> -->
-
   <?php
   $sql = "SELECT * from bitacora order by idBitacora DESC";
   $bitacoras = mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta");

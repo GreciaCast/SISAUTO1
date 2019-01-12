@@ -35,9 +35,10 @@ function mostrarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,
 }
 
 function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP){
+    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
     $("#codigoPE").val(codigoP);
     $("#nombrePE").val(nombreP);
-    $("#catePE").val(cateP);
+    $("#catePE").val(cate[parseInt(cateP)-1]);
     $("#marcaPE").val(marcaP);
     $("#modeloPE").val(modeloP);
         if(anioP!='0'){
@@ -60,9 +61,11 @@ function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,id
 }
 
 function editarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP,precioP){
+    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+
     $("#codigoPEP").val(codigoP);
     $("#nombrePEP").val(nombreP);
-    $("#catePEP").val(cateP);
+    $("#catePEP").val(cate[parseInt(cateP)-1]);
     $("#marcaPEP").val(marcaP);
     $("#modeloPEP").val(modeloP);
         if(anioP!='0'){

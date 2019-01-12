@@ -355,21 +355,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
        <div class="form-group">
          <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del producto:</label>
          <div class="col-sm-5">
-           <select name="categorias" class="form-control" id="catePE" onchange="veruniversal();">
-              <option value="">[Selecionar Categoria]</option>
-              <option value="1">AMORTIGUADORES</option>
-              <option value="2">BUJÍAS</option>
-              <option value="3">COMBUSTIBLE</option>
-              <option value="4">ELÉCTRICO</option>
-              <option value="5">ENFRIAMIENTO</option>
-              <option value="6">FILTROS</option>
-              <option value="7">FRENOS</option>
-              <option value="8">MOTOR</option>
-              <option value="8">SENSORES</option>
-              <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-              <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-              <option value="12">UNIVERSALES</option>
-          </select>
+           <input class="form-control" type="text" id="catePE" name="cateP" value="" readonly="readonly">
          </div>
        </div>
        <br><br>
@@ -456,21 +442,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
        <div class="form-group">
          <label align="right" for="categorias" class="col-sm-4 control-label" style="font-size:15px;">Categoria del producto:</label>
          <div class="col-sm-5">
-           <select name="categorias" class="form-control" id="catePEP" onchange="veruniversal();">
-              <option value="">[Selecionar Categoria]</option>
-              <option value="1">AMORTIGUADORES</option>
-              <option value="2">BUJÍAS</option>
-              <option value="3">COMBUSTIBLE</option>
-              <option value="4">ELÉCTRICO</option>
-              <option value="5">ENFRIAMIENTO</option>
-              <option value="6">FILTROS</option>
-              <option value="7">FRENOS</option>
-              <option value="8">MOTOR</option>
-              <option value="8">SENSORES</option>
-              <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
-              <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
-              <option value="12">UNIVERSALES</option>
-          </select>
+           <input name="categorias" class="form-control" id="catePEP" readonly="readonly">
          </div>
        </div>
        <br><br>
