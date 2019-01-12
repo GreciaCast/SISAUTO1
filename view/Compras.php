@@ -416,7 +416,7 @@ and open the template in the editor.
                  ?>
                  <div class="col-sm-3 input-group" >
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select id="clientesID" name="id_Proveedor" aling="center" style="width:500px;height:40px" class="form-control"> 
+                  <select id="proveedoresID" name="id_Proveedor" aling="center" style="width:500px;height:40px" class="form-control"> 
                     <option value="">[Selecionar proveedor]</option>
                     <?php
 
@@ -506,27 +506,25 @@ and open the template in the editor.
             })
           }
 
-          function reporte(){
+        function reporte(){
             desde = $('#fecha1').val();
             hasta = $('#fecha2').val();
 
-            idcliente = $('#clientesID').val();
+            idproveedor = $('#proveedoresID').val();
             tipor = $('#tiporeporte').val();
 
             desde=desde.split('/').reverse().join('-');
             hasta=hasta.split('/').reverse().join('-');
 
-            if(tipor == '1' && idcliente == ""){
-              notaError("Debe seleccionar un proveedor");
-
-          }else if(desde > hasta && hasta != "") {
-            notaError("Verifique las fecha");
-        }else{
-            var dominio = window.location.host;
-            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteCompra.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
+            if(tipor == '1' && idproveedor == ""){
+                notaError("Debe seleccionar un proveedor");
+            }else if(desde > hasta && hasta != "") {
+                notaError("Verifique las fecha");
+            }else{
+                var dominio = window.location.host;
+                window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteCompra.php?desde='+desde+'&hasta='+hasta+'&idproveedor='+idproveedor+'&tipor='+tipor,'_blank');
+            }
         }
-
-    }
 </script>
 <?php
 }else{

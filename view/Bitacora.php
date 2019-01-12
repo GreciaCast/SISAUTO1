@@ -154,7 +154,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             <div class="col-sm-3 input-group" >
               <div class="col-sm-2">
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <select id="clientesID" name="id_Usuario" aling="center" style="width:500px;height:40px" class="form-control"> 
+                <select id="usuariosID" name="id_Usuario" aling="center" style="width:500px;height:40px" class="form-control"> 
                     <option value="">[Selecionar usuario]</option>
                     <?php
 
@@ -217,20 +217,20 @@ if (isset($_SESSION['usuarioActivo'])) {
     desde = $('#fecha1').val();
     hasta = $('#fecha2').val();
 
-     idcliente = $('#clientesID').val();
+     idusuario = $('#usuariosID').val();
      tipor = $('#tiporeporte').val();
 
     desde=desde.split('/').reverse().join('-');
     hasta=hasta.split('/').reverse().join('-');
 
-    if(tipor == '1' && idcliente == ""){
+    if(tipor == '1' && idusuario == ""){
       notaError("Debe seleccionar un usuario");
 
     }else if(desde > hasta) {
       notaError("Verifique las fecha");
     }else{
       var dominio = window.location.host;
-      window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteBitacora.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
+      window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteBitacora.php?desde='+desde+'&hasta='+hasta+'&idusuario='+idusuario+'&tipor='+tipor,'_blank');
     }
 
   }

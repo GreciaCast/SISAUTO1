@@ -6,7 +6,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
-$idusu = $_GET["idcliente"];
+$idusu = $_GET["idusuario"];
 $tipor = $_GET["tipor"];
 ?>
 <!doctype html>
@@ -80,7 +80,7 @@ $tipor = $_GET["tipor"];
   </tr>
   <tr align="right">
     <td>&nbsp;</td>
-    <td>FECHA IMPRESION:  <?php echo date("d-m-Y"); ?>
+    <td>FECHA IMPRESION:  <?php echo date("d/m/Y"); ?>
     <br>
     HORA  IMPRESION:   <?php
 		date_default_timezone_set('America/El_Salvador');
@@ -117,7 +117,8 @@ if($tipor == 1){
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
     <td width="29" align="center" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
-    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha</td>
+    <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Hora</td>
     <?php if ($tipor == 2) {?>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>
     <?php }  ?>
@@ -154,7 +155,8 @@ if($tipor == 1){
   ?>
   <tr align="left" class="">
     <td bgcolor="" align="center"><?php echo $contador;?></td>
-    <td bgcolor="" align="center"><?php echo date('d/m/Y H:i:s A',strtotime($fila[2]));?></td>
+    <td bgcolor="" align="center"><?php echo date('d/m/Y',strtotime($fila[2]));?></td>
+    <td bgcolor="" align="center"><?php echo date('H:i:s A',strtotime($fila[2]));?></td>
     <?php if($tipor == 2){ ?>
     <td bgcolor="" align="center"><?php echo $fila[1];?></td>
     <?php } ?>

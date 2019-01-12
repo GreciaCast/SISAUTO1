@@ -532,7 +532,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
               </div> -->
               <div class="form-group row" align="center">
                 <div class="col-sm-3 input-group">
-                  <select id="clientesID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
+                  <select id="categoriasID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
                     <option value="">[Selecionar categoría]</option>
                     <option value="1">AMORTIGUADORES</option>
                     <option value="2">BUJÍAS</option>
@@ -643,16 +643,15 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
          //REPORTE------------------------------------------------------
               function reporte(){
 
-                idcliente = $('#clientesID').val();
+                idcategoria = $('#categoriasID').val();
                 tipor = $('#tiporeporte').val();
-                console.log(idcliente);
 
-                if(tipor == '1' && idcliente == ""){
+                if(tipor == '1' && idcategoria == ""){
                   notaError("Debe seleccionar una categoría");
 
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteProducto.php?idcliente='+idcliente+'&tipor='+tipor,'_blank');
+                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteProducto.php?idcategoria='+idcategoria+'&tipor='+tipor,'_blank');
                 }
               }
      </script>

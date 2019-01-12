@@ -5,7 +5,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <?php 
 $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
-$idcliente = $_GET["idcliente"];
+$idproveedor = $_GET["idproveedor"];
 $tipor = $_GET["tipor"];
 ?>
 <!doctype html>
@@ -79,7 +79,7 @@ $tipor = $_GET["tipor"];
         </tr>
         <tr align="right">
           <td>&nbsp;</td>
-          <td>FECHA IMPRESIÓN:  <?php echo date("d-m-Y"); ?>
+          <td>FECHA IMPRESIÓN:  <?php echo date("d/m/Y"); ?>
             <br>
             HORA  IMPRESIÓN:   <?php
             date_default_timezone_set('America/El_Salvador');
@@ -95,11 +95,10 @@ $tipor = $_GET["tipor"];
         $conexion = conectarMysql(); 
 
         if($tipor == 1){
-          $aux = $idcliente;
+          $aux = $idproveedor;
           $sql1 = "SELECT nombre_Prov FROM proveedor where idProveedor = '$aux'";
           $proveedor = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
           $proveedor = mysqli_fetch_array($proveedor);
-          // echo $cliente['nombre_Cli'];
           ?>
           <table width="685" border="0" align="center">
             <tr align="center">
@@ -129,26 +128,26 @@ $tipor = $_GET["tipor"];
           date_default_timezone_set('america/el_salvador');
           $hoy = getdate();
           $dia = date("d");
-          $today = $hoy['year'].'-'.$hoy['mon'].'-'.$dia; 
+          $today = $hoy['year'].'/'.$hoy['mon'].'/'.$dia; 
 
           $contador=1;
           if($tipor == 1){
               if($desde == ""&& $hasta== ""){
-                $cliente = "where id_Proveedor = '$idcliente'";
+                $proveedor = "where id_Proveedor = '$idproveedor'";
               }else{
-                $cliente = "and id_Proveedor = '$idcliente'";
+                $proveedor = "and id_Proveedor = '$idproveedor'";
               }
             }else{
-              $cliente = "";
+              $proveedor = "";
             }
           if($desde == ""&& $hasta== ""){
-           $sql = "select * from compra ".$cliente." order by fecha_Com ASC";
+           $sql = "select * from compra ".$proveedor." order by fecha_Com ASC";
          }else if($hasta == ""){
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' ".$cliente." order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$today' ".$proveedor." order by fecha_Com ASC";
         }else if($desde == ""){
-          $sql = "select * from compra  where fecha_Com <= '$hasta' ".$cliente." order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com <= '$hasta' ".$proveedor." order by fecha_Com ASC";
         }else{
-          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' ".$cliente." order by fecha_Com ASC";
+          $sql = "select * from compra  where fecha_Com BETWEEN '$desde' and '$hasta' ".$proveedor." order by fecha_Com ASC";
         }
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
@@ -162,7 +161,7 @@ $tipor = $_GET["tipor"];
          <tr align="left" class="">
           <td bgcolor="" align="center"><?php echo $contador;?></td>
           <td bgcolor="" align="center"><?php echo $fila[1];?></td>
-          <td bgcolor="" align="center"><?php echo date('d-m-Y',strtotime($fila[2]));?></td>
+          <td bgcolor="" align="center"><?php echo date('d/m/Y',strtotime($fila[2]));?></td>
           <td bgcolor="" align="center"><a>$</a><?php 
           $preciocom = $fila[3];
           echo number_format($preciocom,2,'.','');?></td>

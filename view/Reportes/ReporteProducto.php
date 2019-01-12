@@ -4,7 +4,7 @@ if (isset($_SESSION['usuarioActivo'])) {
   if ($_SESSION['usuarioActivo']['tipo_Usu']=='0') {
     ?>
     <?php 
-    $idcliente = $_GET["idcliente"];
+    $idcategoria = $_GET["idcategoria"];
     $tipor = $_GET["tipor"];
     ?>
     <!doctype html>
@@ -101,29 +101,29 @@ if (isset($_SESSION['usuarioActivo'])) {
               <br>
               <td ><strong class="titulos" align="center">CATEGORÍA: </strong>
               <?php 
-              if($idcliente == '1'){
+              if($idcategoria == '1'){
                 echo "AMORTIGUADORES";
-              }else if($idcliente == '2'){
+              }else if($idcategoria == '2'){
                 echo "BUJÍAS";
-              }else if($idcliente == '3'){
+              }else if($idcategoria == '3'){
                 echo "COMBUSTIBLE";
-              }else if($idcliente == '4'){
+              }else if($idcategoria == '4'){
                 echo "ELÉCTRICO";
-              }else if($idcliente == '5'){
+              }else if($idcategoria == '5'){
                 echo "ENFRIAMIENTO";
-              }else if($idcliente == '6'){
+              }else if($idcategoria == '6'){
                 echo "FILTROS";
-              }else if($idcliente == '7'){
+              }else if($idcategoria == '7'){
                 echo "FRENOS";
-              }else if($idcliente == '8'){
+              }else if($idcategoria == '8'){
                 echo "MOTOR";
-              }else if($idcliente == '9'){
+              }else if($idcategoria == '9'){
                 echo "SENSORES";
-              }else if($idcliente == '10'){
+              }else if($idcategoria == '10'){
                 echo "SUSPENSIÓN Y DIRECCIÓN";
-              }else if($idcliente == '11'){
+              }else if($idcategoria == '11'){
                 echo "TRANSMISIÓN Y EMBRAGUE";
-              }else if($idcliente == '12'){
+              }else if($idcategoria == '12'){
                 echo "UNIVERSALES";
               }
                
@@ -142,7 +142,7 @@ if (isset($_SESSION['usuarioActivo'])) {
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Categoria</td>
               <?php }  ?>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Marca</td>
-              <?php if ($idcliente != 12) {?>
+              <?php if ($idcategoria != 12) {?>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Modelo Vehículo</td>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td>
               <?php }  ?>
@@ -159,7 +159,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             $contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){ 
             if($tipor == 1){
-              $sql = "select * from producto where tipo_Prod='1' and categoria_Prod = '$idcliente' order by nombre_Prod ASC";  
+              $sql = "select * from producto where tipo_Prod='1' and categoria_Prod = '$idcategoria' order by nombre_Prod ASC";  
             }else{
               $sql = "select * from producto where tipo_Prod='1' order by nombre_Prod ASC";
             }
@@ -181,10 +181,10 @@ if (isset($_SESSION['usuarioActivo'])) {
               <?php }  ?>
               <td align="center" bgcolor=""><?php echo $fila[3];?></td>
 
-              <?php if ($idcliente != 12) {?>
+              <?php if ($idcategoria != 12) {?>
               <td align="center" bgcolor=""><?php echo $fila[5];?></td>
               <td align="center" bgcolor=""><?php 
-                if($idcliente != 12){
+                if($idcategoria != 12){
                   echo $fila[6];
                 }else{
                  echo ""; 
