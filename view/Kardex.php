@@ -70,7 +70,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                     <input class="form-control" disabled="true" type="text"  value="Costo Promedio">
                    </div>
                  </div>
-
+                  <input class="form-control" type="hidden" name="" id="kardexId" value="<?php echo $aux1; ?>">
                  <div class="form-group">
                   <label for="" class="col-sm-3 control-label">Código:</label>
                   <div class="col-sm-2">
@@ -171,9 +171,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 
                  </div>
                     
-                       <a target="_blank" href="Reportes/ReporteKardex.php" >
-                      <button title="Imprimir" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="">Imprimir</button>
-                    </a>
+                      <button title="Imprimir" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="reporteKardex();">Imprimir</button>
+                    
                </form>
              </div>
            </div>
@@ -185,7 +184,15 @@ if (isset($_SESSION['usuarioActivo'])) {
 </div>
 </div>
 <!--_____________________________________________________________________________-->
+<script type="text/javascript">
+  //REPORTE------------------------------------------------------
+  function reporteKardex(){
+    kardex = $('#kardexId').val();
 
+      var dominio = window.location.host;
+      window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteKardex.php?kardex='+kardex,'_blank');
+  }
+</script>
 
 </body>
 </html>

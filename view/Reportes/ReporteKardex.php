@@ -2,6 +2,9 @@
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
   ?>
+  <?php 
+$idP = $_GET["kardex"];
+?>
   <!doctype html>
   <html>
   <head>
@@ -72,25 +75,28 @@ if (isset($_SESSION['usuarioActivo'])) {
 
         include("../../confi/Conexion.php");
         $conexion = conectarMysql();
-        $sql1 = "SELECT * FROM producto where idProducto ";
+        $sql1 = "SELECT * FROM producto where idProducto = '$idP'";
         $producto = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
         $producto = mysqli_fetch_array($producto); ?>
 
-        <?php if($producto['descripcion_Prod'] == "Ninguna"){
+        <?php                                  
+          if($producto['descripcion_Prod'] == "Ninguna"){
+           if($producto['categoria_Prod'] == 12){
+             $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
+           }else{
+            $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+          }
+        }else{
          if($producto['categoria_Prod'] == 12){
-           $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].')';
-         }else{
-          $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
+          $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
+        }else{
+          $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
         }
-      }else{
-       if($producto['categoria_Prod'] == 12){
-        $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].')';
-      }else{
-        $nombreProKar = $producto['nombre_Prod'].' ('.$producto['marca_Prod'].', '.$producto['descripcion_Prod'].' para '.$producto['modeloVehiculo_Prod'].' '.$producto['anioVehiculo_Prod'].') ';
       }
-    }
-    $sql1 = "SELECT * FROM inventario where id_Producto ";
-    $inventarios = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta"); ?>
+      $sql1 = "SELECT * FROM inventario where id_Producto = '$idP'";
+      $inventarios = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+
+      ?>
     <tr align="center">
       <p><td colspan="6" align="center"><strong class="titulos">KARDEX COSTO PROMEDIO</strong></td>
 
