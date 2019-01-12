@@ -97,15 +97,15 @@ $conexion = conectarMysql();
 if($tipor == 1){
   $aux = $idcliente;
 
-  $sql1 = "SELECT nombre_Usu FROM usuario where idCliente = '$aux'";
+  $sql1 = "SELECT * FROM usuario where idUsuario = '$aux'";
   $usuario = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
-  $usuario = mysqli_fetch_array($usuario);
+  $usuario = mysqli_fetch_assoc($usuario);
   ?>
   <table width="685" border="0" align="center">
     <tr align="center">
       <br><br>
       <td ><strong class="titulos" align="center">USUARIO: </strong>
-        <?php echo $usuario['nombre_Cli']; ?>
+        <?php echo $usuario['nombre_Usu']; ?>
       </td>
     </tr>
   </table>
