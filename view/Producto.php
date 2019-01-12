@@ -536,7 +536,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
     
   <!-- MODAL -->
   <div class="modal inmodal" id="modalReporteProducto" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
+    <div class="modal-dialog" align="center">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button> -->
@@ -548,18 +548,19 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
               <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
                 <div class="col-sm-6 i-checks">
                   <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por categoria</label>
-                  <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Por fecha</label>
+                  <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Todo</label>
               </div>
+              <input type="hidden" id="tiporeporte" value="1" />
               <!-- <div class="i-checks">
                 <label><input type="radio" checked="" value="option1" name="a"> <i></i> Ambos</label>
               </div> -->
-              <br>
+              <br><br><br>
               <!-- <div class="i-checks">
                 <label><input type="radio" value="option1" name="a"> <i></i> Categoria </label>
               </div> -->
               <div class="form-group row" align="center">
-                <div class="col-sm-2">
-                  <select id="categoriaPro" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
+                <div class="col-sm-3 input-group">
+                  <select id="clientesID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
                     <option value="">[Selecionar categoría]</option>
                     <option value="1">AMORTIGUADORES</option>
                     <option value="2">BUJÍAS</option>
@@ -569,7 +570,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                     <option value="6">FILTROS</option>
                     <option value="7">FRENOS</option>
                     <option value="8">MOTOR</option>
-                    <option value="8">SENSORES</option>
+                    <option value="9">SENSORES</option>
                     <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
                     <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
                     <option value="12">UNIVERSALES</option>
@@ -577,7 +578,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                 </div>
               </div>
               <br>
-              <div class="i-checks">
+              <!-- <div class="i-checks">
                 <label><input type="radio" value="option2" name="a"> <i></i> Modelo de vehiculo </label>
               </div>
               <div class="col-sm-2 input-group">
@@ -585,12 +586,12 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                   <option value="">[Selecionar modelo y año]</option>
                   <option value=""></option>
                 </select>
-              </div>
+              </div> -->
 
             </div>
             <div class="modal-footer">
             <!-- <a class="pull-right" target="_blank" href="Reportes/ReporteProductosCat.php"> -->
-                <button type="button" class="btn btn-success" style="font-size:14px;">
+                <button type="button" class="btn btn-success" style="font-size:14px;"  onclick="reporte();">
                   Generar reporte
                 </button>
               <!-- </a> -->
@@ -607,6 +608,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
     <script src="../assets/Validaciones/validarEntero.js"></script>
     <script src="../assets/Validaciones/mostrarProducto.js"></script>
     <script src="../assets/Validaciones/validarProducto.js"></script>
+    <script src="../assets/Validaciones/validarNuevaVenta.js"></script>
     <script>
         $(document).ready(function () {
             $('.i-checks').iCheck({
@@ -665,6 +667,22 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                  }
              })
          }
+
+         //REPORTE------------------------------------------------------
+              function reporte(){
+
+                idcliente = $('#clientesID').val();
+                tipor = $('#tiporeporte').val();
+                console.log(idcliente);
+
+                if(tipor == '1' && idcliente == ""){
+                  notaError("Debe seleccionar una categoría");
+
+                }else{
+                  var dominio = window.location.host;
+                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteProducto.php?idcliente='+idcliente+'&tipor='+tipor,'_blank');
+                }
+              }
      </script>
 
     <script type="text/javascript">

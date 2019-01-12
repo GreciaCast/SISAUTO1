@@ -82,7 +82,7 @@
             </div>
 
             <?php 
-            $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+            $sql = "SELECT  * FROM producto where tipo_Prod='1' order by nombre_Prod ASC";
             $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
             $contador = 0;
             $label = "label-success";
@@ -101,7 +101,7 @@
                             $label = "label-danger";   
                         }
                     }
-                    $sql = "SELECT  * FROM producto order by nombre_Prod ASC";
+                    $sql = "SELECT  * FROM producto where tipo_Prod='1' order by nombre_Prod ASC";
                     $productos = mysqli_query($conexion, $sql) or die("No se pudo ejecutar la consulta");
                     
                     ?>
