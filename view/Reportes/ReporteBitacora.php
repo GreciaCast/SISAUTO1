@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
-  if ($_SESSION['usuarioActivo']['tipo_Usu']=='0') {
+  if ($_SESSION['usuarioActivo']['tipo_Usu'] == '0') {
 ?>
 <?php 
 $desde = $_GET["desde"];
@@ -121,47 +121,28 @@ if($tipor == 1){
     <?php }  ?>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Actividad</td>
   </tr>
-    <?php
-	//try {
-	//$fechainicio=$_REQUEST["fechainicio"];
-	//$fechafinal=$_REQUEST["fechafinal"];
-
-	$contador=1;
-	//if($fechainicio!= NULL && $fechafinal!= NULL){
-	// $sql = "select * from bitacora ";
-	//$consulta=mysqli_query($conexion,$sql);
-	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
-
-  // if($tipor == 1){
-
-  //   if($desde == ""&& $hasta== ""){
-  //     $cliente = "where id_Cliente = '$idcliente'";
-  //   }else{
-  //     $cliente = "and id_Cliente = '$idcliente'";
-  //   }
-  // }else{
-  //   $cliente = "";
-  // }
+  <?php
+  $contador=1;
   if($desde == ""&& $hasta== ""){
-   $sql = "select * from bitacora order by idBitacora DESC";
- }else if($hasta == ""){
+  $sql = "select * from bitacora order by idBitacora DESC";
+  }else if($hasta == ""){
   $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$today' order by idBitacora DESC";
-}else if($desde == ""){
+  }else if($desde == ""){
   $sql = "select * from bitacora  where sesionInicio <= '$hasta' order by idBitacora DESC";
-}else{
+  }else{
   $sql = "select * from bitacora  where sesionInicio BETWEEN '$desde' and '$hasta' order by idBitacora DESC";
-}
+  }
 
-	$consulta=mysqli_query($conexion,$sql);
-//  var_dump($consulta);
+  $consulta=mysqli_query($conexion,$sql);
+  //  var_dump($consulta);
 
-            while($fila=mysqli_fetch_array($consulta))
+  while($fila=mysqli_fetch_array($consulta))
 
-	{
-	?>
+  {
+  ?>
   <tr align="left" class="">
     <td bgcolor="" align="center"><?php echo $contador;?></td>
-    <td bgcolor="" align="center"><?php echo date('d-m-Y H:i:s A',strtotime($fila[2]));?></td>
+    <td bgcolor="" align="center"><?php echo date('d/m/Y H:i:s A',strtotime($fila[2]));?></td>
     <?php if($tipor == 2){ ?>
     <td bgcolor="" align="center"><?php echo $fila[1];?></td>
     <?php } ?>
