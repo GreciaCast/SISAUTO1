@@ -139,13 +139,13 @@ if (isset($_SESSION['usuarioActivo'])) {
                           ?>
                             <td></td><td></td> <td></td>
                             <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["precio_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
+                            <td  align="center">$<?php  echo $inventario["precio_Inv"];?></td>
+                            <td  align="center">$<?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
                             <?php
                           } ?>
                           <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["nuevoPrecio_Inv"];?></td>
-                            <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
+                            <td  align="center">$<?php  echo $inventario["nuevoPrecio_Inv"];?></td>
+                            <td  align="center">$<?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
                             
                                      
                        </tr>
