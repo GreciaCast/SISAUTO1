@@ -139,8 +139,8 @@ if (isset($_SESSION['usuarioActivo'])) {
 
           $contador=1;
 	//if($fechainicio!= NULL && $fechafinal!= NULL){
-          $sql = "select * from inventario ";
-          $sql = "select * from inventario where tipo_Prod='1' order by nombre_Prod ASC";
+         // $sql = "select * from inventario ";
+          $sql = "select * from inventario where idInventario='$idcliente' ";
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
           $consulta=mysqli_query($conexion,$sql);
