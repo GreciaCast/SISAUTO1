@@ -65,7 +65,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <hr width="75%" style="background-color:#007bff;"/><br>
 
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Metodo:</label>
+                    <label class="col-sm-3 control-label">Método:</label>
                     <div class="col-sm-2">
                     <input class="form-control" disabled="true" type="text"  value="Costo Promedio">
                    </div>

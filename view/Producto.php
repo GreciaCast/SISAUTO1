@@ -513,13 +513,13 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
             <div class="modal-header">
                 <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button> -->
                 <i class="fa fa-check-square-o modal-icon"></i>
-                <h4 class="modal-title">Reporte de Producto</h4>
+                <h4 class="modal-title">Reporte de Productos</h4>
                 <small>...</small>
             </div>
             <div class="modal-body">
               <label for="empresa" class="col-sm-3 control-label">Reporte: </label>
                 <div class="col-sm-6 i-checks">
-                  <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por categoria</label>
+                  <label><input type="button" id="r1" value="  " name="a" style="background:green" onclick="radioSeleccionado(1);"> Por categoría</label>
                   <label><input type="button" id="r2" value="  " name="a" onclick="radioSeleccionado(2);"> Todo</label>
               </div>
               <input type="hidden" id="tiporeporte" value="1" />

@@ -116,7 +116,7 @@ if($tipor == 1){
 
 <table width="700" border="1" align="center" rules="all">
   <tr bgcolor="#CCCCCC">
-    <td width="29" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
+    <td width="29" align="center" bgcolor="#fcf3b3" class=""><strong>N°</strong></td>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Fecha y Hora</td>
     <?php if ($tipor == 2) {?>
     <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Usuario</td>

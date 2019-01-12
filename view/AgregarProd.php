@@ -38,10 +38,10 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         <div class="form-group">
                                         </div>
                                         <div class="form-group ">
-                                            <label  for="tele1" class="col-sm-3 control-label">Categoria:</label>
+                                            <label  for="tele1" class="col-sm-3 control-label">Categoría:</label>
                                             <div  class="col-sm-2">
                                               <select name="categorias" style="width:600px;height:40px" class="form-control" id="categoriaPr" onchange="veruniversal(this.value);">
-                                                <option value="">[Selecionar Categoria]</option>
+                                                <option value="">[Selecionar Categoría]</option>
                                                 <option value="1">AMORTIGUADORES</option>
                                                 <option value="2">BUJÍAS</option>
                                                 <option value="3">COMBUSTIBLE</option>
@@ -59,7 +59,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group">
-                                            <label for="empresa" class="col-sm-3 control-label">Codigo:</label>
+                                            <label for="empresa" class="col-sm-3 control-label">Código:</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" name="codigoPro" value="" id="codigoP" readonly="readonly">
                                             </div>
@@ -80,14 +80,14 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="responsable" class="col-sm-3 control-label">Modelo vehiculo:</label>
+                                            <label for="responsable" class="col-sm-3 control-label">Modelo vehículo:</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" name="modelo" id="modeloPr" placeholder="Modelo de Auto">
                                             </div>
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Año vehiculo: </label>
+                                            <label for="tel2" class="col-sm-3 control-label">Año vehículo: </label>
                                             <div class="col-sm-2">
                                                 <input type="tel" class="form-control" type="number" id="anioPr" name="anio" placeholder="Año" onkeypress="return validarAnio(this,event,this.value)">
                                             </div>
@@ -101,7 +101,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                         </div>
                                         <br>
                                         <div class="form-group ">
-                                            <label for="tel2" class="col-sm-3 control-label">Stock minimo: </label>
+                                            <label for="tel2" class="col-sm-3 control-label">Stock mínimo: </label>
                                             <div class="col-sm-2">
                                                 <input type="tel" class="form-control" type="number" id="stockPr" name="stock" placeholder="Stock" onkeypress="return validarEntero(this,event,this.value)">
                                             </div>
