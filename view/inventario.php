@@ -165,7 +165,7 @@ if (isset($_SESSION['usuarioActivo'])) {
               <br><br><br><br>
               <div class="form-group row" align="center">
                 <div class="col-sm-3 input-group">
-                  <select id="clientesID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
+                  <select id="categoriaID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
                     <option value="">[Selecionar categoría]</option>
                     <option value="1">AMORTIGUADORES</option>
                     <option value="2">BUJÍAS</option>
@@ -204,14 +204,14 @@ if (isset($_SESSION['usuarioActivo'])) {
          //REPORTE------------------------------------------------------
          function reporte(){
 
-          idcliente = $('#clientesID').val();
+          idcategoria = $('#categoriaID').val();
 
-          if( idcliente == ""){
+          if( idcategoria == ""){
             notaError("Debe seleccionar una categoría");
 
           }else{
             var dominio = window.location.host;
-            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteInventario.php?idcliente='+idcliente,'_blank');
+            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteInventario.php?idcategoria='+idcategoria,'_blank');
           }
         }
       </script>

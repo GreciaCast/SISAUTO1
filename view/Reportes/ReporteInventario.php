@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION['usuarioActivo'])) {
   ?>
   <?php 
-  $idcliente = $_GET["idcliente"];
+  $cat = $_GET["idcategoria"];
   ?>
 
   <!doctype html>
@@ -92,29 +92,29 @@ if (isset($_SESSION['usuarioActivo'])) {
               <br>
               <td ><strong class="titulos" align="center">CATEGORÍA: </strong>
               <?php 
-              if($idcliente == '1'){
+              if($cat == '1'){
                 echo "AMORTIGUADORES";
-              }else if($idcliente == '2'){
+              }else if($cat == '2'){
                 echo "BUJÍAS";
-              }else if($idcliente == '3'){
+              }else if($cat == '3'){
                 echo "COMBUSTIBLE";
-              }else if($idcliente == '4'){
+              }else if($cat == '4'){
                 echo "ELÉCTRICO";
-              }else if($idcliente == '5'){
+              }else if($cat == '5'){
                 echo "ENFRIAMIENTO";
-              }else if($idcliente == '6'){
+              }else if($cat == '6'){
                 echo "FILTROS";
-              }else if($idcliente == '7'){
+              }else if($cat == '7'){
                 echo "FRENOS";
-              }else if($idcliente == '8'){
+              }else if($cat == '8'){
                 echo "MOTOR";
-              }else if($idcliente == '9'){
+              }else if($cat == '9'){
                 echo "SENSORES";
-              }else if($idcliente == '10'){
+              }else if($cat == '10'){
                 echo "SUSPENSIÓN Y DIRECCIÓN";
-              }else if($idcliente == '11'){
+              }else if($cat == '11'){
                 echo "TRANSMISIÓN Y EMBRAGUE";
-              }else if($idcliente == '12'){
+              }else if($cat == '12'){
                 echo "UNIVERSALES";
               }
                
@@ -131,34 +131,30 @@ if (isset($_SESSION['usuarioActivo'])) {
             <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Existencias</td>
           </tr>
           <?php
-	//try {
           include("../../confi/Conexion.php");
           $conexion = conectarMysql();
-	//$fechainicio=$_REQUEST["fechainicio"];
-	//$fechafinal=$_REQUEST["fechafinal"];
+          $contador = 1;
+          $sql = "SELECT * FROM producto where categoria_Prod = '$cat'";
+          $productos = mysqli_query($conexion,$sql);
 
-          $contador=1;
-	//if($fechainicio!= NULL && $fechafinal!= NULL){
-         // $sql = "select * from inventario ";
-          $sql = "select * from inventario where idInventario='$idcliente' ";
-	//$consulta=mysqli_query($conexion,$sql);
-	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
-          $consulta=mysqli_query($conexion,$sql);
-//  var_dump($consulta);
+          while($producto = mysqli_fetch_array($productos)){
+            $idP = $producto[0];
 
-          while($fila=mysqli_fetch_array($consulta))
-
-          {
-           ?>
-           <tr align="left" class="">
-            <td align="center" bgcolor=""><?php echo $contador;?></td>
-            <td align="center" bgcolor=""><?php echo $fila[1];?></td>
-            <td align="center" bgcolor=""><?php echo $fila[2];?></td>
-            <td align="center"bgcolor=""><?php echo $fila[3];?></td>
-          </tr>
-          <?php $contador++;
-        }
-        ?>
+            $sql1 = "SELECT nuevaExistencia_Inv from inventario where id_Producto = '$idP' order by idInventario desc";
+            $inventarios = mysqli_query($conexion, $sql1) or die("No se puedo ejecutar la consulta");
+            $inventario = mysqli_fetch_array($inventarios);//CAPTURA EL ULTIMO REGISTRO
+            if($inventario['nuevaExistencia_Inv'] != ""){
+          ?>
+              <tr align="left" class="">
+                <td align="center" bgcolor=""><?php echo $contador;?></td>
+                <td align="center" bgcolor=""><?php echo $producto[7];?></td>
+                <td align="center" bgcolor=""><?php echo $producto[1].' ('.$producto[3].', '.$producto[4].' para '.$producto[5].' '.$producto[6].')';?></td>
+                <td align="center" bgcolor=""><?php echo $inventario['nuevaExistencia_Inv'];?></td>
+              </tr>
+              <?php $contador++;
+            }
+          }
+          ?>
       </table>
       <form name="frmTesis" method="get" action="" id="frmTesis">
         <p align="center"><input class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo" style="font-size:17px;" type="button" name="IM" id="IM" value="IMPRIMIR" onClick="imprimir()"></p>
