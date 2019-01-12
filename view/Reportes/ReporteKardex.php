@@ -118,16 +118,17 @@ if (isset($_SESSION['usuarioActivo'])) {
         </td>
       </tr>
       <tr align="left">
-        <td width="5">
+        <td>&nbsp;</td>
+        <td >
           CÓDIGO:
           <?php 
           echo $producto['codigo_Prod'];?>
-          
+          <br>
           PRODUCTO:
           <?php 
           echo  $nombreProKar;
           ?>
-  
+          <br>
           STOCK MÍNIMO:
           <?php echo $producto['stock_Prod'];
           ?>
