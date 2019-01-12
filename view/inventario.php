@@ -35,8 +35,8 @@ if (isset($_SESSION['usuarioActivo'])) {
           <div class="row" style="padding:20px">
             <br>
 
-            <a class="pull-right" href="Reportes/ReporteInventario.php">
-              <button class="btn btn-success" data-toggle="modal" data-target="#modalNuevo" style="font-size:16px;">
+            <a class="pull-right" >
+              <button class="btn btn-success" data-toggle="modal" data-target="#modalReporteInventario" style="font-size:16px;">
                 Reporte
                 <span class="fa fa-file-pdf-o"></span>
               </button>
@@ -54,7 +54,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 Ver ventas 
                 <span class="fa fa-eye"></span>
               </button>
-             &nbsp;
+              &nbsp;
             </a>
           </div>
 
@@ -150,21 +150,88 @@ if (isset($_SESSION['usuarioActivo'])) {
       </div>
     </div>
 
-  </body>
-  </html>
+    <!-- MODAL -->
+    <div class="modal inmodal" id="modalReporteInventario" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog" align="center">
+        <div class="modal-content animated fadeIn">
+          <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Cerrar</span></button> -->
+            <i class="fa fa-check-square-o modal-icon"></i>
+            <h4 class="modal-title">Reporte de Inventario</h4>
+            <small>...</small>
+          </div>
+          <div class="modal-body">
+            <label for="empresa" aling="center" class="col-sm-10 control-label">Seleccione una categoría: </label>
+              <br><br><br><br>
+              <div class="form-group row" align="center">
+                <div class="col-sm-3 input-group">
+                  <select id="clientesID" name="categorias" style="width:400px;height:40px" class="form-control" onchange="filtrarModelos(this.value);">
+                    <option value="">[Selecionar categoría]</option>
+                    <option value="1">AMORTIGUADORES</option>
+                    <option value="2">BUJÍAS</option>
+                    <option value="3">COMBUSTIBLE</option>
+                    <option value="4">ELÉCTRICO</option>
+                    <option value="5">ENFRIAMIENTO</option>
+                    <option value="6">FILTROS</option>
+                    <option value="7">FRENOS</option>
+                    <option value="8">MOTOR</option>
+                    <option value="9">SENSORES</option>
+                    <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
+                    <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
+                    <option value="12">UNIVERSALES</option>
+                  </select>
+                </div>
+              </div>
+              <br>
 
-  <?php
-}else{
+            </div>
+            <div class="modal-footer">
+              <!-- <a class="pull-right" target="_blank" href="Reportes/ReporteProductosCat.php"> -->
+              <button type="button" class="btn btn-success" style="font-size:14px;"  onclick="reporte();">
+                Generar reporte
+              </button>
+              <!-- </a> -->
+              &nbsp;&nbsp;
+              <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+              &nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+
+         //REPORTE------------------------------------------------------
+         function reporte(){
+
+          idcliente = $('#clientesID').val();
+
+          if( idcliente == ""){
+            notaError("Debe seleccionar una categoría");
+
+          }else{
+            var dominio = window.location.host;
+            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteInventario.php?idcliente='+idcliente,'_blank');
+          }
+        }
+      </script>
+
+
+    </body>
+    </html>
+
+    <?php
+  }else{
+    ?>
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+    </head>
+    <body>
+    </body>
+    </html>
+    <?php
+  }
   ?>
-  <!DOCTYPE HTML>
-  <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
-  </head>
-  <body>
-  </body>
-  </html>
-  <?php
-}
-?>

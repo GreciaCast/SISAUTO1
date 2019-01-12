@@ -50,7 +50,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                                                 <option value="6">FILTROS</option>
                                                 <option value="7">FRENOS</option>
                                                 <option value="8">MOTOR</option>
-                                                <option value="8">SENSORES</option>
+                                                <option value="9">SENSORES</option>
                                                 <option value="10">SUSPENSIÓN Y DIRECCIÓN</option>
                                                 <option value="11">TRANSMISIÓN Y EMBRAGUE</option>
                                                 <option value="12">UNIVERSALES</option>
