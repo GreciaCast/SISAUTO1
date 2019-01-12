@@ -1,60 +1,60 @@
 <?php
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
-?>
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
+  ?>
+  <!doctype html>
+  <html>
+  <head>
+    <meta charset="utf-8">
 
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-  <link href="../assets/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
-  <link href="../assets/package/dist/sweetalert2.css" rel="stylesheet">
+    <link href="../assets/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="../assets/package/dist/sweetalert2.css" rel="stylesheet">
 
-  <!-- Toastr style -->
-  <link href="../assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="../assets/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
-  <!-- Gritter -->
-  <link href="../assets/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="../assets/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-  <link href="../assets/css/animate.css" rel="stylesheet">
-  <link href="../assets/css/style.css" rel="stylesheet">
-  <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
-  <script src="../assets/package/dist/sweetalert2.js"></script>
+    <link href="../assets/css/animate.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
+    <script src="../assets/package/dist/sweetalert2.js"></script>
 
-  <link href="../assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-  <link href="../assets/css/plugins/chosen/chosen.css" rel="stylesheet">
-  <link href="../assets/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
-  <link href="../assets/css/plugins/cropper/cropper.min.css" rel="stylesheet">
-  <link href="../assets/css/plugins/switchery/switchery.css" rel="stylesheet">
-  <link href="../assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
-  <link href="../assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-  <link href="../assets/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
-  <link href="../assets/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
-  <link href="../assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-  <link href="../assets/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
-  <link href="../assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
-  <link href="../assets/css/plugins/select2/select2.min.css" rel="stylesheet">
-  <link href="../assets/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-  <link href="../assets/css/animate.css" rel="stylesheet">
-  <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="../assets/css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="../assets/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+    <link href="../assets/css/plugins/cropper/cropper.min.css" rel="stylesheet">
+    <link href="../assets/css/plugins/switchery/switchery.css" rel="stylesheet">
+    <link href="../assets/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+    <link href="../assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="../assets/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="../assets/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+    <link href="../assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <link href="../assets/css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    <link href="../assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="../assets/css/plugins/select2/select2.min.css" rel="stylesheet">
+    <link href="../assets/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
+    <link href="../assets/css/animate.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
 
-  <script language="javascript">
-   function imprimir(){
-    if(!window.print){
-     alert("El navegador no permite la impresión..");
-     return;
-   }
-   else{
-    document.frmTesis.IM.style.visibility="hidden";
-    window.print();
-    document.frmTesis.IM.style.visibility="visible";
+    <script language="javascript">
+     function imprimir(){
+      if(!window.print){
+       alert("El navegador no permite la impresión..");
+       return;
+     }
+     else{
+      document.frmTesis.IM.style.visibility="hidden";
+      window.print();
+      document.frmTesis.IM.style.visibility="visible";
+    }
   }
-}
 </script>
 </head>
 
@@ -119,17 +119,15 @@ if (isset($_SESSION['usuarioActivo'])) {
       </tr>
       <tr align="left">
         <td width="5">
-          <br >
           CÓDIGO:
           <?php 
           echo $producto['codigo_Prod'];?>
-          <br>
+          
           PRODUCTO:
-          &nbsp;
           <?php 
           echo  $nombreProKar;
           ?>
-          <br>
+  
           STOCK MÍNIMO:
           <?php echo $producto['stock_Prod'];
           ?>
@@ -142,7 +140,6 @@ if (isset($_SESSION['usuarioActivo'])) {
     <table width="900" border="1" align="center" rules="all">
       <thead align="center" style="width:100%">
         <tr align="center">
-
           <th rowspan="2" style="width:95px" align="center">Fecha</th>
           <th rowspan="2" align="center">Detalle</th>
           <th colspan="3" align="center">Entradas</th>                               
@@ -160,64 +157,78 @@ if (isset($_SESSION['usuarioActivo'])) {
           <th style="width:28px" align="center">V/Unitario</th>
           <th style="width:28px" align="center">V/Total</th>
         </tr>
-         <?php While ($inventario = mysqli_fetch_assoc($inventarios)) { ?>
+        <?php While ($inventario = mysqli_fetch_assoc($inventarios)) { ?>
 
-                      <tr align="center">
-                       <td  align="center">
-                         <?php $fechaK = explode("-",$inventario['fechaMovimiento_Inv']);
-                         $fechaK = $fechaK[2].'/'.$fechaK[1].'/'.$fechaK[0];
-                         echo $fechaK ?>
-                         <td  align="center">
-                           <?php if ($inventario["tipoMovimiento_Inv"]==0) {
-                             echo "Compra";
-                           } else if($inventario["tipoMovimiento_Inv"]==1){
-                             echo "Venta";
-                           } else if($inventario["tipoMovimiento_Inv"]==2){
-                            echo "Modificación de la compra";
-                          } else if($inventario["tipoMovimiento_Inv"]==3){
-                           echo "Eliminación de la compra";
-                         } else if($inventario["tipoMovimiento_Inv"]==4){
-                           echo "Devolución de la compra";
-                         } else if($inventario["tipoMovimiento_Inv"]==5){
-                           echo "Anulación de la venta";
-                         }
+        <tr align="center">
+         <td  align="center">
+           <?php $fechaK = explode("-",$inventario['fechaMovimiento_Inv']);
+           $fechaK = $fechaK[2].'/'.$fechaK[1].'/'.$fechaK[0];
+           echo $fechaK ?>
+           <td  align="center">
+             <?php if ($inventario["tipoMovimiento_Inv"]==0) {
+               echo "Compra";
+             } else if($inventario["tipoMovimiento_Inv"]==1){
+               echo "Venta";
+             } else if($inventario["tipoMovimiento_Inv"]==2){
+              echo "Modificación de la compra";
+            } else if($inventario["tipoMovimiento_Inv"]==3){
+             echo "Eliminación de la compra";
+           } else if($inventario["tipoMovimiento_Inv"]==4){
+             echo "Devolución de la compra";
+           } else if($inventario["tipoMovimiento_Inv"]==5){
+             echo "Anulación de la venta";
+           }
 
-                         ?>
-                         <?php if ($inventario["existencias_Inv"]<$inventario["nuevaExistencia_Inv"]) {
-                          ?>
-                          <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                          <?php $v_unitarioen = $inventario["precio_Inv"];
-                          $v_unitarioen = number_format($v_unitarioen, 2, '.', '');?>
-                          <td  align="center">$<?php  echo $v_unitarioen ?></td>
-                          <?php $v_totalen = $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; 
-                          $v_totalen = number_format($v_totalen, 2, '.', '');?>
-                          <td  align="center">$<?php  echo $v_totalen ?></td><td></td><td></td> <td></td>
-                          <?php
+           ?>
+           <?php if ($inventario["existencias_Inv"]<$inventario["nuevaExistencia_Inv"]) {
+            ?>
+            <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
+            <?php $v_unitarioen = $inventario["precio_Inv"];
+            $v_unitarioen = number_format($v_unitarioen, 2, '.', '');?>
+            <td  align="center">$<?php  echo $v_unitarioen ?></td>
+            <?php $v_totalen = $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; 
+            $v_totalen = number_format($v_totalen, 2, '.', '');?>
+            <td  align="center">$<?php  echo $v_totalen ?></td><td></td><td></td> <td></td>
+            <?php
 
-                        }else{
-                          ?>
+          }else{
+            ?>
 
-                            <td></td><td></td> <td></td>
-                            <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["precio_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
-                            <?php
-                          } ?>
-                          <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["nuevoPrecio_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
-                            
-                                     
-                       </tr>
-                       <?php  }?>
+            <td></td><td></td> <td></td>
+            <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
+            <td  align="center">$<?php  echo $inventario["precio_Inv"];?></td>
+            <td  align="center">$<?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
+            <?php
+          } ?>
+          <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
+          <td  align="center">$<?php  echo $inventario["nuevoPrecio_Inv"];?></td>
+          <td  align="center">$<?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
+
+
+        </tr>
+        <?php  }?>
       </thead>
 
     </table>
-
-    <form name="frmTesis" method="get" action="" id="frmTesis">
-      <p align="center"><input class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo" style="font-size:17px;" type="button" name="IM" id="IM" value="IMPRIMIR" onClick="imprimir()"></p>
-    </form>
-    <p>&nbsp;</p>
+   <form name="frmTesis" method="get" action="" id="frmTesis">
+        <p align="center"><input class="btn btn-primary" data-toggle="modal" data-target="#modalNuevo" style="font-size:17px;" type="button" name="IM" id="IM" value="IMPRIMIR" onClick="imprimir()"></p>
+      </form>
+      <p>&nbsp;</p>
   </body>
   </html>
 
+  <?php
+}else{
+  ?>
+  <!DOCTYPE HTML>
+  <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+  </head>
+  <body>
+  </body>
+  </html>
+  <?php
+}
+?>
