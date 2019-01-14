@@ -153,13 +153,21 @@ if (isset($_SESSION['usuarioActivo'])) {
 
                             <td></td><td></td> <td></td>
                             <td  align="center"><?php  echo $inventario["cantidad_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["precio_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; ?></td>
+                            <?php $v_unitarios = $inventario["precio_Inv"];
+                            $v_unitarios = number_format($v_unitarios, 2, '.', '');?>
+                            <td  align="center">$<?php  echo $v_unitarios;?></td>
+                            <?php $v_totals = $inventario["cantidad_Inv"]* $inventario["precio_Inv"]; 
+                            $v_totals = number_format($v_totals, 2, '.', '');?>
+                            <td  align="center">$<?php  echo $v_totals; ?></td>
                             <?php
                           } ?>
                           <td  align="center"><?php  echo $inventario["nuevaExistencia_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["nuevoPrecio_Inv"];?></td>
-                            <td  align="center">$<?php  echo $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; ?></td>
+                            <?php $v_unitarioe = $inventario["nuevoPrecio_Inv"];
+                            $v_unitarioe = number_format($v_unitarioe, 2, '.', '');?>
+                            <td  align="center">$<?php  echo $v_unitarioe ;?></td>
+                            <?php $v_totale = $inventario["nuevaExistencia_Inv"]* $inventario["nuevoPrecio_Inv"]; 
+                            $v_totale = number_format($v_totale, 2, '.', '');?>
+                            <td  align="center">$<?php  echo $v_totale; ?></td>
                             
                                      
                        </tr>
