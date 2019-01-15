@@ -164,7 +164,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <div class="form-group row">
                     <div class="col-sm-12 col-md-1">
                     </div>
-                    <label class="col-sm-2 control-label">Cantidad en invetario: </label>
+                    <label class="col-sm-2 control-label">Cantidad en inventario: </label>
                     <div class="col-sm-12 col-md-1">
                       <input id="cantidadDisponiblePV" name="cantidadDisponiblePV" class="form-control" type="text" style="width:150px;height:40px" readonly="readonly">
                     </div>
