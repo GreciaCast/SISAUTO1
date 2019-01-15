@@ -140,7 +140,7 @@ if (isset($_SESSION['usuarioActivo'])) {
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Categoria</td>
               <?php }  ?>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Marca</td>
-              <?php if ($idcategoria != 12) {?>
+              <?php if ($idcategoria != 12 && $tipor == 1) {?>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Modelo Vehículo</td>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td>
               <?php }  ?>
@@ -161,6 +161,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             }else{
               $sql = "select * from producto where tipo_Prod='1' order by nombre_Prod ASC";
             }
+
 	//$consulta=mysqli_query($conexion,$sql);
 	//$consulta = mysql_query("SELECT * FROM bitacora", $conexion);
             $consulta=mysqli_query($conexion,$sql);
@@ -179,7 +180,7 @@ if (isset($_SESSION['usuarioActivo'])) {
               <?php }  ?>
               <td align="center" bgcolor=""><?php echo $fila[3];?></td>
 
-              <?php if ($idcategoria != 12) {?>
+              <?php if ($idcategoria != 12 && $tipor == 1) {?>
               <td align="center" bgcolor=""><?php echo $fila[5];?></td>
               <td align="center" bgcolor=""><?php 
                 if($idcategoria != 12){
