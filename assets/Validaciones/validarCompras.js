@@ -92,7 +92,7 @@ function filtrarCategoria(id){
 }
 
 function mostrarAddProduc(){
-    var cate = ["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    var cate = ["AMORTIGUADORES","BUJÍAS","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
     var obtenerC = $("#categoriaPro").find('option:selected');
     var categoriaId = obtenerC.val();
     var categoriaText = obtenerC.text();

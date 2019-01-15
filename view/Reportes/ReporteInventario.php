@@ -96,8 +96,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                 echo "AMORTIGUADORES";
               }else if($cat == '2'){
                 echo "BUJÍAS";
-              }else if($cat == '3'){
-                echo "COMBUSTIBLE";
               }else if($cat == '4'){
                 echo "ELÉCTRICO";
               }else if($cat == '5'){

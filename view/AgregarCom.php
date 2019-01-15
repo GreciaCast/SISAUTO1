@@ -89,7 +89,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                                             <option value="">[Selecionar categoría]</option>
                                             <option value="1">AMORTIGUADORES</option>
                                             <option value="2">BUJÍAS</option>
-                                            <option value="3">COMBUSTIBLE</option>
                                             <option value="4">ELÉCTRICO</option>
                                             <option value="5">ENFRIAMIENTO</option>
                                             <option value="6">FILTROS</option>

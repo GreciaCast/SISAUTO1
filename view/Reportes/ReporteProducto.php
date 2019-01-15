@@ -62,7 +62,7 @@ if (isset($_SESSION['usuarioActivo'])) {
     }
   </script>
 </head>
-<?php $cate = array(1 => "AMORTIGUADORES", 2 => "BUJÍAS", 3 => "COMBUSTIBLE",
+<?php $cate = array(1 => "AMORTIGUADORES", 2 => "BUJÍAS",
 4 => "ELÉCTRICO", 5 => "ENFRIAMIENTO", 6 => "FILTROS", 7 => "FRENOS", 8 => "MOTOR", 9 => "SENSORES", 10 => "SUSPENSIÓN Y DIRECCIÓN", 11 => "TRANSMISIÓN Y EMBRAGUE", 12 => "UNIVERSALES"); ?>
 <body>
   <table width="685" border="0" align="center">
@@ -105,8 +105,6 @@ if (isset($_SESSION['usuarioActivo'])) {
                 echo "AMORTIGUADORES";
               }else if($idcategoria == '2'){
                 echo "BUJÍAS";
-              }else if($idcategoria == '3'){
-                echo "COMBUSTIBLE";
               }else if($idcategoria == '4'){
                 echo "ELÉCTRICO";
               }else if($idcategoria == '5'){

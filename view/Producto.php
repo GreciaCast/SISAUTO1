@@ -5,7 +5,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <!DOCTYPE html>
 <html>
 <?php include("generalidades/apertura.php"); ?>
-<?php $cate = array(1 => "AMORTIGUADORES", 2 => "BUJÍAS", 3 => "COMBUSTIBLE",
+<?php $cate = array(1 => "AMORTIGUADORES", 2 => "BUJÍAS", 
 4 => "ELÉCTRICO", 5 => "ENFRIAMIENTO", 6 => "FILTROS", 7 => "FRENOS", 8 => "MOTOR", 9 => "SENSORES", 10 => "SUSPENSIÓN Y DIRECCIÓN", 11 => "TRANSMISIÓN Y EMBRAGUE", 12 => "UNIVERSALES"); ?>
 <!--  -->
 <body>
@@ -536,7 +536,6 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                     <option value="">[Selecionar categoría]</option>
                     <option value="1">AMORTIGUADORES</option>
                     <option value="2">BUJÍAS</option>
-                    <option value="3">COMBUSTIBLE</option>
                     <option value="4">ELÉCTRICO</option>
                     <option value="5">ENFRIAMIENTO</option>
                     <option value="6">FILTROS</option>

@@ -1,5 +1,5 @@
 function mostrarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,stockP){
-    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    var cate =["AMORTIGUADORES","BUJÍAS","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
 
     $("#codigoP").val(codigoP);
     $("#nombreP").val(nombreP);
@@ -16,7 +16,7 @@ function mostrarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,s
 }
 
 function mostrarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,stockP,precioP){
-    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    var cate =["AMORTIGUADORES","BUJÍAS","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
 
     $("#codigoPP").val(codigoP);
     $("#nombrePP").val(nombreP);
@@ -35,7 +35,7 @@ function mostrarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,
 }
 
 function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP){
-    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    var cate =["AMORTIGUADORES","BUJÍAS","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
     $("#codigoPE").val(codigoP);
     $("#nombrePE").val(nombreP);
     $("#catePE").val(cate[parseInt(cateP)-1]);
@@ -61,7 +61,7 @@ function editarProduc(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,id
 }
 
 function editarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,idProducto,stockP,precioP){
-    var cate =["AMORTIGUADORES","BUJÍAS","COMBUSTIBLE","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
+    var cate =["AMORTIGUADORES","BUJÍAS","ELÉCTRICO","ENFRIAMIENTO","FILTROS","FRENOS","MOTOR","SENSORES","SUSPENSIÓN Y DIRECCIÓN","TRANSMISIÓN Y EMBRAGUE","UNIVERSALES"];
 
     $("#codigoPEP").val(codigoP);
     $("#nombrePEP").val(nombreP);
