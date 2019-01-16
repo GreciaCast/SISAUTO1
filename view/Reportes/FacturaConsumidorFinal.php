@@ -2,11 +2,17 @@
 session_start();
 if (isset($_SESSION['usuarioActivo'])) {
 ?>
+<?php 
+$fac = $_GET["fac"];
+?>
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="1" />
+
+  
+  <!-- <meta http-equiv="refresh" content="1" /> -->
+  <!-- <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/Reportes/FacturaConsumidorFinal.php"> -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -65,10 +71,15 @@ if (isset($_SESSION['usuarioActivo'])) {
       include("../../confi/Conexion.php");
       $conexion = conectarMysql();
 
-      $sql1 = "SELECT * FROM facturaconsumidor order by idFactura desc";
+      $sql1 = "SELECT * FROM facturaconsumidor where numero_Fac = '$fac'";
       $resultadof = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-      $resultadof = mysqli_fetch_array($resultadof);
+      $resultadof = mysqli_fetch_assoc($resultadof);
 
+      if($resultadof == ""){
+        ?>
+        <meta http-equiv="refresh" content="0">
+        <?php
+      }
       ?>
       <td  align="center">
         <span class="titulos">
@@ -132,10 +143,10 @@ if (isset($_SESSION['usuarioActivo'])) {
   </table>
 <?php
 
-
-  $sql1 = "SELECT * FROM venta order by idVenta desc";
+  $idVen = $resultadof['id_Venta'];
+  $sql1 = "SELECT * FROM venta where idVenta = '$idVen'";
   $resultado = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
-  $resultado = mysqli_fetch_array($resultado);
+  $resultado = mysqli_fetch_assoc($resultado);
   $id = $resultado['idVenta'];
   $clienteId = $resultado['id_Cliente'];
 
@@ -166,10 +177,10 @@ if (isset($_SESSION['usuarioActivo'])) {
       <tr bgcolor="#c4eeff">
         <td width="10" align="center" bgcolor="#c4eeff" class=""><strong>CANT.</strong></td>
         <td width="300" align="center" bgcolor="#c4eeff" class="formatoTabla">DESCRIPCION</td>
-        <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">PRECIO UNITARIO</td>
+        <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">PRECIO UNITARIO ($)</td>
         <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">V. NO S.</td>
         <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">V. E.</td>
-        <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">VENTAS AFECTAS</td>
+        <td width="10" align="center" bgcolor="#c4eeff" class="formatoTabla">VENTAS AFECTAS ($)</td>
       </tr>
       <?php
       
@@ -236,7 +247,7 @@ if (isset($_SESSION['usuarioActivo'])) {
     <tr>
       <td width="400" bgcolor=""><?php echo "SON: ";?> 
       </td>
-      <td width="158" bgcolor=""><?php echo "SUMAS"?>
+      <td width="158" bgcolor=""><?php echo "SUMAS ($)"?>
       </td>
       <td width="31" bgcolor=""><?php  ?>
       </td>
@@ -250,7 +261,7 @@ if (isset($_SESSION['usuarioActivo'])) {
     <tr>
       <td width="397" bgcolor=""><?php echo "Llenar si la operacion es igual o Superior a $200.00";?> 
       </td>
-      <td rowspan="4" width="158" bgcolor=""><?php echo "SUB-TOTAL"?>
+      <td rowspan="4" width="158" bgcolor=""><?php echo "SUB-TOTAL ($)"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>
@@ -292,7 +303,7 @@ if (isset($_SESSION['usuarioActivo'])) {
       </td>
       <td width="198" bgcolor=""><?php echo "Firma recibido: ";?> 
       </td>
-      <td width="158" bgcolor=""><?php echo "VENTAS TOTAL"?>
+      <td width="158" bgcolor=""><?php echo "VENTAS TOTAL ($)"?>
       </td>
       <td width="53" bgcolor="#c4eeff"><?php  ?>
       </td>

@@ -242,18 +242,18 @@ if (isset($_SESSION['usuarioActivo'])) {
                   <hr width="75%">
                   <div class="form-group" align="center">
                     <div id="sinF" style="display:none;">
-                      <a target="_blank" href="Reportes/FacturaCreditoFiscal.php">
+                      <!-- <a target="_blank" href="Reportes/FacturaCreditoFiscal.php"> -->
                         <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(3);">Factura</button>
-                      </a>
+                      <!-- </a> -->
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>
                   <div id="conF" style="display:block;">
                     <div class="card-header">
                       <h3><b>¿Desea emitir factura?</b></h3>
                     </div>
-                    <a target="_blank" href="Reportes/FacturaConsumidorFinal.php">
+                    <!-- <a target="_blank" href="Reportes/FacturaConsumidorFinal.php"> -->
                       <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(1);">Si</button>
-                    </a>
+                    <!-- </a> -->
                     <button title="Factura" type="button" class="btn" style="color:#fff; background-color:#28a745; width:90px; height:40px" onclick="validarVenta(2);">No</button>
                     <button title="Cancelar" type="reset" value="Cancelar" class="btn " style="color:#fff; background-color:#ffc107; width:90px; height:40px" >Cancelar</button>
                   </div>

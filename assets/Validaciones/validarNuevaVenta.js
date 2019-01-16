@@ -122,6 +122,9 @@ function eliminarProductosDeTabla(id,subtotal){
 }
 
 async function validarVenta(sino){
+    var idcliente = $('#clientess').val();
+
+
     if (sino == 2) {
         $('#indicador').val(2);
     } else if (sino == 3){
@@ -129,11 +132,30 @@ async function validarVenta(sino){
     } else {
         $('#indicador').val(1);
     }
+
+    if (sino == 1) {
+        var fac = $('#numFacConVen').val();
+    }else{
+        var fac = $('#numFacCreVen').val();   
+    }
+
     var detallesV = await validarDetallesV();
     var clienteV = await validarClienteV();
+    var indicador = 0;
     if (detallesV && clienteV){
         $('#guardarVen').submit();
-    };   
+        indicador = 1;
+
+    };
+    if(indicador == 1){
+        if(idcliente == 28){
+            var dominio = window.location.host;
+            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaConsumidorFinal.php?fac='+fac,'_blank');
+        }else{
+            var dominio = window.location.host;
+            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaCreditoFiscal.php?fac='+fac,'_blank');
+        }
+    }
 }
 
 function validarDetallesV(){
