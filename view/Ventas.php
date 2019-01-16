@@ -26,7 +26,7 @@ if (isset($_SESSION['usuarioActivo'])) {
   </div>
 </div>
 <?php if (!isset($_GET['tipo'])) {
- $tipo=1;
+ $tipo=0;
 }else{
  $tipo = $_GET['tipo'];
 }?>
@@ -359,7 +359,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
               }
 
               function anular(id){
-                aux='¿Está seguro? ¡El registro no podrá ser recuperado!'+
+                aux='¿Está seguro?'+
                 '<label style="color: red;">Debe comentar la razón para anular la factura</label>'+
                 '<input class="swal2-input" id="comentario" placeholder="Razón">';
                 return swal({
