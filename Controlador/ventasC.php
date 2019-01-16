@@ -23,7 +23,7 @@ if(isset($_POST["bandera"])){
 		$indicador = $_POST["indicador"];
 		echo( $indicador);
 
-		$sql = "INSERT INTO venta (fecha_Ven,total_Ven,id_Cliente) VALUES ('$fechaVen','$totalVen','$idCliVen')";
+		$sql = "INSERT INTO venta (fecha_Ven,total_Ven,id_Cliente,estado_Ven) VALUES ('$fechaVen','$totalVen','$idCliVen',0)";
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		$sql1 = "SELECT * FROM venta order by idVenta desc";
 		$resultado = mysqli_query($conexion,$sql1) or die ("Error a Conectar en la BD".mysqli_connect_error());
@@ -71,24 +71,8 @@ if(isset($_POST["bandera"])){
 				$ress = mysqli_query($conexion,$sql5) or die ("Error a Conectar en la BD".mysqli_connect_error());
 				$res = mysqli_fetch_assoc($ress);
 				$pre = $res['precio_Prod'];//precio actual
-				// $calculo = $res['precio_Prod'] - ($res['precio_Prod'] * 0.15);
-
-				// echo $pre;4
-				// echo " -- ";
-				// echo $calculo;3.4
-				// echo " -- ";
-				// echo $precioProdVen[$key];5
-				// if ($calculo == $precioProdVen[$key]) {
-					$sql6 = "UPDATE producto set precio_Prod = '$pre' where idProducto = '$idProdVen[$key]'";
-					mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
-				// } else {
-				// 	$sql6 = "UPDATE producto set precio_Prod = '$precioProdVen[$key]' where idProducto = '$idProdVen[$key]'";
-				// 	mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
-
-				// }
-				
-
-
+				$sql6 = "UPDATE producto set precio_Prod = '$pre' where idProducto = '$idProdVen[$key]'";
+				mysqli_query($conexion,$sql6) or die ("Error a Conectar en la BD".mysqli_connect_error());
 		 	}
 
 		}

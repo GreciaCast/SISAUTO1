@@ -79,7 +79,7 @@ if (isset($_SESSION['usuarioActivo'])) {
         </tr>
         <tr align="right">
           <td>&nbsp;</td>
-          <td>FECHA IMPRESIÓN:  <?php echo date("d-m-Y"); ?>
+          <td>FECHA IMPRESIÓN:  <?php echo date("d/m/Y"); ?>
             <br>
             HORA  IMPRESIÓN:   <?php
             date_default_timezone_set('America/El_Salvador');
@@ -175,7 +175,7 @@ if (isset($_SESSION['usuarioActivo'])) {
               echo $numFac['numero_Fac'];
               ?>
             </td>
-            <td bgcolor="" align="center"><?php echo date('d-m-Y',strtotime($fila[1]));?></td>
+            <td bgcolor="" align="center"><?php echo date('d/m/Y',strtotime($fila[1]));?></td>
             <td bgcolor="" align="center"><a>$</a><?php
               $precioven = $fila[2];
               echo number_format($precioven,2,'.','');?></td>
