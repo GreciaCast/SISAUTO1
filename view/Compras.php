@@ -415,7 +415,7 @@ and open the template in the editor.
                  ?>
                  <div class="col-sm-3 input-group" >
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <select id="proveedoresID" name="id_Proveedor" aling="center" style="width:500px;height:40px" class="form-control"> 
+                  <select id="clientesID" name="id_Proveedor" aling="center" style="width:500px;height:40px" class="form-control"> 
                     <option value="">[Selecionar proveedor]</option>
                     <?php
 
@@ -509,7 +509,7 @@ and open the template in the editor.
             desde = $('#fecha1').val();
             hasta = $('#fecha2').val();
 
-            idproveedor = $('#proveedoresID').val();
+            idproveedor = $('#clientesID').val();
             tipor = $('#tiporeporte').val();
 
             desde=desde.split('/').reverse().join('-');
