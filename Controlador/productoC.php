@@ -31,7 +31,6 @@ if ($bandera == "guardar") {
 
 if ($bandera == "EditarProd") {
     $nombrePro = $_POST["nombrePro"];
-    $categoria = $_POST["categorias"];
     $marca = $_POST["marca"];
     $modelo = $_POST["modelo"];
     $anio = $_POST["anio"];
@@ -42,7 +41,7 @@ if ($bandera == "EditarProd") {
     echo "SIN precio ";
     
 
-    $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod = '$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod = 0 where idProducto = '$idProducto'";
+    $sql = "UPDATE producto set nombre_Prod='$nombrePro',marca_Prod='$marca',modeloVehiculo_Prod = '$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod = 0 where idProducto = '$idProducto'";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     
     $_SESSION['mensaje'] = "Registro editado exitosamente";
@@ -56,26 +55,25 @@ if ($bandera == "EditarProd") {
 }
 if ($bandera == "EditarProdP") {
     $nombrePro = $_POST["nombreProP"];
-    $categoria = $_POST["categorias"];
     $marca = $_POST["marcaP"];
     $modelo = $_POST["modeloP"];
     $anio = $_POST["anioP"];
     $descripcion = $_POST["descripcionP"];
-    $idProducto = $_POST["idProductoP"];
+    $idProducto = $_POST["idProductoPEP"];
     $stock = $_POST["stockPEP"];
     $precio = $_POST["precioP"];
 
     echo "Con precio ";
 
-    echo $precio;
+    echo $idProducto;
 
-    $sql = "UPDATE producto set nombre_Prod='$nombrePro', categoria_Prod='$categoria',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod='$precio' where idProducto = '$idProducto'";
+    $sql = "UPDATE producto set nombre_Prod='$nombrePro',marca_Prod='$marca',modeloVehiculo_Prod='$modelo',anioVehiculo_Prod='$anio',descripcion_Prod='$descripcion',stock_Prod='$stock',precio_Prod='$precio' where idProducto = '$idProducto'";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     echo "Con precio ";
 
     echo $precio;
     $_SESSION['mensaje'] = "Registro editado exitosamente";
-    header("location: /SISAUTO1/view/Producto.php");
+    //header("location: /SISAUTO1/view/Producto.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];

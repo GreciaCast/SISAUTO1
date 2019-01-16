@@ -74,7 +74,7 @@ function editarProducP(codigoP,nombreP,cateP,marcaP,modeloP,anioP,descripcionP,i
        $("#anioPEP").val("");
     }
     $("#descripcionPEP").val(descripcionP);
-    $("#idProducto").val(idProducto);
+    $("#idProductoPEP").val(idProducto);
     if(cateP=="12"){
         $("#modeloPEP").attr("disabled", "disabled");
         $("#anioPEP").attr("disabled", "disabled");

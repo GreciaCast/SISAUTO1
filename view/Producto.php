@@ -405,11 +405,6 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
    </div>
  </div>
 </div>
-<form method="POST" id="cambioProd">
-          <input type="hidden" name="id" id="idProd"  />
-          <input type="hidden" name="bandera" id="banderaProd" />
-          <input type="hidden" name="valor" id="valorProd" />
-      </form>
 </div>
 
 <!-- MODAL EDITAR PRODUCTO CON PRECIO-->
@@ -424,7 +419,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
      <div class="modal-body">
       <form action="../Controlador/productoC.php" method="POST" id="editarProdP" align="center" autocomplete="off">
          <input type="hidden" value="EditarProdP" name="bandera"/>
-         <input type="hidden" value="" id="idProducto" name="idProductoP"/>
+         <input type="hidden" value="" id="idProductoPEP" name="idProductoPEP"/>
        <div class="form-group ">
          <label align="right" for="nombre" class="col-sm-4 control-label" style="font-size:15px;">Código:</label>
          <div class="col-sm-7">

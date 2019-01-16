@@ -141,12 +141,12 @@ if (isset($_SESSION['usuarioActivo'])) {
               <?php }  ?>
               <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Marca</td>
               <?php if ($idcategoria != 12 && $tipor == 1) {?>
-              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Modelo Vehículo</td>
-              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td>
+              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Vehículo</td>
+              <!-- <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td> -->
               <?php }  ?>
               <?php if ($tipor == 2) {?>
-              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Modelo Vehículo</td>
-              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td>
+              <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Vehículo</td>
+              <!-- <td width="87" align="center" bgcolor="#fcf3b3" class="formatoTabla">Año Vehículo</td> -->
               <?php }  ?>
             </tr>
             <?php
@@ -181,20 +181,20 @@ if (isset($_SESSION['usuarioActivo'])) {
               <td align="center" bgcolor=""><?php echo $fila[3];?></td>
 
               <?php if ($idcategoria != 12 && $tipor == 1) {?>
-              <td align="center" bgcolor=""><?php echo $fila[5];?></td>
+              <!-- <td align="center" bgcolor=""><?php echo $fila[5];?></td> -->
               <td align="center" bgcolor=""><?php 
                 if($idcategoria != 12){
-                  echo $fila[6];
+                  echo $fila[5].', '.$fila[6];
                 }else{
                  echo ""; 
                }?></td>
                <?php }  ?>
 
                <?php if ($tipor == 2) {?>
-               <td align="center" bgcolor=""><?php echo $fila[5];?></td>
+               <!-- <td align="center" bgcolor=""><?php echo $fila[5];?></td> -->
                <td align="center" bgcolor=""><?php 
                 if($fila[6] != 0){
-                  echo $fila[6];
+                  echo $fila[5].', '.$fila[6];
                 }else{
                  echo ""; 
                }?></td>
