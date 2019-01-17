@@ -132,7 +132,9 @@ if (isset($_SESSION['usuarioActivo'])) {
             <td bgcolor="" align="center"><?php echo $fila[4];?></td>
             <td bgcolor="" align="center"><?php echo $fila[5];?></td>
           </tr>
-          <?php } ?>
+          <?php }else{
+            $contador = $contador - 1;
+          } ?>
           <?php $contador++;
         }
   // }

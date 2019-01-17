@@ -73,7 +73,7 @@ if ($bandera == "EditarProdP") {
 
     echo $precio;
     $_SESSION['mensaje'] = "Registro editado exitosamente";
-    //header("location: /SISAUTO1/view/Producto.php");
+    header("location: /SISAUTO1/view/Producto.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
