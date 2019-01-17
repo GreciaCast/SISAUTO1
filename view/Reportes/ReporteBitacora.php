@@ -107,6 +107,7 @@ if($tipor == 1){
     <tr align="center">
       <br><br>
       <td ><strong class="titulos" align="center">USUARIO: </strong>
+      
         <?php echo $usuario['nombre_Usu']; ?>
       </td>
     </tr>
