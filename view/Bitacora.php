@@ -154,7 +154,7 @@ if (isset($_SESSION['usuarioActivo'])) {
             <div class="col-sm-3 input-group" >
               <div class="col-sm-2">
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <select id="usuariosID" name="id_Usuario" aling="center" style="width:500px;height:40px" class="form-control"> 
+                <select id="clientesID" name="id_Usuario" aling="center" style="width:500px;height:40px" class="form-control"> 
                     <option value="">[Selecionar usuario]</option>
                     <?php
 
@@ -217,7 +217,7 @@ if (isset($_SESSION['usuarioActivo'])) {
     desde = $('#fecha1').val();
     hasta = $('#fecha2').val();
 
-     idusuario = $('#usuariosID').val();
+     idusuario = $('#clientesID').val();
      tipor = $('#tiporeporte').val();
 
     desde=desde.split('/').reverse().join('-');
