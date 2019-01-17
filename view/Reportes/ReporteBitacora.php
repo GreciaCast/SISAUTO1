@@ -8,6 +8,13 @@ $desde = $_GET["desde"];
 $hasta = $_GET["hasta"];
 $idusu = $_GET["idusuario"];
 $tipor = $_GET["tipor"];
+
+
+$hasta = explode("-",$hasta);
+$hasta[2] = $hasta[2] + 1;
+$hasta = $hasta[0].'-'.$hasta[1].'-'.$hasta[2];
+
+
 ?>
 <!doctype html>
 <html>
