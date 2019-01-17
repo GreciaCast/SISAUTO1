@@ -141,17 +141,18 @@ async function validarVenta(sino){
 
     var detallesV = await validarDetallesV();
     var clienteV = await validarClienteV();
-    var indicador = 0;
+    var indicadoor = 0;
     if (detallesV && clienteV){
         $('#guardarVen').submit();
-        indicador = 1;
+        indicadoor = 1;
 
     };
-    if(indicador == 1){
-        if(idcliente == 28){
+
+    if(indicadoor == 1){
+        if(idcliente == 28 && sino == 1){
             var dominio = window.location.host;
             window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaConsumidorFinal.php?fac='+fac,'_blank');
-        }else{
+        }else if (idcliente != 28 && sino == 3){
             var dominio = window.location.host;
             window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaCreditoFiscal.php?fac='+fac,'_blank');
         }
