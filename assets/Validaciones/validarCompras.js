@@ -9,7 +9,7 @@ async function validarCompra(){
     var proveedorC = await validarProveedorC(); 
     var detallesC = await validarDetallesC();
     var duplicada = await validarCompraDuplicada();
-    if (fechaC && numeroFacC && proveedorC && detallesC && duplicada){
+    if (fechaC && numeroFacC && proveedorC && detallesC && (duplicada == 0)){
         $('#guardarCom').submit();
     };   
 }
