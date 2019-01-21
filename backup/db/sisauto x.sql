@@ -33,13 +33,34 @@ CREATE TABLE `bitacora` (
   `actividad` varchar(50) DEFAULT NULL,
   `tipo_Bico` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`idBitacora`)
-) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=202 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bitacora`
 --
 
 /*!40000 ALTER TABLE `bitacora` DISABLE KEYS */;
+INSERT INTO `bitacora` (`idBitacora`,`usuario_Usu`,`sesionInicio`,`actividad`,`tipo_Bico`) VALUES 
+ (183,'grecia','2019-01-08 16:04:45','IniciÃ³ de sesiÃ³n',NULL),
+ (184,'grecia','2019-01-09 21:12:23','RegistrÃ³ un usuario',NULL),
+ (185,'grecia','2019-01-09 21:12:34','CerrÃ³ sesiÃ³n',NULL),
+ (186,'tonny22','2019-01-09 21:12:45','IniciÃ³ sesiÃ³n',NULL),
+ (187,'tonny22','2019-01-09 21:13:37','CerrÃ³ sesiÃ³n',NULL),
+ (188,'grecia','2019-01-10 22:17:01','IniciÃ³ sesiÃ³n',NULL),
+ (189,'grecia','2019-01-10 23:27:38','GuardÃ³ un producto',NULL),
+ (190,'grecia','2019-01-10 23:32:10','EditÃ³ un producto',NULL),
+ (191,'grecia','2019-01-10 23:32:57','GuardÃ³ una compra',NULL),
+ (192,'grecia','2019-01-10 23:37:31','IniciÃ³ sesiÃ³n',NULL),
+ (193,'grecia','2019-01-11 17:17:20','IniciÃ³ sesiÃ³n',NULL),
+ (194,'grecia','2019-01-11 17:23:51','GuardÃ³ una compra',NULL),
+ (195,'grecia','2019-01-11 20:58:09','EditÃ³ un producto',NULL),
+ (196,'grecia','2019-01-11 21:06:51','IniciÃ³ sesiÃ³n',NULL),
+ (197,'grecia','2019-01-11 22:21:02','IniciÃ³ sesiÃ³n',NULL);
+INSERT INTO `bitacora` (`idBitacora`,`usuario_Usu`,`sesionInicio`,`actividad`,`tipo_Bico`) VALUES 
+ (198,'grecia','2019-01-12 00:44:49','GuardÃ³ una compra',NULL),
+ (199,'grecia','2019-01-12 00:46:18','IniciÃ³ nÃºmeros de factura',NULL),
+ (200,'grecia','2019-01-12 00:47:42','GuardÃ³ una venta',NULL),
+ (201,'grecia','2019-01-12 15:02:50','IniciÃ³ sesiÃ³n',NULL);
 /*!40000 ALTER TABLE `bitacora` ENABLE KEYS */;
 
 
@@ -84,7 +105,7 @@ INSERT INTO `cliente` (`idCliente`,`nombre_Cli`,`direccion_Cli`,`telefono_Cli`,`
  (19,'Big Pizza ','2Âª Calle Oriente, Avenida Crescencio Miranda, San Vicente ','2393-4093','225894-4','0614-100608-109-8',0,NULL),
  (20,'Farmacia Vicentina ','2Âª Avenida Sur, San Vicente ','2393-5954','384367-0','0614-150380-709-1',1,NULL);
 INSERT INTO `cliente` (`idCliente`,`nombre_Cli`,`direccion_Cli`,`telefono_Cli`,`nrc_Cli`,`nit_Cli`,`tipo_Cli`,`descripcion_Cli`) VALUES 
- (21,'ElÃ­as Alberto Ruiz ',' 8Âª Avenida norte, Col. Santa Elena, pasaje #2, casa 22, San Vicente ','2393-6189','556971-9','1010-030587-104-4',1,NULL),
+ (21,'ElÃ­as Alberto Ruiz ',' 8Âª Avenida norte, Col. Santa Elena, pasaje #2, casa 22, San Vicente ','2393-6189','556971-9','1010-030587-104-4',0,NULL),
  (22,'Jonathan Alexis Osorio ','1a. Avenida Sur, pasaje # 1, Bo. El Calvario, San Vicente','2393-0874','226793-2','1010-270995-223-5',1,''),
  (23,'MarÃ¬a HernÃ ndez Canessa ','Bo. el Centro, San Esteban Catarina, San Vicente','2313-6767','789233-1','1010-210482-103-2',1,NULL),
  (24,'Tienda Rodil S.A de C.V.','3ra. calle Oriente, Colonia los Ã€ngeles, Apastepeque','2253-6432','887934-5','0614-170899-201-4',1,NULL),
@@ -109,13 +130,17 @@ CREATE TABLE `compra` (
   PRIMARY KEY (`idCompra`),
   KEY `FK_compra_Proveedor` (`id_Proveedor`),
   CONSTRAINT `FK_compra_Proveedor` FOREIGN KEY (`id_Proveedor`) REFERENCES `proveedor` (`idProveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `compra`
 --
 
 /*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` (`idCompra`,`numFac_Com`,`fecha_Com`,`total_Com`,`id_Proveedor`) VALUES 
+ (1,123,'2019-01-10',24.46,19),
+ (2,777,'2019-01-11',84,11),
+ (3,12,'2019-01-12',23.5,7);
 /*!40000 ALTER TABLE `compra` ENABLE KEYS */;
 
 
@@ -135,13 +160,17 @@ CREATE TABLE `detallecompra` (
   KEY `FK_detalleCompra_Producto` (`id_Producto`),
   CONSTRAINT `FK_detalleCompra_Compra` FOREIGN KEY (`id_Compra`) REFERENCES `compra` (`idCompra`),
   CONSTRAINT `FK_detalleCompra_Producto` FOREIGN KEY (`id_Producto`) REFERENCES `producto` (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detallecompra`
 --
 
 /*!40000 ALTER TABLE `detallecompra` DISABLE KEYS */;
+INSERT INTO `detallecompra` (`idDetalleCompra`,`cantidad_DCom`,`precio_DCom`,`id_Compra`,`id_Producto`) VALUES 
+ (1,2,12.23,1,25),
+ (2,8,10.5,2,17),
+ (3,10,2.35,3,25);
 /*!40000 ALTER TABLE `detallecompra` ENABLE KEYS */;
 
 
@@ -187,13 +216,15 @@ CREATE TABLE `detalleventa` (
   KEY `FK_detalleventa_Venta` (`id_Venta`),
   CONSTRAINT `FK_detalleVenta_Producto` FOREIGN KEY (`id_Producto`) REFERENCES `producto` (`idProducto`),
   CONSTRAINT `FK_detalleventa_Venta` FOREIGN KEY (`id_Venta`) REFERENCES `venta` (`idVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `detalleventa`
 --
 
 /*!40000 ALTER TABLE `detalleventa` DISABLE KEYS */;
+INSERT INTO `detalleventa` (`idDetalleVenta`,`cantidad_DVen`,`precio_DVen`,`id_Venta`,`id_Producto`,`costo_DVen`) VALUES 
+ (1,4,4.11,1,25,3.99667);
 /*!40000 ALTER TABLE `detalleventa` ENABLE KEYS */;
 
 
@@ -229,13 +260,15 @@ CREATE TABLE `facturaconsumidor` (
   PRIMARY KEY (`idFactura`),
   KEY `FK_facturaconsumidor_1` (`id_Venta`),
   CONSTRAINT `FK_facturaconsumidor_1` FOREIGN KEY (`id_Venta`) REFERENCES `venta` (`idVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `facturaconsumidor`
 --
 
 /*!40000 ALTER TABLE `facturaconsumidor` DISABLE KEYS */;
+INSERT INTO `facturaconsumidor` (`idFactura`,`numero_Fac`,`id_Venta`) VALUES 
+ (1,122,1);
 /*!40000 ALTER TABLE `facturaconsumidor` ENABLE KEYS */;
 
 
@@ -251,7 +284,7 @@ CREATE TABLE `facturacredito` (
   PRIMARY KEY (`idFactura`),
   KEY `FK_factura_Venta` (`id_Venta`),
   CONSTRAINT `FK_factura_Venta` FOREIGN KEY (`id_Venta`) REFERENCES `venta` (`idVenta`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `facturacredito`
@@ -280,13 +313,18 @@ CREATE TABLE `inventario` (
   PRIMARY KEY (`idInventario`),
   KEY `FK_inventario_Producto` (`id_Producto`),
   CONSTRAINT `FK_inventario_Producto` FOREIGN KEY (`id_Producto`) REFERENCES `producto` (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `inventario`
 --
 
 /*!40000 ALTER TABLE `inventario` DISABLE KEYS */;
+INSERT INTO `inventario` (`idInventario`,`tipoMovimiento_Inv`,`existencias_Inv`,`precioActual_Inv`,`cantidad_Inv`,`precio_Inv`,`fechaMovimiento_Inv`,`nuevaExistencia_Inv`,`nuevoPrecio_Inv`,`id_Producto`) VALUES 
+ (1,0,0,0,2,12.23,'2019-01-10',2,12.23,25),
+ (2,0,0,0,8,10.5,'2019-01-11',8,10.5,17),
+ (3,0,2,12.23,10,2.35,'2019-01-12',12,3.99667,25),
+ (4,1,12,3.99667,4,3.99667,'2019-01-12',8,3.99667,25);
 /*!40000 ALTER TABLE `inventario` ENABLE KEYS */;
 
 
@@ -307,6 +345,9 @@ CREATE TABLE `numerofactura` (
 --
 
 /*!40000 ALTER TABLE `numerofactura` DISABLE KEYS */;
+INSERT INTO `numerofactura` (`idnumeroFactura`,`numeroInicial_numF`,`tipo_numF`) VALUES 
+ (1,10,1),
+ (2,122,2);
 /*!40000 ALTER TABLE `numerofactura` ENABLE KEYS */;
 
 
@@ -328,7 +369,7 @@ CREATE TABLE `producto` (
   `stock_Prod` int(10) unsigned DEFAULT NULL,
   `precio_Prod` float DEFAULT NULL,
   PRIMARY KEY (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `producto`
@@ -336,27 +377,30 @@ CREATE TABLE `producto` (
 
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
 INSERT INTO `producto` (`idProducto`,`nombre_Prod`,`categoria_Prod`,`marca_Prod`,`descripcion_Prod`,`modeloVehiculo_Prod`,`anioVehiculo_Prod`,`codigo_Prod`,`tipo_Prod`,`stock_Prod`,`precio_Prod`) VALUES 
- (1,'Amortiguador',1,'ELECTRAN','5 pulgadas, cromado','Ford - Ranger',2000,'AM00001',1,10,0),
- (2,'Crico',12,'ACEDELCO','Color gris','',0,'UN00001',1,3,0),
- (3,'Pastilla de frenos',5,'ACEDELCO','Ninguna','Toyoya-Hilux',2000,'EN00001',1,2,0),
- (4,'Bateria 9A',12,'VALVOLINE','Ninguna','',0,'UN00002',1,3,0),
- (5,'Faro delantero',4,'BEHR','Ninguna','Land Cruiser Coronella',2018,'EL00001',1,3,0),
- (6,'Bujia',2,'ELECTRAN','De alta calidad','Honda-CRV',2010,'BU00001',1,5,0),
- (7,'Llanta',10,'BRM',' Rin 14, de estrella','Ford - Fiesta',2018,'SU00001',1,4,0),
- (8,'Llanta',10,'Kenda','Ultima generacion, rin 16','Honda - Civic',2015,'SU00002',1,6,0),
- (9,'Radiador',8,'Firestone','Motor 25','Honda Accord',2017,'MO00001',1,3,0),
- (10,'Cuerpo del Acelerador',8,'Bridgestone','Motor radial','Honda Ascot Innova',2010,'MO00002',1,10,0),
- (11,'Carburador',8,'GoodYear','Combustion externa','NISSAN ALTIMA',2015,'MO00003',1,2,0);
+ (1,'Amortiguador x',1,'BRM','MÃ¡s economico','Honda-CRV',2012,'00001',1,4,0),
+ (2,'Crico',12,'ACEDELCO','Color gris','',0,'00002',1,3,0),
+ (3,'Pastilla de frenos',5,'ACEDELCO','Ninguna','Toyoya-Hilux',2000,'00003',1,2,0),
+ (4,'Bateria 9A',12,'VALVOLINE','Ninguna','',0,'00004',1,3,0),
+ (5,'Faro delantero',4,'BEHR','Ninguna','Land Cruiser Coronella',2018,'00005',1,3,0),
+ (6,'Bujia',2,'ELECTRAN','De alta calidad','Honda-CRV',2010,'00006',1,5,0),
+ (7,'Llanta',10,'BRM','Llantas','Ford - Fiesta',2018,'00007',1,4,0),
+ (8,'Llanta',10,'Kenda','Ultima generacion','Honda - Civic',2015,'00008',1,6,0),
+ (9,'Radiador',8,'Firestone','Motor 25','Honda Accord',2017,'00009',1,3,0),
+ (10,'Cuerpo del Acelerador',8,'Bridgestone','Motor radial','Honda Ascot Innova',2010,'00010',1,10,0),
+ (11,'Carburador',8,'GoodYear','Combustion externa','NISSAN ALTIMA',2015,'00011',1,2,0),
+ (12,'Alternador',8,'Michelin','Combustion interna','ISUZU FORWARD JUSTON',2016,'00012',1,2,0);
 INSERT INTO `producto` (`idProducto`,`nombre_Prod`,`categoria_Prod`,`marca_Prod`,`descripcion_Prod`,`modeloVehiculo_Prod`,`anioVehiculo_Prod`,`codigo_Prod`,`tipo_Prod`,`stock_Prod`,`precio_Prod`) VALUES 
- (12,'Alternador',8,'Michelin','Combustion interna','ISUZU FORWARD JUSTON',2016,'MO00004',1,2,0),
- (13,'Amortiguador x',1,'BRM','MÃ¡s economico','Honda-CRV',2003,'AM00002',1,4,0),
- (14,'Bombilla para luces de frenos',4,'Hella','Tipo de lampara: W2/5W, Tension 12V','Toyota-Land Cruiser Prado',2005,'EL00002',1,10,0),
- (15,'Termostato',5,'Gates','Refrigerante, temperatura de abertura 82C','Scion-xB',2010,'EN00002',1,3,0),
- (16,'Filtro de aire',6,'Izusu-Impulse Japanpart','Altura 61mm, diametro exterior 257.2mm','Izusu-Impulse Coupe',2011,'FI00001',1,4,0),
- (17,'Cojinete de Empuje',11,'Sachs','Cojinete de desembrague','Honda-CRV',2000,'TR00001',1,5,0),
- (18,'Juego de llanta',10,'Firestone','Numero de rin13','Chevrolet - S10',2009,'SU00003',1,3,0),
- (19,'Juego de alfonbrilla de suelo',12,'Polgum','lado de montaje posterior, color negro','',0,'UN00003',1,4,0),
- (20,'Aceite para motor',12,'Castrol','Viscosidad GTX 20W-50.','',0,'UN00004',1,12,0);
+ (13,'Amortiguador x',1,'BRM','MÃ¡s economico','Honda-CRV',2003,'00013',1,4,0),
+ (14,'Bombilla para luces de frenos',4,'Hella','Tipo de lampara: W2/5W, Tension 12V','Toyota-Land Cruiser Prado',2005,'00014',1,10,0),
+ (15,'Termostato',5,'Gates','Refrigerante, temperatura de abertura 82C','Scion-xB',2010,'00015',1,3,0),
+ (16,'Filtro de aire',6,'Izusu-Impulse Japanpart','Altura 61mm, diametro exterior 257.2mm','Izusu-Impulse Coupe',2011,'00016',1,4,0),
+ (17,'Cojinete de Empuje',11,'Sachs','Cojinete de desembrague','Honda-CRV',2000,'00017',1,5,18.375),
+ (18,'Juego de llanta',11,'Firestone','Numero de rin13','Chevrolet - S10',2009,'00018',1,3,0),
+ (19,'Juego de alfonbrilla de suelo',12,'Polgum','lado de montaje posterior, color negro','',0,'00019',1,4,0),
+ (20,'Aceite para motor',12,'Castrol','Viscosidad GTX 20W-50.','',0,'00020',1,12,0),
+ (24,'Grecia',4,'Melina','Castilo','Hernandez',2019,'00021',1,15,0);
+INSERT INTO `producto` (`idProducto`,`nombre_Prod`,`categoria_Prod`,`marca_Prod`,`descripcion_Prod`,`modeloVehiculo_Prod`,`anioVehiculo_Prod`,`codigo_Prod`,`tipo_Prod`,`stock_Prod`,`precio_Prod`) VALUES 
+ (25,'AMORTUGUADOR XC',1,'GOLD','ALTO CALIBRE','NISSAN FRONTIER',2001,'AM00003',1,3,4.1125);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 
 
@@ -438,7 +482,10 @@ CREATE TABLE `usuario` (
 
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idUsuario`,`usuario_Usu`,`contrasena_Usu`,`nombre_Usu`,`correo_Usu`,`direccion_Usu`,`telefono_Usu`,`dui_Usu`,`tipo_Usu`,`estado_Usu`) VALUES 
- (62,'grecia','10bab2c711bca9ace3036044b0efcc8a','Grecia Melina Hernandez Castillo','grecihdez@gmail.com','Barrio El Santuario, San Vicente, San Vicente','7694-8573','54389107-1',0,1);
+ (62,'grecia','10bab2c711bca9ace3036044b0efcc8a','Grecia Melina Hernandez Castillo','grecihdez@gmail.com','Barrio El Santuario, San Vicente, San Vicente','7694-8573','54389107-1',0,1),
+ (70,'katita','c066dd182b15f86dd200d4dfde289d91','Katy Briseyda Hernandez Castillo','katybris@gmail.com','San Nicolas Lempa, Tecoluca, San Vicente','2342-1122','23399181-7',1,1),
+ (73,'lisbeth','64da72c38be98ef0fbaac9f7a08a3937','Lisbeth Eunice Reyes Melgar','lis@gmail.com','San Marcos Lempa, Tecoluca, San Vicente','6110-2512','23654431-2',1,1),
+ (74,'tonny22','10304c1dd517a5e25fa4b15b5f1791e2','Juan Antonio Bautista Perez','tonny.perez22@gmai.com','Ilobasco, CabaÃ±as','7904-2186','37189212-2',1,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 
@@ -457,13 +504,15 @@ CREATE TABLE `venta` (
   PRIMARY KEY (`idVenta`),
   KEY `FK_venta_Cliente` (`id_Cliente`),
   CONSTRAINT `FK_venta_Cliente` FOREIGN KEY (`id_Cliente`) REFERENCES `cliente` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `venta`
 --
 
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` (`idVenta`,`fecha_Ven`,`total_Ven`,`id_Cliente`,`estado_Ven`,`comentarioanular_Ven`) VALUES 
+ (1,'2019-01-12',16.44,28,NULL,NULL);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 
 
