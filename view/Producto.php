@@ -57,14 +57,14 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
       &nbsp;
     </a>
     <?php  if ($tipo == 1) { ?>
-    <a class="pull-right" href="/SISAUTO1/view/Producto.php?tipo=0">
+    <a class="pull-right" href="/SISANT/view/Producto.php?tipo=0">
       <button class="btn btn-success" style="font-size:16px;">
         Ver productos inactivos  <i class="fa fa-bars"></i>
       </button>
       &nbsp;
     </a>
     <?php  }else{ ?>
-    <a class="pull-right" href="/SISAUTO1/view/Producto.php?tipo=1">
+    <a class="pull-right" href="/SISANT/view/Producto.php?tipo=1">
       <button class="btn btn-success" style="font-size:16px;">
         Ver productos activos <i class="fa fa-bars"></i>
       </button>
@@ -601,7 +601,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                      $('#banderaProd').val('cambio');
                      $('#valorProd').val('0');
                      var dominio = window.location.host;
-                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
+                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISANT/Controlador/productoC.php');
                      $('#cambioProd').submit();
                  } else {
 
@@ -626,7 +626,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
                      $('#banderaProd').val('cambio');
                      $('#valorProd').val('1');
                      var dominio = window.location.host;
-                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISAUTO1/Controlador/productoC.php');
+                     $('#cambioProd').attr('action', 'http://' + dominio + '/SISANT/Controlador/productoC.php');
                      $('#cambioProd').submit();
                  } else {
 
@@ -645,7 +645,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
 
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteProducto.php?idcategoria='+idcategoria+'&tipor='+tipor,'_blank');
+                  window.open('http://'+dominio+'/SISANT/view/Reportes/ReporteProducto.php?idcategoria='+idcategoria+'&tipor='+tipor,'_blank');
                 }
               }
      </script>
@@ -676,7 +676,7 @@ $productos= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consul
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 </head>
 <body>
 </body>

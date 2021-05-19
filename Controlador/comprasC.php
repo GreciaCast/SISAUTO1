@@ -77,7 +77,7 @@ if(isset($_POST["bandera"])){
 		///////////////////////////////////////////////
 
 		$_SESSION['mensaje'] = "Registro guardado exitosamente";
-		header("location: /SISAUTO1/view/Compras.php?");
+		header("location: /SISANT/view/Compras.php?");
 	}
 
 	if($bandera == "EditarCom"){
@@ -156,7 +156,7 @@ if(isset($_POST["bandera"])){
 		mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 		///////////////////////////////////////////////
 		$_SESSION['mensaje'] = "Registro editado exitosamente";
-		header("location: /SISAUTO1/view/Compras.php?");
+		header("location: /SISANT/view/Compras.php?");
 
 		
 	}
@@ -204,7 +204,7 @@ if(isset($_POST["bandera"])){
 					if($eliminar <= $stop){
 						$aux = 1;
 						$_SESSION['error'] = "Lo sentimos se han vendido productos de esta compra por lo cual no se puede eliminar";
-						header("location: /SISAUTO1/view/Compras.php");
+						header("location: /SISANT/view/Compras.php");
 					}
 				}
 			}
@@ -245,7 +245,7 @@ if(isset($_POST["bandera"])){
 		///////////////////////////////////////////////
 
 			$_SESSION['mensaje'] = "Compra eliminada exitosamente";
-			header("location: /SISAUTO1/view/Compras.php?");
+			header("location: /SISANT/view/Compras.php?");
 		}
 
 	}
@@ -313,7 +313,7 @@ if(isset($_POST["bandera"])){
 		///////////////////////////////////////////////
 
 		$_SESSION['mensaje'] = "Devolución realizada exitosamente";
-		header("location: /SISAUTO1/view/Compras.php");
+		header("location: /SISANT/view/Compras.php");
 	}
 
 }

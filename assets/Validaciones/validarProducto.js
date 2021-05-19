@@ -111,7 +111,7 @@ async function existe(){
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/productoC.php",
+            url:"/SISANT/Controlador/productoC.php",
             method: "post",
             success: function(data){
                 if (data == 0) {
@@ -307,7 +307,7 @@ async function validacionPrecio(){
     };
     return $.ajax({
         data: param,
-        url:"/SISAUTO1/Controlador/productoC.php",
+        url:"/SISANT/Controlador/productoC.php",
         method: "post",
         success: function(data){
             nuevoprecio = $('#precioPEP').val().trim();
@@ -326,7 +326,7 @@ async function validacionPrecio(){
 function filtrarModelos(id){
     $('#modeloFiltrado').empty();
     $('#modeloFiltrado').append('<option value="">[Selecionar modelo y año]</option>');
-    $.get('/SISAUTO1/Controlador/productoC.php?bandera=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/productoC.php?bandera=1&id='+id,function(data){
         console.log(data);
             $('#modeloFiltrado').append(data);
     });

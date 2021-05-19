@@ -20,7 +20,7 @@ if ($bandera == "guardar") {
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     
     $_SESSION['mensaje'] = "Registro guardado exitosamente";
-    header("location: /SISAUTO1/view/Producto.php?");
+    header("location: /SISANT/view/Producto.php?");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari = $_SESSION['usuarioActivo']['usuario_Usu'];
@@ -45,7 +45,7 @@ if ($bandera == "EditarProd") {
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     
     $_SESSION['mensaje'] = "Registro editado exitosamente";
-     header("location: /SISAUTO1/view/Producto.php");
+     header("location: /SISANT/view/Producto.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -73,7 +73,7 @@ if ($bandera == "EditarProdP") {
 
     echo $precio;
     $_SESSION['mensaje'] = "Registro editado exitosamente";
-    header("location: /SISAUTO1/view/Producto.php");
+    header("location: /SISANT/view/Producto.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -107,7 +107,7 @@ if ($bandera=="cambio") {
         ///////////////////////////////////////////////
 
     }
-    header("location: /SISAUTO1/view/Producto.php?tipo=".$aux."");
+    header("location: /SISANT/view/Producto.php?tipo=".$aux."");
 }
 
 if ($bandera == "existe") {

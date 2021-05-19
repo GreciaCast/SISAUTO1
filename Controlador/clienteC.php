@@ -1,6 +1,6 @@
 <?php
 
-  session_start();
+ session_start();
 include("../confi/Conexion.php");
 $conexion = conectarMysql();
 
@@ -17,7 +17,7 @@ if($bandera=="GuardarCli"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
     $_SESSION['mensaje'] ="Registro guardado exitosamente";
-    header("location: /SISAUTO1/view/Cliente.php");
+    header("location: /SISANT/view/Cliente.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -42,7 +42,7 @@ if($bandera=="EditarCli"){
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
 
     $_SESSION['mensaje'] ="Registro editado exitosamente";
-    header("location: /SISAUTO1/view/Cliente.php");
+    header("location: /SISANT/view/Cliente.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -70,7 +70,7 @@ if ($bandera=="cambio") {
     $sql = "INSERT INTO bitacora (usuario_Usu,sesionInicio,actividad) VALUES ('$usuari',now(),'Dio de baja a un cliente')";
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD guardo bita".mysqli_connect_error());
 	}
-    header("location: /SISAUTO1/view/Cliente.php?tipo=".$aux."");
+    header("location: /SISANT/view/Cliente.php?tipo=".$aux."");
  }
 if ($bandera=="nombreC") {
 	$sql="SELECT * from cliente where nombre_Cli like '".$_POST["nombre"]."'";

@@ -91,7 +91,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 																			<?php echo date("d-m-Y g:i:s a", filemtime($ruta."/".$archivo)); ?>
 																		</td>	
 																		<td>
-																			<a title="Descargar"  class="btn btn-success fa fa-download" href="/SISAUTO1/backup/db/<?php echo $archivo ?><?php  ?>" ></a>
+																			<a title="Descargar"  class="btn btn-success fa fa-download" href="/SISANT/backup/db/<?php echo $archivo ?><?php  ?>" ></a>
 																			<a title="Restaurar"  class="btn btn-primary fa fa-exchange" onclick="restaurar('<?php echo $archivo ?>');"></a>
 																			<a title="Eliminar"  class="btn btn-danger fa fa-trash-o" onclick="eliminar('<?php echo $archivo ?>');"></a>
 																		</td>		
@@ -160,7 +160,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 				})
 					$.ajax({
 						type: 'post',
-						url: '/SISAUTO1/backup/backaup.php',
+						url: '/SISANT/backup/backaup.php',
 						data: {
 							nombre: n,
 							bandera: "respaldar",
@@ -170,7 +170,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 						}
 					});
 					
-					window.location.href= "/SISAUTO1/view/Respaldo.php";
+					window.location.href= "/SISANT/view/Respaldo.php";
                  }else{
 
                 }
@@ -192,7 +192,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 if(result.value){
                 $.ajax({
 						type: 'post',
-						url: '/SISAUTO1/backup/backaup.php',
+						url: '/SISANT/backup/backaup.php',
 						data: {
 							nombre: n,
 							bandera: "eliminar",
@@ -202,7 +202,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 						}
 					});
 					
-					window.location.href= "/SISAUTO1/view/Respaldo.php";
+					window.location.href= "/SISANT/view/Respaldo.php";
                  }else{
 
                 }
@@ -253,7 +253,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 		<html>
 		<head>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-			<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+			<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 		</head>
 		<body>
 		</body>

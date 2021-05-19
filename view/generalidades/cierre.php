@@ -3,7 +3,7 @@
     <div class="text-center">
         <div class="footer">
             <div>
-                <strong>UES-FMP</strong> . DERECHOS RESERVADOS 2018
+                <strong>UES-FMP</strong> . DERECHOS RESERVADOS 2021
             </div>
         </div>
     </div>

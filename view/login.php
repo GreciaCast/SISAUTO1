@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SISAUTO | Login</title>
+    <title>SISANT | Login</title>
 
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -17,21 +17,16 @@
 
     <link href="../assets/pNotify/pnotify.custom.min.css" rel="stylesheet">
 
-    <style>
-        body {
-            background-image: url("../assets/img/auto.jpg");
-        }</style>
-
     </head>
 
-    <body class="gray-bg">
-
+    <body style="background-color: white;">
         <div class="passwordBox animated fadeInDown">
             <div class="row">
-
                 <div class="col-md-12">
-                    <div class="ibox-content">
-                        <h1 align="center" class="font-bold">SISAUTO</h1>
+                 <div class="content"> 
+                  <h1 align="center" class="font-bold" >Complejo Educativo Católico "Santa Teresita"</h1>
+                    <p style="text-align: center; "> <img src="../assets/img/logo.jpg" alt="aut" width="225"></p>
+                     &nbsp;&nbsp;
                         <div class="row">
                             <div class="col-lg-12">
                                 <form action="../Controlador/logear.php" method="POST" autocomplete="off">
@@ -41,9 +36,9 @@
                                     <div class="form-group">
                                         <input type="password" name="password" class="form-control" placeholder="Contraseña">
                                     </div>
-                                    <button type="submit" class="btn btn-success block full-width m-b">Entrar</button>
+                                    <button type="submit" class="btn block full-width m-b" style="background-color:  #0D3851"><a style="color: white;">Entrar</a></button>
                                     <div class="text-center">
-                                        <a href="forgot_password.php" ><small>¿Olvidaste tu contraseña?</small></a>
+                                        <a href="forgot_password.php" ><small style="color: #0D3851">¿Olvidaste tu contraseña?</small></a>
                                     </div>
                                 </form>
                             </div>

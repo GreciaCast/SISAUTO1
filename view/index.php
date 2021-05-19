@@ -34,9 +34,9 @@ if (isset($_SESSION['usuarioActivo'])) {
                                 <div class="ibox-content">
                                     <div class="row" align="" >
                                         <div class="col-12">
-                                            <h1 class="card-body " align="center"><b>SISTEMA INFORMÁTICO DE CONTROL DE COMPRAS-VENTAS</b><br><b> PARA EL NEGOCIO AUTO REPUESTOS VAQUERANO</b></h1>
+                                            <h1 class="card-body " align="center" style="font-size:25px;"><b>SISTEMA INFORMÁTICO PARA LA GESTIÓN ADMINISTRATIVA DEL COMPLEJO EDUCATIVO CATÓLICO "SANTA TERESITA"</b></h1>
                                             <br><br>
-                                            <p style="text-align: center; "> <img src="../assets/img/sisa.jpg" alt="aut" width="600"></p>
+                                            <p style="text-align: center; "> <img src="../assets/img/logo.jpg" alt="aut" width="500"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 </head>
 <body>
 </body>

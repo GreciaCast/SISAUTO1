@@ -47,14 +47,14 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
    </a>
    <?php if( $_SESSION['usuarioActivo']['tipo_Usu'] == 0 ){?>
    <?php  if ($tipo == 0) { ?>
-   <a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=1">
+   <a class="pull-right" href="/SISANT/view/Ventas.php?tipo=1">
      <button class="btn btn-success" style="font-size:16px;">
       Ver ventas anuladas<i class="fa fa-bars"></i>
     </button>
     &nbsp;
   </a>
   <?php  }else{ ?>
-  <a class="pull-right" href="/SISAUTO1/view/Ventas.php?tipo=0">
+  <a class="pull-right" href="/SISANT/view/Ventas.php?tipo=0">
    <button class="btn btn-success" style="font-size:16px;">
     Lista de ventas  <i class="fa fa-bars"></i>
   </button>
@@ -354,7 +354,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
                   notaError("Verifique las fecha");
                 }else{
                   var dominio = window.location.host;
-                  window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
+                  window.open('http://'+dominio+'/SISANT/view/Reportes/ReporteVenta.php?desde='+desde+'&hasta='+hasta+'&idcliente='+idcliente+'&tipor='+tipor,'_blank');
                 }
               }
 
@@ -379,7 +379,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
                       anularVenta(id);
                     }else{
                       var dominio = window.location.host;
-                      location.href ='http://'+dominio+'/SISAUTO1/Controlador/ventasC.php?'+ 'idventa='+id+'&comentario='+$('#comentario').val()+'&anular=1';
+                      location.href ='http://'+dominio+'/SISANT/Controlador/ventasC.php?'+ 'idventa='+id+'&comentario='+$('#comentario').val()+'&anular=1';
                     }
                   }
                 });
@@ -397,7 +397,7 @@ $ventas= mysqli_query($conexion, $sql) or die("No se puedo ejecutar la consulta"
           <html>
           <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-            <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+            <meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
           </head>
           <body>
           </body>

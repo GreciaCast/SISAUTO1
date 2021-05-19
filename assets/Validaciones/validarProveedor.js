@@ -24,7 +24,7 @@
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -54,7 +54,7 @@
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -88,7 +88,7 @@
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -146,7 +146,7 @@ return true;
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -204,7 +204,7 @@ function validarproveedorEditar(){
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -236,7 +236,7 @@ function validarproveedorEditar(){
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -271,7 +271,7 @@ function validarproveedorEditar(){
 
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/proveedorC.php",
+            url:"/SISANT/Controlador/proveedorC.php",
             method: "post",
             success: function(data){
                 if (data==0) {
@@ -328,7 +328,7 @@ function validarproveedorEditar(){
 
             return $.ajax({
                 data: param,
-                url:"/SISAUTO1/Controlador/proveedorC.php",
+                url:"/SISANT/Controlador/proveedorC.php",
                 method: "post",
                 success: function(data){
                     if (data==0) {

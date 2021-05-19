@@ -10,7 +10,7 @@ session_start();
     	if ($row['contrasena_Usu']== $contrasena) {
     		$_SESSION['usuarioActivo']=$row;
             $_SESSION['mensaje']="Usted a iniciado sesión - BIENVENIDO";
-    		header("location: /SISAUTO1/view/index.php");
+    		header("location: /SISANT/view/index.php");
 
         //////////CAPTURA DATOS PARA BITACORA
         $usuari=$row['usuario_Usu'];
@@ -21,10 +21,10 @@ session_start();
         
     	}else{
         $_SESSION['error']="Usuario y Contraseña Incorrectos";
-      	header("location: /SISAUTO1/view/login.php");
+      	header("location: /SISANT/view/login.php");
     	}
     }else{
     	$_SESSION['error']="Usuario y Contraseña Incorrectos";
-    	header("location: /SISAUTO1/view/login.php");
+    	header("location: /SISANT/view/login.php");
     }
 ?>

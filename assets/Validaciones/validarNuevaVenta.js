@@ -24,16 +24,16 @@ function mostrarCostoyExistencias(id){
 	$('#costoPV').empty();
 	$('#precioPV').empty();
 	$('#descuento').css('display','block');
-    $.get('/SISAUTO1/Controlador/datosProductoC.php?existencias=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/datosProductoC.php?existencias=1&id='+id,function(data){
         $('#cantidadDisponiblePV').val(data);
     });
-    $.get('/SISAUTO1/Controlador/datosProductoC.php?costo=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/datosProductoC.php?costo=1&id='+id,function(data){
     	$('#costoPV').val(data); 
     });
-    $.get('/SISAUTO1/Controlador/datosProductoC.php?precio=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/datosProductoC.php?precio=1&id='+id,function(data){
     	$('#precioPV').val(data); 
     });
-    $.get('/SISAUTO1/Controlador/datosProductoC.php?costocompleto=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/datosProductoC.php?costocompleto=1&id='+id,function(data){
         $('#costoauxiliar').val(data); 
     });
 }
@@ -151,10 +151,10 @@ async function validarVenta(sino){
     if(indicadoor == 1){
         if(idcliente == 28 && sino == 1){
             var dominio = window.location.host;
-            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaConsumidorFinal.php?fac='+fac,'_blank');
+            window.open('http://'+dominio+'/SISANT/view/Reportes/FacturaConsumidorFinal.php?fac='+fac,'_blank');
         }else if (idcliente != 28 && sino == 3){
             var dominio = window.location.host;
-            window.open('http://'+dominio+'/SISAUTO1/view/Reportes/FacturaCreditoFiscal.php?fac='+fac,'_blank');
+            window.open('http://'+dominio+'/SISANT/view/Reportes/FacturaCreditoFiscal.php?fac='+fac,'_blank');
         }
     }
 }

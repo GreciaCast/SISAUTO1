@@ -19,7 +19,7 @@ if($bandera=="guardar"){
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] = "Registro guardado exitosamente";
-    header("location: /SISAUTO1/view/Proveedor.php?");
+    header("location: /SISANT/view/Proveedor.php?");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -43,7 +43,7 @@ if($bandera=="EditarPro"){
 
     mysqli_query($conexion,$sql) or die ("Error a Conectar en la BD".mysqli_connect_error());
     $_SESSION['mensaje'] ="Registro editado exitosamente";
-    header("location: /SISAUTO1/view/Proveedor.php");
+    header("location: /SISANT/view/Proveedor.php");
 
     //////////CAPTURA DATOS PARA BITACORA
     $usuari=$_SESSION['usuarioActivo']['usuario_Usu'];
@@ -77,7 +77,7 @@ if ($bandera=="cambio") {
     ///////////////////////////////////////////////
 	
 	}
-    header("location: /SISAUTO1/view/Proveedor.php?tipo=".$aux."");
+    header("location: /SISANT/view/Proveedor.php?tipo=".$aux."");
 }
 
 if ($bandera=="cnombre") {

@@ -1,7 +1,7 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
-            <img alt="logo" src="../assets/img/aut5.png" width="100%" height="100%" />
+            <img alt="logo" src="../assets/img/logo3.jpg" width="100%" height="100%" />
             <li>
                 <a href="/SISAUTO1/view/NuevaVenta.php" style="font-size:15px;"><i class="fa fa-dollar"></i> <span class="nav-label">Vender</span>  </a>
             </li>
@@ -78,7 +78,7 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; background-color: #343A40;">
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-success" href="#"><i class="fa fa-bars"></i> </a>
-                <a class="navbar-brand" href="index.php" style="color: white">SISAUTO</a>
+                <a class="navbar-brand" href="index.php" style="color: white">SISANT</a>
             </div>
 
             <?php 

@@ -86,9 +86,9 @@ if(isset($_POST["bandera"])){
 	///////////////////////////////////////////////
 
 	$_SESSION['mensaje'] = "Registro guardado exitosamente";
-	//header("location: /SISAUTO1/view/Reportes/ReporteUsuario.php?");
+	//header("location: /SISANT/view/Reportes/ReporteUsuario.php?");
 
-	header("location: /SISAUTO1/view/NuevaVenta.php?");
+	header("location: /SISANT/view/NuevaVenta.php?");
 	//target="_blank" href="Reportes/ReporteUsuario.php"
 }
 
@@ -207,7 +207,7 @@ if(isset($_GET["anular"])){
 		///////////////////////////////////////////////
 
 			$_SESSION['mensaje'] = "Venta anulada exitosamente";
-			header("location: /SISAUTO1/view/Ventas.php?");
+			header("location: /SISANT/view/Ventas.php?");
 
 }
 

@@ -5,7 +5,7 @@ function VerVen(fecha,totalVenta,idventa,idcliente,numFact){
 	$("#cliVenVer>option[value="+idcliente+"]").attr("selected",true);
 
 	$('#productosVer').empty();
-	$.get('/SISAUTO1/Controlador/ventasC.php?bandera1=1&id='+idventa,function(data){
+	$.get('/SISANT/Controlador/ventasC.php?bandera1=1&id='+idventa,function(data){
 		
 			$('#productosVer').append(data);
 	});

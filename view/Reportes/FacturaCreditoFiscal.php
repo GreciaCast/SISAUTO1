@@ -379,7 +379,7 @@ $fac = $_GET["fac"];
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 </head>
 <body>
 </body>

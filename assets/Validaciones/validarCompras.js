@@ -85,7 +85,7 @@ function validarDetallesC(){
 function filtrarCategoria(id){
     $('#productoFiltrado').empty();
     $('#productoFiltrado').append('<option value="">[Selecionar producto]</option>');
-    $.get('/SISAUTO1/Controlador/comprasC.php?bandera=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?bandera=1&id='+id,function(data){
         console.log(data);
             $('#productoFiltrado').append(data);
     });
@@ -101,27 +101,27 @@ function mostrarAddProduc(){
     var productoText = obtenerP.text();
     $("#cateAddP").val(cate[parseInt(categoriaId)-1]);
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?codigo=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?codigo=1&id='+id,function(data){
             $("#codigoAddP").val(data);    
      });
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?nombre=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?nombre=1&id='+id,function(data){
             $("#nombreAddP").val(data);    
      });
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?marca=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?marca=1&id='+id,function(data){
             $("#marcaAddP").val(data);    
      });
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?descripcion=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?descripcion=1&id='+id,function(data){
             $("#descripcionAddP").val(data);  
      });
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?modelo=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?modelo=1&id='+id,function(data){
             $("#modeloAddP").val(data);   
      });
 
-    $.get('/SISAUTO1/Controlador/comprasC.php?anio=1&id='+id,function(data){
+    $.get('/SISANT/Controlador/comprasC.php?anio=1&id='+id,function(data){
             if(data!='0'){
                 $("#anioAddP").val(data);
             }else{
@@ -201,7 +201,7 @@ function validarCompraDuplicada(){
         };
         return $.ajax({
             data: param,
-            url:"/SISAUTO1/Controlador/comprasC.php",
+            url:"/SISANT/Controlador/comprasC.php",
             method: "post",
             success: function(data){
                 console.log(data);

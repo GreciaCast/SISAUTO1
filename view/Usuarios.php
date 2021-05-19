@@ -57,14 +57,14 @@ and open the template in the editor.
                     &nbsp;
                 </a>
                 <?php  if ($tipo == 1) { ?>
-                    <a class="pull-right" href="/SISAUTO1/view/Usuarios.php?tipo=0">
+                    <a class="pull-right" href="/SISANT/view/Usuarios.php?tipo=0">
                         <button class="btn btn-success" style="font-size:16px;">
                             Ver usuarios inactivos  <i class="fa fa-bars"></i>
                         </button>
                         &nbsp;
                     </a>
                 <?php  }else{ ?>
-                    <a class="pull-right" href="/SISAUTO1/view/Usuarios.php?tipo=1">
+                    <a class="pull-right" href="/SISANT/view/Usuarios.php?tipo=1">
                         <button class="btn btn-success" style="font-size:16px;">
                             Ver usuarios activos  <i class="fa fa-bars"></i>
                         </button>
@@ -246,7 +246,7 @@ and open the template in the editor.
                     $('#banderaUsu').val('cambio');
                     $('#valorUsu').val('0');
                     var dominio = window.location.host;
-                    $('#cambioUsu').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
+                    $('#cambioUsu').attr('action','http://'+dominio+'/SISANT/Controlador/usuarioC.php');
                     $('#cambioUsu').submit();
                 }else{
 
@@ -272,7 +272,7 @@ and open the template in the editor.
             $('#banderaUsu').val('cambio');
             $('#valorUsu').val('1');
             var dominio = window.location.host;
-             $('#cambioUsu').attr('action','http://'+dominio+'/SISAUTO1/Controlador/usuarioC.php');
+             $('#cambioUsu').attr('action','http://'+dominio+'/SISANT/Controlador/usuarioC.php');
              $('#cambioUsu').submit();
              }else{
 
@@ -290,7 +290,7 @@ and open the template in the editor.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/index.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/index.php">
 </head>
 <body>
 </body>
@@ -305,7 +305,7 @@ and open the template in the editor.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 </head>
 <body>
 </body>

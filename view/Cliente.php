@@ -51,14 +51,14 @@ if (isset($_SESSION['usuarioActivo'])) {
           &nbsp;
 				</a>
 				<?php  if ($tipo == 1) { ?>
-				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=0">
+				<a class="pull-right" href="/SISANT/view/Cliente.php?tipo=0">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes inactivos  <i class="fa fa-bars"></i>
 					</button>
           &nbsp;
 				</a>
 				<?php  }else{ ?>
-				<a class="pull-right" href="/SISAUTO1/view/Cliente.php?tipo=1">
+				<a class="pull-right" href="/SISANT/view/Cliente.php?tipo=1">
 					<button class="btn btn-success" style="font-size:16px;">
 						Ver clientes activos <i class="fa fa-bars"></i>
 					</button>
@@ -298,7 +298,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 $('#banderaCli').val('cambio');
                 $('#valorCli').val('0');
                 var dominio = window.location.host;
-                 $('#cambioCli').attr('action','http://'+dominio+'/SISAUTO1/Controlador/clienteC.php');
+                 $('#cambioCli').attr('action','http://'+dominio+'/SISANT/Controlador/clienteC.php');
                  $('#cambioCli').submit();
                  }else{
 
@@ -323,7 +323,7 @@ if (isset($_SESSION['usuarioActivo'])) {
                 $('#banderaCli').val('cambio');
                 $('#valorCli').val('1');
                 var dominio = window.location.host;
-                 $('#cambioCli').attr('action','http://'+dominio+'/SISAUTO1/Controlador/clienteC.php');
+                 $('#cambioCli').attr('action','http://'+dominio+'/SISANT/Controlador/clienteC.php');
                  $('#cambioCli').submit();
                  }else{
 
@@ -342,7 +342,7 @@ if (isset($_SESSION['usuarioActivo'])) {
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+<meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
 </head>
 <body>
 </body>

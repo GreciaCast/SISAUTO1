@@ -497,7 +497,7 @@ and open the template in the editor.
                     $('#idCom').val(id);
                     $('#banderaCom').val('eliminar');
                     var dominio = window.location.host;
-                    $('#eliminarCom').attr('action','http://'+dominio+'/SISAUTO1/Controlador/comprasC.php');
+                    $('#eliminarCom').attr('action','http://'+dominio+'/SISANT/Controlador/comprasC.php');
                     $('#eliminarCom').submit();
                 }else{
 
@@ -521,7 +521,7 @@ and open the template in the editor.
                 notaError("Verifique las fecha");
             }else{
                 var dominio = window.location.host;
-                window.open('http://'+dominio+'/SISAUTO1/view/Reportes/ReporteCompra.php?desde='+desde+'&hasta='+hasta+'&idproveedor='+idproveedor+'&tipor='+tipor,'_blank');
+                window.open('http://'+dominio+'/SISANT/view/Reportes/ReporteCompra.php?desde='+desde+'&hasta='+hasta+'&idproveedor='+idproveedor+'&tipor='+tipor,'_blank');
             }
         }
 </script>
@@ -532,7 +532,7 @@ and open the template in the editor.
     <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta http-equiv="refresh" content="0;URL=/SISAUTO1/view/login.php">
+        <meta http-equiv="refresh" content="0;URL=/SISANT/view/login.php">
     </head>
     <body>
     </body>
